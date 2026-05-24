@@ -2,14 +2,29 @@
 
 > **Documento vivo.** Define el contrato de producto de la API generadora de personajes del universo *Subordinación y Valor* (SyV). No contiene decisiones de arquitectura, almacenamiento ni stack — solo el QUÉ.
 >
-> **Versión**: 0.3.0
-> **Reemplaza**: 0.2.6 (cierre de fase: eliminación de `armor`, normalización de armamento, catálogo canon `/meta/*` con 74 tags semilla, preparación de la próxima ola — aspectos como frases)
+> **Versión**: 0.3.1
+> **Reemplaza**: 0.3.0 (rectificación catálogo `equipo.arma` a 6 genéricos, mapeo de tags específicos, eliminación de cuchillos del catálogo armas)
 > **Idioma**: castellano rioplatense, voseo sobrio.
 > **Convención de identificadores en payloads JSON/YAML**: `snake_case_castellano` (consistente con `faccion`, `atributos`, `estado_salud` ya usados en `/Dev/syv-battle-game-system/`).
 
 ---
 
 ## 0. Changelog
+
+### v0.3.1
+
+Rectificación de catálogo de armas. YAGNI aplicado a `equipo.arma`, coherente con el patrón ya establecido en vestidura (v0.2.6).
+
+- **Catálogo `equipo.arma` reducido a 6 genéricos**: `pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora`. Eliminadas las 10 entradas específicas anteriores (FAL, FAP Confederado M2A, FAP Modelo 45, Fusil de precisión Mauser, Pistola reglamentaria M9, Subfusil Halcón, Fusil Mauser 1909, Ametralladora ligera, Pistola Browning capturada, Bayoneta, Granada de mano).
+- **Mapeo en los 22 YAMLs**: `Fusil FAL` / `Fusil FAL con óptica 4x` / `Fusil de precisión FAL Tiro` → `rifle militar`; `FAP Confederado M2A` / `FAP Modelo 45` → `ametralladora`; `Fusil Mauser 1909 con mira` / `Fusil de cerrojo Mauser 1909` → `rifle militar`; `Subfusil Halcón` → `SMG`; `Pistola reglamentaria M9` / `Pistola Browning capturada` → `pistola`.
+- **Eliminación de cuchillos del catálogo de armas**: `Cuchillo de campo` y `Cuchillo de trabajo` movidos de `equipo.arma` a `equipo.utilitario` en los mocks de Funes y Calfucurá. No entran al catálogo de armas de fuego.
+- **Bayoneta y granada eliminadas del catálogo canon**: eran parte del catálogo semilla anterior pero no tienen representación en los 22 mocks. Siguen siendo posibles tags emergentes si la prosa o historial lo justifican.
+- **Total de tags semilla**: baja de 74 a 70 (6 armas + 10 utilitarios + 10 rasgos + 10 roles + 10 skills + 10 traits + 10 perks + 4 vestiduras).
+
+**Breaking changes vs v0.3.0.**
+
+- Catálogo `/meta/equipo/armas`: de 10 a 6 valores genéricos.
+- En los 22 mocks: todos los tags `equipo.arma` específicos reemplazados por genéricos. Los `Cuchillo de campo` y `Cuchillo de trabajo` que estaban en `equipo.arma` pasan a `equipo.utilitario`.
 
 ### v0.3.0
 
@@ -198,7 +213,7 @@ La siguiente hoja es la **representación visual canónica** del payload del per
 |   mandibula marcada, quemadura en antebrazo derecho                       |
 +----------------------------------------------------------------------------+
 | EQUIPO                                                                     |
-|   ARMAS        [subfusil Halcon]  [pistola Browning capturada]             |
+|   ARMAS        [SMG]  [pistola]                                            |
 |   UTILITARIOS  [cargador 9m]  [cargador 9m]  [cargador 9m]                 |
 |                [silbato de contramaestre]                                  |
 |   VESTIDURA    [uniforme rojo]                                             |
@@ -404,7 +419,7 @@ personaje:
   | `skill` | Habilidades aprendidas o entrenadas | `Comandancia`, `Francotirador`, `Medicina`, `Oratoria de muelle`, `Lectura de columna`, `Ingeniería`, `Comisariado` |
   | `trait` | Rasgos de carácter o condición, sin polaridad fija | `Sangre fría`, `Miope`, `Objetivo prioritario`, `Hemorragia lenta`, `Voz grave`, `Obstinado` |
   | `perk` | Ventajas mecánicas activables | `Voz de mando`, `Recarga rápida`, `Cobertura instintiva`, `Sucesor de Ricardo` |
-  | `equipo.arma` | Arma de fuego o cuerpo a cuerpo (incluye alcance en el valor) | `Fusil FAL (alcance media)`, `Pistola Browning (alcance corta)` |
+  | `equipo.arma` | Arma de fuego (6 valores genéricos) | `pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora` |
   | `equipo.utilitario` | Consumible o accesorio táctico | `cargador 9mm`, `vendaje`, `brújula de oficial`, `silbato de contramaestre` |
   | `equipo.vestidura` | Identidad visual de facción (no defensiva) | `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico` |
 
@@ -479,8 +494,8 @@ personaje:
     # perks (ex-perk_fijo migra acá como Sucesor de Ricardo)
     - { categoria: perk, valor: "Sucesor de Ricardo" }  # sin líder funcional, MEN favorable para mando/iniciativa
     # equipo.arma
-    - { categoria: "equipo.arma", valor: "Fusil FAL (alcance media)" }
-    - { categoria: "equipo.arma", valor: "Pistola reglamentaria M9 (alcance corta)" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
+    - { categoria: "equipo.arma", valor: "pistola" }
     # equipo.utilitario
     - { categoria: "equipo.utilitario", valor: "prismáticos militares — trofeo del Sector 12,15, lente derecha rajada pero usable" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, marcas de Ricardo en las primeras hojas" }
@@ -549,8 +564,8 @@ personaje:
     - { categoria: trait, valor: "Mirada larga" }
     - { categoria: trait, valor: "Eco del peñasco" }
     - { categoria: perk, valor: "Sucesor de Ricardo" }
-    - { categoria: "equipo.arma", valor: "Fusil FAL (alcance media)" }
-    - { categoria: "equipo.arma", valor: "Pistola reglamentaria M9 (alcance corta)" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
+    - { categoria: "equipo.arma", valor: "pistola" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, marcas de Ricardo en las primeras hojas" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
@@ -626,8 +641,8 @@ personaje:
     # perks (ex-perk_fijo p03_voz_de_mando)
     - { categoria: perk, valor: "Voz de mando" }
     # equipo.arma
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón (alcance corta)" }
-    - { categoria: "equipo.arma", valor: "Pistola Browning (alcance corta)" }
+    - { categoria: "equipo.arma", valor: "SMG" }
+    - { categoria: "equipo.arma", valor: "pistola" }
     # equipo.utilitario
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
     - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
@@ -696,8 +711,8 @@ personaje:
     - { categoria: trait, valor: "Voz grave" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Voz de mando" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón (alcance corta)" }
-    - { categoria: "equipo.arma", valor: "Pistola Browning (alcance corta)" }
+    - { categoria: "equipo.arma", valor: "SMG" }
+    - { categoria: "equipo.arma", valor: "pistola" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
     - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
@@ -860,7 +875,7 @@ Pool curado `rango × faccion` produce tags en lugar de objetos estructurados.
 | `Fusilero` | Fusil FAL (media) | Fusil Mauser (larga) o subfusil (corta) |
 | `Recluta` | Fusil FAL (corta) | Lo que haya disponible |
 
-- **`equipo.arma`**: cada arma incluye el alcance en el valor.
+- **`equipo.arma`**: un valor genérico del catálogo de 6 (`pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora`). El alcance ya no se incluye en el valor del tag.
 - **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico (`cargador`, `vendaje`, `cantimplora`). En mocks: hasta 4-5 narrativos.
 - **`equipo.vestidura`**: tabla determinística por facción. Todos los Confederados: `uniforme confederado`. Rojos integrados (líderes, veteranos): `uniforme rojo`. Rojos de origen civil reciente o andrajosos: `ropa de civil` o `camuflaje básico`. Catálogo canon: `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico`.
 
@@ -963,8 +978,8 @@ Ejemplos representativos:
 |---|---|---|
 | Personaje aprende una habilidad de su mentor | `agregar_tag` | `{ categoria: "skill", valor: "Lectura de columna" }` |
 | Herida grave en combate deja secuela | `agregar_tag` | `{ categoria: "trait", valor: "Hemorragia lenta" }` + hito `herida` coordinado |
-| Captura enemiga. Le requisaron el arma | `quitar_tag` | `{ categoria: "equipo.arma", valor: "Fusil FAL (alcance media)" }` |
-| Captura y recuperación de armamento enemigo | `agregar_tag` | `{ categoria: "equipo.arma", valor: "Pistola Browning capturada (alcance corta)" }` |
+| Captura enemiga. Le requisaron el arma | `quitar_tag` | `{ categoria: "equipo.arma", valor: "rifle militar" }` |
+| Captura y recuperación de armamento enemigo | `agregar_tag` | `{ categoria: "equipo.arma", valor: "pistola" }` |
 | Hazaña reconocida por el alto mando | `agregar_tag` | `{ categoria: "perk", valor: "Cobertura instintiva" }` |
 | Consigue tres cargadores tras asaltar una posición | `agregar_tag` (×3) | `{ categoria: "equipo.utilitario", valor: "cargador 9mm" }` — tres hitos independientes o un único hito con `metadata.cantidad: 3` si la implementación lo admite |
 | Recupera visión normal tras tratamiento | `quitar_tag` | `{ categoria: "trait", valor: "Miope" }` — requiere justificación narrativa en `descripcion` |
@@ -1051,7 +1066,7 @@ Las seis categorías canon de v0.2.5 con descripción y política de uso. Respue
   { "categoria": "skill",            "descripcion": "Habilidades aprendidas o entrenadas." },
   { "categoria": "trait",            "descripcion": "Rasgos de carácter o condición, sin polaridad fija." },
   { "categoria": "perk",             "descripcion": "Ventajas mecánicas activables." },
-  { "categoria": "equipo.arma",      "descripcion": "Arma de fuego o cuerpo a cuerpo. Valor incluye alcance." },
+  { "categoria": "equipo.arma",      "descripcion": "Arma de fuego. Catálogo de 6 genéricos: pistola, revolver, rifle, rifle militar, SMG, ametralladora." },
   { "categoria": "equipo.utilitario","descripcion": "Consumible o accesorio táctico (sin identidad de facción)." },
   { "categoria": "equipo.vestidura",  "descripcion": "Identidad visual de facción. Catálogo: uniforme confederado, uniforme rojo, ropa de civil, camuflaje básico." }
 ]
@@ -1076,7 +1091,7 @@ Si se introduce un endpoint de escuadras, devolvería `id`, `nombre`, `cuerpo`, 
 
 Mapea (todos los `/meta/*`): UC-09.
 
-### 10.1. Catálogo canon `/meta/*` — 74 tags semilla (v0.3.0)
+### 10.1. Catálogo canon `/meta/*` — 70 tags semilla (v0.3.1)
 
 Cada endpoint `/meta/*` devuelve esta **semilla canónica** más cualquier valor agregado por los mocks o personajes canonizados existentes. El catálogo es semilla, **no autoridad**: otros usuarios crearán tags personalizados que entran al catálogo emergente. La fragmentación semántica que esto introduce está documentada como tensión en 13.9.
 
@@ -1113,11 +1128,9 @@ Veterano de flanqueo, Sangre fría, Recarga rápida, Olfato del terreno,
 Tenaz, Disparo de oportunidad
 ```
 
-**`/meta/equipo/armas` — 10 armas canon:**
+**`/meta/equipo/armas` — 6 armas canon (genéricos):**
 ```
-Fusil FAL, FAP, Fusil de precisión Mauser, Pistola reglamentaria M9,
-Subfusil Halcón, Fusil Mauser 1909, Ametralladora ligera,
-Pistola Browning capturada, Bayoneta, Granada de mano
+pistola, revolver, rifle, rifle militar, SMG, ametralladora
 ```
 
 **`/meta/equipo/utilitarios` — 10 utilitarios canon:**
@@ -1132,7 +1145,7 @@ radio de campo PRC-77, mapa topográfico
 ropa de civil, uniforme rojo, uniforme confederado, camuflaje básico
 ```
 
-**Total: 74 tags semilla**. La categoría `aspecto` queda **reservada para v0.4.0** (próxima ola — ver sección 16); no se materializa pool semilla en v0.3.0.
+**Total: 70 tags semilla** (6 armas + 10 utilitarios + 10 rasgos + 10 roles + 10 skills + 10 traits + 10 perks + 4 vestiduras). La categoría `aspecto` queda **reservada para v0.4.0** (próxima ola — ver sección 16); no se materializa pool semilla en v0.3.1.
 
 ---
 
@@ -1140,7 +1153,7 @@ ropa de civil, uniforme rojo, uniforme confederado, camuflaje básico
 
 Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
 
-**Estado de migración.** Los 22 fixtures fueron regenerados al schema v0.2.5/v0.2.6 y normalizados en v0.3.0 (eliminación residual de `armor` — no existía en la regeneración; reemplazo del único `Springfield 1903` por `Mauser 1909` en el mock del Tirador Antinao). Cada mock tiene exactamente 1 tag `equipo.vestidura` del catálogo de 4 valores cerrado. Tags emergentes (oficios, customs narrativos) coexisten con el catálogo canon de 74 tags semilla descripto en 10.1 — el catálogo es semilla, no purga.
+**Estado de migración.** Los 22 fixtures fueron regenerados al schema v0.2.5/v0.2.6 y normalizados en v0.3.0 (eliminación residual de `armor` — no existía en la regeneración; reemplazo del único `Springfield 1903` por `Mauser 1909` en el mock del Tirador Antinao). Cada mock tiene exactamente 1 tag `equipo.vestidura` del catálogo de 4 valores cerrado. Tags emergentes (oficios, customs narrativos) coexisten con el catálogo canon de 70 tags semilla descripto en 10.1 — el catálogo es semilla, no purga.
 
 ### 11.1. Escuadra Confederación (11)
 
@@ -1297,7 +1310,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ### 13.9. Catálogo `/meta/*` como semilla, no como autoridad
 
-**Decisión.** El catálogo canon de 74 tags semilla (sección 10.1) es vocabulario sugerido, no enum cerrado. La excepción es `equipo.vestidura`, cerrado en 4 valores por decisión del cliente en v0.2.6.
+**Decisión.** El catálogo canon de 70 tags semilla (sección 10.1) es vocabulario sugerido, no enum cerrado. La excepción es `equipo.vestidura`, cerrado en 4 valores por decisión del cliente en v0.2.6.
 
 **Costo.** Convive con la fragmentación documentada en 13.2 y 13.7: distintos usuarios pueden crear sinónimos del mismo concepto (`Tiro de precisión` canon vs `Francotirador` custom), y el catálogo emergente termina mezclando registros canónicos con customs no normalizados.
 
@@ -1337,7 +1350,7 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 ---
 
-## 15. Open questions v0.3.0
+## 15. Open questions v0.3.1
 
 1. **Nombre final del campo derivado `filiacion`.** Alternativas en evaluación: `designacion`, `titulo`, `pie_de_firma`. El nombre `filiacion` se usa como provisorio en v0.2.5. Decidir antes de v1.0.
 
@@ -1366,6 +1379,8 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 13. **Límite de tags por categoría.** ¿Hay un máximo razonable de tags por categoría? Un personaje con 20 `equipo.utilitario` es sintácticamente válido pero semánticamente raro. ¿El generador tiene caps internos? ¿La API los valida o advierte?
 
 14. **Futuro del campo `armor` tras renombrar armadura → vestidura.** **CERRADA en v0.3.0 — resolución (a)**: eliminado del sistema. La vestidura es identidad visual, no protección numérica; el campo `armor` no se sostenía conceptualmente. Si más adelante hace falta defensa numérica, vuelve como tag `trait: blindado` derivado de vestidura específica o de skill defensiva. No persiste hasta entonces. El endpoint `/meta/equipo/armaduras/{valor}` queda eliminado del PRD.
+
+15. **¿Cargadores por calibre deberían generizarse a `munición rifle` / `munición pistola` / `munición SMG`?** La rectificación de armas a 6 genéricos (v0.3.1) abre una pregunta de simetría: los cargadores actuales en `equipo.utilitario` siguen siendo específicos (`cargador 7.62`, `cargador 9mm`, `cargador 7.65`, `cargador 7.92 Mauser`). Si las armas son genéricas, ¿los cargadores también deberían serlo? Alternativa: `munición rifle militar`, `munición SMG`, `munición pistola`. Sin decidir.
 
 ---
 

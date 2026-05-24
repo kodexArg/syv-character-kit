@@ -49,8 +49,8 @@ personaje:
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: trait, valor: "Objetivo prioritario" }
     - { categoria: perk, valor: "Voz de mando" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
-    - { categoria: "equipo.arma", valor: "Pistola Browning capturada" }
+    - { categoria: "equipo.arma", valor: "SMG" }
+    - { categoria: "equipo.arma", valor: "pistola" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
@@ -117,8 +117,8 @@ personaje:
     - { categoria: trait, valor: "Voz grave" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Voz de mando" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
-    - { categoria: "equipo.arma", valor: "Pistola Browning capturada" }
+    - { categoria: "equipo.arma", valor: "SMG" }
+    - { categoria: "equipo.arma", valor: "pistola" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
     - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }

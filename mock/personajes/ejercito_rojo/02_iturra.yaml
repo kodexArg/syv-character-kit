@@ -48,8 +48,8 @@ personaje:
     - { categoria: trait, valor: "Sangre fría" }
     - { categoria: trait, valor: "Sombra del líder" }
     - { categoria: perk, valor: "Sangre fría" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
@@ -95,8 +95,8 @@ personaje:
     - { categoria: trait, valor: "Sangre fría" }
     - { categoria: trait, valor: "Sombra del líder" }
     - { categoria: perk, valor: "Sangre fría" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   metadatos:

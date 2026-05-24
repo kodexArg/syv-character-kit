@@ -47,7 +47,7 @@ personaje:
     - { categoria: trait, valor: "Paciente" }
     - { categoria: trait, valor: "Puntería fría, mente fría" }
     - { categoria: perk, valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma", valor: "Fusil de precisión FAL Tiro" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
     - { categoria: "equipo.utilitario", valor: "mapa topográfico del sector — anotaciones a lápiz de curvas de nivel y líneas de tiro" }
@@ -92,7 +92,7 @@ personaje:
     - { categoria: trait, valor: "Paciente" }
     - { categoria: trait, valor: "Puntería fría, mente fría" }
     - { categoria: perk, valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma", valor: "Fusil de precisión FAL Tiro" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.utilitario", valor: "mapa topográfico del sector — anotaciones a lápiz de curvas de nivel y líneas de tiro" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
