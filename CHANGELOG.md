@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.2] - 2026-05-24
+### Fixed
+- Header de la hoja ASCII canónica de Miguel sincronizado a schema v0.3.1 (decía v0.2.5 porque el worker de v0.3.0/v0.3.1 no bumpeó esa referencia interna).
+
+### Removed
+- OQs #4 (restricción de perks por rol — cerrada por subordinación) y #14 (futuro de `armor` — cerrada con resolución eliminación) eliminadas de la sección Open Questions. OQs restantes renumeradas (15 → 13 vivas).
+- Bullet duplicado de `fza_aportada` (la regla de derivación estaba documentada dos veces).
+
+### Changed
+- Tabla 7.11 "Pool curado rango × facción" actualizada con los 6 valores genéricos del catálogo `equipo.arma` v0.3.1. Columnas de "alcance" eliminadas donde el valor genérico las hacía redundantes.
+- Referencias a OQ #14 en texto activo actualizadas; menciones en changelog histórico conservadas como registro válido.
+
+### Notes
+- PRD pasó de 1417 a 1421 líneas. El delta positivo viene del propio bloque de changelog v0.3.2; el cuerpo del PRD se redujo unas 4 líneas netas.
+- Preservadas: referencias intencionales a "Artillero FAP" como nombre cultural del rol (no tag de arma) y "Manejo de FAP" como nombre de skill canon (no tag de arma).
+- Sin cambios al sistema de tags ni al catálogo `/meta/*`. Sin tocar los 22 mocks.
+
 ## [0.3.1] - 2026-05-24
 ### Changed
 - Catálogo `equipo.arma` rectificado de 10 valores específicos (Fusil FAL, FAP, Subfusil Halcón, Mauser 1909, etc.) a 6 genéricos: `pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora`. Coherente con la rectificación previa de vestidura. Detalle específico (calibre, modelo, óptica) se difumina; la diferenciación mecánica de tipos pesados (artilleros) se preserva con `ametralladora` como sexto tag.
