@@ -2,14 +2,23 @@
 
 > **Documento vivo.** Define el contrato de producto de la API generadora de personajes del universo *Subordinación y Valor* (SyV). No contiene decisiones de arquitectura, almacenamiento ni stack — solo el QUÉ.
 >
-> **Versión**: 0.3.1
-> **Reemplaza**: 0.3.0 (rectificación catálogo `equipo.arma` a 6 genéricos, mapeo de tags específicos, eliminación de cuchillos del catálogo armas)
+> **Versión**: 0.3.2
+> **Reemplaza**: 0.3.1 (pasada de poda cosmética — sin cambios funcionales)
 > **Idioma**: castellano rioplatense, voseo sobrio.
 > **Convención de identificadores en payloads JSON/YAML**: `snake_case_castellano` (consistente con `faccion`, `atributos`, `estado_salud` ya usados en `/Dev/syv-battle-game-system/`).
 
 ---
 
 ## 0. Changelog
+
+### v0.3.2
+
+Pasada de poda cosmética. Sin cambios funcionales.
+
+- Header de la hoja ASCII de Miguel sincronizado a `schema v0.3.1`.
+- OQs cerradas (#4 `armor` on-demand y #14 `armor` tras v0.3.0) eliminadas de la sección 15; OQs restantes renumeradas.
+- Referencias huérfanas a campos obsoletos limpiadas en texto activo (tabla de equipo 7.11 actualizada a genéricos).
+- Bullet duplicado de `fza_aportada` en sección 6.2 eliminado.
 
 ### v0.3.1
 
@@ -186,7 +195,7 @@ La siguiente hoja es la **representación visual canónica** del payload del per
 
 ```
 +----------------------------------------------------------------------------+
-| SyV CHARACTER SHEET                                          schema v0.2.5 |
+| SyV CHARACTER SHEET                                          schema v0.3.1 |
 | id: mock.ejercito_rojo.??.miguel                          origen: mock     |
 +----------------------------------------------------------------------------+
 | NOMBRE         Miguel Quilodran                                            |
@@ -261,7 +270,7 @@ Observaciones sobre la hoja:
 
 - La cabecera respeta el **orden definitivo** documentado en el changelog v0.2.5.
 - `FILIACION` es campo derivado, no persistido. Se compone como `"{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"`.
-- `VESTIDURA` muestra la identidad visual del personaje (categoría `equipo.vestidura`). El campo `armor` fue eliminado del sistema en v0.3.0 (ver changelog y resolución de OQ #14).
+- `VESTIDURA` muestra la identidad visual del personaje (categoría `equipo.vestidura`). El campo `armor` fue eliminado del sistema en v0.3.0 (ver changelog).
 - `MANDO si` corresponde a `mando: true` en el JSON.
 - `ESTADO Activo` corresponde a `estado: activo` (asignación operativa), distinto de `ESTADO SALUD saludable` (condición física).
 
@@ -429,7 +438,6 @@ personaje:
   - `fza_aportada` (DERIVADO): tag `{categoria: rol, valor: heroe}` → 3; `{categoria: rol, valor: lider}` → 2; sin ninguno → 1. El campo no se persiste; la API lo computa al servir.
   - `sobrenombre` en Ejército Rojo (DERIVADO): se construye desde el tag `skill` de mando más prominente: `Comandancia` → `"Comandante {nombre}"`; `Medicina` → `"Doctor {nombre}"`; `Ingeniería` → `"Ingeniero {nombre}"`; `Comisariado` → `"Camarada Puntero {nombre}"`; sin ninguno → `"Camarada {nombre}"`. Ver 7.3.
 - **Decisión consciente — sub-categorías con punto**: el equipo se modela como `equipo.arma`, `equipo.utilitario`, `equipo.vestidura` (jerárquico con punto) en lugar de un sub-campo aparte. Ventajas: filtrado por prefijo `equipo.*`, legibilidad visual, sin nuevos sub-campos en el schema. Este patrón puede aplicarse a futuro a otras categorías que necesiten subdivisión.
-- **`fza_aportada`** (DERIVADO, no persistido): tag `categoria: rol, valor: heroe` → 3; `categoria: rol, valor: lider` → 2; sin ninguno → 1. El motor lo computa al servir.
 - **Categoría `trait` sin polaridad**: incluye positivos (`Sangre fria`), neutros (`Voz grave`) y penalidades que antes eran complicaciones (`Miope`, `Hemorragia lenta`, `Objetivo prioritario`). El motor downstream decide cómo aplicar polaridad, opcionalmente consultando `/meta/traits/{valor}.polaridad` si existe. Ver tensión 13.6.
 - **`vinculos[].ref_personaje_id`**: la API **no valida** que el id exista. `descripcion` es el fallback obligatorio.
 - **`historia`**: prosa original. Se congela al canonizar.
@@ -868,12 +876,12 @@ Pool curado `rango × faccion` produce tags en lugar de objetos estructurados.
 
 | `rango` | Confederación (default) | Ejército Rojo (default) |
 |---|---|---|
-| `Lider de escuadra` | Fusil FAL (media) + Pistola reglamentaria (corta) | Subfusil Halcón (corta) + Pistola (corta) |
-| `Segundo al mando` | Fusil FAL (media) + Pistola reglamentaria (corta) | Subfusil o Fusil ligero (media) + Pistola (corta) |
-| `Apuntador` | Fusil de precisión (larga) | Fusil de cerrojo Mauser (larga) |
-| `Artillero` | FAP (media) | Ametralladora ligera (media) |
-| `Fusilero` | Fusil FAL (media) | Fusil Mauser (larga) o subfusil (corta) |
-| `Recluta` | Fusil FAL (corta) | Lo que haya disponible |
+| `Lider de escuadra` | `rifle militar` + `pistola` | `SMG` + `pistola` |
+| `Segundo al mando` | `rifle militar` + `pistola` | `SMG` o `rifle militar` + `pistola` |
+| `Apuntador` | `rifle militar` (larga) | `rifle militar` (larga) |
+| `Artillero` | `ametralladora` | `ametralladora` |
+| `Fusilero` | `rifle militar` | `rifle militar` o `SMG` |
+| `Recluta` | `rifle militar` | Lo que haya disponible |
 
 - **`equipo.arma`**: un valor genérico del catálogo de 6 (`pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora`). El alcance ya no se incluye en el valor del tag.
 - **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico (`cargador`, `vendaje`, `cantimplora`). En mocks: hasta 4-5 narrativos.
@@ -984,7 +992,7 @@ Ejemplos representativos:
 | Consigue tres cargadores tras asaltar una posición | `agregar_tag` (×3) | `{ categoria: "equipo.utilitario", valor: "cargador 9mm" }` — tres hitos independientes o un único hito con `metadata.cantidad: 3` si la implementación lo admite |
 | Recupera visión normal tras tratamiento | `quitar_tag` | `{ categoria: "trait", valor: "Miope" }` — requiere justificación narrativa en `descripcion` |
 
-**Trayectoria de tags y auditoría.** El estado vigente de `tags[]` es el resultado de aplicar en orden todos los hitos `agregar_tag` y `quitar_tag` sobre el snapshot `tags_iniciales` (inmutable al crear). Esto significa que la trayectoria completa de tags de un personaje se puede reconstruir reproduciendo su `historial[]` contra `tags_iniciales`, sin necesidad de un campo de historial separado para tags. Operación útil para auditoría y para el endpoint potencial `POST /character/{id}/original` (ver OQ #9).
+**Trayectoria de tags y auditoría.** El estado vigente de `tags[]` es el resultado de aplicar en orden todos los hitos `agregar_tag` y `quitar_tag` sobre el snapshot `tags_iniciales` (inmutable al crear). Esto significa que la trayectoria completa de tags de un personaje se puede reconstruir reproduciendo su `historial[]` contra `tags_iniciales`, sin necesidad de un campo de historial separado para tags. Operación útil para auditoría y para el endpoint potencial `POST /character/{id}/original` (ver OQ #8).
 
 **Nota — aspectos mutables ya no aplican como bloque.** En v0.2.5 no existen los hitos `mejora_aspecto`. Los cambios de identidad mecánica (perk, trait, skill) son adiciones/eliminaciones a las categorías correspondientes vía `agregar_tag` / `quitar_tag`.
 
@@ -1316,7 +1324,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 **Por qué se acepta.** El usuario explicitó: "completamos lo estándar, los casos más normales solamente; otros usuarios crearán tags personalizados". Forzar enum cerrado en `skill`/`trait`/`perk`/`equipo.{arma,utilitario}` paralizaría la creatividad narrativa, que es exactamente el diferencial del producto.
 
-**Mitigación.** El catálogo semilla cubre los casos comunes del MVP — un cliente sano resuelve >80% de los personajes contra la semilla. Los `/meta/*` pueden marcar entradas con `origen: "canon" | "emergente"` para que el cliente discrimine. La normalización de case (OQ #12) y el mecanismo de alias (OQ #11) atacan el síntoma cuando lleguen a v1.
+**Mitigación.** El catálogo semilla cubre los casos comunes del MVP — un cliente sano resuelve >80% de los personajes contra la semilla. Los `/meta/*` pueden marcar entradas con `origen: "canon" | "emergente"` para que el cliente discrimine. La normalización de case (OQ #11) y el mecanismo de alias (OQ #10) atacan el síntoma cuando lleguen a v1.
 
 ### 13.8. Denormalización opt-in de efectos de tags → dos fuentes de verdad potenciales
 
@@ -1346,7 +1354,7 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 ### 14.3. Campos derivados → cómputo al servir, no al persistir
 
-`filiacion` y `fza_aportada` son derivados que la API computa al armar la respuesta. El campo `armor` fue eliminado del sistema en v0.3.0 (ver changelog y resolución de OQ #14): la vestidura es identidad visual y no aporta protección numérica; si más adelante se necesita defensa, vuelve como tag `trait: blindado` derivado de vestidura o skill defensiva.
+`filiacion` y `fza_aportada` son derivados que la API computa al armar la respuesta. El campo `armor` fue eliminado del sistema en v0.3.0: la vestidura es identidad visual y no aporta protección numérica; si más adelante se necesita defensa, vuelve como tag `trait: blindado` derivado de vestidura o skill defensiva.
 
 ---
 
@@ -1358,29 +1366,25 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 3. **Polaridad de `trait`.** ¿Existe `/meta/traits/{valor}.polaridad` como hint sugerido, o se deja al motor downstream interpretar libremente? Documentado en 13.6 pero el endpoint no está decidido.
 
-4. **`armor` derivado siempre vs on-demand.** ~~Cerrada en v0.3.0~~ — pregunta sin objeto tras la eliminación del campo `armor` (ver resolución de OQ #14).
+4. **Schema completo de la entidad `escuadra`.** v0.2.5 introduce `escuadra_id` y la entidad implícita (`id`, `nombre`, `cuerpo`, `faccion`) pero no especifica un schema completo ni endpoints CRUD. Definir en v1.1 o cuando aparezca el primer consumidor que necesite gestionar escuadras.
 
-5. **Schema completo de la entidad `escuadra`.** v0.2.5 introduce `escuadra_id` y la entidad implícita (`id`, `nombre`, `cuerpo`, `faccion`) pero no especifica un schema completo ni endpoints CRUD. Definir en v1.1 o cuando aparezca el primer consumidor que necesite gestionar escuadras.
+5. **Mutabilidad fina de rasgos físicos.** Cicatrices mutan vía `agregar_tag`. ¿Pero altura o complexión pueden mutar tras una herida grave ("queda enjuto tras la convalecencia")? El PRD las marca modificables como cualquier tag, sin restricción explícita.
 
-6. **Mutabilidad fina de rasgos físicos.** Cicatrices mutan vía `agregar_tag`. ¿Pero altura o complexión pueden mutar tras una herida grave ("queda enjuto tras la convalecencia")? El PRD las marca modificables como cualquier tag, sin restricción explícita.
+6. **Interpretación de customs por el motor.** ¿El motor de batalla interpreta `perk` custom con LLM al aplicar la regla, o un curador humano traduce el custom a regla mecánica antes? Tensión documentada (13.1), flujo operacional abierto.
 
-7. **Interpretación de customs por el motor.** ¿El motor de batalla interpreta `perk` custom con LLM al aplicar la regla, o un curador humano traduce el custom a regla mecánica antes? Tensión documentada (13.1), flujo operacional abierto.
+7. **Versionado de categorías canon de tags.** Las categorías y sub-categorías (`rasgo`, `skill`, `equipo.arma`, etc.) se documentan en `/meta/tag_categories`. ¿Gobernanza del catálogo? ¿Se versiona junto al PRD?
 
-8. **Versionado de categorías canon de tags.** Las categorías y sub-categorías (`rasgo`, `skill`, `equipo.arma`, etc.) se documentan en `/meta/tag_categories`. ¿Gobernanza del catálogo? ¿Se versiona junto al PRD?
+8. **`POST /character/{id}/original`.** ¿Útil exponer un endpoint que regenere la ficha al estado de creación (sin historial) usando `semilla` + `tags_iniciales`, para que herramientas externas calculen el diff? Fuera de v1; útil para auditoría.
 
-9. **`POST /character/{id}/original`.** ¿Útil exponer un endpoint que regenere la ficha al estado de creación (sin historial) usando `semilla` + `tags_iniciales`, para que herramientas externas calculen el diff? Fuera de v1; útil para auditoría.
+9. **Catálogo de tags canon por facción.** ¿El catálogo `/meta/skills` tiene entries segmentadas por facción (`facciones_predominantes: ["Ejército Rojo"]`)? ¿El generador rechaza o avisa cuando sortea un tag que el canon considera cruzado (ej. `skill: Comisariado` para un personaje Confederado)? ¿O se acepta con libertad?
 
-10. **Catálogo de tags canon por facción.** ¿El catálogo `/meta/skills` tiene entries segmentadas por facción (`facciones_predominantes: ["Ejército Rojo"]`)? ¿El generador rechaza o avisa cuando sortea un tag que el canon considera cruzado (ej. `skill: Comisariado` para un personaje Confederado)? ¿O se acepta con libertad?
+10. **Política de eviction de tags obsoletos.** Si el catálogo `/meta/skills` retira un valor (ej. `Oratoria de muelle` renombrado a `Oratoria sindical`), los personajes que ya tienen ese tag no se actualizan. ¿Se acepta silenciosamente o se implementa un job de migración? ¿Existe un mecanismo de alias para que ambos valores resuelvan al mismo efecto?
 
-11. **Política de eviction de tags obsoletos.** Si el catálogo `/meta/skills` retira un valor (ej. `Oratoria de muelle` renombrado a `Oratoria sindical`), los personajes que ya tienen ese tag no se actualizan. ¿Se acepta silenciosamente o se implementa un job de migración? ¿Existe un mecanismo de alias para que ambos valores resuelvan al mismo efecto?
+11. **Normalización de case en `valor`.** ¿El schema normaliza `valor` de tags a lowercase antes de persistir? Evita fragmentación silenciosa (`Francotirador` ≠ `francotirador`). Tensión 13.7. Decisión mínima viable antes de v1.
 
-12. **Normalización de case en `valor`.** ¿El schema normaliza `valor` de tags a lowercase antes de persistir? Evita fragmentación silenciosa (`Francotirador` ≠ `francotirador`). Tensión 13.7. Decisión mínima viable antes de v1.
+12. **Límite de tags por categoría.** ¿Hay un máximo razonable de tags por categoría? Un personaje con 20 `equipo.utilitario` es sintácticamente válido pero semánticamente raro. ¿El generador tiene caps internos? ¿La API los valida o advierte?
 
-13. **Límite de tags por categoría.** ¿Hay un máximo razonable de tags por categoría? Un personaje con 20 `equipo.utilitario` es sintácticamente válido pero semánticamente raro. ¿El generador tiene caps internos? ¿La API los valida o advierte?
-
-14. **Futuro del campo `armor` tras renombrar armadura → vestidura.** **CERRADA en v0.3.0 — resolución (a)**: eliminado del sistema. La vestidura es identidad visual, no protección numérica; el campo `armor` no se sostenía conceptualmente. Si más adelante hace falta defensa numérica, vuelve como tag `trait: blindado` derivado de vestidura específica o de skill defensiva. No persiste hasta entonces. El endpoint `/meta/equipo/armaduras/{valor}` queda eliminado del PRD.
-
-15. **¿Cargadores por calibre deberían generizarse a `munición rifle` / `munición pistola` / `munición SMG`?** La rectificación de armas a 6 genéricos (v0.3.1) abre una pregunta de simetría: los cargadores actuales en `equipo.utilitario` siguen siendo específicos (`cargador 7.62`, `cargador 9mm`, `cargador 7.65`, `cargador 7.92 Mauser`). Si las armas son genéricas, ¿los cargadores también deberían serlo? Alternativa: `munición rifle militar`, `munición SMG`, `munición pistola`. Sin decidir.
+13. **¿Cargadores por calibre deberían generizarse a `munición rifle` / `munición pistola` / `munición SMG`?** La rectificación de armas a 6 genéricos (v0.3.1) abre una pregunta de simetría: los cargadores actuales en `equipo.utilitario` siguen siendo específicos (`cargador 7.62`, `cargador 9mm`, `cargador 7.65`, `cargador 7.92 Mauser`). Si las armas son genéricas, ¿los cargadores también deberían serlo? Alternativa: `munición rifle militar`, `munición SMG`, `munición pistola`. Sin decidir.
 
 ---
 
