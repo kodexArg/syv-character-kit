@@ -11,6 +11,26 @@
 - Vínculo asimétrico canon Mansilla→Aguirre como `rival`
 - Total: 2215 líneas YAML
 
+## [0.2.5] - 2026-05-24
+### Changed
+- Delta v0.2.3 — Rango ≠ Rol: `rol_id` removido del payload público (pasa a interno del motor); `mando` migrado de enum {titular|suplente|no_apto} a `bool` (capacidad), con la titularidad actual derivada de (mando=true AND mayor rango en la escuadra); `estado_salud` valor `activo` renombrado a `saludable` para no chocar con el nuevo campo `estado`.
+- Delta v0.2.4 — Aspectos disueltos en tags: bloque `aspectos` eliminado entero. Sus contenidos migran a tres nuevas categorías canon de tags: `skill` (habilidades), `trait` (rasgos sin polaridad fija — incluye lo que antes eran complicaciones), `perk` (ventajas activables). `equipo` reformulado: armas/utilitarios/armaduras se expresan como tags con categoría jerárquica `equipo.arma`, `equipo.utilitario`, `equipo.armadura`. `fza_aportada` y `equipo.armor` pasan a regla derivada (no persistidos).
+- Delta v0.2.5 — Escuadra y filiación: `peloton` renombrado a `escuadra`; `nombre_de_campo` renombrado a `sobrenombre`; nueva entidad implícita `escuadra` con id+nombre+cuerpo+facción; nuevo campo derivado `filiacion` (provisorio) que compone "{rango} de la {escuadra.nombre} del {escuadra.cuerpo}". Orden definitivo de cabecera: nombre → sobrenombre → filiacion → facción → datos biológicos → rol → estado → rango → escuadra → mando.
+
+### Added
+- Sección nueva "Hoja ASCII de referencia" con el ejemplo del Comandante Miguel Quilodrán (Líder Revolucionario, Escuadra Mardones del ERP) aprobado por el cliente como representación visual canónica.
+- Píldora de arquitectura nueva sobre tags como inverted index, afinidad NoSQL/document-store.
+- Tensión nueva sobre traits sin polaridad explícita.
+- 4 open questions nuevas (nombre final de `filiacion`, polaridad de traits, derivación de `armor` total, endpoint `/meta/escuadras`).
+
+### Removed
+- Campos `rol_id`, `origen_geografico`, `fza_aportada` (como persistido), `especialidad`, `nombre_de_campo`, `equipo.armor` (escalar).
+- Bloque entero `aspectos`.
+- Enum `mando: {titular|suplente|no_apto}`, valor `activo` de `estado_salud`.
+
+### Notes
+- Los 22 mocks materializados (v0.3.0) siguen al schema v0.2.0/v0.2.1 y requieren regeneración al schema v0.2.5 en iteración separada.
+
 ## [0.2.2] - 2026-05-24
 ### Changed
 - Reforma estructural completa del schema de personaje
