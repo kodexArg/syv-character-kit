@@ -1,0 +1,97 @@
+personaje:
+  id: mock.ejercito_rojo.10.maturana
+  origen: mock
+  semilla: mock-fixed-21
+
+  nombre: Voluntario Claudio Maturana
+  edad: 21
+  genero: no_binario
+
+  faccion: Ejército Rojo
+  rol: Voluntario (Recargador)
+  rol_id: recluta
+  tag_rol: [recargador]
+
+  origen_geografico:
+    region: Patagonia Central (meseta)
+    localidad: Sarmiento (Chubut)
+
+  apariencia:
+    altura: medio
+    complexion: delgado
+    rasgos:
+      - pelo lacio cortado al cuchillo
+      - rostro andrógino curtido por el viento
+      - habla escasa
+    cicatrices: []
+
+  lealtades:
+    primaria: Ejército Rojo (utilitaria)
+    secundarias:
+      - el sueldo fijo y las tres comidas
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 2
+    men: 2
+
+  aspectos:
+    concepto: "Ex-peón rural; el Rojo le ofreció pan y un lugar antes que doctrina."
+    perk_fijo:
+      id: p_custom_olfato_del_terreno
+      nombre: Olfato del terreno
+      descripcion: >
+        Si el escenario tiene modificadores de visión reducida (niebla, lluvia),
+        Maturana ignora penalizadores de visión en su tirada de TAC.
+    complicacion_fija:
+      id: c_custom_vacio_de_mando
+      nombre: Vacío de mando
+      descripcion: >
+        Si no hay ninguna unidad con tag `líder` activa en la escuadra, todas
+        las tiradas de iniciativa de la escuadra son desfavorables (Maturana
+        como factor agravante moral).
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Subfusil Halcón
+        categoria_alcance: corta
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.11.bordagaray
+      descripcion: "Llegaron los dos tarde a la formación final. Se hicieron compañía sin proponérselo."
+
+  historia: |
+    Claudio Maturana pasó cuatro años trabajando en estancias al sur del Chubut
+    — esquila, marcación, alambrado. Los estancieros de esa zona no distinguían
+    mucho entre un peón y una herramienta. Maturana tampoco los distinguía a
+    ellos de ningún patrón que hubiera conocido antes. Cuando un agitador rojo
+    llegó a la zona prometiendo cambiar eso, Maturana preguntó cuánto pagaban
+    y cuánto había que caminar. Creció en la meseta y conoce la niebla
+    patagónica mejor que la mayoría: sabe leer el viento, distinguir siluetas
+    en la llovizna, moverse sin orientarse por referencias visuales claras.
+    Eso le da utilidad en condiciones que paralizan a gente con más
+    entrenamiento formal. No tiene opinión firme sobre el operativo de caza.
+    No conoce bien el contexto del Sector 12,15. Sigue a Mansilla porque
+    Mansilla parece saber lo que hace. Si resulta que no sabe, Maturana va a
+    notar el problema probablemente antes que el resto.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [recargador]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras:
+    curator_note: "Género no_binario asignado por curaduría — la prosa fuente no fija pronombres conclusivos; cumple distribución de diversidad pedida en la escuadra roja."

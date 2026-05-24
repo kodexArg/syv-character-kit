@@ -1,0 +1,99 @@
+personaje:
+  id: mock.confederacion.04.funes
+  origen: mock
+  semilla: mock-fixed-04
+
+  nombre: Soldado de Primera Dardo Funes
+  edad: 26
+  genero: masculino
+
+  faccion: Confederación
+  rol: Artillero FAP
+  rol_id: artillero
+  tag_rol: [artillero]
+
+  origen_geografico:
+    region: Nordeste
+    localidad: Resistencia
+
+  apariencia:
+    altura: alto
+    complexion: corpulento
+    rasgos:
+      - hombros anchos
+      - manos grandes de carga
+      - mirada parca
+    cicatrices: []
+
+  lealtades:
+    primaria: Confederación
+    secundarias:
+      - su escuadra
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 4
+    men: 3
+
+  aspectos:
+    concepto: "Hombre parco asignado al FAP por corpulencia, lo aprendió por método."
+    perk_fijo:
+      id: p_custom_recarga_rapida
+      nombre: Recarga rápida
+      descripcion: >
+        Cuando el recargador asignado está activo en la escuadra y en posición,
+        Funes puede disparar el FAP sin penalización de munición ese turno.
+    complicacion_fija:
+      id: c_custom_arma_pesada_sin_dotacion
+      nombre: Arma pesada sin dotación
+      descripcion: >
+        Cuando no hay ninguna unidad con tag `recargador` activa en su sector,
+        tirada de TAC desfavorable al atacar con el FAP.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: FAP Confederado M2A
+        categoria_alcance: media
+      - nombre: Cuchillo de campo
+        categoria_alcance: corta
+    equipo_tactico:
+      - nombre: bandolera de munición FAP
+        descripcion: "Reservas extra. Funes calcula al cartucho."
+      - nombre: almanaque de bolsillo
+        descripcion: "Registra el clima diario. Costumbre."
+
+  fza_aportada: 2
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.09.mendez
+      descripcion: "Recluta Méndez es su recargador asignado. Funes le marca el ritmo del arma."
+
+  historia: |
+    Dardo Funes es de Resistencia, Chaco. Llegó al frente patagónico sin saber
+    que el frío del sur es otro tipo de frío — no el húmedo del nordeste, sino
+    uno seco que entra por las articulaciones. Le tomó un mes aclimatarse y otro
+    dejar de pensar en el clima como problema personal. Le asignaron el FAP
+    porque era el más corpulento del pelotón y nadie se preguntó si había mejores
+    criterios. Funes no protestó. Aprendió el arma por partes, sin saltarse pasos,
+    verificando dos veces. A los seis meses era el artillero más parco y confiable
+    de su compañía — el tipo que no desperdicia munición porque sabe cuánto cuesta
+    traerla al frente. Su única rareza: lleva un almanaque de bolsillo con el que
+    registra el clima diario. No lo usa para nada en particular. Dice que es por
+    costumbre.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [artillero]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

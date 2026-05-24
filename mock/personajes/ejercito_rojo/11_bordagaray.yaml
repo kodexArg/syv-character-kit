@@ -1,0 +1,100 @@
+personaje:
+  id: mock.ejercito_rojo.11.bordagaray
+  origen: mock
+  semilla: mock-fixed-22
+
+  nombre: Voluntario Sebastián Bordagaray
+  edad: 22
+  genero: masculino
+
+  faccion: Ejército Rojo
+  rol: Voluntario (Recargador)
+  rol_id: recluta
+  tag_rol: [recargador]
+
+  origen_geografico:
+    region: Pampa Bonaerense
+    localidad: Bahía Blanca (barrio Noroeste)
+
+  apariencia:
+    altura: medio
+    complexion: robusto
+    rasgos:
+      - pelo oscuro abundante
+      - rasgos vascos marcados
+      - manos manchadas de aceite del taller
+    cicatrices: []
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - la memoria de su abuelo huelguista
+      - su padre metalúrgico
+    secretos:
+      - inquietud no articulada sobre la naturaleza del operativo de caza
+
+  atributos:
+    fis: 3
+    tac: 2
+    men: 2
+
+  aspectos:
+    concepto: "Tercera generación de huelguistas; el peso familiar lo empuja sin que lo note."
+    perk_fijo:
+      id: p_custom_escudo_humano
+      nombre: Escudo humano
+      descripcion: >
+        Si un impacto se asigna al Camarada Puntero o a Iturra, Bordagaray
+        puede interceptar el impacto y realizar la salvación en su lugar.
+    complicacion_fija:
+      id: c_custom_hemorragia_lenta
+      nombre: Hemorragia lenta
+      descripcion: >
+        Si Bordagaray tiene el tag `herido` al inicio de la hora, chequeo de
+        MEN; fallo = pierde 1 punto de FIS adicional ese ciclo.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Subfusil Halcón
+        categoria_alcance: corta
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: subordinado
+      ref_personaje_id: mock.ejercito_rojo.01.mansilla
+      descripcion: "Mansilla notó su disposición a meterse adelante. Iturra dijo que eso podía matarlo."
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.10.maturana
+      descripcion: "Llegaron tarde a la formación. Se hicieron compañía sin proponérselo."
+
+  historia: |
+    El abuelo de Sebastián Bordagaray llegó del País Vasco en 1923 y terminó
+    en los frigoríficos de Bahía Blanca. El padre fue metalúrgico. Sebastián
+    fue la primera generación de la familia que tuvo posibilidad de no trabajar
+    con las manos, y eligió las manos igual — taller mecánico en el barrio
+    Noroeste, tres años, hasta que la revolución cambió lo que valía la pena
+    hacer con el tiempo. No es el más hábil ni el más rápido. Tiene buena
+    constitución y una disposición a meterse donde nadie quiere meterse que
+    Mansilla notó en los primeros días de entrenamiento. "Ese va adelante
+    cuando los demás van atrás", le comentó a Iturra. Iturra dijo que eso
+    también podía matarlo. Mansilla dijo que ya lo sabía. Lo que Bordagaray no
+    le dijo a nadie es que el operativo de caza lo inquieta de un modo que no
+    puede articular. No es el peligro — es la especificidad: ir a matar a
+    alguien en particular.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [recargador]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

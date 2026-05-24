@@ -1,0 +1,96 @@
+personaje:
+  id: mock.confederacion.09.mendez
+  origen: mock
+  semilla: mock-fixed-09
+
+  nombre: Recluta Ignacio Méndez
+  edad: 19
+  genero: masculino
+
+  faccion: Confederación
+  rol: Recluta — Recargador
+  rol_id: recluta
+  tag_rol: [recargador]
+
+  origen_geografico:
+    region: Cuyo
+    localidad: San Rafael
+
+  apariencia:
+    altura: medio
+    complexion: robusto
+    rasgos:
+      - cara redonda recién afeitada
+      - manos curtidas por la viña
+      - movimientos un toque lentos
+    cicatrices: []
+
+  lealtades:
+    primaria: Confederación
+    secundarias:
+      - su familia en San Rafael
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 2
+    men: 2
+
+  aspectos:
+    concepto: "Pibe de viña que aprende el rol mientras lo ejerce."
+    perk_fijo:
+      id: p_custom_tenaz
+      nombre: Tenaz
+      descripcion: >
+        Cuando tiene el tag `cansado` o `exhausto`, tirada de FIS favorable en
+        cualquier chequeo físico.
+    complicacion_fija:
+      id: c_custom_novato_asustado
+      nombre: Novato asustado
+      descripcion: >
+        Cuando recibe fuego estando fuera de cobertura, tirada de FIS desfavorable
+        en la salvación.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Fusil FAL
+        categoria_alcance: corta
+    equipo_tactico:
+      - nombre: bandolera de munición FAP
+        descripcion: "Para alimentar el arma de Funes."
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: subordinado
+      ref_personaje_id: mock.confederacion.04.funes
+      descripcion: "Recargador asignado del artillero Funes."
+
+  historia: |
+    Ignacio Méndez tiene diecinueve años y es de San Rafael, Mendoza. Trabajaba
+    en la viña familiar — cosecha, poda, los trabajos que dicta el calendario
+    agrícola — antes de que la conscripción lo sacara del ciclo. Su padre lo
+    acompañó hasta el punto de embarque sin decir mucho, que es como hacen las
+    cosas en San Rafael. En la instrucción fue regular en todo y destacó en
+    resistencia física — el trabajo en la viña le dio una base muscular que los
+    ejercicios solo refinaron. Su TAC es baja porque todavía no interiorizó el
+    timing del combate: sabe usar el arma, pero la usa un segundo tarde bajo
+    presión. Lo asignaron a recargador del artillero Funes porque alguien en
+    logística vio la nota de resistencia física y lo marcó para carga pesada.
+    Méndez no protestó porque no sabe bien qué implica el rol todavía. Lo está
+    aprendiendo.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [recargador]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

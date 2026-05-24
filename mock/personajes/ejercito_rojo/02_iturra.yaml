@@ -1,0 +1,105 @@
+personaje:
+  id: mock.ejercito_rojo.02.iturra
+  origen: mock
+  semilla: mock-fixed-13
+
+  nombre: Segundo Camarada Delia Iturra
+  edad: 38
+  genero: femenino
+
+  faccion: Ejército Rojo
+  rol: Segundo Camarada (Segunda al mando)
+  rol_id: segundo_mando
+  tag_rol: [líder]
+
+  origen_geografico:
+    region: Patagonia Atlántica
+    localidad: Carmen de Patagones
+
+  apariencia:
+    altura: medio
+    complexion: atletico
+    rasgos:
+      - pelo gris atado
+      - dos dedos de la mano derecha soldados entre sí por una quemadura de vapor
+      - voz grave, palabras justas
+    cicatrices:
+      - cicatriz de quemadura en mano derecha (usina ferroviaria, año cuatro)
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - los talleres ferroviarios de Carmen de Patagones
+      - las compañeras de la primera oleada sindical
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 5
+    men: 6
+
+  aspectos:
+    concepto: "Veterana sindical que asume mando por señalamiento, no por ambición."
+    perk_fijo:
+      id: p_custom_sangre_fria
+      nombre: Sangre fría
+      descripcion: >
+        Si la escuadra pierde un miembro en la misma ronda, tirada de MEN
+        favorable para chequeo de moral.
+    complicacion_fija:
+      id: c_custom_sombra_del_lider
+      nombre: Sombra del líder
+      descripcion: >
+        Si el Camarada Puntero está KIA y Iturra asume el mando, tirada de
+        iniciativa desfavorable esa ronda.
+
+  equipo:
+    armor: 1
+    armas:
+      - nombre: Fusil de cerrojo Mauser 1909
+        categoria_alcance: larga
+      - nombre: Subfusil Halcón
+        categoria_alcance: corta
+    equipo_tactico: null
+
+  fza_aportada: 2
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.01.mansilla
+      descripcion: "Mansilla la señaló como segunda. Aceptó sin preguntar."
+
+  historia: |
+    Delia Iturra tiene treinta y ocho años y dos dedos de la mano derecha soldados
+    entre sí por una quemadura de vapor en la usina ferroviaria de Carmen de
+    Patagones. Aprendió a disparar con esa mano igual, porque no había otra
+    opción cuando la patronal trajo los primeros rompehuelgas armados en el
+    verano del año cuatro. "Si te van a matar de todas formas, mejor que sea
+    por algo que valga", le dijo entonces a la compañera que le enseñó a cargar
+    el Mauser. Estuvo en cuatro acciones antes de este operativo. Nunca ocupó
+    un rol de mando formal hasta que Mansilla la señaló como segunda. La
+    venganza del Sector 12,15 le importa en la medida en que le importan todas
+    las muertes: como deuda colectiva, no como drama personal. Matar a un
+    oficial específico parece más ajuste de cuentas que operación táctica. Se
+    lo guardó para ella.
+
+  historial:
+    - fecha: "2024-12-15T00:00:00Z"
+      tipo: herida
+      descripcion: "Quemadura de vapor en mano derecha durante represión patronal en la usina."
+      ref_batalla: null
+      metadata:
+        gravedad: grave
+        cicatriz: "dos dedos soldados, mano derecha"
+
+  estado_salud: activo
+  tags_iniciales: [líder]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

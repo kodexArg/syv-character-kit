@@ -1,0 +1,126 @@
+personaje:
+  id: mock.ejercito_rojo.01.mansilla
+  origen: mock
+  semilla: mock-fixed-12
+
+  nombre: Camarada Puntero Ramón Mansilla
+  edad: 34
+  genero: masculino
+
+  faccion: Ejército Rojo
+  rol: Camarada Puntero (Líder de escuadra)
+  rol_id: lider_escuadra
+  tag_rol: [líder, sargento]
+
+  origen_geografico:
+    region: Pampa Bonaerense
+    localidad: Bahía Blanca
+
+  apariencia:
+    altura: alto
+    complexion: delgado
+    rasgos:
+      - pelo entrecano corto
+      - lentes de armazón fino reforzado con alambre
+      - habla pausada, voz grave
+    cicatrices: []
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - el boletín sindical de los metalúrgicos
+      - los instructores de Stroeder
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 5
+    men: 7
+
+  aspectos:
+    concepto: "Comisario político devenido comandante de campo por necesidad orgánica."
+    perk_fijo:
+      id: p03_voz_de_mando
+      nombre: Voz de mando
+      descripcion: >
+        Mientras el líder está activo en la escuadra, todos los compañeros
+        usan el MEN del líder en chequeos de MENTAL.
+    complicacion_fija:
+      id: c06_obstinado
+      nombre: Obstinado
+      descripcion: >
+        Si se emite una orden que implique retroceder o ceder posición,
+        tirada de MEN desfavorable para obedecer.
+
+  equipo:
+    armor: 1
+    armas:
+      - nombre: Subfusil Halcón
+        categoria_alcance: corta
+      - nombre: Pistola Browning capturada
+        categoria_alcance: corta
+    equipo_tactico:
+      - nombre: cuaderno de notas
+        descripcion: "Anotaciones de campaña y borradores de comunicados."
+      - nombre: brújula de oficial
+        descripcion: "Regalo del instructor de Stroeder."
+
+  fza_aportada: 2
+
+  vinculos:
+    - tipo: mentor
+      ref_personaje_id: null
+      descripcion: >
+        Instructor del campo de Stroeder, que le enseñó a leer mapas cuando
+        todavía redactaba comunicados sindicales.
+    - tipo: rival
+      ref_personaje_id: mock.confederacion.01.aguirre
+      descripcion: >
+        Sargento Aguirre. Mansilla anotó su nombre en el informe del Sector
+        12,15. No se conocen en persona; el rival es de papel y de mapa.
+    - tipo: subordinado
+      ref_personaje_id: mock.ejercito_rojo.02.iturra
+      descripcion: "Segundo Camarada Iturra. La señaló como segunda en la formación de la escuadra."
+    - tipo: subordinado
+      ref_personaje_id: mock.ejercito_rojo.03.antinao
+      descripcion: "Tirador Antinao. Su ojo elegido para el objetivo."
+
+  historia: |
+    Mansilla no disparó un arma en combate hasta los treinta y dos años. Era
+    redactor del boletín sindical de los metalúrgicos de Bahía Blanca, después
+    comisario político de la segunda región, después instructor de cuadros en
+    Stroeder. La revolución tiene usos para un hombre que sabe leer mapas y
+    convencer a otros de que la causa vale el riesgo. El campo de batalla no
+    estaba en su programa. Cuando llegó el informe del Sector 12,15, Mansilla
+    fue uno de los tres hombres que lo analizaron. Anotó: "respuesta táctica
+    competente del oficial azul". Después recomendó eliminarlo antes de la
+    siguiente operación. El alto mando lo comisionó para liderar la escuadra
+    de caza — no por tirador, sino porque conoce el informe y no carga rencor.
+
+  historial:
+    - fecha: "2026-02-28T10:00:00Z"
+      tipo: traslado
+      descripcion: "Comisionado de Stroeder al frente sur como líder de escuadra de caza."
+      ref_batalla: null
+      metadata:
+        motivo: "decisión del alto mando tras análisis del Sector 12,15"
+    - fecha: "2026-04-18T17:30:00Z"
+      tipo: formacion_vinculo
+      descripcion: "Identifica formalmente al Sargento Aguirre como objetivo prioritario."
+      ref_batalla: null
+      metadata:
+        vinculo_creado:
+          tipo: rival
+          ref: mock.confederacion.01.aguirre
+
+  estado_salud: activo
+  tags_iniciales: [líder, sargento]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

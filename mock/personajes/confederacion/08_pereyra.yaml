@@ -1,0 +1,98 @@
+personaje:
+  id: mock.confederacion.08.pereyra
+  origen: mock
+  semilla: mock-fixed-08
+
+  nombre: Soldado de Primera Graciela Pereyra
+  edad: 23
+  genero: femenino
+
+  faccion: Confederación
+  rol: Fusilero de Primera
+  rol_id: fusilero
+  tag_rol: [infantería]
+
+  origen_geografico:
+    region: Patagonia Atlántica
+    localidad: Rawson
+
+  apariencia:
+    altura: medio
+    complexion: atletico
+    rasgos:
+      - pelo oscuro corto
+      - cara curtida por el viento
+      - mirada directa
+    cicatrices: []
+
+  lealtades:
+    primaria: Confederación
+    secundarias:
+      - su escuadra
+      - el frente patagónico
+    secretos:
+      - razones propias para no aceptar reasignación a logística
+
+  atributos:
+    fis: 3
+    tac: 3
+    men: 3
+
+  aspectos:
+    concepto: "Patagónica que pidió quedarse en línea por razones que no comparte."
+    perk_fijo:
+      id: p_custom_veterana_de_flanqueo
+      nombre: Veterana de flanqueo
+      descripcion: >
+        Cuando ataca a un enemigo con iniciativa menor a la suya en el track,
+        tirada de TAC favorable.
+    complicacion_fija:
+      id: c_custom_gatillo_rapido
+      nombre: Gatillo rápido
+      descripcion: >
+        Cuando la escuadra disparó en el turno anterior, Pereyra debe superar
+        un chequeo de desabastecimiento; en caso de fallo no puede atacar esa ronda.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Fusil FAL
+        categoria_alcance: corta
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.05.rodriguez
+      descripcion: "Misma escuadra por azar de numeración."
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.06.olivares
+      descripcion: "Mismo pelotón de asignación."
+
+  historia: |
+    Graciela Pereyra es de Rawson, Chubut — nació y creció en la Patagonia, así
+    que el frío no la sorprendió como a los norteños de la escuadra. Lo que la
+    sorprendió fue el ruido. En Rawson el viento hace su propio ruido constante;
+    el del combate es diferente, más concentrado y arbitrario. Su familia no
+    entiende del todo por qué pidió mantenerse en el frente patagónico cuando
+    le ofrecieron reasignación a logística. Ella explicó que era más útil en
+    línea, que tenía experiencia de terreno, que había razones tácticas.
+    Probablemente haya algo más, pero no lo dice y nadie le insiste. Con
+    Olivares y Rodríguez terminaron en el mismo pelotón de asignación y en la
+    misma escuadra por azar. No son amigos exactamente, pero se conocen lo
+    suficiente como para saber cuándo el otro está funcionando mal.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [infantería]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

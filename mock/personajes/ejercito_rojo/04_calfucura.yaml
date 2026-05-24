@@ -1,0 +1,99 @@
+personaje:
+  id: mock.ejercito_rojo.04.calfucura
+  origen: mock
+  semilla: mock-fixed-15
+
+  nombre: Ametrallador Ignacio Calfucurá
+  edad: 34
+  genero: masculino
+
+  faccion: Ejército Rojo
+  rol: Ametrallador (FAP)
+  rol_id: artillero
+  tag_rol: [artillero]
+
+  origen_geografico:
+    region: Pampa Bonaerense (norte)
+    localidad: San Nicolás
+
+  apariencia:
+    altura: medio
+    complexion: corpulento
+    rasgos:
+      - antebrazos cicatrizados hasta el codo
+      - manos endurecidas por el acero
+      - mirada que no se inmuta
+    cicatrices:
+      - salpicaduras de acero fundido en antebrazos (SOMISA)
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - los compañeros de SOMISA
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 4
+    men: 3
+
+  aspectos:
+    concepto: "Siderúrgico convertido en ametrallador, opera el FAP por ritual."
+    perk_fijo:
+      id: p_custom_recarga_rapida
+      nombre: Recarga rápida
+      descripcion: >
+        Si el recargador asignado no está disponible, Calfucurá puede disparar
+        el FAP sin penalización de desabastecimiento ese turno.
+    complicacion_fija:
+      id: c_custom_arma_pesada_sin_dotacion
+      nombre: Arma pesada sin dotación
+      descripcion: >
+        Si no hay ninguna unidad con tag `apuntador` activa en la escuadra,
+        tirada de TAC desfavorable al atacar con el FAP.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: FAP Modelo 45
+        categoria_alcance: media
+      - nombre: Cuchillo de trabajo
+        categoria_alcance: corta
+    equipo_tactico:
+      - nombre: kit de desencasquillamiento
+        descripcion: "Improvisado. Lo arma por reflejo cada noche."
+
+  fza_aportada: 2
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.09.bordon
+      descripcion: "Bordón le carga el arma. Calfucurá no le explica nada — se aprende mirando."
+
+  historia: |
+    Ignacio Calfucurá tiene treinta y cuatro años y manos que parecen hechas
+    de otra materia. Trabajó en la siderúrgica SOMISA de San Nicolás antes de
+    que la revolución lo empujara al sur. Las cicatrices de las salpicaduras
+    de acero fundido le recorren los antebrazos hasta el codo. No les presta
+    atención — son parte del oficio, como el FAP sin manual de instrucciones
+    que el alto mando rojo le asignó hace ocho meses. Aprendió a operar el
+    FAP por ensayo y error. El arma encasquilla cada cuarenta o cincuenta
+    disparos si el ambiente es húmedo. Calfucurá desarrolló un ritual de
+    desencasquillamiento que ejecuta sin mirar. No tiene opinión elaborada
+    sobre el operativo. Recibió la orden, verificó que había munición suficiente.
+    La política la deja para Mansilla; él se ocupa de que el FAP dispare cuando
+    tiene que disparar.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [artillero]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

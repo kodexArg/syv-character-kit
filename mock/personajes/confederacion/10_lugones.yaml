@@ -1,0 +1,94 @@
+personaje:
+  id: mock.confederacion.10.lugones
+  origen: mock
+  semilla: mock-fixed-10
+
+  nombre: Recluta Patricia Lugones
+  edad: 20
+  genero: femenino
+
+  faccion: Confederación
+  rol: Recluta — Recargador
+  rol_id: recluta
+  tag_rol: [recargador]
+
+  origen_geografico:
+    region: Tierra del Fuego
+    localidad: Ushuaia
+
+  apariencia:
+    altura: bajo
+    complexion: robusto
+    rasgos:
+      - pelo negro recogido
+      - cara observadora
+      - habla breve
+    cicatrices: []
+
+  lealtades:
+    primaria: Confederación
+    secundarias:
+      - su familia en Ushuaia
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 2
+    men: 2
+
+  aspectos:
+    concepto: "Guía de senderismo aprendiendo que en el frente la iniciativa no es ejecución."
+    perk_fijo:
+      id: p_custom_escudo_humano
+      nombre: Escudo humano
+      descripcion: >
+        Cuando un impacto se asigna al líder o a un especialista en su sector,
+        Lugones puede interceptar el impacto y realizar la salvación en su lugar.
+    complicacion_fija:
+      id: c_custom_peso_muerto
+      nombre: Peso muerto
+      descripcion: >
+        Cuando debe superar un chequeo físico en terreno difícil (barro, pendiente,
+        terreno irregular), tirada de FIS desfavorable.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Fusil FAL
+        categoria_alcance: corta
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: mentor
+      ref_personaje_id: mock.confederacion.02.sosa
+      descripcion: "Sosa la mueve según la situación. Aprende mirándolo."
+
+  historia: |
+    Patricia Lugones es de Ushuaia, la ciudad más al sur del frente confederado.
+    Tiene veinte años y creció con el tipo de frío que hace que el frente
+    patagónico le resulte conocido en temperatura aunque no en nada más. Su
+    familia trabaja en el turismo — antes de la guerra, al menos. Antes de la
+    conscripción trabajó dos temporadas como guía de senderismo en el Parque
+    Nacional Tierra del Fuego. Conoce el terreno abrupto, el barro, la roca
+    mojada. En condiciones normales sería una ventaja; en el frente el terreno
+    es uno de los factores y no el más importante, y Lugones todavía está
+    aprendiendo a jerarquizar correctamente. La asignaron a recargador
+    secundario. No tiene apuntador fijo — es apoyo móvil que va donde la dotación
+    lo requiera. En la práctica Sosa o Walter la mueven según la situación, y
+    ella obedece sin chistar.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [recargador]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

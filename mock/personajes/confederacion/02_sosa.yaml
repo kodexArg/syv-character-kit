@@ -1,0 +1,99 @@
+personaje:
+  id: mock.confederacion.02.sosa
+  origen: mock
+  semilla: mock-fixed-02
+
+  nombre: Cabo Primero Horacio Sosa
+  edad: 27
+  genero: masculino
+
+  faccion: Confederación
+  rol: Cabo Primero (Segundo al mando)
+  rol_id: segundo_mando
+  tag_rol: [líder]
+
+  origen_geografico:
+    region: Centro
+    localidad: Córdoba Capital
+
+  apariencia:
+    altura: medio
+    complexion: robusto
+    rasgos:
+      - pelo oscuro recortado al rape
+      - manos grandes manchadas de aceite que no termina de salir
+      - habla justa, sin adornos
+    cicatrices: []
+
+  lealtades:
+    primaria: Confederación
+    secundarias:
+      - el Sargento Aguirre
+      - su escuadra
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 5
+    men: 6
+
+  aspectos:
+    concepto: "Organizador silencioso del cinturón industrial, asciende por confiabilidad."
+    perk_fijo:
+      id: p_custom_brazo_derecho_funcional
+      nombre: Brazo derecho funcional
+      descripcion: >
+        Cuando el Sargento Aguirre está activo y operativo, Sosa ejecuta órdenes
+        de coordinación sin tirada. Si Aguirre cae, Sosa tira MEN favorable para
+        asumir el mando sin vacío.
+    complicacion_fija:
+      id: c06_obstinado
+      nombre: Obstinado
+      descripcion: >
+        Cuando recibe una orden que implica retroceder o ceder posición ganada,
+        tirada de MEN desfavorable para obedecer.
+
+  equipo:
+    armor: 1
+    armas:
+      - nombre: Fusil FAL
+        categoria_alcance: corta
+    equipo_tactico:
+      - nombre: Radio de campo PRC-77
+        descripcion: "Equipo de coordinación. Sosa la opera sin manual."
+
+  fza_aportada: 2
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.01.aguirre
+      descripcion: "Sargento Aguirre lo eligió personalmente. Confianza recíproca, sin palabras."
+    - tipo: subordinado
+      ref_personaje_id: mock.confederacion.10.lugones
+      descripcion: "Recluta Lugones, recargador móvil. Sosa la mueve según la situación."
+
+  historia: |
+    Horacio Sosa es cordobés, del cinturón industrial. Antes del servicio trabajaba
+    turno noche en una planta de procesado de aceite — sin quejarse porque era lo
+    que había. Entró al servicio obligatorio sin expectativas y descubrió que tenía
+    talento para la organización bajo presión: nunca perdía la cuenta de cartuchos,
+    posiciones ni tiempos. Dos inviernos patagónicos lo curtieron. Sobrevivió a
+    ambos sin heridas graves y con la reputación de saber dónde está todo. Aguirre
+    lo eligió Cabo Primero de su nueva escuadra. No se conocían del Sector 12,15
+    — Sosa estaba en otro frente —, pero el expediente habla solo. Sosa aceptó sin
+    preguntar sobre el ascenso ni sobre cómo murió el sargento anterior. Eso
+    también es parte de por qué lo eligieron.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [líder]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

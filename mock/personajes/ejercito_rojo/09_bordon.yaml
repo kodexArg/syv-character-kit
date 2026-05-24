@@ -1,0 +1,101 @@
+personaje:
+  id: mock.ejercito_rojo.09.bordon
+  origen: mock
+  semilla: mock-fixed-20
+
+  nombre: Voluntario Luciano Bordón
+  edad: 19
+  genero: masculino
+
+  faccion: Ejército Rojo
+  rol: Voluntario (Recargador)
+  rol_id: recluta
+  tag_rol: [recargador]
+
+  origen_geografico:
+    region: Pampa Bonaerense
+    localidad: Bahía Blanca
+
+  apariencia:
+    altura: medio
+    complexion: delgado
+    rasgos:
+      - cara aniñada
+      - anteojos manchados
+      - manos limpias todavía
+    cicatrices: []
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - las ideas, sin orden establecido
+    secretos:
+      - duda intelectual permanente sobre la doctrina antimaquinista
+
+  atributos:
+    fis: 3
+    tac: 2
+    men: 2
+
+  aspectos:
+    concepto: "Estudiante de ingeniería desertado, más teoría que práctica."
+    perk_fijo:
+      id: p_custom_disparo_de_oportunidad
+      nombre: Disparo de oportunidad
+      descripcion: >
+        Si un enemigo actúa primero en el track de iniciativa, Bordón puede
+        ejecutar una tirada de TAC desfavorable como reacción fuera de su turno.
+    complicacion_fija:
+      id: c_custom_novato_asustado
+      nombre: Novato asustado
+      descripcion: >
+        Si recibe fuego estando fuera de cobertura, tirada de FIS desfavorable
+        en salvación.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Subfusil Halcón
+        categoria_alcance: corta
+    equipo_tactico:
+      - nombre: cuaderno de notas
+        descripcion: "Apuntes de doctrina y dudas anotadas para discutir luego."
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: subordinado
+      ref_personaje_id: mock.ejercito_rojo.04.calfucura
+      descripcion: "Recargador asignado del ametrallador. Aprende sin que le expliquen."
+    - tipo: mentor
+      ref_personaje_id: mock.ejercito_rojo.01.mansilla
+      descripcion: "Le pidió a Mansilla aclaraciones doctrinarias una vez. La respuesta no le alcanzó."
+
+  historia: |
+    Luciano Bordón estudió dos años y medio de ingeniería industrial en la
+    Universidad Nacional del Sur antes de que la revolución cambiara la
+    composición del cuerpo docente, el plan de estudios y sus propias
+    convicciones, en ese orden. Leyó los panfletos, fue a dos reuniones, y al
+    tercer mes se presentó voluntario. Sus padres — contadores ambos — todavía
+    no entienden bien qué pasó. En el Ejército Rojo aprendió que las cosas que
+    entendía teóricamente sobre la guerra no sirven de nada cuando alguien te
+    está disparando de verdad. El cuerpo reacciona antes que el cálculo. La
+    contradicción antimaquinista del Ejército Rojo lo inquieta intelectualmente
+    más que a cualquier otro en la escuadra. Tuvo esa conversación con Mansilla
+    una vez. Mansilla le explicó que las contradicciones tácticas se resuelven
+    después de la victoria estratégica. Bordón anotó la respuesta y sigue sin
+    estar convencido.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [recargador]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

@@ -1,0 +1,96 @@
+personaje:
+  id: mock.ejercito_rojo.07.soriano
+  origen: mock
+  semilla: mock-fixed-18
+
+  nombre: Miliciano Veterano Norberto Soriano
+  edad: 40
+  genero: masculino
+
+  faccion: Ejército Rojo
+  rol: Miliciano Veterano
+  rol_id: fusilero
+  tag_rol: [infantería]
+
+  origen_geografico:
+    region: Patagonia Atlántica
+    localidad: Puerto Madryn
+
+  apariencia:
+    altura: medio
+    complexion: corpulento
+    rasgos:
+      - espalda ancha algo curvada
+      - manos grandes con dedos rígidos
+      - respiración pesada por el amoníaco
+    cicatrices: []
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - los compañeros del puerto de Madryn
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 3
+    men: 3
+
+  aspectos:
+    concepto: "Portuario con la espalda hecha bolsa que esperó veinte años para actuar."
+    perk_fijo:
+      id: p_custom_resistencia_al_dolor
+      nombre: Resistencia al dolor
+      descripcion: >
+        Si Soriano tiene el tag `herido`, una de las tiradas desfavorables del
+        turno se resuelve como estándar.
+    complicacion_fija:
+      id: c_custom_peso_muerto
+      nombre: Peso muerto
+      descripcion: >
+        Si debe superar un chequeo físico en terreno difícil, tirada de FIS
+        desfavorable.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Subfusil Halcón
+        categoria_alcance: corta
+    equipo_tactico:
+      - nombre: cinto lumbar reforzado
+        descripcion: "Improvisado del puerto. Le sostiene la espalda lo justo."
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.06.paine
+      descripcion: "Comparten turnos largos. Pocos verbos."
+
+  historia: |
+    Norberto Soriano tiene cuarenta años y dos hernias de disco que el médico
+    del sindicato le diagnosticó hace tres años. "No cargues más de veinte
+    kilos", le dijo. El FAP vacío pesa dieciocho. La mochila de campaña con
+    agua, raciones y parque pesa veintidós. Soriano lleva los dos porque es lo
+    que hay. Veinte años en las dársenas de Puerto Madryn cargando contenedores
+    de pescado congelado le dejaron la espalda, los pulmones afectados por el
+    amoníaco de las cámaras frigoríficas, y una convicción muy clara sobre
+    quién se queda con el dinero y quién pone el cuerpo. Cuando el Ejército
+    Rojo llegó al puerto con sus agitadores, Soriano ya tenía las mismas
+    conclusiones — solo le faltaba una estructura donde meterlas. No le cuesta
+    obedecer órdenes. La diferencia es que aquí las órdenes vienen de camaradas,
+    no de gerentes. O al menos eso le dijeron.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [infantería]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

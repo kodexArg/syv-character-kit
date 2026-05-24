@@ -1,0 +1,95 @@
+personaje:
+  id: mock.ejercito_rojo.06.paine
+  origen: mock
+  semilla: mock-fixed-17
+
+  nombre: Miliciana Veterana Rosa Painé
+  edad: 30
+  genero: femenino
+
+  faccion: Ejército Rojo
+  rol: Miliciana Veterana
+  rol_id: fusilero
+  tag_rol: [infantería]
+
+  origen_geografico:
+    region: Patagonia Central
+    localidad: comunidad mapuche al norte del lago Musters
+
+  apariencia:
+    altura: bajo
+    complexion: atletico
+    rasgos:
+      - pelo negro trenzado
+      - cara curtida por el sol de meseta
+      - habla pausada, acento de comunidad
+    cicatrices: []
+
+  lealtades:
+    primaria: su comunidad mapuche
+    secundarias:
+      - Ejército Rojo (como medio)
+    secretos:
+      - mantiene dudas sobre la doctrina antimaquinista
+
+  atributos:
+    fis: 3
+    tac: 3
+    men: 3
+
+  aspectos:
+    concepto: "Mapuche que se opone a la Confederación; el Rojo es la herramienta disponible."
+    perk_fijo:
+      id: p_custom_tenaz
+      nombre: Tenaz
+      descripcion: >
+        Si Painé tiene el tag `cansado` o `exhausto`, tirada de FIS favorable
+        en cualquier chequeo físico.
+    complicacion_fija:
+      id: c_custom_panico_en_abierto
+      nombre: Pánico en abierto
+      descripcion: >
+        Si está en terreno sin cobertura y recibe fuego, tirada de MEN
+        desfavorable para mantenerse en posición.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Fusil de cerrojo Mauser 1909
+        categoria_alcance: larga
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.07.soriano
+      descripcion: "Comparten turnos largos. Conversaciones cortas, silencios largos."
+
+  historia: |
+    Rosa Painé tiene treinta años y viene de una comunidad mapuche al norte del
+    lago Musters. No llegó al Ejército Rojo por el sindicato sino por el camino
+    más largo: vio lo que la Confederación hizo a las tierras comunitarias de
+    su zona cuando necesitaba espacio para sus líneas de comunicación, y
+    decidió que el bando que se oponía a la Confederación era el suyo, al menos
+    por ahora. La contradicción del Ejército Rojo con la maquinaria la siente
+    más aguda que la mayoría. El Ejército dice ser antimaquinista pero usa
+    fusiles, radio, camiones. Painé lo menciona de vez en cuando. La respuesta
+    habitual es que las armas son una necesidad táctica transitoria. Ella
+    asiente sin estar del todo convencida. En combate aprendió que el terreno
+    abierto la pone nerviosa. Lo sabe. Lo trabaja. Hasta ahora no le ha costado
+    la vida.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [infantería]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

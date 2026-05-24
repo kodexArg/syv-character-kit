@@ -1,0 +1,94 @@
+personaje:
+  id: mock.ejercito_rojo.03.antinao
+  origen: mock
+  semilla: mock-fixed-14
+
+  nombre: Tirador Vanguardia Héctor Antinao
+  edad: 26
+  genero: masculino
+
+  faccion: Ejército Rojo
+  rol: Tirador Vanguardia
+  rol_id: apuntador
+  tag_rol: [apuntador]
+
+  origen_geografico:
+    region: Patagonia Norte (meseta)
+    localidad: General Roca
+
+  apariencia:
+    altura: medio
+    complexion: delgado
+    rasgos:
+      - pelo negro lacio
+      - rasgos mapuche marcados
+      - manos firmes
+    cicatrices: []
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - los agitadores ferroviarios de Viedma
+      - el oficio del cazador
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 5
+    men: 5
+
+  aspectos:
+    concepto: "Cazador de meseta que aprende a no malgastar el tiro."
+    perk_fijo:
+      id: p_custom_punteria_fria
+      nombre: Puntería fría
+      descripcion: >
+        Si Antinao no ha recibido fuego en la ronda actual, tirada de TAC
+        favorable al atacar.
+    complicacion_fija:
+      id: c06_obstinado
+      nombre: Obstinado
+      descripcion: >
+        Si se emite una orden que implique retroceder o abandonar posición de
+        tiro, tirada de MEN desfavorable para obedecer.
+
+  equipo:
+    armor: 1
+    armas:
+      - nombre: Fusil de cerrojo Springfield 1903 con mira
+        categoria_alcance: larga
+    equipo_tactico: null
+
+  fza_aportada: 2
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.01.mansilla
+      descripcion: "Mansilla decide qué blanco. Antinao decide cuándo."
+
+  historia: |
+    Héctor Antinao creció en la meseta, entre Roca y el Limay. Cazaba con su
+    padre desde los doce años: liebre, martineta, guanaco cuando la temporada
+    daba. No era cuestión de deporte sino de comer. A los veintidós cruzó a la
+    costa y terminó cargando bolsas en el puerto de Viedma por dos años. Ahí
+    conoció a los agitadores ferroviarios y, a través de ellos, al Ejército
+    Rojo. Nadie le enseñó a disparar en el ejército. Lo que le enseñaron fue a
+    no malgastar el tiro. En acción tiene fama de esperar más de lo que sus
+    compañeros consideran razonable antes de apretar el gatillo. A él le parece
+    simplemente la única forma sensata de proceder. El objetivo del operativo
+    no le genera ni repulsión ni entusiasmo. Si Mansilla lo pone en la mira,
+    Antinao va a hacer lo que sabe hacer.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [apuntador]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

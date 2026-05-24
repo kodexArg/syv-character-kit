@@ -1,0 +1,95 @@
+personaje:
+  id: mock.ejercito_rojo.05.carcamo
+  origen: mock
+  semilla: mock-fixed-16
+
+  nombre: Miliciano Veterano Fermín Cárcamo
+  edad: 32
+  genero: masculino
+
+  faccion: Ejército Rojo
+  rol: Miliciano Veterano
+  rol_id: fusilero
+  tag_rol: [infantería]
+
+  origen_geografico:
+    region: Pampa Bonaerense
+    localidad: Bahía Blanca
+
+  apariencia:
+    altura: medio
+    complexion: atletico
+    rasgos:
+      - pelo corto entrecano
+      - ojeras de turno noche
+      - habla seca, sin floreo
+    cicatrices: []
+
+  lealtades:
+    primaria: Ejército Rojo
+    secundarias:
+      - el sindicato ferroviario del sur
+      - sus dos hijos en Bahía Blanca
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 3
+    men: 3
+
+  aspectos:
+    concepto: "Ferroviario sindicalizado que pelea porque es lo que corresponde."
+    perk_fijo:
+      id: p_custom_cobertura_instintiva
+      nombre: Cobertura instintiva
+      descripcion: >
+        Si recibe fuego de hostigamiento a distancia, tirada de FIS favorable
+        en salvación.
+    complicacion_fija:
+      id: c_custom_gatillo_rapido
+      nombre: Gatillo rápido
+      descripcion: >
+        Si la escuadra disparó en el turno anterior, chequeo de
+        desabastecimiento; fallo = no puede atacar esta ronda.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Fusil de cerrojo Mauser 1909
+        categoria_alcance: larga
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.ejercito_rojo.08.belenchini
+      descripcion: "Ambos de Bahía Blanca. Hijos de la misma ciudad, oficios distintos."
+
+  historia: |
+    Fermín Cárcamo era garrafero de playa en el ferrocarril del sur. Treinta y
+    dos años, divorciado, dos hijos en Bahía Blanca que ve cuando la rotación
+    lo permite, que es rara vez. Se unió al Ejército Rojo cuando el sindicato
+    ferroviario declaró la adhesión a la revolución y el capataz de su turno
+    amenazó con despedir a quien firmara. Cárcamo firmó igual, no por heroísmo
+    sino porque le pareció que correspondía. Tres años de milicia le enseñaron
+    que la guerra no es como la describen ni el boletín sindical ni el alto
+    mando. Es más sucia, más aburrida y más rápida cuando finalmente ocurre
+    algo. El operativo de caza no lo entusiasma. Matar a un oficial específico
+    por nombre y apellido le parece más propio de un ajuste que de una guerra.
+    Pero Mansilla da las órdenes y Cárcamo las cumple. Tiene hijos que esperan
+    que vuelva.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [infantería]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

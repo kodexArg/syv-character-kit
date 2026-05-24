@@ -1,0 +1,98 @@
+personaje:
+  id: mock.confederacion.06.olivares
+  origen: mock
+  semilla: mock-fixed-06
+
+  nombre: Soldado de Primera Tomás Olivares
+  edad: 22
+  genero: masculino
+
+  faccion: Confederación
+  rol: Fusilero de Primera
+  rol_id: fusilero
+  tag_rol: [infantería]
+
+  origen_geografico:
+    region: Buenos Aires
+    localidad: Caballito (CABA)
+
+  apariencia:
+    altura: medio
+    complexion: delgado
+    rasgos:
+      - anteojos de marco fino
+      - pelo desordenado
+      - dicción cuidada
+    cicatrices: []
+
+  lealtades:
+    primaria: Confederación
+    secundarias:
+      - su escuadra
+      - la duda como método
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 3
+    men: 3
+
+  aspectos:
+    concepto: "Estudiante de filosofía interrumpido que entiende sistemas antes de operarlos."
+    perk_fijo:
+      id: p_custom_sangre_fria
+      nombre: Sangre fría
+      descripcion: >
+        Cuando la escuadra pierde un miembro en la misma ronda, tirada de MEN
+        favorable para el chequeo de moral.
+    complicacion_fija:
+      id: c06_obstinado
+      nombre: Obstinado
+      descripcion: >
+        Cuando recibe una orden que le parece tácticamente incorrecta, tirada de
+        MEN desfavorable para obedecer sin demorar.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Fusil FAL
+        categoria_alcance: corta
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.05.rodriguez
+      descripcion: "Mismo pelotón. Confianza tácita."
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.08.pereyra
+      descripcion: "Compañera de asignación; los tres llegaron juntos al sur."
+
+  historia: |
+    Tomás Olivares es porteño, Caballito. Su madre es profesora de historia en
+    un secundario y su padre maneja un remis desde que Olivares tiene memoria.
+    Entró a filosofía porque le parecía la carrera más honesta para no saber
+    qué estudiar. El servicio obligatorio lo interrumpió en el segundo año. Lo
+    mandaron al sur con el mismo lote de conscriptos que a Rodríguez y Pereyra,
+    y los tres terminaron en la misma escuadra casi por azar. En la instrucción
+    fue mediocre en lo físico y sorprendentemente competente en lo táctico —
+    no por talento militar, sino porque le gustaba entender los sistemas antes
+    de operar en ellos. En el frente patagónico descubrió que el frío y el barro
+    son argumentos filosóficos que ningún texto anticipa bien. Lo menciona
+    ocasionalmente, sin ironía. Sus compañeros no saben si es gracioso o si
+    algo le falta.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [infantería]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null

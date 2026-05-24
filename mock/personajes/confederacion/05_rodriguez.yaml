@@ -1,0 +1,96 @@
+personaje:
+  id: mock.confederacion.05.rodriguez
+  origen: mock
+  semilla: mock-fixed-05
+
+  nombre: Soldado de Primera Marcela Rodríguez
+  edad: 22
+  genero: femenino
+
+  faccion: Confederación
+  rol: Fusilero de Primera
+  rol_id: fusilero
+  tag_rol: [infantería]
+
+  origen_geografico:
+    region: Costa Atlántica
+    localidad: Mar del Plata
+
+  apariencia:
+    altura: medio
+    complexion: delgado
+    rasgos:
+      - pelo castaño atado
+      - cara que pasa desapercibida
+      - modales suaves
+    cicatrices: []
+
+  lealtades:
+    primaria: Confederación
+    secundarias:
+      - su escuadra
+    secretos: []
+
+  atributos:
+    fis: 3
+    tac: 3
+    men: 3
+
+  aspectos:
+    concepto: "Costurera conscripta que se hace confiable por discreción."
+    perk_fijo:
+      id: p_custom_cobertura_instintiva
+      nombre: Cobertura instintiva
+      descripcion: >
+        Cuando recibe fuego de hostigamiento a distancia, tirada de FIS favorable
+        en la salvación.
+    complicacion_fija:
+      id: c_custom_panico_en_abierto
+      nombre: Pánico en abierto
+      descripcion: >
+        Cuando está en terreno sin cobertura y recibe fuego directo, tirada de MEN
+        desfavorable para mantenerse en posición.
+
+  equipo:
+    armor: 0
+    armas:
+      - nombre: Fusil FAL
+        categoria_alcance: corta
+    equipo_tactico: null
+
+  fza_aportada: 1
+
+  vinculos:
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.06.olivares
+      descripcion: "Mismo pelotón de asignación. Se conocen lo suficiente para saber cuándo el otro funciona mal."
+    - tipo: hermano_de_armas
+      ref_personaje_id: mock.confederacion.08.pereyra
+      descripcion: "Misma escuadra por azar de numeración. Cuidado mudo."
+
+  historia: |
+    Marcela Rodríguez es de Mar del Plata. Trabajaba de costurera en un taller
+    familiar — confección de uniformes, ironías del destino — antes de que la
+    conscripción la interrumpiera a los veintiún años. No había razón para que
+    la mandaran al frente patagónico en particular, pero así funcionan las
+    asignaciones: alguien necesita cuerpos en el sur y los cuerpos disponibles
+    viajan. El frío le costó. No el frío en sí, sino la ropa: nunca le quedó
+    bien el equipo estándar, y pasó semanas con botas que le apretaban hasta
+    que aprendió a conseguir el talle correcto por vías que el reglamento no
+    prevé. En combate es regular, sin más. Dispara cuando le dicen, se cubre
+    cuando hay cobertura, y trata de no pensar demasiado en lo que pasa a dos
+    metros. Hasta ahora le alcanzó.
+
+  historial: []
+
+  estado_salud: activo
+  tags_iniciales: [infantería]
+
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    canonizado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+    modelo_prosa: null
+    es_canon: true
+
+  extras: null
