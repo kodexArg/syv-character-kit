@@ -47,9 +47,9 @@ personaje:
     - { categoria: trait, valor: "Paciente" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Puntería fría" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Springfield 1903 con mira" }
-    - { categoria: "equipo.utilitario", valor: "cargador 30-06 Springfield" }
-    - { categoria: "equipo.utilitario", valor: "cargador 30-06 Springfield" }
+    - { categoria: "equipo.arma", valor: "Fusil Mauser 1909 con mira" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.65 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.65 Mauser" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
@@ -84,7 +84,7 @@ personaje:
     - { categoria: trait, valor: "Paciente" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Puntería fría" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Springfield 1903 con mira" }
+    - { categoria: "equipo.arma", valor: "Fusil Mauser 1909 con mira" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   metadatos:
