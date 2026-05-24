@@ -105,6 +105,7 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 - **LLM solo para prosa, solo una vez.** El modelo generativo escribe el campo `historia` en la creación efímera. Si el personaje se canoniza, esa prosa se congela.
 - **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables del battle-system. Los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
 - **El PRD es contrato; el repo es implementación.** Este documento define formas y reglas. Cómo se almacenan tablas, dónde corre el LLM, qué binding usa la persistencia — fuera de scope.
+- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), pertenencia (`faccion`), posicionamiento operativo (`rol`, `rango`, `estado`, `escuadra_id`, `mando`, `estado_salud`), `atributos`, `lealtades`, `vinculos`, `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista (ej. `rango` para decidir mando, `estado` para filtrar disponibilidad). Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las seis categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, y la familia jerárquica `equipo.{arma,utilitario,armadura}`.
 
 ## 5. Casos de uso
 
@@ -128,6 +129,11 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 | UC-16 | cualquier cliente | pedir la ficha con `?fields=` podada | bajar payload cuando solo le interesa el resumen |
 | UC-17 | sitio de lore | pedir el `historial[]` de un canonizado | renderizar una línea de tiempo del personaje |
 | UC-18 | curador | asignar un personaje a una escuadra | ver `filiacion` y `estado: activo` derivados correctamente |
+| UC-19 | motor de batalla | filtrar personajes por tag `skill: Francotirador` | armar un pelotón de tiradores para una misión de hostigamiento |
+| UC-20 | redactor narrativo | pedir un personaje con tag `trait: Miope` | forzar una complicación visual específica en una escena de tensión |
+| UC-21 | editor de canon | listar todos los tags `equipo.arma` del roster de mocks | auditar coherencia del inventario armamentístico antes de una batalla |
+| UC-22 | motor de batalla | filtrar personajes por tag `rol: lider` AND `faccion: Ejército Rojo` | identificar candidatos al mando ante la caída del líder vigente |
+| UC-23 | herramienta de QA | consultar `/meta/tag_categories` y `/meta/skills` | verificar que el generador no produce tags fuera del vocab canon |
 
 ## 6. JSON canónico del personaje (v0.2.5)
 
@@ -364,7 +370,27 @@ personaje:
     # composición: query por personajes con escuadra_id == self.id
   ```
 - **`atributos`**: un único set **mutable**. Triple-0 o `mejora_atributo` sobreescriben el valor. La trazabilidad vive en `historial[]`.
-- **`tags`**: el corazón del schema. Lista plana de entidades `{categoria, valor}`. Categorías y sub-categorías abiertas. Tags repetibles. Cambios se registran como hitos `agregar_tag` / `quitar_tag`.
+- **`tags`**: el corazón del schema. Lista plana de entidades `{categoria, valor}`. Categorías y sub-categorías abiertas. Tags repetibles (tres `cargador 9mm` son tres entidades distintas — tienen presencia física y pueden perderse de a uno). Cambios se registran como hitos `agregar_tag` / `quitar_tag`.
+
+  Las **seis categorías canon** en v0.2.5 son:
+
+  | Categoría | Tipo | Ejemplos canon |
+  |---|---|---|
+  | `rasgo` | Atributos visuales del cuerpo | `altura media`, `barba canosa`, `cicatriz vertical sobre ceja izquierda`, `quemadura en antebrazo derecho` |
+  | `rol` | Etiquetas mecánicas del rol vigente | `lider`, `heroe`, `sargento` |
+  | `skill` | Habilidades aprendidas o entrenadas | `Comandancia`, `Francotirador`, `Medicina`, `Oratoria de muelle`, `Lectura de columna`, `Ingeniería`, `Comisariado` |
+  | `trait` | Rasgos de carácter o condición, sin polaridad fija | `Sangre fría`, `Miope`, `Objetivo prioritario`, `Hemorragia lenta`, `Voz grave`, `Obstinado` |
+  | `perk` | Ventajas mecánicas activables | `Voz de mando`, `Recarga rápida`, `Cobertura instintiva`, `Sucesor de Ricardo` |
+  | `equipo.arma` | Arma de fuego o cuerpo a cuerpo (incluye alcance en el valor) | `Fusil FAL (alcance media)`, `Pistola Browning (alcance corta)` |
+  | `equipo.utilitario` | Consumible o accesorio sin capacidad de armor | `cargador 9mm`, `vendaje`, `brújula de oficial`, `silbato de contramaestre` |
+  | `equipo.armadura` | Protección con aporte de `armor` declarado en `/meta/equipo/armaduras/{valor}` | `chaleco antifragmentos reglamentario` (armor: 1), `chaleco antifragmentos rústico` (armor: 1) |
+
+  La categoría es string libre — los enums son abiertos — pero el canon de v0.2.5 son las seis listadas. Usar valores fuera del canon es válido; el riesgo semántico está documentado en tensiones 13.1 y 13.2.
+
+  **Reglas de derivación que dependen de tags:**
+  - `armor` (DERIVADO): suma de aportes de cada tag `equipo.armadura` consultando `/meta/equipo/armaduras/{valor}`. El campo no se persiste; la API lo computa al servir.
+  - `fza_aportada` (DERIVADO): tag `{categoria: rol, valor: heroe}` → 3; `{categoria: rol, valor: lider}` → 2; sin ninguno → 1. El campo no se persiste; la API lo computa al servir.
+  - `sobrenombre` en Ejército Rojo (DERIVADO): se construye desde el tag `skill` de mando más prominente: `Comandancia` → `"Comandante {nombre}"`; `Medicina` → `"Doctor {nombre}"`; `Ingeniería` → `"Ingeniero {nombre}"`; `Comisariado` → `"Camarada Puntero {nombre}"`; sin ninguno → `"Camarada {nombre}"`. Ver 7.3.
 - **Decisión consciente — sub-categorías con punto**: el equipo se modela como `equipo.arma`, `equipo.utilitario`, `equipo.armadura` (jerárquico con punto) en lugar de un sub-campo aparte. Ventajas: filtrado por prefijo `equipo.*`, legibilidad visual, sin nuevos sub-campos en el schema. Este patrón puede aplicarse a futuro a otras categorías que necesiten subdivisión.
 - **`fza_aportada`** (DERIVADO, no persistido): tag `categoria: rol, valor: heroe` → 3; `categoria: rol, valor: lider` → 2; sin ninguno → 1. El motor lo computa al servir.
 - **`armor`** (DERIVADO, no persistido): suma de aportes de cada tag `equipo.armadura` consultando `/meta/equipo/armaduras/{valor}`. El motor lo computa al servir.
@@ -689,7 +715,7 @@ El cliente pasa hasta tres parámetros: `faccion`, `rango` (o un alias de rango 
 6. Derivar `mando` (bool) y `estado` default según rango (ver 7.2).
 7. Sortear campos narrativos (nombre, edad, género, rasgos, rol cultural).
 8. Componer `sobrenombre` determinísticamente según facción (ver 7.3).
-9. Inicializar `tags` con pools sorteados de `rasgo`, `rol`, `skill`, `trait`, `perk`, `equipo.arma`, `equipo.utilitario`, `equipo.armadura`.
+9. Inicializar `tags` con pools sorteados de `rasgo`, `rol`, `skill`, `trait`, `perk`, `equipo.arma`, `equipo.utilitario`, `equipo.armadura` — cada categoría tiene sus propias reglas de sorteo detalladas en 7.4–7.8.
 10. Inicializar bloques vacíos (`lealtades.secretos: []`, `vinculos: []`, `historial: []`).
 11. Generar `historia` con LLM, anclada en facción + rango + rol + skills/traits/perks + lugar implícito.
 12. Copiar `tags` a `tags_iniciales` (snapshot inmutable).
@@ -736,24 +762,73 @@ Tabla derivada de `/Dev/syv-battle-game-system/reglamento/02_hoja_personaje.md`.
 
 (El bloque `origen_geografico` fue eliminado en v0.2.3. Si la procedencia importa narrativamente, se cuenta en `historia` o se añade como `rasgo` / `extras`.)
 
-### 7.5. Tags de rasgo
+### 7.5. Tags de `rasgo`
 
-- **En generados dinámicamente**: 1 tag de altura, 1 tag de complexión, 2-3 rasgos físicos sorteados de pool corto por facción. Sin tags de cicatriz en creación.
-- **En mocks**: ricos, escritos a mano.
-- **En canonizados**: heredan; nuevas cicatrices se agregan vía hito `agregar_tag` con `categoria: rasgo`.
+El generador produce 1 tag de altura + 1 tag de complexión obligatorios, más 2-3 rasgos físicos sorteados de pool corto segmentado por facción:
 
-### 7.6. Tags de `skill`, `trait`, `perk`
+- **Confederación**: pools con rasgos que reflejan procedencia del interior — tez mate, rasgos rurales, marcas de trabajo físico en tierra seca. Ejemplos: `complexión atlética`, `manos callosas`, `mirada directa`.
+- **Ejército Rojo**: pools con rasgos de procedencia costera/industrial patagónica — tez curtida de puerto o de meseta, marcas de trabajo manual en frío. Ejemplos: `complexión delgada`, `manos ásperas`, `lentes de armazón fino`.
 
-- **`skill`**: pool curado por facción y rango. Líderes reciben `Comandancia`; apuntadores reciben `Francotirador`; etc. Generador agrega 1-3 skills según rango.
-- **`trait`**: pool curado abierto, sin polaridad fija. Generador agrega 1-2 traits, sesgados al rango pero con espacio para sabor (similar al 80/20 de perks).
-- **`perk`**: pool canon (origen en `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md`). **Restricción 80/20 soft**: ~80% sobre el subconjunto natural del rango, ~20% libre. Generador agrega típicamente 1 perk.
+Sin tags de cicatriz en creación — las cicatrices son consecuencia narrativa y se agregan vía hito `agregar_tag {categoria: rasgo}` después de una herida o acción dramática. En mocks los rasgos son ricos y escritos a mano; en canonizados heredan y acumulan.
 
-### 7.7. `lealtades`
+### 7.6. Tags de `rol` (mecánico)
+
+El generador asigna exactamente 1 tag `categoria: rol` derivado del `rango` del personaje. Tabla de conversión:
+
+| `rango` | tag `rol` generado | `fza_aportada` derivado |
+|---|---|---|
+| `Lider de escuadra` | `lider` | 2 |
+| `Segundo al mando` | `lider` | 2 |
+| `Apuntador` | `tirador` | 1 |
+| `Artillero` | `artillero` | 1 |
+| `Fusilero` | `fusilero` | 1 |
+| `Recluta` | `recluta` | 1 |
+
+El tag `heroe` (→ `fza_aportada: 3`) no se genera en creación — es un tag que solo se agrega vía hito `agregar_tag` por acción extraordinaria reconocida narrativamente.
+
+### 7.7. Tags de `skill`
+
+Pool curado por facción y rango. El generador agrega 1-3 skills según rango:
+
+| `rango` | Skills garantizados | Skills adicionales (sorteo del pool facción) |
+|---|---|---|
+| `Lider de escuadra` | `Comandancia` | 1-2 del pool (ej. `Oratoria de muelle`, `Lectura de columna` para Ejército Rojo; `Lectura de terreno` para Confederación) |
+| `Segundo al mando` | — | 1-2 del pool (tácticos o de comunicación) |
+| `Apuntador` | `Francotirador` | 0-1 adicional |
+| `Artillero` | — | 1 del pool de artillería |
+| `Fusilero` | — | 0-1 del pool general |
+| `Recluta` | — | 0 (raramente 1 simple) |
+
+El tag `skill` más prominente en Ejército Rojo influye en la composición del `sobrenombre` (ver 7.3 y nota de derivación en 6.2).
+
+### 7.8. Tags de `trait`
+
+Pool curado abierto, sin polaridad fija. El generador agrega 1-2 traits:
+
+- **80% del peso**: traits coherentes con el rol y rango (ej. `Sangre fría` para líderes, `Voz grave` para oradores, `Mirada larga` para apuntadores).
+- **20% del peso**: "complicación" — trait con efecto mecánico desfavorable en alguna circunstancia (`Miope`, `Obstinado`, `Hemorragia lenta`, `Objetivo prioritario`). Esta distribución es análoga al 80/20 de perks: el personaje siempre tiene algún borde oscuro potencial.
+
+Los traits no se eliminan fácilmente — a diferencia del equipo, son parte de la identidad. Quitarlos vía hito `quitar_tag {categoria: trait}` requiere justificación narrativa explícita en `descripcion`.
+
+### 7.9. Tags de `perk`
+
+Pool canon (origen en `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md`). **Restricción 80/20 soft**: ~80% sobre el subconjunto natural del rango, ~20% libre para perks inesperados que den sabor. El generador agrega típicamente 1 perk (líderes con más probabilidad; reclutas raramente).
+
+Perks canon actuales de referencia (abierto, no exhaustivo):
+
+| Perk | Rango natural | Efecto resumido |
+|---|---|---|
+| `Voz de mando` | Líder / Segundo | MEN favorable en chequeo de mando colectivo |
+| `Recarga rápida` | Artillero / Apuntador | Recarga sin costo de acción |
+| `Cobertura instintiva` | Fusilero / Segundo | Se cubre automáticamente al primer disparo recibido |
+| `Sucesor de Ricardo` | Líder | MEN favorable para mando/iniciativa cuando no hay líder funcional |
+
+### 7.10. `lealtades`
 
 - **En generados**: `primaria` = nombre de la facción; `secundarias` = 0-2 entradas sorteadas; `secretos: []`.
 - **En mocks y canonizados**: ricas, escritas o agregadas vía hito.
 
-### 7.8. Tags de `equipo.*`
+### 7.11. Tags de `equipo.*`
 
 Pool curado `rango × faccion` produce tags en lugar de objetos estructurados.
 
@@ -772,19 +847,19 @@ Pool curado `rango × faccion` produce tags en lugar de objetos estructurados.
 
 El campo derivado `armor` total se computa al servir sumando aportes desde `/meta/equipo/armaduras/{valor}`.
 
-### 7.9. `vinculos` y `historial`
+### 7.12. `vinculos` y `historial`
 
 - **En generados dinámicamente**: ambos vacíos.
 - **En mocks**: inicializados con el contenido a mano.
 - **En canonizados**: heredan; el motor downstream los puebla vía evento.
 
-### 7.10. `historia` (LLM)
+### 7.13. `historia` (LLM)
 
 Prosa de 120–200 palabras. Prompt recibe: `faccion`, `rol`, `rango`, skills/traits/perks principales, `nombre`, `sobrenombre`, `edad`, `genero`. Instrucción de tono militar austero, voz rioplatense, 2–3 párrafos.
 
 Cache por `hash(seed + inputs + version_modelo)`. Si se canoniza, se congela.
 
-### 7.11. `tags_iniciales` y `estado_salud`
+### 7.14. `tags_iniciales` y `estado_salud`
 
 - `tags_iniciales` = snapshot completo de `tags[]` al crear; inmutable.
 - `estado_salud` = `"saludable"` en creación.
@@ -861,6 +936,24 @@ Solo hitos importantes. **Sin límite ni paginación en v1.**
 | `cambio_lealtad` | Narrador | mutación de `lealtades.secundarias` o `lealtades.secretos` |
 | `condecoracion` | Narrador | no muta campos vigentes (hito puro) |
 
+**Detalle de `agregar_tag` y `quitar_tag` — los hitos de tags son el mecanismo central de evolución del personaje.**
+
+`agregar_tag` y `quitar_tag` operan sobre cualquier categoría de la lista plana `tags[]`. `metadata` siempre lleva `{ categoria, valor }` como mínimo; se puede extender con contexto narrativo o mecánico.
+
+Ejemplos representativos:
+
+| Situación narrativa | `tipo` | `metadata` ejemplo |
+|---|---|---|
+| Personaje aprende una habilidad de su mentor | `agregar_tag` | `{ categoria: "skill", valor: "Lectura de columna" }` |
+| Herida grave en combate deja secuela | `agregar_tag` | `{ categoria: "trait", valor: "Hemorragia lenta" }` + hito `herida` coordinado |
+| Captura enemiga. Le requisaron el arma | `quitar_tag` | `{ categoria: "equipo.arma", valor: "Fusil FAL (alcance media)" }` |
+| Captura y recuperación de armamento enemigo | `agregar_tag` | `{ categoria: "equipo.arma", valor: "Pistola Browning capturada (alcance corta)" }` |
+| Hazaña reconocida por el alto mando | `agregar_tag` | `{ categoria: "perk", valor: "Cobertura instintiva" }` |
+| Consigue tres cargadores tras asaltar una posición | `agregar_tag` (×3) | `{ categoria: "equipo.utilitario", valor: "cargador 9mm" }` — tres hitos independientes o un único hito con `metadata.cantidad: 3` si la implementación lo admite |
+| Recupera visión normal tras tratamiento | `quitar_tag` | `{ categoria: "trait", valor: "Miope" }` — requiere justificación narrativa en `descripcion` |
+
+**Trayectoria de tags y auditoría.** El estado vigente de `tags[]` es el resultado de aplicar en orden todos los hitos `agregar_tag` y `quitar_tag` sobre el snapshot `tags_iniciales` (inmutable al crear). Esto significa que la trayectoria completa de tags de un personaje se puede reconstruir reproduciendo su `historial[]` contra `tags_iniciales`, sin necesidad de un campo de historial separado para tags. Operación útil para auditoría y para el endpoint potencial `POST /character/{id}/original` (ver OQ #9).
+
 **Nota — aspectos mutables ya no aplican como bloque.** En v0.2.5 no existen los hitos `mejora_aspecto`. Los cambios de identidad mecánica (perk, trait, skill) son adiciones/eliminaciones a las categorías correspondientes vía `agregar_tag` / `quitar_tag`.
 
 **Nota — atributos y rango.** Los atributos `{fis, tac, men}` son propiedad del personaje, no derivados del rango post-creación. Cuando cambia `rango`, los atributos no se tocan. Los tags `categoria: rol` sí se realinean. La matriz por rango (7.2) aplica **únicamente** en creación.
@@ -915,21 +1008,50 @@ Catálogo de facciones con descriptor de lore corto.
 
 Catálogo de rangos sugeridos con tabla de stats, `mando` default, `estado` default, rol cultural por facción.
 
-### `GET /meta/skills`, `GET /meta/traits`, `GET /meta/perks`
+### `GET /meta/skills`
 
-Pools canon. Cada entrada incluye `valor`, `descripcion`, `rangos_naturales`. Para `perks`: efecto mecánico. Para `traits`: opcionalmente `polaridad` sugerida (ver tensión 13.6).
+Pool canon de habilidades. Cada entrada: `{ valor, descripcion, rangos_naturales: [], facciones_predominantes: [] }`. Ejemplos canon: `Comandancia`, `Francotirador`, `Medicina`, `Oratoria de muelle`, `Lectura de columna`, `Ingeniería`, `Comisariado`. El endpoint lista el vocab sugerido; valores fuera del canon son válidos.
+
+### `GET /meta/traits`
+
+Pool canon de rasgos de carácter/condición. Cada entrada: `{ valor, descripcion, polaridad_sugerida: "positivo"|"neutro"|"penalidad"|null, rangos_comunes: [] }`. Ejemplos canon: `Sangre fría` (positivo), `Voz grave` (neutro), `Miope` (penalidad), `Obstinado` (penalidad), `Objetivo prioritario` (penalidad), `Hemorragia lenta` (penalidad). El campo `polaridad_sugerida` es hint no autoritativo — ver tensión 13.6.
+
+### `GET /meta/perks`
+
+Pool canon de ventajas mecánicas. Cada entrada: `{ valor, descripcion, efecto_mecanico, rangos_naturales: [] }`. Ejemplos canon: `Voz de mando`, `Recarga rápida`, `Cobertura instintiva`. El efecto mecánico describe el resultado en juego (ej. "MEN favorable en chequeo de mando colectivo").
+
+### `GET /meta/rasgos`
+
+Vocabulario sugerido de rasgos físicos (`categoria: rasgo`). Entries: `{ valor, tipo: "altura"|"complexion"|"rasgo_fisico"|"cicatriz", facciones_comunes: [] }`. Facilita coherencia entre generador y herramientas externas sin forzar enums cerrados.
+
+### `GET /meta/tag_categories`
+
+Las seis categorías canon de v0.2.5 con descripción y política de uso. Respuesta tipo:
+```json
+[
+  { "categoria": "rasgo",            "descripcion": "Atributos visuales del cuerpo. Altura, complexión, rasgos físicos, cicatrices." },
+  { "categoria": "rol",              "descripcion": "Etiquetas mecánicas del rol vigente. lider, heroe, tirador, etc." },
+  { "categoria": "skill",            "descripcion": "Habilidades aprendidas o entrenadas." },
+  { "categoria": "trait",            "descripcion": "Rasgos de carácter o condición, sin polaridad fija." },
+  { "categoria": "perk",             "descripcion": "Ventajas mecánicas activables." },
+  { "categoria": "equipo.arma",      "descripcion": "Arma de fuego o cuerpo a cuerpo. Valor incluye alcance." },
+  { "categoria": "equipo.utilitario","descripcion": "Consumible o accesorio sin aporte de armor." },
+  { "categoria": "equipo.armadura",  "descripcion": "Protección con aporte de armor declarado en /meta/equipo/armaduras/{valor}." }
+]
+```
+Abierto — futuras categorías se agregan sin breaking change.
 
 ### `GET /meta/equipo/armaduras/{valor}`
 
-Devuelve el aporte de `armor` de cada armadura canon. Usado por la API para componer el campo derivado `armor`.
+Devuelve el aporte de `armor` de cada armadura canon. Usado por la API para componer el campo derivado `armor`. Ej: `GET /meta/equipo/armaduras/chaleco+antifragmentos+reglamentario` → `{ valor: "chaleco antifragmentos reglamentario", armor: 1, faccion_predominante: "Confederación" }`.
 
-### `GET /meta/equipo/{arma|utilitario}`
+### `GET /meta/equipo/armas`, `GET /meta/equipo/utilitarios`
 
-Catálogos sugeridos de armas y utilitarios.
+Catálogos sugeridos de armas y utilitarios con alcance y facción predominante. Sin validación — el generador los usa como pool; el cliente puede listarlos para UIs.
 
-### `GET /meta/hito_types`, `GET /meta/vinculo_types`, `GET /meta/tag_categories`
+### `GET /meta/hito_types`, `GET /meta/vinculo_types`
 
-Catálogos sugeridos. Todos abiertos.
+Catálogos sugeridos. Todos abiertos. `hito_types` incluye el efecto sobre campos vigentes para cada tipo canon (ver tabla 9.5).
 
 ### `GET /meta/escuadras/{id}` (potencial, sujeto a necesidad)
 
@@ -1088,6 +1210,26 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 **Mitigación.** El catálogo `/meta/traits` puede declarar `polaridad: positivo | neutro | penalidad` como hint sugerido pero no autoritativo. Los traits custom no la tendrán.
 
+### 13.7. Sinónimos y aliases de tags → fragmentación semántica silenciosa
+
+**Decisión.** El sistema no tiene mecanismo de alias ni normalización de tags en v1. `Francotirador` y `francotirador` son valores distintos. `equipo.arma` y `equipo.weapon` son categorías distintas.
+
+**Costo.** Una query por `skill: Francotirador` no encontrará a un personaje cargado con `skill: francotirador` (minúscula). Distintos generadores pueden usar `Oratoria de muelle` y `Oratoria sindical` para el mismo concepto.
+
+**Por qué se acepta.** Implementar alias en v1 requiere un grafo de equivalencia, gobernanza del catálogo y resolución en writes — costo alto para un MVP donde el generador es la única fuente.
+
+**Mitigación.** El generador es determinístico y usa el vocab del catálogo `/meta/*`. El problema surge cuando humanos o motores externos escriben tags manualmente. Documentar claramente en `/meta/tag_categories` los valores canónicos. Normalización de case (lowercase en `valor`) es una solución mínima viable que debería resolverse antes de v1.
+
+### 13.8. Denormalización opt-in de efectos de tags → dos fuentes de verdad potenciales
+
+**Decisión.** Los efectos mecánicos de skills, traits y perks viven en `/meta/*`, no inlineados en cada tag de cada personaje.
+
+**Costo.** Si un cliente necesita los efectos para procesar un personaje, tiene que hacer N calls adicionales a `/meta/*` o cachear el catálogo localmente. Un personaje con 12 tags puede requerir hasta 12 lookups adicionales.
+
+**Por qué se acepta.** Inlinear el efecto en el tag del personaje es una trampa de denormalización: si el catálogo cambia (un perk recibe errata), habría que actualizar todos los personajes con ese perk.
+
+**Mitigación.** La API puede soportar un query param `?expand=tags` que en una sola call devuelva la ficha del personaje con cada tag resuelto contra su entrada en `/meta/*`. Fuera de v1 estricto.
+
 ---
 
 ## 14. Píldoras de arquitectura
@@ -1098,7 +1240,11 @@ El patrón de entidades pequeñas, repetibles, agrupables y sin esquema rígido 
 
 ### 14.2. Tags como ciudadanos de primera clase → inverted index natural
 
-Con v0.2.5 los tags absorben rasgos, rol, skills, traits, perks y equipo subcategorizado — la mayor parte del contenido mutable del personaje. Esto refuerza la afinidad NoSQL/document-store ya señalada y añade una segunda observación: el query típico downstream es **"dame personajes con tag X"** o **"expandime los efectos mecánicos de estos tags"**. Es el patrón clásico de **inverted index sobre tags**, soportado nativamente por D1 con índices JSON o por Workers KV con clave compuesta `tag:{categoria}:{valor}` apuntando a lista de `personaje_id`. Esta píldora no fija stack; solo registra que el diseño v0.2.5 abre la puerta a optimizaciones de búsqueda baratas si la necesidad aparece.
+Con v0.2.5 los tags absorben rasgos, rol, skills, traits, perks y equipo subcategorizado — la mayor parte del contenido mutable del personaje. Esto refuerza la afinidad NoSQL/document-store ya señalada y añade una segunda observación: el query típico downstream es **"dame personajes con tag X"** o **"expandime los efectos mecánicos de estos tags"**. Es el patrón clásico de **inverted index sobre tags**, soportado nativamente por D1 con índices JSON o por Workers KV con clave compuesta `tag:{categoria}:{valor}` apuntando a lista de `personaje_id`.
+
+Ejemplo concreto: la query "personajes con `skill: Francotirador` AND `rol: lider` AND facción `Confederación`" se resuelve con tres lookups en el inverted index (`skill:Francotirador`, `rol:lider`, filtro `faccion`) seguidos de intersección de sets de `personaje_id`. Más barato que un full scan sobre el campo JSON de cada ficha. Con los seis tipos de categoría canon y un corpus de ~100 canonizados, un inverted index en Workers KV cabe cómodamente en memoria.
+
+Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las optimizaciones de búsqueda sean baratas si la necesidad aparece — y los UCs 19, 20, 21 y 22 (filtros por tag) confirman que aparecerá.
 
 ### 14.3. Campos derivados → cómputo al servir, no al persistir
 
@@ -1125,6 +1271,14 @@ Con v0.2.5 los tags absorben rasgos, rol, skills, traits, perks y equipo subcate
 8. **Versionado de categorías canon de tags.** Las categorías y sub-categorías (`rasgo`, `skill`, `equipo.arma`, etc.) se documentan en `/meta/tag_categories`. ¿Gobernanza del catálogo? ¿Se versiona junto al PRD?
 
 9. **`POST /character/{id}/original`.** ¿Útil exponer un endpoint que regenere la ficha al estado de creación (sin historial) usando `semilla` + `tags_iniciales`, para que herramientas externas calculen el diff? Fuera de v1; útil para auditoría.
+
+10. **Catálogo de tags canon por facción.** ¿El catálogo `/meta/skills` tiene entries segmentadas por facción (`facciones_predominantes: ["Ejército Rojo"]`)? ¿El generador rechaza o avisa cuando sortea un tag que el canon considera cruzado (ej. `skill: Comisariado` para un personaje Confederado)? ¿O se acepta con libertad?
+
+11. **Política de eviction de tags obsoletos.** Si el catálogo `/meta/skills` retira un valor (ej. `Oratoria de muelle` renombrado a `Oratoria sindical`), los personajes que ya tienen ese tag no se actualizan. ¿Se acepta silenciosamente o se implementa un job de migración? ¿Existe un mecanismo de alias para que ambos valores resuelvan al mismo efecto?
+
+12. **Normalización de case en `valor`.** ¿El schema normaliza `valor` de tags a lowercase antes de persistir? Evita fragmentación silenciosa (`Francotirador` ≠ `francotirador`). Tensión 13.7. Decisión mínima viable antes de v1.
+
+13. **Límite de tags por categoría.** ¿Hay un máximo razonable de tags por categoría? Un personaje con 20 `equipo.utilitario` es sintácticamente válido pero semánticamente raro. ¿El generador tiene caps internos? ¿La API los valida o advierte?
 
 ---
 
