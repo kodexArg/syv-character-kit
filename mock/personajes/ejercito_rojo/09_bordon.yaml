@@ -39,18 +39,18 @@ personaje:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion delgada" }
     - { categoria: rasgo, valor: "cara aniñada" }
-    - { categoria: rasgo, valor: "anteojos manchados" }
-    - { categoria: rasgo, valor: "manos limpias todavía" }
+    - { categoria: rasgo, valor: "anteojos" }
+    - { categoria: rasgo, valor: "manos limpias" }
     - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Carga del FAP" }
-    - { categoria: skill, valor: "Apuntes de doctrina" }
+    - { categoria: skill, valor: "Manejo de ametralladora" }
+    - { categoria: skill, valor: "Doctrina" }
     - { categoria: trait, valor: "Intelectual" }
     - { categoria: trait, valor: "Novato asustado" }
     - { categoria: perk, valor: "Disparo de oportunidad" }
     - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — apuntes de doctrina y dudas anotadas para discutir luego" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
     - { categoria: "equipo.vestidura", valor: "ropa de civil" }
 
   vinculos:
@@ -82,16 +82,16 @@ personaje:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion delgada" }
     - { categoria: rasgo, valor: "cara aniñada" }
-    - { categoria: rasgo, valor: "anteojos manchados" }
-    - { categoria: rasgo, valor: "manos limpias todavía" }
+    - { categoria: rasgo, valor: "anteojos" }
+    - { categoria: rasgo, valor: "manos limpias" }
     - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Carga del FAP" }
-    - { categoria: skill, valor: "Apuntes de doctrina" }
+    - { categoria: skill, valor: "Manejo de ametralladora" }
+    - { categoria: skill, valor: "Doctrina" }
     - { categoria: trait, valor: "Intelectual" }
     - { categoria: trait, valor: "Novato asustado" }
     - { categoria: perk, valor: "Disparo de oportunidad" }
     - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — apuntes de doctrina y dudas anotadas para discutir luego" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

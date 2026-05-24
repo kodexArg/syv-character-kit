@@ -38,18 +38,18 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo corto entrecano" }
-    - { categoria: rasgo, valor: "ojeras de turno noche" }
-    - { categoria: rasgo, valor: "habla seca, sin floreo" }
+    - { categoria: rasgo, valor: "pelo entrecano" }
+    - { categoria: rasgo, valor: "ojeras" }
+    - { categoria: rasgo, valor: "habla seca" }
     - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
-    - { categoria: skill, valor: "Resistencia a turnos largos" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Resistencia" }
     - { categoria: trait, valor: "Pragmático" }
     - { categoria: trait, valor: "Gatillo rápido" }
     - { categoria: perk, valor: "Cobertura instintiva" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
@@ -76,12 +76,12 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo corto entrecano" }
-    - { categoria: rasgo, valor: "ojeras de turno noche" }
-    - { categoria: rasgo, valor: "habla seca, sin floreo" }
+    - { categoria: rasgo, valor: "pelo entrecano" }
+    - { categoria: rasgo, valor: "ojeras" }
+    - { categoria: rasgo, valor: "habla seca" }
     - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
-    - { categoria: skill, valor: "Resistencia a turnos largos" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Resistencia" }
     - { categoria: trait, valor: "Pragmático" }
     - { categoria: trait, valor: "Gatillo rápido" }
     - { categoria: perk, valor: "Cobertura instintiva" }

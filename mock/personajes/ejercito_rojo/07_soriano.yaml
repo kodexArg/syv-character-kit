@@ -37,19 +37,19 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "espalda ancha algo curvada" }
-    - { categoria: rasgo, valor: "manos grandes con dedos rígidos" }
-    - { categoria: rasgo, valor: "respiración pesada por el amoníaco" }
+    - { categoria: rasgo, valor: "espalda ancha" }
+    - { categoria: rasgo, valor: "manos grandes" }
+    - { categoria: rasgo, valor: "respiración pesada" }
     - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego de subfusil" }
-    - { categoria: skill, valor: "Carga pesada portuaria" }
+    - { categoria: skill, valor: "Fuego sostenido" }
+    - { categoria: skill, valor: "Carga" }
     - { categoria: trait, valor: "Aguantador" }
     - { categoria: trait, valor: "Peso muerto" }
     - { categoria: perk, valor: "Resistencia al dolor" }
     - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
-    - { categoria: "equipo.utilitario", valor: "cinto lumbar reforzado improvisado del puerto" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cinto" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
@@ -76,17 +76,17 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "espalda ancha algo curvada" }
-    - { categoria: rasgo, valor: "manos grandes con dedos rígidos" }
-    - { categoria: rasgo, valor: "respiración pesada por el amoníaco" }
+    - { categoria: rasgo, valor: "espalda ancha" }
+    - { categoria: rasgo, valor: "manos grandes" }
+    - { categoria: rasgo, valor: "respiración pesada" }
     - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego de subfusil" }
-    - { categoria: skill, valor: "Carga pesada portuaria" }
+    - { categoria: skill, valor: "Fuego sostenido" }
+    - { categoria: skill, valor: "Carga" }
     - { categoria: trait, valor: "Aguantador" }
     - { categoria: trait, valor: "Peso muerto" }
     - { categoria: perk, valor: "Resistencia al dolor" }
     - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cinto lumbar reforzado improvisado del puerto" }
+    - { categoria: "equipo.utilitario", valor: "cinto" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

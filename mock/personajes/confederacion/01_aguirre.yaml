@@ -38,23 +38,23 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo castaño corto" }
-    - { categoria: rasgo, valor: "barba de tres días" }
-    - { categoria: rasgo, valor: "mirada que se demora en las cosas" }
-    - { categoria: rasgo, valor: "cicatriz vertical sobre ceja izquierda (Sector 12,15)" }
+    - { categoria: rasgo, valor: "pelo corto" }
+    - { categoria: rasgo, valor: "barba corta" }
+    - { categoria: rasgo, valor: "mirada lenta" }
+    - { categoria: rasgo, valor: "cicatriz en ceja" }
     - { categoria: rol, valor: "lider" }
     - { categoria: rol, valor: "sargento" }
     - { categoria: skill, valor: "Comandancia" }
-    - { categoria: skill, valor: "Lectura de terreno boscoso" }
+    - { categoria: skill, valor: "Lectura de terreno" }
     - { categoria: trait, valor: "Mirada larga" }
     - { categoria: trait, valor: "Eco del peñasco" }
     - { categoria: perk, valor: "Sucesor de Ricardo" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
@@ -101,19 +101,19 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo castaño corto" }
-    - { categoria: rasgo, valor: "barba de tres días" }
-    - { categoria: rasgo, valor: "mirada que se demora en las cosas" }
+    - { categoria: rasgo, valor: "pelo corto" }
+    - { categoria: rasgo, valor: "barba corta" }
+    - { categoria: rasgo, valor: "mirada lenta" }
     - { categoria: rol, valor: "lider" }
     - { categoria: rol, valor: "sargento" }
     - { categoria: skill, valor: "Comandancia" }
-    - { categoria: skill, valor: "Lectura de terreno boscoso" }
+    - { categoria: skill, valor: "Lectura de terreno" }
     - { categoria: trait, valor: "Mirada larga" }
     - { categoria: trait, valor: "Eco del peñasco" }
     - { categoria: perk, valor: "Sucesor de Ricardo" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   metadatos:

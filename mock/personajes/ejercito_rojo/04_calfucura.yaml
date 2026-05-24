@@ -37,21 +37,21 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "antebrazos cicatrizados hasta el codo" }
-    - { categoria: rasgo, valor: "manos endurecidas por el acero" }
-    - { categoria: rasgo, valor: "mirada que no se inmuta" }
-    - { categoria: rasgo, valor: "salpicaduras de acero fundido en antebrazos (SOMISA)" }
+    - { categoria: rasgo, valor: "antebrazos cicatrizados" }
+    - { categoria: rasgo, valor: "manos endurecidas" }
+    - { categoria: rasgo, valor: "mirada firme" }
+    - { categoria: rasgo, valor: "antebrazos cicatrizados" }
     - { categoria: rol, valor: "artillero" }
-    - { categoria: skill, valor: "Manejo de FAP Modelo 45" }
-    - { categoria: skill, valor: "Desencasquillamiento ritual" }
+    - { categoria: skill, valor: "Manejo de ametralladora" }
+    - { categoria: skill, valor: "Desencasquillamiento" }
     - { categoria: trait, valor: "Imperturbable" }
     - { categoria: trait, valor: "Arma pesada sin dotación" }
     - { categoria: perk, valor: "Recarga rápida" }
     - { categoria: "equipo.arma", valor: "ametralladora" }
-    - { categoria: "equipo.utilitario", valor: "cuchillo de trabajo" }
-    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
-    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
-    - { categoria: "equipo.utilitario", valor: "kit de desencasquillamiento improvisado" }
+    - { categoria: "equipo.utilitario", valor: "cuchillo" }
+    - { categoria: "equipo.utilitario", valor: "bandolera" }
+    - { categoria: "equipo.utilitario", valor: "bandolera" }
+    - { categoria: "equipo.utilitario", valor: "herramientas" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
@@ -78,18 +78,18 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "antebrazos cicatrizados hasta el codo" }
-    - { categoria: rasgo, valor: "manos endurecidas por el acero" }
-    - { categoria: rasgo, valor: "mirada que no se inmuta" }
+    - { categoria: rasgo, valor: "antebrazos cicatrizados" }
+    - { categoria: rasgo, valor: "manos endurecidas" }
+    - { categoria: rasgo, valor: "mirada firme" }
     - { categoria: rol, valor: "artillero" }
-    - { categoria: skill, valor: "Manejo de FAP Modelo 45" }
-    - { categoria: skill, valor: "Desencasquillamiento ritual" }
+    - { categoria: skill, valor: "Manejo de ametralladora" }
+    - { categoria: skill, valor: "Desencasquillamiento" }
     - { categoria: trait, valor: "Imperturbable" }
     - { categoria: trait, valor: "Arma pesada sin dotación" }
     - { categoria: perk, valor: "Recarga rápida" }
     - { categoria: "equipo.arma", valor: "ametralladora" }
-    - { categoria: "equipo.utilitario", valor: "cuchillo de trabajo" }
-    - { categoria: "equipo.utilitario", valor: "kit de desencasquillamiento improvisado" }
+    - { categoria: "equipo.utilitario", valor: "cuchillo" }
+    - { categoria: "equipo.utilitario", valor: "herramientas" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

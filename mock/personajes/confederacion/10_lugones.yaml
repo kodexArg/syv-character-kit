@@ -37,18 +37,18 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura baja" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo negro recogido" }
+    - { categoria: rasgo, valor: "pelo recogido" }
     - { categoria: rasgo, valor: "cara observadora" }
     - { categoria: rasgo, valor: "habla breve" }
     - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Movimiento en terreno abrupto" }
-    - { categoria: skill, valor: "Carga móvil" }
+    - { categoria: skill, valor: "Movimiento" }
+    - { categoria: skill, valor: "Carga" }
     - { categoria: trait, valor: "Observadora" }
     - { categoria: trait, valor: "Peso muerto" }
     - { categoria: perk, valor: "Escudo humano" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
@@ -75,12 +75,12 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura baja" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo negro recogido" }
+    - { categoria: rasgo, valor: "pelo recogido" }
     - { categoria: rasgo, valor: "cara observadora" }
     - { categoria: rasgo, valor: "habla breve" }
     - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Movimiento en terreno abrupto" }
-    - { categoria: skill, valor: "Carga móvil" }
+    - { categoria: skill, valor: "Movimiento" }
+    - { categoria: skill, valor: "Carga" }
     - { categoria: trait, valor: "Observadora" }
     - { categoria: trait, valor: "Peso muerto" }
     - { categoria: perk, valor: "Escudo humano" }
