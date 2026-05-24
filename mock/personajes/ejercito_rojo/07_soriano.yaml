@@ -50,6 +50,7 @@ personaje:
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cinto lumbar reforzado improvisado del puerto" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
     - tipo: hermano_de_armas

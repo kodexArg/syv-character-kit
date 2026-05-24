@@ -52,7 +52,7 @@ personaje:
     - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
     - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
     - { categoria: "equipo.utilitario", valor: "kit de desencasquillamiento improvisado" }
-    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
     - tipo: hermano_de_armas

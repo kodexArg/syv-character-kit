@@ -53,8 +53,7 @@ personaje:
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
-    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -98,7 +97,7 @@ personaje:
     - { categoria: perk, valor: "Sangre fría" }
     - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
     - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

@@ -56,8 +56,7 @@ personaje:
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
     - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
-    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
     - tipo: mentor
@@ -122,7 +121,7 @@ personaje:
     - { categoria: "equipo.arma", valor: "Pistola Browning capturada" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
     - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

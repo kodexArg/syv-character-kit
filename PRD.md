@@ -2,7 +2,7 @@
 
 > **Documento vivo.** Define el contrato de producto de la API generadora de personajes del universo *Subordinación y Valor* (SyV). No contiene decisiones de arquitectura, almacenamiento ni stack — solo el QUÉ.
 >
-> **Versión**: 0.2.5
+> **Versión**: 0.2.6
 > **Reemplaza**: 0.2.2 (consolidación de los deltas v0.2.3 + v0.2.4 + v0.2.5; se saltean los releases intermedios)
 > **Idioma**: castellano rioplatense, voseo sobrio.
 > **Convención de identificadores en payloads JSON/YAML**: `snake_case_castellano` (consistente con `faccion`, `atributos`, `estado_salud` ya usados en `/Dev/syv-battle-game-system/`).
@@ -10,6 +10,15 @@
 ---
 
 ## 0. Changelog
+
+### v0.2.6
+
+Rectificación conceptual sobre la sub-categoría de equipamiento identitario:
+
+- **`equipo.armadura` → `equipo.vestidura`**: la vestidura es identidad visual de facción, no protección defensiva. El catálogo pasa a cuatro valores genéricos: `ropa de civil`, `uniforme rojo`, `uniforme confederado`, `camuflaje básico`.
+- **Eliminación de accesorios menores identitarios**: tags `equipo.utilitario` con valor "brazalete rojo del Pueblo" (y equivalentes) eliminados — no son tags propios, son ruido.
+- **OQ #14 abierta**: el campo derivado `armor` queda como TODO pendiente. La rectificación a vestidura como concepto identitario abre la pregunta sobre si `armor` sigue siendo derivado, vuelve a campo escalar, o desaparece. Ver sección 15.
+- Los 22 mocks actualizados: cada personaje tiene exactamente 1 tag `equipo.vestidura` con valor en el catálogo de 4.
 
 ### v0.2.5 (consolidación de v0.2.3 + v0.2.4 + v0.2.5)
 
@@ -105,7 +114,7 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 - **LLM solo para prosa, solo una vez.** El modelo generativo escribe el campo `historia` en la creación efímera. Si el personaje se canoniza, esa prosa se congela.
 - **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables del battle-system. Los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
 - **El PRD es contrato; el repo es implementación.** Este documento define formas y reglas. Cómo se almacenan tablas, dónde corre el LLM, qué binding usa la persistencia — fuera de scope.
-- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), pertenencia (`faccion`), posicionamiento operativo (`rol`, `rango`, `estado`, `escuadra_id`, `mando`, `estado_salud`), `atributos`, `lealtades`, `vinculos`, `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista (ej. `rango` para decidir mando, `estado` para filtrar disponibilidad). Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las seis categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, y la familia jerárquica `equipo.{arma,utilitario,armadura}`.
+- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), pertenencia (`faccion`), posicionamiento operativo (`rol`, `rango`, `estado`, `escuadra_id`, `mando`, `estado_salud`), `atributos`, `lealtades`, `vinculos`, `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista (ej. `rango` para decidir mando, `estado` para filtrar disponibilidad). Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las seis categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, y la familia jerárquica `equipo.{arma,utilitario,vestidura}`.
 
 ## 5. Casos de uso
 
@@ -176,8 +185,8 @@ La siguiente hoja es la **representación visual canónica** del payload del per
 | EQUIPO                                                                     |
 |   ARMAS        [subfusil Halcon]  [pistola Browning capturada]             |
 |   UTILITARIOS  [cargador 9m]  [cargador 9m]  [cargador 9m]                 |
-|                [silbato de contramaestre]  [brazalete rojo del Pueblo]     |
-|   ARMADURAS    [chaleco antifragmentos rustico]              armor: 1     |
+|                [silbato de contramaestre]                                  |
+|   VESTIDURA    [uniforme rojo]                        (armor: TODO OQ#14) |
 +----------------------------------------------------------------------------+
 | SKILLS                                                                     |
 |   [Comandancia]  [Oratoria de muelle]  [Lectura de columna]                |
@@ -222,7 +231,7 @@ Observaciones sobre la hoja:
 
 - La cabecera respeta el **orden definitivo** documentado en el changelog v0.2.5.
 - `FILIACION` es campo derivado, no persistido. Se compone como `"{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"`.
-- `ARMOR: 1` en la línea de ARMADURAS es valor derivado de la suma de aportes de los tags `equipo.armadura`.
+- `VESTIDURA` muestra la identidad visual del personaje (categoría `equipo.vestidura`). El campo `armor` queda como TODO pendiente de decisión del cliente — ver OQ #14.
 - `MANDO si` corresponde a `mando: true` en el JSON.
 - `ESTADO Activo` corresponde a `estado: activo` (asignación operativa), distinto de `ESTADO SALUD saludable` (condición física).
 
@@ -294,8 +303,8 @@ personaje:
                                         #   trait               → rasgos de carácter o condición (SIN polaridad fija)
                                         #   perk                → ventajas mecánicas activables
                                         #   equipo.arma         → arma de fuego, cuerpo a cuerpo, etc.
-                                        #   equipo.utilitario   → cargador, vendaje, brazalete, silbato, etc.
-                                        #   equipo.armadura     → chalecos, cascos, etc. (aportan a `armor` derivado)
+                                        #   equipo.utilitario   → cargador, vendaje, silbato, etc.
+                                        #   equipo.vestidura    → identidad visual de facción (uniforme, ropa de civil, camuflaje)
                                         # Sub-categorías jerárquicas con punto (decisión consciente para
                                         # filtrar por prefijo y mantener legibilidad).
       valor: string                     # Tags repetibles: tres "cargador 9mm" son tres entidades distintas.
@@ -340,7 +349,7 @@ personaje:
   #
   #   filiacion       : string         (ya documentado arriba en cabecera)
   #   fza_aportada    : integer 1..3   (tag rol=heroe → 3; rol=lider → 2; sin → 1)
-  #   armor           : integer 0..3   (suma de aportes de tags equipo.armadura, segun /meta/equipo/armaduras)
+  #   armor           : TODO OQ#14 (campo derivado pendiente de decisión tras rectificación armadura→vestidura)
   #
   # Si el cliente quiere derivar localmente, los puede recalcular desde los tags.
 
@@ -383,17 +392,17 @@ personaje:
   | `perk` | Ventajas mecánicas activables | `Voz de mando`, `Recarga rápida`, `Cobertura instintiva`, `Sucesor de Ricardo` |
   | `equipo.arma` | Arma de fuego o cuerpo a cuerpo (incluye alcance en el valor) | `Fusil FAL (alcance media)`, `Pistola Browning (alcance corta)` |
   | `equipo.utilitario` | Consumible o accesorio sin capacidad de armor | `cargador 9mm`, `vendaje`, `brújula de oficial`, `silbato de contramaestre` |
-  | `equipo.armadura` | Protección con aporte de `armor` declarado en `/meta/equipo/armaduras/{valor}` | `chaleco antifragmentos reglamentario` (armor: 1), `chaleco antifragmentos rústico` (armor: 1) |
+  | `equipo.vestidura` | Identidad visual de facción (no defensiva) | `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico` |
 
   La categoría es string libre — los enums son abiertos — pero el canon de v0.2.5 son las seis listadas. Usar valores fuera del canon es válido; el riesgo semántico está documentado en tensiones 13.1 y 13.2.
 
   **Reglas de derivación que dependen de tags:**
-  - `armor` (DERIVADO): suma de aportes de cada tag `equipo.armadura` consultando `/meta/equipo/armaduras/{valor}`. El campo no se persiste; la API lo computa al servir.
+  - `armor` (DERIVADO): **TODO OQ#14**. El campo `armor` queda pendiente de decisión del cliente tras la rectificación `armadura`→`vestidura`. La vestidura es identidad visual, no protección; la pregunta de si `armor` sigue siendo derivado, vuelve a campo escalar, o desaparece queda documentada en OQ #14.
   - `fza_aportada` (DERIVADO): tag `{categoria: rol, valor: heroe}` → 3; `{categoria: rol, valor: lider}` → 2; sin ninguno → 1. El campo no se persiste; la API lo computa al servir.
   - `sobrenombre` en Ejército Rojo (DERIVADO): se construye desde el tag `skill` de mando más prominente: `Comandancia` → `"Comandante {nombre}"`; `Medicina` → `"Doctor {nombre}"`; `Ingeniería` → `"Ingeniero {nombre}"`; `Comisariado` → `"Camarada Puntero {nombre}"`; sin ninguno → `"Camarada {nombre}"`. Ver 7.3.
-- **Decisión consciente — sub-categorías con punto**: el equipo se modela como `equipo.arma`, `equipo.utilitario`, `equipo.armadura` (jerárquico con punto) en lugar de un sub-campo aparte. Ventajas: filtrado por prefijo `equipo.*`, legibilidad visual, sin nuevos sub-campos en el schema. Este patrón puede aplicarse a futuro a otras categorías que necesiten subdivisión.
+- **Decisión consciente — sub-categorías con punto**: el equipo se modela como `equipo.arma`, `equipo.utilitario`, `equipo.vestidura` (jerárquico con punto) en lugar de un sub-campo aparte. Ventajas: filtrado por prefijo `equipo.*`, legibilidad visual, sin nuevos sub-campos en el schema. Este patrón puede aplicarse a futuro a otras categorías que necesiten subdivisión.
 - **`fza_aportada`** (DERIVADO, no persistido): tag `categoria: rol, valor: heroe` → 3; `categoria: rol, valor: lider` → 2; sin ninguno → 1. El motor lo computa al servir.
-- **`armor`** (DERIVADO, no persistido): suma de aportes de cada tag `equipo.armadura` consultando `/meta/equipo/armaduras/{valor}`. El motor lo computa al servir.
+- **`armor`** (DERIVADO): TODO OQ#14 — ver nota en sección de campos derivados.
 - **Categoría `trait` sin polaridad**: incluye positivos (`Sangre fria`), neutros (`Voz grave`) y penalidades que antes eran complicaciones (`Miope`, `Hemorragia lenta`, `Objetivo prioritario`). El motor downstream decide cómo aplicar polaridad, opcionalmente consultando `/meta/traits/{valor}.polaridad` si existe. Ver tensión 13.6.
 - **`vinculos[].ref_personaje_id`**: la API **no valida** que el id exista. `descripcion` es el fallback obligatorio.
 - **`historia`**: prosa original. Se congela al canonizar.
@@ -463,8 +472,8 @@ personaje:
     # equipo.utilitario
     - { categoria: "equipo.utilitario", valor: "prismáticos militares — trofeo del Sector 12,15, lente derecha rajada pero usable" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, marcas de Ricardo en las primeras hojas" }
-    # equipo.armadura (aporta a armor derivado)
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
+    # equipo.vestidura (identidad visual de facción)
+    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
     - tipo: mentor
@@ -531,7 +540,7 @@ personaje:
     - { categoria: "equipo.arma", valor: "Fusil FAL (alcance media)" }
     - { categoria: "equipo.arma", valor: "Pistola reglamentaria M9 (alcance corta)" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, marcas de Ricardo en las primeras hojas" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
+    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   metadatos:
     creado_en: "2026-01-15T00:00:00Z"
@@ -543,7 +552,7 @@ personaje:
   # Derivados servidos por la API (no persistidos):
   #   filiacion: ya en cabecera
   #   fza_aportada: 2   (tag rol=lider)
-  #   armor: 1          (chaleco antifragmentos reglamentario aporta 1)
+  #   armor: TODO OQ#14
 
   extras: null
 ```
@@ -611,8 +620,8 @@ personaje:
     # equipo.utilitario
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
     - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
-    # equipo.armadura
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
+    # equipo.vestidura (identidad visual de facción)
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
     - tipo: mentor
@@ -680,7 +689,7 @@ personaje:
     - { categoria: "equipo.arma", valor: "Pistola Browning (alcance corta)" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
     - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   metadatos:
     creado_en: "2026-01-15T00:00:00Z"
@@ -692,7 +701,7 @@ personaje:
   # Derivados servidos por la API (no persistidos):
   #   filiacion: ya en cabecera
   #   fza_aportada: 2   (tag rol=lider)
-  #   armor: 1          (chaleco antifragmentos rústico aporta 1; techo Ejército Rojo: 1)
+  #   armor: TODO OQ#14
 
   extras: null
 ```
@@ -715,7 +724,7 @@ El cliente pasa hasta tres parámetros: `faccion`, `rango` (o un alias de rango 
 6. Derivar `mando` (bool) y `estado` default según rango (ver 7.2).
 7. Sortear campos narrativos (nombre, edad, género, rasgos, rol cultural).
 8. Componer `sobrenombre` determinísticamente según facción (ver 7.3).
-9. Inicializar `tags` con pools sorteados de `rasgo`, `rol`, `skill`, `trait`, `perk`, `equipo.arma`, `equipo.utilitario`, `equipo.armadura` — cada categoría tiene sus propias reglas de sorteo detalladas en 7.4–7.8.
+9. Inicializar `tags` con pools sorteados de `rasgo`, `rol`, `skill`, `trait`, `perk`, `equipo.arma`, `equipo.utilitario`, `equipo.vestidura` — cada categoría tiene sus propias reglas de sorteo detalladas en 7.4–7.8.
 10. Inicializar bloques vacíos (`lealtades.secretos: []`, `vinculos: []`, `historial: []`).
 11. Generar `historia` con LLM, anclada en facción + rango + rol + skills/traits/perks + lugar implícito.
 12. Copiar `tags` a `tags_iniciales` (snapshot inmutable).
@@ -843,9 +852,9 @@ Pool curado `rango × faccion` produce tags en lugar de objetos estructurados.
 
 - **`equipo.arma`**: cada arma incluye el alcance en el valor.
 - **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico (`cargador`, `vendaje`, `cantimplora`). En mocks: hasta 4-5 narrativos.
-- **`equipo.armadura`**: tabla determinística por rango. Líderes/segundos/apuntadores: 1 armadura ligera (aporta 1). Artilleros/fusileros/reclutas Confederación: nada o muy ligera (aporta 0). Ejército Rojo: techo 1 por doctrina anti-equipamiento pesado.
+- **`equipo.vestidura`**: tabla determinística por facción. Todos los Confederados: `uniforme confederado`. Rojos integrados (líderes, veteranos): `uniforme rojo`. Rojos de origen civil reciente o andrajosos: `ropa de civil` o `camuflaje básico`. Catálogo canon: `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico`.
 
-El campo derivado `armor` total se computa al servir sumando aportes desde `/meta/equipo/armaduras/{valor}`.
+El campo derivado `armor` queda pendiente — ver OQ #14.
 
 ### 7.12. `vinculos` y `historial`
 
@@ -909,7 +918,7 @@ Los cambios ocurren vía `POST /character/{id}/event`. La API apendea al `histor
 
 **`edad`**: mutable vía decisión narrativa explícita; sin hito formal.
 
-**`filiacion`, `fza_aportada`, `armor`**: derivados al servir; no mutables porque no son persistidos.
+**`filiacion`, `fza_aportada`**: derivados al servir; no mutables porque no son persistidos. **`armor`**: TODO OQ#14.
 
 ### 9.4. Granularidad del historial
 
@@ -1035,15 +1044,17 @@ Las seis categorías canon de v0.2.5 con descripción y política de uso. Respue
   { "categoria": "trait",            "descripcion": "Rasgos de carácter o condición, sin polaridad fija." },
   { "categoria": "perk",             "descripcion": "Ventajas mecánicas activables." },
   { "categoria": "equipo.arma",      "descripcion": "Arma de fuego o cuerpo a cuerpo. Valor incluye alcance." },
-  { "categoria": "equipo.utilitario","descripcion": "Consumible o accesorio sin aporte de armor." },
-  { "categoria": "equipo.armadura",  "descripcion": "Protección con aporte de armor declarado en /meta/equipo/armaduras/{valor}." }
+  { "categoria": "equipo.utilitario","descripcion": "Consumible o accesorio táctico (sin identidad de facción)." },
+  { "categoria": "equipo.vestidura",  "descripcion": "Identidad visual de facción. Catálogo: uniforme confederado, uniforme rojo, ropa de civil, camuflaje básico." }
 ]
 ```
 Abierto — futuras categorías se agregan sin breaking change.
 
-### `GET /meta/equipo/armaduras/{valor}`
+### `GET /meta/equipo/vestiduras`
 
-Devuelve el aporte de `armor` de cada armadura canon. Usado por la API para componer el campo derivado `armor`. Ej: `GET /meta/equipo/armaduras/chaleco+antifragmentos+reglamentario` → `{ valor: "chaleco antifragmentos reglamentario", armor: 1, faccion_predominante: "Confederación" }`.
+Devuelve el catálogo canon de vestiduras. Ej: `GET /meta/equipo/vestiduras` → `[{ valor: "uniforme confederado", faccion: "Confederación" }, { valor: "uniforme rojo", faccion: "Ejército Rojo" }, { valor: "ropa de civil" }, { valor: "camuflaje básico" }]`.
+
+**TODO OQ#14**: el endpoint `/meta/equipo/armaduras/{valor}` (aporte de `armor` por armadura) queda suspendido hasta resolución de OQ #14.
 
 ### `GET /meta/equipo/armas`, `GET /meta/equipo/utilitarios`
 
@@ -1065,7 +1076,7 @@ Mapea (todos los `/meta/*`): UC-09.
 
 Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
 
-**Estado de migración.** Los 22 fixtures actuales están al schema v0.2.0/v0.2.1 y **no han sido actualizados al schema v0.2.5**. Requieren regeneración completa: nueva cabecera (sobrenombre/filiacion/estado/rango/escuadra_id/mando bool), aspectos disueltos en tags `skill`/`trait`/`perk`, equipo migrado a sub-categorías `equipo.*`, eliminación de `rol_id`, `origen_geografico`, `especialidad`, `apariencia`, `fza_aportada` (como campo) y `equipo.armor` (como campo). La regeneración se realizará en iteración separada. Hasta entonces, los mocks son válidos solo para tests que no dependan del schema nuevo.
+**Estado de migración.** Los 22 fixtures actuales están al schema v0.2.0/v0.2.1 y **no han sido actualizados al schema v0.2.5**. Requieren regeneración completa: nueva cabecera (sobrenombre/filiacion/estado/rango/escuadra_id/mando bool), aspectos disueltos en tags `skill`/`trait`/`perk`, equipo migrado a sub-categorías `equipo.*`, eliminación de `rol_id`, `origen_geografico`, `especialidad`, `apariencia`, `fza_aportada` (como campo) y `equipo.armor` (como campo). v0.2.6 ya aplicó la rectificación `armadura`→`vestidura` a los 22 mocks. La regeneración se realizará en iteración separada. Hasta entonces, los mocks son válidos solo para tests que no dependan del schema nuevo.
 
 ### 11.1. Escuadra Confederación (11)
 
@@ -1117,8 +1128,8 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 - 22 mocks regenerados al schema v0.2.5 en iteración separada.
 - Canonización persistente (solo DB de la API).
 - **Memoria viva**: endpoint de evento, mutación de campos vigentes, historial inline.
-- **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, equipo.{arma,utilitario,armadura}.
-- **Campos derivados**: `filiacion`, `fza_aportada`, `armor` total — computados al servir.
+- **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, equipo.{arma,utilitario,vestidura}.
+- **Campos derivados**: `filiacion`, `fza_aportada` — computados al servir. `armor`: TODO OQ#14.
 - **`mando` como booleano**: capacidad de mando; titularidad derivada.
 - **`estado` como dimensión de asignación**: activo/disponible/kia/licencia.
 - **Lealtades estructuradas** con secretos.
@@ -1162,7 +1173,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ### 13.2. Tags con categorías abiertas → riesgo de fragmentación semántica
 
-**Decisión.** Las categorías de tags son un enum abierto. Las sub-categorías jerárquicas con punto (`equipo.arma`, `equipo.utilitario`, `equipo.armadura`) también son extensibles.
+**Decisión.** Las categorías de tags son un enum abierto. Las sub-categorías jerárquicas con punto (`equipo.arma`, `equipo.utilitario`, `equipo.vestidura`) también son extensibles.
 
 **Costo.** Distintos clientes pueden inventar sinónimos (`equipo.weapon` vs `equipo.arma`).
 
@@ -1248,7 +1259,7 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 ### 14.3. Campos derivados → cómputo al servir, no al persistir
 
-`filiacion`, `fza_aportada` y `armor` total son derivados que la API computa al armar la respuesta. Esto evita inconsistencias (no se puede tener un `armor` desincronizado con los tags `equipo.armadura`) y simplifica el modelo de persistencia. El costo es CPU al servir; se asume bajo dado el tamaño del payload.
+`filiacion` y `fza_aportada` son derivados que la API computa al armar la respuesta. El campo `armor` queda pendiente de decisión — ver OQ #14. La rectificación `armadura`→`vestidura` (identidad visual, no protección) abre la pregunta de si `armor` sigue siendo derivado, vuelve a campo escalar, o desaparece.
 
 ---
 
@@ -1260,7 +1271,7 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 3. **Polaridad de `trait`.** ¿Existe `/meta/traits/{valor}.polaridad` como hint sugerido, o se deja al motor downstream interpretar libremente? Documentado en 13.6 pero el endpoint no está decidido.
 
-4. **`armor` derivado siempre vs on-demand.** ¿La API devuelve `armor` total siempre derivado en la respuesta de `GET /character/{id}`, o solo cuando el cliente expande tags `equipo.armadura` con sus efectos? Recomendación implícita: siempre devolverlo, costo CPU bajo. Confirmar.
+4. **`armor` derivado siempre vs on-demand.** ¿La API devuelve `armor` total siempre derivado en la respuesta de `GET /character/{id}`, o solo cuando el cliente expande tags `equipo.armadura` con sus efectos? Recomendación implícita: siempre devolverlo, costo CPU bajo. Confirmar. **Nota**: esta OQ queda subordinada a OQ #14 — la rectificación a vestidura abre si `armor` sigue existiendo.
 
 5. **Schema completo de la entidad `escuadra`.** v0.2.5 introduce `escuadra_id` y la entidad implícita (`id`, `nombre`, `cuerpo`, `faccion`) pero no especifica un schema completo ni endpoints CRUD. Definir en v1.1 o cuando aparezca el primer consumidor que necesite gestionar escuadras.
 
@@ -1279,6 +1290,8 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 12. **Normalización de case en `valor`.** ¿El schema normaliza `valor` de tags a lowercase antes de persistir? Evita fragmentación silenciosa (`Francotirador` ≠ `francotirador`). Tensión 13.7. Decisión mínima viable antes de v1.
 
 13. **Límite de tags por categoría.** ¿Hay un máximo razonable de tags por categoría? Un personaje con 20 `equipo.utilitario` es sintácticamente válido pero semánticamente raro. ¿El generador tiene caps internos? ¿La API los valida o advierte?
+
+14. **Futuro del campo `armor` tras renombrar armadura → vestidura.** La rectificación de `equipo.armadura` a `equipo.vestidura` (donde la vestidura es identidad visual, no protección) abre la pregunta: ¿qué pasa con el campo derivado `armor`? Opciones: (a) eliminar el concepto de armor del sistema; (b) volver a campo escalar 0–3 independiente; (c) derivar armor de alguna otra cosa (rol_id, vestidura específica, tag separado). Decidir antes de v1.0.
 
 ---
 
