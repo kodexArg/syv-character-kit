@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.6] - 2026-05-24
+### Changed
+- Sub-categoría de tag `equipo.armadura` renombrada a `equipo.vestidura`. Cambio conceptual: la vestidura es identidad visual del combatiente, no protección estructural. Catálogo canon reducido a 4 valores genéricos: `ropa de civil`, `uniforme rojo`, `uniforme confederado`, `camuflaje básico`. Aplicado en PRD.md y en los 22 mocks: 11 confederados con `uniforme confederado`, 8 rojos con `uniforme rojo`, 3 rojos con `ropa de civil` (Paine por identidad mapuche con contradicción; Bordón universitario voluntario reciente; Maturana captado sin convicción ideológica). `camuflaje básico` queda disponible en catálogo sin uso en el corpus actual.
+
+### Removed
+- Accesorios identitarios menores eliminados como tags. 5 ocurrencias de `brazalete rojo del Pueblo` removidas de `equipo.utilitario` en los mocks rojos. El criterio "nada de brazaletes, botas, accesorios menores" se documenta en el PRD: la identidad de facción se expresa por la vestidura completa, no por piezas sueltas.
+
+### Added
+- OQ #14 abierta: tras el cambio conceptual de armadura a vestidura, el campo derivado `armor` queda huérfano (ya no se deriva de algo coherente). Opciones documentadas: eliminar el concepto, volverlo escalar independiente, o derivarlo de otra fuente (rol_id, etc.). Pendiente decisión del cliente.
+
+### Notes
+- Valores históricos "chaleco antifragmentos reglamentario" y "chaleco antifragmentos rústico" introducidos en v0.2.4 quedan obsoletos. Las menciones residuales a `equipo.armadura` en el changelog del PRD y en OQs explicativas se preservan intencionalmente como referencias históricas, no como categorías activas.
+
 ## [0.4.0] - 2026-05-24
 ### Changed
 - Los 22 archivos YAML de `mock/personajes/{confederacion,ejercito_rojo}/` migrados del schema v0.2.0/v0.2.1 al v0.2.5
