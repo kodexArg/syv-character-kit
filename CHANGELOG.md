@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0] - 2026-05-24
+### Changed
+- Los 22 archivos YAML de `mock/personajes/{confederacion,ejercito_rojo}/` migrados del schema v0.2.0/v0.2.1 al v0.2.5
+- Eliminados de todos los YAMLs: `rol_id`, `tag_rol`, `origen_geografico`, `apariencia`, `aspectos` (bloque entero), `equipo.armas[]`, `equipo.equipo_tactico[]`, `equipo.armor`, `fza_aportada`, `especialidad`, `estado_salud: activo`
+- Agregados a todos: `sobrenombre`, `filiacion` (derivado), `rol`, `rango`, `estado`, `escuadra_id`, `escuadra: {nombre, cuerpo}`, `mando: bool`, `tags[]` con 6 categorías canon (rasgo, rol, skill, trait, perk, equipo.arma/utilitario/armadura)
+
+### Added
+- Sistema de tags materializado con 344 tags totales en los 22 personajes (promedio 15.64, mín 13, máx 22 por personaje)
+- Distribución por categoría: 115 rasgos (78 únicos), 23 rol (6 únicos), 44 skill (36 únicos), 45 trait (31 únicos), 20 perk (14 únicos), 27 equipo.arma (12 únicos), 63 equipo.utilitario (17 únicos), 7 equipo.armadura (2 únicos)
+- Escuadras canon: `esq_conf_03` "Escuadra Ricardo" del Ejército de la Confederación Argentina (en honor al Sgto Ricardo caído); `esq_rojo_07` "Escuadra Mardones" del Ejército Revolucionario del Pueblo
+- Líderes con `mando: true`: 4 (Aguirre + Sosa por confederación; Mansilla + Iturra por ejército rojo)
+
+### Preserved
+- Prosa de `historia` y entradas de `historial[]` palabra por palabra
+- Vínculos preservados, incluyendo el asimétrico Mansilla→Aguirre rival (Aguirre no tiene contrarrival registrado)
+
 ## [0.3.0] - 2026-05-24
 ### Added
 - Materialización de los 22 personajes mock (11 Confederación + 11 Ejército Rojo) como archivos YAML en `mock/personajes/{faccion}/{nn}_{apellido}.yaml`
