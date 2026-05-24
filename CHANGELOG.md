@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.4.0] - 2026-05-24
+### Added
+- Categoría `aspecto` promovida de "reservada" (v0.3.0 sección 16) a implementación efectiva. Pool semilla de 10 aspectos canon: 3 dados por el cliente (`cabrón`, `ojo-de-halcón`, `muy-fuerte`) más 7 curados (`cobarde`, `carismático`, `terco`, `veloz`, `veterano-cicatrizado`, `devoto`, `impredecible`). Cada aspecto es un tag corto kebab-case con efecto mecánico embebido como mini-frase (probabilístico, condicional, bonus, o activa otros tags).
+- Nuevo bloque ASPECTOS en la hoja ASCII canónica del Comandante Miguel (`[cabrón]`). Ejemplo Aguirre con aspecto `ojo-de-halcón` (coherente con su skill "Lectura de terreno boscoso"). Ejemplo Mansilla con aspecto `carismático` (coherente con su skill "Oratoria sindical").
+- Endpoint `/meta/aspectos` con los 10 aspectos canon, formato `{valor, efecto, activa_tag?}`. Campo `activa_tag` opcional estructurado para los aspectos que disparan tags transitorios (`berserker`, `pánico`); el resto deja el efecto como string libre.
+- Tipos de hito `agregar_aspecto` y `quitar_aspecto` con `metadata: {valor, motivo}` en sección 9.5. Aspectos son mutables como skills/traits/perks.
+- Patrón implícito de tags activables (`berserker`, `pánico`) reconocido como sub-categoría conceptual `estado_temporal`. No canonizado con valores fijos; el motor downstream los identifica por nombre.
+
+### Changed
+- Sección 16 promovida de "Próximas olas — preview de aspectos" a "Aspectos — capa narrativa-mecánica". Contexto histórico preservado. Apuntada como próxima ola especulativa: aspectos largos al estilo H.I.T.O.S./Cultos Innombrables clásico (frases narrativas de 10-25 palabras), distintos de los aspectos cortos canon de v0.4.0.
+
+### Notes
+- Commits: `1cb98ab` y merge `02acc20` (2026-05-24).
+- PRD bumped a v0.4.0 (mayor — feature nueva). PRD ahora 1525 líneas. Total tags semilla: 80 (70 + 10 aspectos).
+- Los 22 mocks en `mock/personajes/` NO fueron tocados — aspectos solo se materializan en los 2 ejemplos del PRD y en la hoja ASCII de Miguel. Ola separada (futura) puede agregar aspectos al corpus de 22.
+- Tensión 13.10 nueva sobre efecto en texto libre (motor debe interpretar mini-frase, igual que customs de perks). OQ #14 nueva sobre polaridad explícita de aspectos. OQ #15 nueva sobre versionado del catálogo `/meta/aspectos`.
+- Diferencia formal documentada: `aspecto` (tag con efecto mecánico) vs `trait` (sin efecto mecánico) vs `perk` (pool fijo del reglamento).
+
 ## [0.3.2] - 2026-05-24
 ### Fixed
 - Header de la hoja ASCII canónica de Miguel sincronizado a schema v0.3.1 (decía v0.2.5 porque el worker de v0.3.0/v0.3.1 no bumpeó esa referencia interna).
@@ -59,22 +77,6 @@
 
 ### Notes
 - Valores históricos "chaleco antifragmentos reglamentario" y "chaleco antifragmentos rústico" introducidos en v0.2.4 quedan obsoletos. Las menciones residuales a `equipo.armadura` en el changelog del PRD y en OQs explicativas se preservan intencionalmente como referencias históricas, no como categorías activas.
-
-## [0.4.0] - 2026-05-24
-### Changed
-- Los 22 archivos YAML de `mock/personajes/{confederacion,ejercito_rojo}/` migrados del schema v0.2.0/v0.2.1 al v0.2.5
-- Eliminados de todos los YAMLs: `rol_id`, `tag_rol`, `origen_geografico`, `apariencia`, `aspectos` (bloque entero), `equipo.armas[]`, `equipo.equipo_tactico[]`, `equipo.armor`, `fza_aportada`, `especialidad`, `estado_salud: activo`
-- Agregados a todos: `sobrenombre`, `filiacion` (derivado), `rol`, `rango`, `estado`, `escuadra_id`, `escuadra: {nombre, cuerpo}`, `mando: bool`, `tags[]` con 6 categorías canon (rasgo, rol, skill, trait, perk, equipo.arma/utilitario/armadura)
-
-### Added
-- Sistema de tags materializado con 344 tags totales en los 22 personajes (promedio 15.64, mín 13, máx 22 por personaje)
-- Distribución por categoría: 115 rasgos (78 únicos), 23 rol (6 únicos), 44 skill (36 únicos), 45 trait (31 únicos), 20 perk (14 únicos), 27 equipo.arma (12 únicos), 63 equipo.utilitario (17 únicos), 7 equipo.armadura (2 únicos)
-- Escuadras canon: `esq_conf_03` "Escuadra Ricardo" del Ejército de la Confederación Argentina (en honor al Sgto Ricardo caído); `esq_rojo_07` "Escuadra Mardones" del Ejército Revolucionario del Pueblo
-- Líderes con `mando: true`: 4 (Aguirre + Sosa por confederación; Mansilla + Iturra por ejército rojo)
-
-### Preserved
-- Prosa de `historia` y entradas de `historial[]` palabra por palabra
-- Vínculos preservados, incluyendo el asimétrico Mansilla→Aguirre rival (Aguirre no tiene contrarrival registrado)
 
 ## [0.3.0] - 2026-05-24
 ### Added
