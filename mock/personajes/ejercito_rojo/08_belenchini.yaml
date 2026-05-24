@@ -51,6 +51,7 @@ personaje:
     - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
     - tipo: hermano_de_armas

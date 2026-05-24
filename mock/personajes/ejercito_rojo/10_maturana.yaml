@@ -49,6 +49,7 @@ personaje:
     - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.vestidura", valor: "ropa de civil" }
 
   vinculos:
     - tipo: hermano_de_armas

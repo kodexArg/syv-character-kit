@@ -55,7 +55,7 @@ personaje:
     - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
+    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
     - tipo: mentor
@@ -114,7 +114,7 @@ personaje:
     - { categoria: "equipo.arma", valor: "Fusil FAL con óptica 4x" }
     - { categoria: "equipo.arma", valor: "Pistola reglamentaria M9" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
+    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

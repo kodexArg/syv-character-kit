@@ -51,7 +51,7 @@ personaje:
     - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
     - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
     - { categoria: "equipo.utilitario", valor: "almanaque de bolsillo — registra el clima diario, costumbre" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
+    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -88,7 +88,7 @@ personaje:
     - { categoria: "equipo.arma", valor: "FAP Confederado M2A" }
     - { categoria: "equipo.arma", valor: "Cuchillo de campo" }
     - { categoria: "equipo.utilitario", valor: "almanaque de bolsillo — registra el clima diario, costumbre" }
-    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
+    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"
