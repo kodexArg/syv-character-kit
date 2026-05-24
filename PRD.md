@@ -9,7 +9,13 @@
 
 ---
 
-## 0. Changelog v0.1.0 → v0.2.0
+## 0. Changelog
+
+### v0.2.1
+
+Patch incremental sobre v0.2.0. Cierra cuatro *open questions* que habían quedado abiertas: **OQ#1** (edad), **OQ#3** (límite del historial), **OQ#5** (mutabilidad de atributos al cambiar de rol_id), y **OQ#7** (idempotencia de `POST /canonize`). Como resultado de OQ#1, se eliminan del vocabulario de hitos los tipos `cumpleanos` y `paso_del_tiempo`. Se clarifica taxativamente que los atributos `{fis, tac, men}` son propiedad del personaje y no se derivan del rol_id post-creación. Quedan 4 OQs abiertas (renumeradas 1–4 en sección 14).
+
+### v0.2.0
 
 Esta versión cierra las cuatro *open questions* abiertas en v0.1.0 y, sobre esas decisiones, introduce un cambio de naturaleza del recurso: el personaje canonizado deja de ser una foto inmutable y pasa a ser una **memoria viva con experiencia**.
 
@@ -103,7 +109,8 @@ personaje:
   semilla: string                       # seed original que produjo la ficha; siempre presente
 
   nombre: string                        # nombre completo, ej. "Sargento Walter Aguirre"
-  edad: integer                         # años, 16..70 sugerido (estructurado, no narrativo)
+  edad: integer                         # años, 16..70 sugerido. Integer simple; no hay mecánica de envejecimiento.
+                                        # Si envejece, decisión narrativa directa sin hito formal.
   genero: enum                          # "masculino" | "femenino" | "no_binario" | "otro" (abierto)
 
   faccion: enum                         # "Confederación" | "Ejército Rojo" (otras 3 fuera de MVP)
@@ -668,7 +675,7 @@ Los cambios ocurren vía `POST /character/{id}/event`. El cuerpo del evento es u
 - `vinculos[]` (vía `formacion_vinculo`, `ruptura_vinculo`).
 - `lealtades.secundarias`, `lealtades.secretos` (vía `cambio_lealtad`).
 - `apariencia.cicatrices` (vía `herida` grave).
-- `rol`, `rol_id`, `tag_rol`, `fza_aportada` (vía `ascenso` o `traslado` — actualiza la matriz completa).
+- `rol`, `rol_id`, `tag_rol`, `fza_aportada` (vía `ascenso` o `traslado` — `tag_rol` y `fza_aportada` se realinean al nuevo rol; los atributos `{fis,tac,men}` no se tocan).
 - `estado_salud` (vía `herida`, `baja`, `recuperacion`).
 - `metadatos.ultima_actualizacion` (siempre).
 
@@ -683,14 +690,14 @@ Los cambios ocurren vía `POST /character/{id}/event`. El cuerpo del evento es u
 - `metadatos.creado_en`, `metadatos.canonizado_en`, `metadatos.modelo_prosa`, `metadatos.es_canon`.
 - `tags_iniciales` (snapshot de tags al crear; auditoría).
 
-**Debatible — `edad`**: por defecto **mutable** vía hito explícito (`cumpleanos`, `paso_del_tiempo`). No se incrementa automáticamente. Ver Open Question OQ#1.
+**`edad`**: **mutable** vía modificación directa (decisión narrativa explícita del curador). No hay mecánica de envejecimiento ni hito formal asociado; `cumpleanos` y `paso_del_tiempo` quedan eliminados del vocabulario canon (ver 9.5).
 
-**Debatible — `apariencia.rasgos`, `apariencia.altura`, `apariencia.complexion`**: por defecto **inmutables** salvo cicatrices (que sí mutan). Ver Open Question OQ#4.
+**`apariencia.rasgos`, `apariencia.altura`, `apariencia.complexion`**: por defecto **inmutables** salvo cicatrices (que sí mutan). Ver Open Question #3 (sección 14).
 
 ### 9.4. Granularidad del historial
 
 - Solo hitos importantes. El motor de batalla lleva su propio log detallado de combate (turnos, dados, daños) aparte. El `historial[]` del personaje responde a "¿qué cosas le pasaron que vale la pena recordar en su ficha?".
-- Sin límite estricto de tamaño en v1, pero ver Open Question OQ#3 sobre paginación/archivo futuro.
+- **Sin límite de tamaño.** El `historial[]` viaja inline completo en la respuesta. Se asume que "solo hitos importantes" lo mantiene acotado en la práctica. Si en producción algún canonizado supera ~100 entradas y la latencia se vuelve perceptible, se reevalúa en ese momento. No hay paginación en v1.
 
 ### 9.5. Tipos de hito (canon sugerido — abierto)
 
@@ -700,8 +707,8 @@ El campo `tipo` admite cualquier string. El canon **sugiere** un vocabulario par
 |---|---|---|
 | `triple_cero` | Motor (regla mecánica) | `atributos.<atributo> += 1` (techo 5, MEN-líder 7); `metadata: { atributo, delta, valor_anterior, valor_nuevo }` |
 | `mejora_atributo` | Narrador (decisión externa) | igual a `triple_cero` pero sin disparador mecánico |
-| `ascenso` | Narrador | `rol`, `rol_id`, `tag_rol`, `fza_aportada` se reemplazan; `metadata: { rol_id_anterior, rol_id_nuevo }` |
-| `traslado` | Narrador | `rol` y/o `rol_id` (si cambia función) |
+| `ascenso` | Narrador | `rol`, `rol_id`, `tag_rol`, `fza_aportada` se reemplazan; atributos `{fis,tac,men}` NO se tocan; `metadata: { rol_id_anterior, rol_id_nuevo }` |
+| `traslado` | Narrador | `rol` y/o `rol_id` (si cambia función); `tag_rol` y `fza_aportada` se realinean al nuevo rol; atributos `{fis,tac,men}` NO se tocan |
 | `herida` | Motor o narrador | `estado_salud: "herido"`; opcionalmente `apariencia.cicatrices += [...]` |
 | `baja_temporal` | Motor | `estado_salud: "baja"` |
 | `recuperacion` | Motor o narrador | `estado_salud: "activo"` |
@@ -712,10 +719,10 @@ El campo `tipo` admite cualquier string. El canon **sugiere** un vocabulario par
 | `cambio_lealtad` | Narrador | mutación de `lealtades.secundarias` o `lealtades.secretos` |
 | `mejora_aspecto` | Narrador | reemplazo de `aspectos.concepto`, `perk_fijo` o `complicacion_fija` |
 | `condecoracion` | Narrador | no muta campos vigentes (queda como hito puro) |
-| `cumpleanos` | Narrador | `edad += 1` (debatible — ver OQ#1) |
-| `paso_del_tiempo` | Narrador | `edad += N` |
 
 El motor o el narrador pueden emitir tipos custom; la API los acepta y los apendea al historial. El efecto sobre campos vigentes solo ocurre para los tipos conocidos; tipos custom **no mutan** la ficha (quedan como hito puro).
+
+**Nota sobre atributos y rol_id.** Los atributos `{fis, tac, men}` son **propiedad del personaje**, no derivados del rol_id post-creación. Cuando un personaje cambia de `rol_id` (por ascenso, traslado u otro hito), los atributos vigentes no se tocan: el personaje no pierde ni resetea lo que ganó. `tag_rol` y `fza_aportada` sí se realinean a la matriz del nuevo rol (son etiquetas mecánicas del rol vigente, no propiedad del personaje). La matriz determinística por rol (sección 7.2) aplica **únicamente** en el momento de creación.
 
 ---
 
@@ -750,7 +757,7 @@ Mapea: UC-05, UC-15, UC-16.
 
 Devuelve solo el `historial[]` del personaje. Útil para renderizar líneas de tiempo sin cargar la ficha completa.
 
-Parámetros opcionales sugeridos: paginación si OQ#3 se resuelve hacia archivo.
+Sin paginación en v1 (el historial viaja completo). Si en el futuro se reevalúa el límite de tamaño, este endpoint sería el candidato natural para incorporar un cursor.
 
 Mapea: UC-17.
 
@@ -768,7 +775,7 @@ Devuelve la ficha completa actualizada.
 
 Solo aplica a `origen: "canonizado"`. Sobre mocks devuelve 409 (los mocks son inmutables). Sobre efímeros devuelve 404 (no existen como recurso persistente).
 
-Gobernanza de quién puede llamar este endpoint: ver Open Question OQ#2.
+Gobernanza de quién puede llamar este endpoint: ver Open Question #1 (sección 14).
 
 Mapea: UC-10..14.
 
@@ -781,6 +788,8 @@ Mapea: UC-08.
 ### `POST /canonize`
 
 Toma un personaje generado (vía body con la ficha completa + seed) y lo persiste como canon **en el almacenamiento de la API**. Asigna `id` estable (`canon.{ulid}`), cambia `origen` a `"canonizado"`, marca `metadatos.es_canon: true`, fija `metadatos.canonizado_en`. La prosa de `historia` se congela en este momento.
+
+**Idempotencia.** `POST /canonize` es idempotente por la tripleta `(seed, faccion, rol_id)`. Si se llama dos veces con los mismos parámetros, se devuelve el id del primero canonizado en lugar de crear uno nuevo. Si un curador quiere dos versiones distintas del mismo arquetipo, debe variar la seed o el rol_id.
 
 **Explícito:** este endpoint nunca toca `/Dev/syv-battle-game-system/personajes/`. Nunca abre PRs. Los canonizados son un universo de la API; los mocks Markdown del battle-system son un universo paralelo.
 
@@ -951,25 +960,17 @@ Esta sección documenta decisiones que el PRD toma sabiendo que tienen un costo.
 
 ---
 
-## 14. Open questions v0.2.0
+## 14. Open questions v0.2.1
 
-Preguntas reales que esta versión deja abiertas para la próxima iteración.
+Preguntas reales que esta versión deja abiertas para la próxima iteración. Las OQs cerradas en v0.2.1 (#1 edad, #3 historial, #5 rol_id atributos, #7 idempotencia) fueron incorporadas como decisiones en las secciones correspondientes.
 
-1. **`edad` automática vs explícita.** ¿La edad sube sola con el tiempo (delta entre `creado_en` y `now()`) o solo vía hito explícito (`cumpleanos`, `paso_del_tiempo`)? El PRD propone explícita por default — la edad de un personaje en ficción solo cambia cuando alguien decide que cambió. Decidir si esto se sostiene.
+1. **Gobernanza de `POST /character/{id}/event`.** ¿Quién puede llamarlo? El motor de batalla obvio (para `triple_cero`, `herida`, `baja`). ¿Pero un redactor narrativo puede emitir `ascenso` o `cambio_lealtad` desde cualquier cliente? Sin auth en v1, en la práctica cualquiera con la URL puede. Decidir si esto se atemporaliza con tokens, lista blanca de orígenes, o si se acepta porque el corpus de canonizados es pequeño y curable a mano.
 
-2. **Gobernanza de `POST /character/{id}/event`.** ¿Quién puede llamarlo? El motor de batalla obvio (para `triple_cero`, `herida`, `baja`). ¿Pero un redactor narrativo puede emitir `ascenso` o `cambio_lealtad` desde cualquier cliente? Sin auth en v1, en la práctica cualquiera con la URL puede. Decidir si esto se atemporaliza con tokens, lista blanca de orígenes, o si se acepta porque el corpus de canonizados es pequeño y curable a mano.
+2. **Mutabilidad fina de `apariencia`.** Cicatrices mutan (claro). ¿Pero una herida grave puede mutar `complexion` ("queda enjuto tras la convalecencia")? ¿Los rasgos son absolutamente inmutables o pueden modificarse vía hito narrativo explícito? El PRD los marca inmutables por default, sabiendo que es debatible.
 
-3. **Límite del `historial[]`.** ¿Cuál es el máximo razonable de entradas antes de paginar o archivar? Un canonizado activo en 100 batallas podría acumular cientos de hitos. ¿La ficha sigue cargando todo inline, o `GET /character/{id}` empieza a devolver solo los últimos N + un cursor a `/historial`?
+3. **Interpretación de customs por el motor.** ¿El motor de batalla se compromete a interpretar `p_custom_*` con un LLM al momento de aplicar la regla, o existe un workflow donde un curador humano traduce el custom a una regla mecánica antes de que el personaje entre a batalla? Esta tensión está documentada (13.1) pero el flujo operacional concreto queda abierto.
 
-4. **Mutabilidad fina de `apariencia`.** Cicatrices mutan (claro). ¿Pero un personaje envejece visualmente con el tiempo? ¿Una herida grave puede mutar `complexion` ("queda enjuto tras la convalecencia")? El PRD las marca inmutables por default, sabiendo que es debatible.
-
-5. **`rol_id` vía hito de traslado.** Cuando un personaje cambia de rol (`ascenso` o `traslado` a otra escuadra), ¿se reemplaza `rol_id` y se reaplica la matriz determinística de atributos? ¿O solo se actualiza `rol` narrativo y `tag_rol`, dejando los atributos vigentes intactos? El PRD propone reemplazar `rol_id` y dejar los atributos como están (no se "reseteán" — el personaje no pierde lo que ganó), pero el `tag_rol` y `fza_aportada` sí se realinean. Confirmar.
-
-6. **Interpretación de customs por el motor.** ¿El motor de batalla se compromete a interpretar `p_custom_*` con un LLM al momento de aplicar la regla, o existe un workflow donde un curador humano traduce el custom a una regla mecánica antes de que el personaje entre a batalla? Esta tensión está documentada (13.1) pero el flujo operacional concreto queda abierto.
-
-7. **Idempotencia de `POST /canonize`.** Si se canoniza dos veces el mismo personaje generado (misma seed, mismos inputs), ¿se crea un canon nuevo (id distinto) o se devuelve el id del primero? El PRD no lo resuelve. Default sugerido: id distinto cada vez, porque "canonizar" es una decisión, no una propiedad pura del input.
-
-8. **Persistencia de `semilla` vs entidad viva.** La `semilla` se preserva post-canonización para trazabilidad. ¿Es útil exponer un endpoint `GET /character/{id}/original` que regenere la ficha al estado de creación (sin historial) para que herramientas externas puedan calcular el diff? Fuera de v1 pero útil para auditoría narrativa.
+4. **Persistencia de `semilla` vs entidad viva.** La `semilla` se preserva post-canonización para trazabilidad. ¿Es útil exponer un endpoint `GET /character/{id}/original` que regenere la ficha al estado de creación (sin historial) para que herramientas externas puedan calcular el diff? Fuera de v1 pero útil para auditoría narrativa.
 
 ---
 
