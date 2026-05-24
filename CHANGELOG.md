@@ -11,6 +11,30 @@
 - Vínculo asimétrico canon Mansilla→Aguirre como `rival`
 - Total: 2215 líneas YAML
 
+## [0.2.2] - 2026-05-24
+### Changed
+- Reforma estructural completa del schema de personaje
+- Identidad nominal desdoblada: `nombre` (identidad real) separado de `nombre_de_campo` (cómo se conoce a la unidad), más `especialidad` para Ejército Rojo que define el título de campo
+- Sistema de mando desacoplado de `rol_id`: nuevo enum `mando: {titular | suplente | no_apto}` permite múltiples unidades del mismo `rol_id` en la escuadra con una sola titular vigente
+- Sistema híbrido unificado: bloques `apariencia`, `equipo.armas[]` y `equipo.equipo_tactico[]` eliminados; unificación bajo `tags: array<{categoria, valor}>` repetibles y agrupables por categoría
+- Categorías canon de tags: `rasgo`, `equipo`, `rol`; abiertas a nuevas categorías
+- `tags_iniciales` redefinido como snapshot completo de `tags[]` al momento de creación
+- `equipo.armor` queda como único campo escalar residual
+
+### Added
+- Nuevo rol canon `lider_revolucionario` para Ejército Rojo
+- Sección "Píldoras de arquitectura" con nota sobre afinidad NoSQL/document-store
+- Open question #5 sobre versionado y curación de categorías canon de tags
+
+### Removed
+- Bloque `apariencia` (breaking change)
+- `equipo.armas[]` (breaking change)
+- `equipo.equipo_tactico[]` (breaking change)
+- Campo `tag_rol` (breaking change)
+
+### Notes
+- Los 22 mocks materializados (v0.3.0) quedan al schema v0.2.0/v0.2.1 y requieren regeneración en iteración separada
+
 ## [0.2.1] - 2026-05-24
 ### Changed
 - Cierre taxativo de 4 open questions del PRD v0.2.0
