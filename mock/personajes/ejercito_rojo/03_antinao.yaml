@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-14
 
-  nombre: Tirador Vanguardia Héctor Antinao
-  edad: 26
-  genero: masculino
+  nombre: Héctor Antinao
+  sobrenombre: Tirador Vanguardia Héctor Antinao
+  filiacion: "Apuntador de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
+
+  edad: 26
+  genero: masculino
+  estado_salud: saludable
+
   rol: Tirador Vanguardia
-  rol_id: apuntador
-  tag_rol: [apuntador]
 
-  origen_geografico:
-    region: Patagonia Norte (meseta)
-    localidad: General Roca
-
-  apariencia:
-    altura: medio
-    complexion: delgado
-    rasgos:
-      - pelo negro lacio
-      - rasgos mapuche marcados
-      - manos firmes
-    cicatrices: []
+  estado: activo
+  rango: Apuntador
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: Ejército Rojo
@@ -37,29 +35,23 @@ personaje:
     tac: 5
     men: 5
 
-  aspectos:
-    concepto: "Cazador de meseta que aprende a no malgastar el tiro."
-    perk_fijo:
-      id: p_custom_punteria_fria
-      nombre: Puntería fría
-      descripcion: >
-        Si Antinao no ha recibido fuego en la ronda actual, tirada de TAC
-        favorable al atacar.
-    complicacion_fija:
-      id: c06_obstinado
-      nombre: Obstinado
-      descripcion: >
-        Si se emite una orden que implique retroceder o abandonar posición de
-        tiro, tirada de MEN desfavorable para obedecer.
-
-  equipo:
-    armor: 1
-    armas:
-      - nombre: Fusil de cerrojo Springfield 1903 con mira
-        categoria_alcance: larga
-    equipo_tactico: null
-
-  fza_aportada: 2
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo negro lacio" }
+    - { categoria: rasgo, valor: "rasgos mapuche marcados" }
+    - { categoria: rasgo, valor: "manos firmes" }
+    - { categoria: rol, valor: "apuntador" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Caza en meseta" }
+    - { categoria: trait, valor: "Paciente" }
+    - { categoria: trait, valor: "Obstinado" }
+    - { categoria: perk, valor: "Puntería fría" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Springfield 1903 con mira" }
+    - { categoria: "equipo.utilitario", valor: "cargador 30-06 Springfield" }
+    - { categoria: "equipo.utilitario", valor: "cargador 30-06 Springfield" }
+    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -81,8 +73,20 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [apuntador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo negro lacio" }
+    - { categoria: rasgo, valor: "rasgos mapuche marcados" }
+    - { categoria: rasgo, valor: "manos firmes" }
+    - { categoria: rol, valor: "apuntador" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Caza en meseta" }
+    - { categoria: trait, valor: "Paciente" }
+    - { categoria: trait, valor: "Obstinado" }
+    - { categoria: perk, valor: "Puntería fría" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Springfield 1903 con mira" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

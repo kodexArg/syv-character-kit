@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-03
 
-  nombre: Cabo Apuntador Lisandro Quiroga
-  edad: 25
-  genero: masculino
+  nombre: Lisandro Quiroga
+  sobrenombre: Cabo Apuntador Lisandro Quiroga
+  filiacion: "Apuntador de la Escuadra Ricardo del Ejército de la Confederación Argentina"
 
   faccion: Confederación
+
+  edad: 25
+  genero: masculino
+  estado_salud: saludable
+
   rol: Cabo Apuntador
-  rol_id: apuntador
-  tag_rol: [apuntador]
 
-  origen_geografico:
-    region: Cuyo
-    localidad: La Rioja Capital
-
-  apariencia:
-    altura: alto
-    complexion: delgado
-    rasgos:
-      - pelo lacio castaño claro
-      - ojos chicos, atentos
-      - habla poco, observa mucho
-    cicatrices: []
+  estado: activo
+  rango: Apuntador
+  escuadra_id: esq_conf_03
+  escuadra:
+    nombre: Escuadra Ricardo
+    cuerpo: Ejército de la Confederación Argentina
+  mando: false
 
   lealtades:
     primaria: Confederación
@@ -37,31 +35,23 @@ personaje:
     tac: 5
     men: 5
 
-  aspectos:
-    concepto: "Agrimensor frustrado que dispara solo cuando está seguro."
-    perk_fijo:
-      id: p_custom_olfato_del_terreno
-      nombre: Olfato del terreno
-      descripcion: >
-        En escenarios con visión reducida (niebla, llovizna, humo), Quiroga
-        ignora las penalizaciones de visión en sus tiradas de TAC.
-    complicacion_fija:
-      id: c_custom_punteria_fria_mente_fria
-      nombre: Puntería fría, mente fría
-      descripcion: >
-        Si Quiroga recibió fuego directo en la ronda anterior, tirada de TAC
-        desfavorable en su próximo disparo de precisión.
-
-  equipo:
-    armor: 1
-    armas:
-      - nombre: Fusil de precisión FAL Tiro
-        categoria_alcance: larga
-    equipo_tactico:
-      - nombre: mapa topográfico del sector
-        descripcion: "Anotaciones a lápiz de curvas de nivel y líneas de tiro."
-
-  fza_aportada: 2
+  tags:
+    - { categoria: rasgo, valor: "altura alta" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo lacio castaño claro" }
+    - { categoria: rasgo, valor: "ojos chicos, atentos" }
+    - { categoria: rasgo, valor: "habla poco, observa mucho" }
+    - { categoria: rol, valor: "apuntador" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Lectura de mapas topográficos" }
+    - { categoria: trait, valor: "Paciente" }
+    - { categoria: trait, valor: "Puntería fría, mente fría" }
+    - { categoria: perk, valor: "Olfato del terreno" }
+    - { categoria: "equipo.arma", valor: "Fusil de precisión FAL Tiro" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "mapa topográfico del sector — anotaciones a lápiz de curvas de nivel y líneas de tiro" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -87,11 +77,24 @@ personaje:
       descripcion: "Ascendido a Cabo tras eliminar a operador de radio enemigo a 280m en llovizna."
       ref_batalla: null
       metadata:
-        rol_id_anterior: apuntador
-        rol_id_nuevo: apuntador
+        rango_anterior: Apuntador
+        rango_nuevo: Apuntador
 
-  estado_salud: activo
-  tags_iniciales: [apuntador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura alta" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo lacio castaño claro" }
+    - { categoria: rasgo, valor: "ojos chicos, atentos" }
+    - { categoria: rasgo, valor: "habla poco, observa mucho" }
+    - { categoria: rol, valor: "apuntador" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Lectura de mapas topográficos" }
+    - { categoria: trait, valor: "Paciente" }
+    - { categoria: trait, valor: "Puntería fría, mente fría" }
+    - { categoria: perk, valor: "Olfato del terreno" }
+    - { categoria: "equipo.arma", valor: "Fusil de precisión FAL Tiro" }
+    - { categoria: "equipo.utilitario", valor: "mapa topográfico del sector — anotaciones a lápiz de curvas de nivel y líneas de tiro" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

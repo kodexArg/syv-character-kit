@@ -3,28 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-01
 
-  nombre: Sargento Walter Aguirre
-  edad: 28
-  genero: masculino
+  nombre: Walter Aguirre
+  sobrenombre: Sargento Walter Aguirre
+  filiacion: "Lider de escuadra de la Escuadra Ricardo del Ejército de la Confederación Argentina"
 
   faccion: Confederación
-  rol: Sargento (Líder de escuadra)
-  rol_id: lider_escuadra
-  tag_rol: [líder, sargento]
 
-  origen_geografico:
-    region: Patagonia Norte
-    localidad: Neuquén
+  edad: 28
+  genero: masculino
+  estado_salud: saludable
 
-  apariencia:
-    altura: medio
-    complexion: atletico
-    rasgos:
-      - pelo castaño corto
-      - barba de tres días
-      - mirada que se demora en las cosas
-    cicatrices:
-      - corte vertical sobre la ceja izquierda (Sector 12,15)
+  rol: Sargento Confederado
+
+  estado: activo
+  rango: Lider de escuadra
+  escuadra_id: esq_conf_03
+  escuadra:
+    nombre: Escuadra Ricardo
+    cuerpo: Ejército de la Confederación Argentina
+  mando: true
 
   lealtades:
     primaria: Sargento Ricardo (post mortem)
@@ -38,33 +35,27 @@ personaje:
     tac: 5
     men: 7
 
-  aspectos:
-    concepto: "Cabo Primero ascendido a la fuerza tras sobrevivir al Sector 12,15."
-    perk_fijo:
-      id: p_custom_sucesor_de_ricardo
-      nombre: Sucesor de Ricardo
-      descripcion: >
-        Cuando la escuadra no tiene líder funcional y debe actuar sin órdenes
-        del HQ, tirada de MEN favorable para cualquier chequeo de mando o iniciativa.
-    complicacion_fija:
-      id: c_custom_eco_del_penasco
-      nombre: Eco del peñasco
-      descripcion: >
-        Cuando un aliado cae por fuego enemigo en la misma ronda, la ronda
-        siguiente la tirada de MEN para chequeos de moral o mando es desfavorable.
-
-  equipo:
-    armor: 1
-    armas:
-      - nombre: Fusil FAL con óptica 4x
-        categoria_alcance: media
-      - nombre: Pistola reglamentaria M9
-        categoria_alcance: corta
-    equipo_tactico:
-      - nombre: cuaderno de campaña
-        descripcion: "Anotaciones de terreno; firma con la inicial R en el margen."
-
-  fza_aportada: 2
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo castaño corto" }
+    - { categoria: rasgo, valor: "barba de tres días" }
+    - { categoria: rasgo, valor: "mirada que se demora en las cosas" }
+    - { categoria: rasgo, valor: "cicatriz vertical sobre ceja izquierda (Sector 12,15)" }
+    - { categoria: rol, valor: "lider" }
+    - { categoria: rol, valor: "sargento" }
+    - { categoria: skill, valor: "Comandancia" }
+    - { categoria: skill, valor: "Lectura de terreno boscoso" }
+    - { categoria: trait, valor: "Mirada larga" }
+    - { categoria: trait, valor: "Eco del peñasco" }
+    - { categoria: perk, valor: "Sucesor de Ricardo" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL con óptica 4x" }
+    - { categoria: "equipo.arma", valor: "Pistola reglamentaria M9" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
 
   vinculos:
     - tipo: mentor
@@ -104,11 +95,26 @@ personaje:
       descripcion: "Ascendido a Sargento tras la pérdida de Ricardo."
       ref_batalla: null
       metadata:
-        rol_id_anterior: segundo_mando
-        rol_id_nuevo: lider_escuadra
+        rango_anterior: "Segundo al mando"
+        rango_nuevo: "Lider de escuadra"
 
-  estado_salud: activo
-  tags_iniciales: [líder, sargento]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo castaño corto" }
+    - { categoria: rasgo, valor: "barba de tres días" }
+    - { categoria: rasgo, valor: "mirada que se demora en las cosas" }
+    - { categoria: rol, valor: "lider" }
+    - { categoria: rol, valor: "sargento" }
+    - { categoria: skill, valor: "Comandancia" }
+    - { categoria: skill, valor: "Lectura de terreno boscoso" }
+    - { categoria: trait, valor: "Mirada larga" }
+    - { categoria: trait, valor: "Eco del peñasco" }
+    - { categoria: perk, valor: "Sucesor de Ricardo" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL con óptica 4x" }
+    - { categoria: "equipo.arma", valor: "Pistola reglamentaria M9" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

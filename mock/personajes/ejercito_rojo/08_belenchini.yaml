@@ -3,28 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-19
 
-  nombre: Miliciano Veterano Esteban Belenchini
-  edad: 39
-  genero: masculino
+  nombre: Esteban Belenchini
+  sobrenombre: Miliciano Veterano Esteban Belenchini
+  filiacion: "Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
+
+  edad: 39
+  genero: masculino
+  estado_salud: saludable
+
   rol: Miliciano Veterano
-  rol_id: fusilero
-  tag_rol: [infantería]
 
-  origen_geografico:
-    region: Pampa Bonaerense
-    localidad: Bahía Blanca
-
-  apariencia:
-    altura: medio
-    complexion: robusto
-    rasgos:
-      - pelo oscuro con canas
-      - quemadura del tamaño de una palma en mejilla izquierda
-      - mirada acostumbrada a ser mirada
-    cicatrices:
-      - quemadura en mejilla izquierda (incendio del local sindical, año uno)
+  estado: activo
+  rango: Fusilero
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: Ejército Rojo
@@ -38,28 +35,22 @@ personaje:
     tac: 3
     men: 3
 
-  aspectos:
-    concepto: "Metalúrgico de la primera hora; carga la revolución sin ilusiones."
-    perk_fijo:
-      id: p_custom_veterano_de_flanqueo
-      nombre: Veterano de flanqueo
-      descripcion: >
-        Si ataca a un enemigo con iniciativa menor, tirada de TAC favorable.
-    complicacion_fija:
-      id: c_custom_objetivo_prioritario
-      nombre: Objetivo prioritario
-      descripcion: >
-        Si un francotirador o ataque dirigido enemigo actúa, el primer impacto
-        se asigna a Belenchini.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Fusil de cerrojo Mauser 1909
-        categoria_alcance: larga
-    equipo_tactico: null
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "pelo oscuro con canas" }
+    - { categoria: rasgo, valor: "quemadura del tamaño de una palma en mejilla izquierda" }
+    - { categoria: rasgo, valor: "mirada acostumbrada a ser mirada" }
+    - { categoria: rasgo, valor: "quemadura en mejilla izquierda (incendio del local sindical, año uno)" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Flanqueo" }
+    - { categoria: trait, valor: "Veterano" }
+    - { categoria: trait, valor: "Objetivo prioritario" }
+    - { categoria: perk, valor: "Veterano de flanqueo" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -89,8 +80,19 @@ personaje:
         gravedad: grave
         cicatriz: "quemadura en mejilla izquierda"
 
-  estado_salud: activo
-  tags_iniciales: [infantería]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "pelo oscuro con canas" }
+    - { categoria: rasgo, valor: "quemadura del tamaño de una palma en mejilla izquierda" }
+    - { categoria: rasgo, valor: "mirada acostumbrada a ser mirada" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Flanqueo" }
+    - { categoria: trait, valor: "Veterano" }
+    - { categoria: trait, valor: "Objetivo prioritario" }
+    - { categoria: perk, valor: "Veterano de flanqueo" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

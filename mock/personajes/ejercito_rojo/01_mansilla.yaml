@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-12
 
-  nombre: Camarada Puntero Ramón Mansilla
-  edad: 34
-  genero: masculino
+  nombre: Ramón Mansilla
+  sobrenombre: Camarada Puntero Ramón Mansilla
+  filiacion: "Lider de escuadra de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
-  rol: Camarada Puntero (Líder de escuadra)
-  rol_id: lider_escuadra
-  tag_rol: [líder, sargento]
 
-  origen_geografico:
-    region: Pampa Bonaerense
-    localidad: Bahía Blanca
+  edad: 34
+  genero: masculino
+  estado_salud: saludable
 
-  apariencia:
-    altura: alto
-    complexion: delgado
-    rasgos:
-      - pelo entrecano corto
-      - lentes de armazón fino reforzado con alambre
-      - habla pausada, voz grave
-    cicatrices: []
+  rol: Líder Revolucionario
+
+  estado: activo
+  rango: Lider de escuadra
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: true
 
   lealtades:
     primaria: Ejército Rojo
@@ -37,35 +35,29 @@ personaje:
     tac: 5
     men: 7
 
-  aspectos:
-    concepto: "Comisario político devenido comandante de campo por necesidad orgánica."
-    perk_fijo:
-      id: p03_voz_de_mando
-      nombre: Voz de mando
-      descripcion: >
-        Mientras el líder está activo en la escuadra, todos los compañeros
-        usan el MEN del líder en chequeos de MENTAL.
-    complicacion_fija:
-      id: c06_obstinado
-      nombre: Obstinado
-      descripcion: >
-        Si se emite una orden que implique retroceder o ceder posición,
-        tirada de MEN desfavorable para obedecer.
-
-  equipo:
-    armor: 1
-    armas:
-      - nombre: Subfusil Halcón
-        categoria_alcance: corta
-      - nombre: Pistola Browning capturada
-        categoria_alcance: corta
-    equipo_tactico:
-      - nombre: cuaderno de notas
-        descripcion: "Anotaciones de campaña y borradores de comunicados."
-      - nombre: brújula de oficial
-        descripcion: "Regalo del instructor de Stroeder."
-
-  fza_aportada: 2
+  tags:
+    - { categoria: rasgo, valor: "altura alta" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo entrecano corto" }
+    - { categoria: rasgo, valor: "lentes de armazón fino reforzado con alambre" }
+    - { categoria: rasgo, valor: "habla pausada, voz grave" }
+    - { categoria: rol, valor: "lider" }
+    - { categoria: skill, valor: "Comisariado" }
+    - { categoria: skill, valor: "Oratoria sindical" }
+    - { categoria: skill, valor: "Lectura de mapas" }
+    - { categoria: trait, valor: "Voz grave" }
+    - { categoria: trait, valor: "Obstinado" }
+    - { categoria: trait, valor: "Objetivo prioritario" }
+    - { categoria: perk, valor: "Voz de mando" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "Pistola Browning capturada" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
+    - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
+    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
 
   vinculos:
     - tipo: mentor
@@ -113,8 +105,24 @@ personaje:
           tipo: rival
           ref: mock.confederacion.01.aguirre
 
-  estado_salud: activo
-  tags_iniciales: [líder, sargento]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura alta" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo entrecano corto" }
+    - { categoria: rasgo, valor: "lentes de armazón fino reforzado con alambre" }
+    - { categoria: rasgo, valor: "habla pausada, voz grave" }
+    - { categoria: rol, valor: "lider" }
+    - { categoria: skill, valor: "Comisariado" }
+    - { categoria: skill, valor: "Oratoria sindical" }
+    - { categoria: skill, valor: "Lectura de mapas" }
+    - { categoria: trait, valor: "Voz grave" }
+    - { categoria: trait, valor: "Obstinado" }
+    - { categoria: perk, valor: "Voz de mando" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "Pistola Browning capturada" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
+    - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

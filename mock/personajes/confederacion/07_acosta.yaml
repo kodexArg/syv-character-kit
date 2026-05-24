@@ -3,28 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-07
 
-  nombre: Soldado de Primera Rubén Acosta
-  edad: 26
-  genero: masculino
+  nombre: Rubén Acosta
+  sobrenombre: Soldado de Primera Rubén Acosta
+  filiacion: "Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina"
 
   faccion: Confederación
+
+  edad: 26
+  genero: masculino
+  estado_salud: saludable
+
   rol: Fusilero de Primera
-  rol_id: fusilero
-  tag_rol: [infantería]
 
-  origen_geografico:
-    region: Cuyo
-    localidad: Mendoza Capital
-
-  apariencia:
-    altura: medio
-    complexion: atletico
-    rasgos:
-      - barba descuidada
-      - pelo oscuro con canas tempranas
-      - postura algo torcida del lado derecho
-    cicatrices:
-      - cicatriz larga en el costado derecho (metralla, frente norte)
+  estado: activo
+  rango: Fusilero
+  escuadra_id: esq_conf_03
+  escuadra:
+    nombre: Escuadra Ricardo
+    cuerpo: Ejército de la Confederación Argentina
+  mando: false
 
   lealtades:
     primaria: Confederación
@@ -38,31 +35,23 @@ personaje:
     tac: 3
     men: 3
 
-  aspectos:
-    concepto: "Veterano del norte que clasifica el dolor como información."
-    perk_fijo:
-      id: p_custom_resistencia_al_dolor
-      nombre: Resistencia al dolor
-      descripcion: >
-        Cuando tiene el tag `herido`, una de las tiradas desfavorables del turno
-        se resuelve como tirada estándar.
-    complicacion_fija:
-      id: c_custom_hemorragia_lenta
-      nombre: Hemorragia lenta
-      descripcion: >
-        Si llega al inicio de una hora con el tag `herido`, chequeo de MEN;
-        en caso de fallo pierde 1 punto de FIS adicional ese ciclo.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Fusil FAL
-        categoria_alcance: corta
-    equipo_tactico:
-      - nombre: vendaje de campaña reforzado
-        descripcion: "Lo arma él mismo. No confía en el botiquín reglamentario."
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "barba descuidada" }
+    - { categoria: rasgo, valor: "pelo oscuro con canas tempranas" }
+    - { categoria: rasgo, valor: "postura torcida del lado derecho" }
+    - { categoria: rasgo, valor: "cicatriz larga en el costado derecho (metralla, frente norte)" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Fuego sostenido de fusil" }
+    - { categoria: skill, valor: "Primeros auxilios de campaña" }
+    - { categoria: trait, valor: "Veterano" }
+    - { categoria: trait, valor: "Hemorragia lenta" }
+    - { categoria: perk, valor: "Resistencia al dolor" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "vendaje de campaña reforzado — no confía en el botiquín reglamentario" }
 
   vinculos:
     - tipo: mentor
@@ -92,8 +81,19 @@ personaje:
         gravedad: grave
         cicatriz: "cicatriz larga en costado derecho"
 
-  estado_salud: activo
-  tags_iniciales: [infantería]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "barba descuidada" }
+    - { categoria: rasgo, valor: "pelo oscuro con canas tempranas" }
+    - { categoria: rasgo, valor: "postura torcida del lado derecho" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Fuego sostenido de fusil" }
+    - { categoria: skill, valor: "Primeros auxilios de campaña" }
+    - { categoria: trait, valor: "Veterano" }
+    - { categoria: perk, valor: "Resistencia al dolor" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
+    - { categoria: "equipo.utilitario", valor: "vendaje de campaña reforzado — no confía en el botiquín reglamentario" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

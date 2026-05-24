@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-16
 
-  nombre: Miliciano Veterano Fermín Cárcamo
-  edad: 32
-  genero: masculino
+  nombre: Fermín Cárcamo
+  sobrenombre: Miliciano Veterano Fermín Cárcamo
+  filiacion: "Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
+
+  edad: 32
+  genero: masculino
+  estado_salud: saludable
+
   rol: Miliciano Veterano
-  rol_id: fusilero
-  tag_rol: [infantería]
 
-  origen_geografico:
-    region: Pampa Bonaerense
-    localidad: Bahía Blanca
-
-  apariencia:
-    altura: medio
-    complexion: atletico
-    rasgos:
-      - pelo corto entrecano
-      - ojeras de turno noche
-      - habla seca, sin floreo
-    cicatrices: []
+  estado: activo
+  rango: Fusilero
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: Ejército Rojo
@@ -37,29 +35,22 @@ personaje:
     tac: 3
     men: 3
 
-  aspectos:
-    concepto: "Ferroviario sindicalizado que pelea porque es lo que corresponde."
-    perk_fijo:
-      id: p_custom_cobertura_instintiva
-      nombre: Cobertura instintiva
-      descripcion: >
-        Si recibe fuego de hostigamiento a distancia, tirada de FIS favorable
-        en salvación.
-    complicacion_fija:
-      id: c_custom_gatillo_rapido
-      nombre: Gatillo rápido
-      descripcion: >
-        Si la escuadra disparó en el turno anterior, chequeo de
-        desabastecimiento; fallo = no puede atacar esta ronda.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Fusil de cerrojo Mauser 1909
-        categoria_alcance: larga
-    equipo_tactico: null
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo corto entrecano" }
+    - { categoria: rasgo, valor: "ojeras de turno noche" }
+    - { categoria: rasgo, valor: "habla seca, sin floreo" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Resistencia a turnos largos" }
+    - { categoria: trait, valor: "Pragmático" }
+    - { categoria: trait, valor: "Gatillo rápido" }
+    - { categoria: perk, valor: "Cobertura instintiva" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -82,8 +73,19 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [infantería]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo corto entrecano" }
+    - { categoria: rasgo, valor: "ojeras de turno noche" }
+    - { categoria: rasgo, valor: "habla seca, sin floreo" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Resistencia a turnos largos" }
+    - { categoria: trait, valor: "Pragmático" }
+    - { categoria: trait, valor: "Gatillo rápido" }
+    - { categoria: perk, valor: "Cobertura instintiva" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

@@ -3,28 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-13
 
-  nombre: Segundo Camarada Delia Iturra
-  edad: 38
-  genero: femenino
+  nombre: Delia Iturra
+  sobrenombre: Segundo Camarada Delia Iturra
+  filiacion: "Segundo al mando de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
-  rol: Segundo Camarada (Segunda al mando)
-  rol_id: segundo_mando
-  tag_rol: [líder]
 
-  origen_geografico:
-    region: Patagonia Atlántica
-    localidad: Carmen de Patagones
+  edad: 38
+  genero: femenino
+  estado_salud: saludable
 
-  apariencia:
-    altura: medio
-    complexion: atletico
-    rasgos:
-      - pelo gris atado
-      - dos dedos de la mano derecha soldados entre sí por una quemadura de vapor
-      - voz grave, palabras justas
-    cicatrices:
-      - cicatriz de quemadura en mano derecha (usina ferroviaria, año cuatro)
+  rol: Cuadro Sindical Veterano
+
+  estado: activo
+  rango: Segundo al mando
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: true
 
   lealtades:
     primaria: Ejército Rojo
@@ -38,31 +35,26 @@ personaje:
     tac: 5
     men: 6
 
-  aspectos:
-    concepto: "Veterana sindical que asume mando por señalamiento, no por ambición."
-    perk_fijo:
-      id: p_custom_sangre_fria
-      nombre: Sangre fría
-      descripcion: >
-        Si la escuadra pierde un miembro en la misma ronda, tirada de MEN
-        favorable para chequeo de moral.
-    complicacion_fija:
-      id: c_custom_sombra_del_lider
-      nombre: Sombra del líder
-      descripcion: >
-        Si el Camarada Puntero está KIA y Iturra asume el mando, tirada de
-        iniciativa desfavorable esa ronda.
-
-  equipo:
-    armor: 1
-    armas:
-      - nombre: Fusil de cerrojo Mauser 1909
-        categoria_alcance: larga
-      - nombre: Subfusil Halcón
-        categoria_alcance: corta
-    equipo_tactico: null
-
-  fza_aportada: 2
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo gris atado" }
+    - { categoria: rasgo, valor: "dos dedos de la mano derecha soldados por quemadura de vapor" }
+    - { categoria: rasgo, valor: "voz grave, palabras justas" }
+    - { categoria: rasgo, valor: "cicatriz de quemadura en mano derecha (usina ferroviaria, año cuatro)" }
+    - { categoria: rol, valor: "lider" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Coordinación de cuadros" }
+    - { categoria: trait, valor: "Sangre fría" }
+    - { categoria: trait, valor: "Sombra del líder" }
+    - { categoria: perk, valor: "Sangre fría" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -92,8 +84,21 @@ personaje:
         gravedad: grave
         cicatriz: "dos dedos soldados, mano derecha"
 
-  estado_salud: activo
-  tags_iniciales: [líder]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo gris atado" }
+    - { categoria: rasgo, valor: "dos dedos de la mano derecha soldados por quemadura de vapor" }
+    - { categoria: rasgo, valor: "voz grave, palabras justas" }
+    - { categoria: rol, valor: "lider" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Coordinación de cuadros" }
+    - { categoria: trait, valor: "Sangre fría" }
+    - { categoria: trait, valor: "Sombra del líder" }
+    - { categoria: perk, valor: "Sangre fría" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos rústico" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"
