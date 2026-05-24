@@ -39,18 +39,18 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo oscuro abundante" }
-    - { categoria: rasgo, valor: "rasgos vascos marcados" }
-    - { categoria: rasgo, valor: "manos manchadas de aceite del taller" }
+    - { categoria: rasgo, valor: "pelo abundante" }
+    - { categoria: rasgo, valor: "rasgos vascos" }
+    - { categoria: rasgo, valor: "manos manchadas" }
     - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Mecánica de taller" }
+    - { categoria: skill, valor: "Mecánica" }
     - { categoria: skill, valor: "Carga rápida" }
     - { categoria: trait, valor: "Voluntarioso" }
     - { categoria: trait, valor: "Hemorragia lenta" }
     - { categoria: perk, valor: "Escudo humano" }
     - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
@@ -81,11 +81,11 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo oscuro abundante" }
-    - { categoria: rasgo, valor: "rasgos vascos marcados" }
-    - { categoria: rasgo, valor: "manos manchadas de aceite del taller" }
+    - { categoria: rasgo, valor: "pelo abundante" }
+    - { categoria: rasgo, valor: "rasgos vascos" }
+    - { categoria: rasgo, valor: "manos manchadas" }
     - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Mecánica de taller" }
+    - { categoria: skill, valor: "Mecánica" }
     - { categoria: skill, valor: "Carga rápida" }
     - { categoria: trait, valor: "Voluntarioso" }
     - { categoria: trait, valor: "Hemorragia lenta" }

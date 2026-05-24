@@ -2,14 +2,26 @@
 
 > **Documento vivo.** Define el contrato de producto de la API generadora de personajes del universo *Subordinación y Valor* (SyV). No contiene decisiones de arquitectura, almacenamiento ni stack — solo el QUÉ.
 >
-> **Versión**: 0.4.0
-> **Reemplaza**: 0.3.2 (promueve aspectos de preview reservado a categoría canon implementada)
+> **Versión**: 0.4.1
+> **Reemplaza**: 0.4.0 (normalización transversal de tags a forma mínima)
 > **Idioma**: castellano rioplatense, voseo sobrio.
 > **Convención de identificadores en payloads JSON/YAML**: `snake_case_castellano` (consistente con `faccion`, `atributos`, `estado_salud` ya usados en `/Dev/syv-battle-game-system/`).
 
 ---
 
 ## 0. Changelog
+
+### v0.4.1
+
+Pasada transversal de **normalización de tags a forma mínima**: tag = identificador, no descripción. Patch sobre v0.4.0; sin nuevas categorías ni features de schema.
+
+- **Principio del tag mínimo**: cada `valor` de tag se reduce a 1-2 palabras (3 cuando el nombre canónico lo requiere — `rifle militar`, `Tiro de precisión`). Cero prosa, cero paréntesis, cero comas internas, cero guiones largos. Documentado como bullet explícito en 6.2.
+- **22 mocks normalizados**: `cargador 7.62` / `cargador 9mm` / `cargador 7.65 Mauser` / `cargador 7.92 Mauser` → `cargador`; `cuaderno de campaña — anotaciones de terreno, firma con la inicial R` → `cuaderno`; `brújula de oficial — regalo del instructor de Stroeder` → `brújula`; `cicatriz vertical sobre ceja izquierda (Sector 12,15)` → `cicatriz en ceja`; `Manejo de FAP Confederado M2A` → `Manejo de ametralladora`; `Lectura de terreno boscoso` → `Lectura de terreno`; `Oratoria de muelle` → `Oratoria`; etc. Aplicado a 22 fixtures en `mock/personajes/`. Prosa de `historia` e `historial[]` preservada literal.
+- **Ejemplos del PRD normalizados**: Aguirre (6.3), Mansilla (6.4), hoja ASCII canónica de Comandante Miguel (6.0) actualizados al schema mínimo. UTILITARIOS de Miguel pasa de `[cargador 9m]` x3 + `[silbato de contramaestre]` a `[cargador]` x3 + `[silbato]`.
+- **Catálogos `/meta/*` alineados**: `/meta/skills` y `/meta/equipo/utilitarios` rebajan sus semillas de 10 a versiones mínimas coherentes (`cargador`, `silbato`, `cuaderno`, `brújula`, `prismáticos`, `botiquín`, `radio`, `mapa`, `cuchillo`, `vendaje`; `Comandancia`, `Tiro de precisión`, `Manejo de ametralladora`, `Operación de radio`, etc.).
+- **Tensión nueva 13.11**: "Tags mínimos vs riqueza contextual" — trade-off explícito documentado. La info contextual canónica vive en `/meta/*`, el color narrativo en `historia`, la info estructurada por instancia (si llegara a hacer falta) en una futura entidad `notas`.
+- **OQ nueva #16**: entidad `notas: array<{tag_ref, texto}>` como capa enriquecida; pendiente, se acepta pérdida actual.
+- **OQ #13 resuelta**: cargadores se generizan a `cargador` (sin calibre). El calibre se infiere del `equipo.arma` portado.
 
 ### v0.4.0
 
@@ -241,12 +253,11 @@ La siguiente hoja es la **representación visual canónica** del payload del per
 +----------------------------------------------------------------------------+
 | EQUIPO                                                                     |
 |   ARMAS        [SMG]  [pistola]                                            |
-|   UTILITARIOS  [cargador 9m]  [cargador 9m]  [cargador 9m]                 |
-|                [silbato de contramaestre]                                  |
+|   UTILITARIOS  [cargador]  [cargador]  [cargador]  [silbato]              |
 |   VESTIDURA    [uniforme rojo]                                             |
 +----------------------------------------------------------------------------+
 | SKILLS                                                                     |
-|   [Comandancia]  [Oratoria de muelle]  [Lectura de columna]                |
+|   [Comandancia]  [Oratoria]  [Coordinación]                                |
 +----------------------------------------------------------------------------+
 | TRAITS                                                                     |
 |   [Sangre fria]  [Objetivo prioritario]                                    |
@@ -446,14 +457,14 @@ personaje:
 
   | Categoría | Tipo | Ejemplos canon |
   |---|---|---|
-  | `rasgo` | Atributos visuales del cuerpo | `altura media`, `barba canosa`, `cicatriz vertical sobre ceja izquierda`, `quemadura en antebrazo derecho` |
+  | `rasgo` | Atributos visuales del cuerpo | `altura media`, `barba descuidada`, `cicatriz en ceja`, `manos curtidas` |
   | `rol` | Etiquetas mecánicas del rol vigente | `lider`, `heroe`, `sargento` |
-  | `skill` | Habilidades aprendidas o entrenadas | `Comandancia`, `Francotirador`, `Medicina`, `Oratoria de muelle`, `Lectura de columna`, `Ingeniería`, `Comisariado` |
-  | `trait` | Rasgos de carácter o condición, sin polaridad fija | `Sangre fría`, `Miope`, `Objetivo prioritario`, `Hemorragia lenta`, `Voz grave`, `Obstinado` |
+  | `skill` | Habilidades aprendidas o entrenadas | `Comandancia`, `Tiro de precisión`, `Primeros auxilios`, `Oratoria`, `Lectura de terreno`, `Comisariado` |
+  | `trait` | Rasgos de carácter o condición, sin polaridad fija | `Sangre fría`, `Objetivo prioritario`, `Hemorragia lenta`, `Voz grave`, `Obstinado` |
   | `perk` | Ventajas mecánicas activables del reglamento canónico | `Voz de mando`, `Recarga rápida`, `Cobertura instintiva`, `Sucesor de Ricardo` |
   | `aspecto` | Mini-tag identitario con efecto mecánico embebido en mini-frase | `cabrón`, `ojo-de-halcón`, `muy-fuerte`, `carismático`, `terco` |
   | `equipo.arma` | Arma de fuego (6 valores genéricos) | `pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora` |
-  | `equipo.utilitario` | Consumible o accesorio táctico | `cargador 9mm`, `vendaje`, `brújula de oficial`, `silbato de contramaestre` |
+  | `equipo.utilitario` | Consumible o accesorio táctico | `cargador`, `vendaje`, `brújula`, `silbato`, `cuaderno` |
   | `equipo.vestidura` | Identidad visual de facción (no defensiva) | `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico` |
 
   La categoría es string libre — los enums son abiertos — pero el canon de v0.2.5 son las seis listadas. Usar valores fuera del canon es válido; el riesgo semántico está documentado en tensiones 13.1 y 13.2.
@@ -466,6 +477,7 @@ personaje:
   - `perk` — ventaja activable **definida en el reglamento canónico del juego** (ver `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md`). Pool fijo de 12 valores canon; el efecto mecánico está documentado en el reglamento. Ejemplos: `Voz de mando`, `Recarga rápida`.
   - `aspecto` — mini-tag con **efecto mecánico embebido en una mini-frase** definida en `/meta/aspectos/{valor}.efecto`. Estructura semántica de la frase: trigger (condición de activación) + probabilidad opcional + efecto (bonus, repetición, activación de otro tag). Pool abierto, semilla canon de 10, customs permitidos pero no auto-generables. Inspirado en H.I.T.O.S. y Cultos Innombrables pero recortado a frase corta de mecánica directa.
 - **Tags activables (`estado_temporal` como patrón implícito)**: algunos aspectos disparan tags transitorios — `cabrón` puede activar `[berserker]`, `cobarde` puede activar `[pánico]`. Estos tags **no se canonizan con catálogo cerrado** en v0.4.0: son un patrón reconocido (`categoria: estado_temporal`, sub-familia conceptual abierta) que el motor de batalla aplica y revoca según turno. Documentado para que el motor downstream sepa identificar el patrón cuando lo encuentre.
+- **Principio del tag mínimo (v0.4.1)**: cada `valor` de tag es un **identificador corto** (idealmente 1-2 palabras, 3 cuando el nombre canónico lo requiere — `rifle militar`, `Tiro de precisión`). Nunca prosa, paréntesis, comas internas ni guiones largos. La info contextual ("brújula regalo del instructor", "cuaderno con anotaciones de terreno") **no vive en el tag**: vive en (a) la prosa de `historia` cuando el dato pertenece a la voz narrativa del personaje, (b) el catálogo `/meta/*` cuando es definición canónica, o (c) una futura entidad `notas: array<{tag_ref, texto}>` (ver OQ) si el contexto amerita persistencia estructurada. La info que no esté en ninguno de esos tres lugares se pierde — costo aceptado por el minimalismo. Aplicado transversalmente en v0.4.1 a los 22 mocks y a los ejemplos del PRD.
 - **Decisión consciente — sub-categorías con punto**: el equipo se modela como `equipo.arma`, `equipo.utilitario`, `equipo.vestidura` (jerárquico con punto) en lugar de un sub-campo aparte. Ventajas: filtrado por prefijo `equipo.*`, legibilidad visual, sin nuevos sub-campos en el schema. Este patrón puede aplicarse a futuro a otras categorías que necesiten subdivisión.
 - **Categoría `trait` sin polaridad**: incluye positivos (`Sangre fria`), neutros (`Voz grave`) y penalidades que antes eran complicaciones (`Miope`, `Hemorragia lenta`, `Objetivo prioritario`). El motor downstream decide cómo aplicar polaridad, opcionalmente consultando `/meta/traits/{valor}.polaridad` si existe. Ver tensión 13.6.
 - **`vinculos[].ref_personaje_id`**: la API **no valida** que el id exista. `descripcion` es el fallback obligatorio.
@@ -516,15 +528,15 @@ personaje:
     # rasgo
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo castaño corto" }
-    - { categoria: rasgo, valor: "barba de tres días" }
-    - { categoria: rasgo, valor: "mirada que se demora en las cosas" }
-    - { categoria: rasgo, valor: "cicatriz vertical sobre ceja izquierda (Sector 12,15)" }
+    - { categoria: rasgo, valor: "pelo corto" }
+    - { categoria: rasgo, valor: "barba corta" }
+    - { categoria: rasgo, valor: "mirada lenta" }
+    - { categoria: rasgo, valor: "cicatriz en ceja" }
     # rol (mecánico)
     - { categoria: rol, valor: "lider" }
     # skills (antes: especialidad + saberes implícitos)
     - { categoria: skill, valor: "Comandancia" }
-    - { categoria: skill, valor: "Lectura de terreno boscoso" }
+    - { categoria: skill, valor: "Lectura de terreno" }
     # traits (sin polaridad; ex-complicación migra acá como Eco del peñasco)
     - { categoria: trait, valor: "Mirada larga" }
     - { categoria: trait, valor: "Eco del peñasco" }   # penalidad: tras caída aliada, MEN desfavorable la ronda siguiente
@@ -536,8 +548,8 @@ personaje:
     - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.arma", valor: "pistola" }
     # equipo.utilitario
-    - { categoria: "equipo.utilitario", valor: "prismáticos militares — trofeo del Sector 12,15, lente derecha rajada pero usable" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, marcas de Ricardo en las primeras hojas" }
+    - { categoria: "equipo.utilitario", valor: "prismáticos" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
     # equipo.vestidura (identidad visual de facción)
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
@@ -580,7 +592,7 @@ personaje:
       ref_batalla: "batalla_cresta_norte"
       metadata:
         categoria: "equipo.utilitario"
-        valor: "prismáticos militares — trofeo del Sector 12,15, lente derecha rajada pero usable"
+        valor: "prismáticos"
     - fecha: "2026-05-10T22:45:00Z"
       tipo: triple_cero
       descripcion: "Triple-0 en chequeo de MEN durante la retirada táctica de Estación 9."
@@ -594,19 +606,19 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo castaño corto" }
-    - { categoria: rasgo, valor: "barba de tres días" }
-    - { categoria: rasgo, valor: "mirada que se demora en las cosas" }
+    - { categoria: rasgo, valor: "pelo corto" }
+    - { categoria: rasgo, valor: "barba corta" }
+    - { categoria: rasgo, valor: "mirada lenta" }
     - { categoria: rol, valor: "lider" }
     - { categoria: skill, valor: "Comandancia" }
-    - { categoria: skill, valor: "Lectura de terreno boscoso" }
+    - { categoria: skill, valor: "Lectura de terreno" }
     - { categoria: trait, valor: "Mirada larga" }
     - { categoria: trait, valor: "Eco del peñasco" }
     - { categoria: perk, valor: "Sucesor de Ricardo" }
     - { categoria: aspecto, valor: "ojo-de-halcón" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno de campaña — anotaciones de terreno, marcas de Ricardo en las primeras hojas" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   metadatos:
@@ -666,14 +678,14 @@ personaje:
     # rasgo
     - { categoria: rasgo, valor: "altura alta" }
     - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo entrecano corto" }
-    - { categoria: rasgo, valor: "lentes de armazón fino reforzado con alambre" }
-    - { categoria: rasgo, valor: "habla pausada, voz grave" }
+    - { categoria: rasgo, valor: "pelo entrecano" }
+    - { categoria: rasgo, valor: "lentes" }
+    - { categoria: rasgo, valor: "voz grave" }
     # rol (mecánico)
     - { categoria: rol, valor: "lider" }
     # skills (ex-especialidad: "comisariado" + saberes operativos)
     - { categoria: skill, valor: "Comisariado" }
-    - { categoria: skill, valor: "Oratoria sindical" }
+    - { categoria: skill, valor: "Oratoria" }
     - { categoria: skill, valor: "Lectura de mapas" }
     # traits (ex-complicación c06_obstinado migra acá)
     - { categoria: trait, valor: "Voz grave" }
@@ -686,8 +698,8 @@ personaje:
     - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.arma", valor: "pistola" }
     # equipo.utilitario
-    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
-    - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
+    - { categoria: "equipo.utilitario", valor: "brújula" }
     # equipo.vestidura (identidad visual de facción)
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
@@ -743,12 +755,12 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura alta" }
     - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo entrecano corto" }
-    - { categoria: rasgo, valor: "lentes de armazón fino reforzado con alambre" }
-    - { categoria: rasgo, valor: "habla pausada, voz grave" }
+    - { categoria: rasgo, valor: "pelo entrecano" }
+    - { categoria: rasgo, valor: "lentes" }
+    - { categoria: rasgo, valor: "voz grave" }
     - { categoria: rol, valor: "lider" }
     - { categoria: skill, valor: "Comisariado" }
-    - { categoria: skill, valor: "Oratoria sindical" }
+    - { categoria: skill, valor: "Oratoria" }
     - { categoria: skill, valor: "Lectura de mapas" }
     - { categoria: trait, valor: "Voz grave" }
     - { categoria: trait, valor: "Obstinado" }
@@ -756,8 +768,8 @@ personaje:
     - { categoria: aspecto, valor: "carismático" }
     - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — anotaciones de campaña y borradores de comunicados" }
-    - { categoria: "equipo.utilitario", valor: "brújula de oficial — regalo del instructor de Stroeder" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno" }
+    - { categoria: "equipo.utilitario", valor: "brújula" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   metadatos:
@@ -1036,7 +1048,7 @@ Ejemplos representativos:
 | Captura enemiga. Le requisaron el arma | `quitar_tag` | `{ categoria: "equipo.arma", valor: "rifle militar" }` |
 | Captura y recuperación de armamento enemigo | `agregar_tag` | `{ categoria: "equipo.arma", valor: "pistola" }` |
 | Hazaña reconocida por el alto mando | `agregar_tag` | `{ categoria: "perk", valor: "Cobertura instintiva" }` |
-| Consigue tres cargadores tras asaltar una posición | `agregar_tag` (×3) | `{ categoria: "equipo.utilitario", valor: "cargador 9mm" }` — tres hitos independientes o un único hito con `metadata.cantidad: 3` si la implementación lo admite |
+| Consigue tres cargadores tras asaltar una posición | `agregar_tag` (×3) | `{ categoria: "equipo.utilitario", valor: "cargador" }` — tres hitos independientes o un único hito con `metadata.cantidad: 3` si la implementación lo admite |
 | Recupera visión normal tras tratamiento | `quitar_tag` | `{ categoria: "trait", valor: "Miope" }` — requiere justificación narrativa en `descripcion` |
 
 **Trayectoria de tags y auditoría.** El estado vigente de `tags[]` es el resultado de aplicar en orden todos los hitos `agregar_tag` y `quitar_tag` sobre el snapshot `tags_iniciales` (inmutable al crear). Esto significa que la trayectoria completa de tags de un personaje se puede reconstruir reproduciendo su `historial[]` contra `tags_iniciales`, sin necesidad de un campo de historial separado para tags. Operación útil para auditoría y para el endpoint potencial `POST /character/{id}/original` (ver OQ #8).
@@ -1097,7 +1109,7 @@ Catálogo de rangos sugeridos con tabla de stats, `mando` default, `estado` defa
 
 ### `GET /meta/skills`
 
-Pool canon de habilidades. Cada entrada: `{ valor, descripcion, rangos_naturales: [], facciones_predominantes: [] }`. Ejemplos canon: `Comandancia`, `Francotirador`, `Medicina`, `Oratoria de muelle`, `Lectura de columna`, `Ingeniería`, `Comisariado`. El endpoint lista el vocab sugerido; valores fuera del canon son válidos.
+Pool canon de habilidades. Cada entrada: `{ valor, descripcion, rangos_naturales: [], facciones_predominantes: [] }`. Ejemplos canon: `Comandancia`, `Tiro de precisión`, `Primeros auxilios`, `Oratoria`, `Lectura de terreno`, `Coordinación`, `Comisariado`. El endpoint lista el vocab sugerido; valores fuera del canon son válidos.
 
 ### `GET /meta/traits`
 
@@ -1186,9 +1198,9 @@ infanteria, recargador, comisariado, veterano
 
 **`/meta/skills` — 10 skills canon:**
 ```
-Comandancia, Tiro de precisión, Manejo de FAP, Manejo de ametralladora,
-Primeros auxilios, Lectura de mapas, Lectura de terreno boscoso,
-Conocimiento mapuche, Oratoria de muelle, Comisariado político
+Comandancia, Tiro de precisión, Manejo de ametralladora, Operación de radio,
+Primeros auxilios, Lectura de mapas, Lectura de terreno,
+Conocimiento de meseta, Oratoria, Comisariado
 ```
 
 **`/meta/traits` — 10 traits canon (sin polaridad fija):**
@@ -1212,9 +1224,8 @@ pistola, revolver, rifle, rifle militar, SMG, ametralladora
 
 **`/meta/equipo/utilitarios` — 10 utilitarios canon:**
 ```
-cargador 7.62, cargador 9mm, cargador 7.65, silbato de contramaestre,
-cuaderno de campaña, brújula, prismáticos, kit de primeros auxilios,
-radio de campo PRC-77, mapa topográfico
+cargador, silbato, cuaderno, brújula, prismáticos,
+botiquín, radio, mapa, cuchillo, vendaje
 ```
 
 **`/meta/equipo/vestiduras` — 4 vestiduras (cerrado por decisión del cliente en v0.2.6):**
@@ -1411,6 +1422,18 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 **Mitigación.** La API puede soportar un query param `?expand=tags` que en una sola call devuelva la ficha del personaje con cada tag resuelto contra su entrada en `/meta/*`. Fuera de v1 estricto.
 
+### 13.11. Tags mínimos vs riqueza contextual (v0.4.1)
+
+**Decisión.** En v0.4.1 los tags se normalizan a forma mínima: 1-2 palabras, 3 cuando el nombre canónico lo exige. Cero prosa, cero paréntesis, cero comas internas, cero guiones largos. El tag es **identificador**, no descripción.
+
+**Costo.** Se pierde info contextual enriquecida que vivía dentro del propio tag — "brújula de oficial — regalo del instructor de Stroeder" colapsa a `brújula`; "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" colapsa a `cuaderno`. Parte de ese color narrativo ya estaba duplicado en la prosa de `historia` (y ahí queda); parte se pierde irreversiblemente. La pérdida es aceptada como costo del minimalismo.
+
+**Por qué se acepta.** Tags-como-ID habilitan inverted index trivial (14.2), comparación entre personajes, agregación en `/meta/*`, y semántica predecible para el motor downstream. Tags-como-prosa-disfrazada rompen esas tres cosas. La info contextual canónica vive en el catálogo `/meta/*`; el color narrativo vive en `historia`; la info estructurada por instancia, si llega a hacer falta, va a la futura entidad `notas` (OQ #16).
+
+**Mitigación.** La pasada de v0.4.1 preservó literal la prosa de `historia` e `historial[]` en los 22 mocks — toda la info contextual irrecuperable que estuviera reflejada ahí sigue viva. Una ola futura puede introducir `notas: array<{tag_ref, texto}>` si el caso de uso aparece (ver OQ #16).
+
+---
+
 ### 13.10. Efecto del aspecto en texto libre → motor downstream interpreta mini-frase
 
 **Decisión.** El campo `efecto` de cada entrada de `/meta/aspectos/{valor}` es **string libre** en castellano (consistente con `perk.efecto_mecanico`). No se estructura en parsing rígido (trigger / probabilidad / efecto / tag activado) en v0.4.0.
@@ -1469,11 +1492,13 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 12. **Límite de tags por categoría.** ¿Hay un máximo razonable de tags por categoría? Un personaje con 20 `equipo.utilitario` es sintácticamente válido pero semánticamente raro. ¿El generador tiene caps internos? ¿La API los valida o advierte?
 
-13. **¿Cargadores por calibre deberían generizarse a `munición rifle` / `munición pistola` / `munición SMG`?** La rectificación de armas a 6 genéricos (v0.3.1) abre una pregunta de simetría: los cargadores actuales en `equipo.utilitario` siguen siendo específicos (`cargador 7.62`, `cargador 9mm`, `cargador 7.65`, `cargador 7.92 Mauser`). Si las armas son genéricas, ¿los cargadores también deberían serlo? Alternativa: `munición rifle militar`, `munición SMG`, `munición pistola`. Sin decidir.
+13. **~~¿Cargadores por calibre deberían generizarse?~~** **Resuelto en v0.4.1**: todos los cargadores colapsan a `cargador` (sin calibre). El calibre se infiere del tag `equipo.arma` que el personaje porta; mantener el calibre en el tag del cargador era info duplicada y rompía el principio de tag mínimo (13.11).
 
 14. **Polaridad explícita de aspectos.** ¿Los aspectos admiten un campo `polaridad: positivo | neutro | penalidad` (análogo al hint sugerido de traits en 13.6) o se tratan como neutros y el motor downstream interpreta? Algunos del pool semilla son ambiguos: `terco` repite chequeos MEN al recibir orden de retirada (¿es ventaja porque el personaje se mantiene firme, o penalidad porque desobedece?); `impredecible` es literalmente 50/50. Decidir si vale el campo o si el texto libre del `efecto` es suficiente.
 
 15. **Versionado del pool semilla de aspectos.** ¿El catálogo canon de 10 aspectos en `/meta/aspectos` se versiona con bump explícito del schema cuando se agregan o retiran entries, o evoluciona libremente como semilla abierta (mismo trato que `/meta/skills` o `/meta/traits`)? Los aspectos cargan más peso mecánico que un skill o trait, lo cual sugiere gobernanza más estricta. Sin decidir.
+
+16. **Entidad `notas` como capa enriquecida de tags (v0.4.1).** ¿Implementar `notas: array<{tag_ref, texto}>` para persistir contexto narrativo o mecánico atado a tags específicos sin contaminar el `valor` del tag? Caso típico: el `cuaderno` de Aguirre tenía "anotaciones de terreno, firma con la inicial R en el margen" — info que hoy o vive en la prosa de `historia` (si pertenece a la voz narrativa) o se pierde. Una entidad `notas` permitiría persistirla estructuradamente sin romper el principio del tag mínimo (13.11). Pendiente; se acepta pérdida actual.
 
 ---
 

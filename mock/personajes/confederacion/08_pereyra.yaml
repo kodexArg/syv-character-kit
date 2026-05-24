@@ -39,18 +39,18 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo oscuro corto" }
-    - { categoria: rasgo, valor: "cara curtida por el viento" }
+    - { categoria: rasgo, valor: "pelo corto" }
+    - { categoria: rasgo, valor: "cara curtida" }
     - { categoria: rasgo, valor: "mirada directa" }
     - { categoria: rol, valor: "infanteria" }
     - { categoria: skill, valor: "Flanqueo" }
-    - { categoria: skill, valor: "Lectura de terreno patagónico" }
+    - { categoria: skill, valor: "Lectura de terreno" }
     - { categoria: trait, valor: "Determinada" }
     - { categoria: trait, valor: "Gatillo rápido" }
     - { categoria: perk, valor: "Veterana de flanqueo" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
@@ -79,12 +79,12 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo oscuro corto" }
-    - { categoria: rasgo, valor: "cara curtida por el viento" }
+    - { categoria: rasgo, valor: "pelo corto" }
+    - { categoria: rasgo, valor: "cara curtida" }
     - { categoria: rasgo, valor: "mirada directa" }
     - { categoria: rol, valor: "infanteria" }
     - { categoria: skill, valor: "Flanqueo" }
-    - { categoria: skill, valor: "Lectura de terreno patagónico" }
+    - { categoria: skill, valor: "Lectura de terreno" }
     - { categoria: trait, valor: "Determinada" }
     - { categoria: trait, valor: "Gatillo rápido" }
     - { categoria: perk, valor: "Veterana de flanqueo" }

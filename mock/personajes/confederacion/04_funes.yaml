@@ -38,19 +38,19 @@ personaje:
     - { categoria: rasgo, valor: "altura alta" }
     - { categoria: rasgo, valor: "complexion corpulenta" }
     - { categoria: rasgo, valor: "hombros anchos" }
-    - { categoria: rasgo, valor: "manos grandes de carga" }
+    - { categoria: rasgo, valor: "manos grandes" }
     - { categoria: rasgo, valor: "mirada parca" }
     - { categoria: rol, valor: "artillero" }
-    - { categoria: skill, valor: "Manejo de FAP Confederado M2A" }
-    - { categoria: skill, valor: "Gestión de munición" }
+    - { categoria: skill, valor: "Manejo de ametralladora" }
+    - { categoria: skill, valor: "Munición" }
     - { categoria: trait, valor: "Metódico" }
     - { categoria: trait, valor: "Parco" }
     - { categoria: perk, valor: "Recarga rápida" }
     - { categoria: "equipo.arma", valor: "ametralladora" }
-    - { categoria: "equipo.utilitario", valor: "cuchillo de campo" }
-    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
-    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
-    - { categoria: "equipo.utilitario", valor: "almanaque de bolsillo — registra el clima diario, costumbre" }
+    - { categoria: "equipo.utilitario", valor: "cuchillo" }
+    - { categoria: "equipo.utilitario", valor: "bandolera" }
+    - { categoria: "equipo.utilitario", valor: "bandolera" }
+    - { categoria: "equipo.utilitario", valor: "almanaque" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
@@ -77,17 +77,17 @@ personaje:
     - { categoria: rasgo, valor: "altura alta" }
     - { categoria: rasgo, valor: "complexion corpulenta" }
     - { categoria: rasgo, valor: "hombros anchos" }
-    - { categoria: rasgo, valor: "manos grandes de carga" }
+    - { categoria: rasgo, valor: "manos grandes" }
     - { categoria: rasgo, valor: "mirada parca" }
     - { categoria: rol, valor: "artillero" }
-    - { categoria: skill, valor: "Manejo de FAP Confederado M2A" }
-    - { categoria: skill, valor: "Gestión de munición" }
+    - { categoria: skill, valor: "Manejo de ametralladora" }
+    - { categoria: skill, valor: "Munición" }
     - { categoria: trait, valor: "Metódico" }
     - { categoria: trait, valor: "Parco" }
     - { categoria: perk, valor: "Recarga rápida" }
     - { categoria: "equipo.arma", valor: "ametralladora" }
-    - { categoria: "equipo.utilitario", valor: "cuchillo de campo" }
-    - { categoria: "equipo.utilitario", valor: "almanaque de bolsillo — registra el clima diario, costumbre" }
+    - { categoria: "equipo.utilitario", valor: "cuchillo" }
+    - { categoria: "equipo.utilitario", valor: "almanaque" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   metadatos:

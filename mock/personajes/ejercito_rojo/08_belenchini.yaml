@@ -38,19 +38,19 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo oscuro con canas" }
-    - { categoria: rasgo, valor: "quemadura del tamaño de una palma en mejilla izquierda" }
-    - { categoria: rasgo, valor: "mirada acostumbrada a ser mirada" }
-    - { categoria: rasgo, valor: "quemadura en mejilla izquierda (incendio del local sindical, año uno)" }
+    - { categoria: rasgo, valor: "pelo con canas" }
+    - { categoria: rasgo, valor: "cicatriz facial" }
+    - { categoria: rasgo, valor: "mirada firme" }
+    - { categoria: rasgo, valor: "cicatriz facial" }
     - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Tiro de precisión" }
     - { categoria: skill, valor: "Flanqueo" }
     - { categoria: trait, valor: "Veterano" }
     - { categoria: trait, valor: "Objetivo prioritario" }
     - { categoria: perk, valor: "Veterano de flanqueo" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
@@ -84,11 +84,11 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo oscuro con canas" }
-    - { categoria: rasgo, valor: "quemadura del tamaño de una palma en mejilla izquierda" }
-    - { categoria: rasgo, valor: "mirada acostumbrada a ser mirada" }
+    - { categoria: rasgo, valor: "pelo con canas" }
+    - { categoria: rasgo, valor: "cicatriz facial" }
+    - { categoria: rasgo, valor: "mirada firme" }
     - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Tiro de precisión" }
     - { categoria: skill, valor: "Flanqueo" }
     - { categoria: trait, valor: "Veterano" }
     - { categoria: trait, valor: "Objetivo prioritario" }

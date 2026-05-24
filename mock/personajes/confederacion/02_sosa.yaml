@@ -38,20 +38,20 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo oscuro recortado al rape" }
-    - { categoria: rasgo, valor: "manos grandes manchadas de aceite" }
-    - { categoria: rasgo, valor: "habla justa, sin adornos" }
+    - { categoria: rasgo, valor: "pelo rapado" }
+    - { categoria: rasgo, valor: "manos grandes" }
+    - { categoria: rasgo, valor: "habla parca" }
     - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Coordinación de columna" }
-    - { categoria: skill, valor: "Operación de radio PRC-77" }
-    - { categoria: skill, valor: "Inventario bajo presión" }
+    - { categoria: skill, valor: "Coordinación" }
+    - { categoria: skill, valor: "Operación de radio" }
+    - { categoria: skill, valor: "Inventario" }
     - { categoria: trait, valor: "Confiable" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Brazo derecho funcional" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
-    - { categoria: "equipo.utilitario", valor: "radio de campo PRC-77" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "radio" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   vinculos:
@@ -79,18 +79,18 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo oscuro recortado al rape" }
-    - { categoria: rasgo, valor: "manos grandes manchadas de aceite" }
-    - { categoria: rasgo, valor: "habla justa, sin adornos" }
+    - { categoria: rasgo, valor: "pelo rapado" }
+    - { categoria: rasgo, valor: "manos grandes" }
+    - { categoria: rasgo, valor: "habla parca" }
     - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Coordinación de columna" }
-    - { categoria: skill, valor: "Operación de radio PRC-77" }
-    - { categoria: skill, valor: "Inventario bajo presión" }
+    - { categoria: skill, valor: "Coordinación" }
+    - { categoria: skill, valor: "Operación de radio" }
+    - { categoria: skill, valor: "Inventario" }
     - { categoria: trait, valor: "Confiable" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Brazo derecho funcional" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "radio de campo PRC-77" }
+    - { categoria: "equipo.utilitario", valor: "radio" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 
   metadatos:

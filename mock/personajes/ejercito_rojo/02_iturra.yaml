@@ -38,21 +38,21 @@ personaje:
   tags:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo gris atado" }
-    - { categoria: rasgo, valor: "dos dedos de la mano derecha soldados por quemadura de vapor" }
-    - { categoria: rasgo, valor: "voz grave, palabras justas" }
-    - { categoria: rasgo, valor: "cicatriz de quemadura en mano derecha (usina ferroviaria, año cuatro)" }
+    - { categoria: rasgo, valor: "pelo atado" }
+    - { categoria: rasgo, valor: "dedos cicatrizados" }
+    - { categoria: rasgo, valor: "voz grave" }
+    - { categoria: rasgo, valor: "cicatriz en mano" }
     - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
-    - { categoria: skill, valor: "Coordinación de cuadros" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Coordinación" }
     - { categoria: trait, valor: "Sangre fría" }
     - { categoria: trait, valor: "Sombra del líder" }
     - { categoria: perk, valor: "Sangre fría" }
     - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
-    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
-    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
+    - { categoria: "equipo.utilitario", valor: "cargador" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   vinculos:
@@ -86,12 +86,12 @@ personaje:
   tags_iniciales:
     - { categoria: rasgo, valor: "altura media" }
     - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo gris atado" }
-    - { categoria: rasgo, valor: "dos dedos de la mano derecha soldados por quemadura de vapor" }
-    - { categoria: rasgo, valor: "voz grave, palabras justas" }
+    - { categoria: rasgo, valor: "pelo atado" }
+    - { categoria: rasgo, valor: "dedos cicatrizados" }
+    - { categoria: rasgo, valor: "voz grave" }
     - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
-    - { categoria: skill, valor: "Coordinación de cuadros" }
+    - { categoria: skill, valor: "Tiro de precisión" }
+    - { categoria: skill, valor: "Coordinación" }
     - { categoria: trait, valor: "Sangre fría" }
     - { categoria: trait, valor: "Sombra del líder" }
     - { categoria: perk, valor: "Sangre fría" }
