@@ -2,14 +2,29 @@
 
 > **Documento vivo.** Define el contrato de producto de la API generadora de personajes del universo *Subordinación y Valor* (SyV). No contiene decisiones de arquitectura, almacenamiento ni stack — solo el QUÉ.
 >
-> **Versión**: 0.2.6
-> **Reemplaza**: 0.2.2 (consolidación de los deltas v0.2.3 + v0.2.4 + v0.2.5; se saltean los releases intermedios)
+> **Versión**: 0.3.0
+> **Reemplaza**: 0.2.6 (cierre de fase: eliminación de `armor`, normalización de armamento, catálogo canon `/meta/*` con 74 tags semilla, preparación de la próxima ola — aspectos como frases)
 > **Idioma**: castellano rioplatense, voseo sobrio.
 > **Convención de identificadores en payloads JSON/YAML**: `snake_case_castellano` (consistente con `faccion`, `atributos`, `estado_salud` ya usados en `/Dev/syv-battle-game-system/`).
 
 ---
 
 ## 0. Changelog
+
+### v0.3.0
+
+Cierre de fase del schema del personaje. Reconcilia los tres pendientes que dejó v0.2.6 y prepara terreno para la próxima ola narrativa. Bump mayor — sistema de tags consolidado.
+
+- **Eliminación de `armor`**: el campo derivado `armor` se elimina del sistema. La rectificación de v0.2.6 (armadura → vestidura como identidad visual, no protección) dejó al campo sin sustento conceptual. Si más adelante se necesita defensa numérica, vuelve como tag `trait: blindado` derivado de vestidura específica o de skill defensiva. Cierra OQ #14 con resolución (a). El endpoint `/meta/equipo/armaduras/{valor}` queda fuera del PRD.
+- **Springfield 1903 → Mauser 1909**: tag `equipo.arma` con valor "Fusil de cerrojo Springfield 1903 con mira" reemplazado en el mock afectado por "Fusil Mauser 1909 con mira" (arma de cerrojo canon del Ejército Rojo). Cargadores de calibre 30-06 normalizados a 7.65 Mauser. Prosa de los personajes no se toca.
+- **Catálogo canon `/meta/*` con 74 tags semilla**: se materializa la lista de tags estándar que cada endpoint `/meta/skills`, `/meta/traits`, `/meta/perks`, `/meta/rasgos`, `/meta/roles`, `/meta/equipo/{armas,utilitarios,vestiduras}` devuelve como vocabulario sugerido. 10 rasgos + 10 roles + 10 skills + 10 traits + 10 perks + 10 armas + 10 utilitarios + 4 vestiduras = 74. La lista cubre los casos normales del MVP; otros usuarios crearán tags personalizados que entrarán al catálogo emergente. Documentado en sección 10 y como tensión en 13.9.
+- **Reserva de la categoría `aspecto` para v0.4.0**: la próxima ola introduce aspectos como **frases narrativas largas** (10–25 palabras), inspirados en el patrón de H.I.T.O.S. y Cultos Innombrables. No se implementa hoy; se documenta como nota arquitectónica en sección 16 para que la próxima iteración tenga camino claro.
+- **Bump mayor a v0.3.0**: el sistema de tags está sólido, los 22 mocks normalizados, los pendientes cerrados. Cierra una fase entera del schema.
+
+**Breaking changes vs v0.2.6.**
+
+- Eliminado: campo derivado `armor` y endpoint `/meta/equipo/armaduras/{valor}`.
+- Renombrado en mock: arma "Fusil de cerrojo Springfield 1903 con mira" → "Fusil Mauser 1909 con mira".
 
 ### v0.2.6
 
@@ -186,7 +201,7 @@ La siguiente hoja es la **representación visual canónica** del payload del per
 |   ARMAS        [subfusil Halcon]  [pistola Browning capturada]             |
 |   UTILITARIOS  [cargador 9m]  [cargador 9m]  [cargador 9m]                 |
 |                [silbato de contramaestre]                                  |
-|   VESTIDURA    [uniforme rojo]                        (armor: TODO OQ#14) |
+|   VESTIDURA    [uniforme rojo]                                             |
 +----------------------------------------------------------------------------+
 | SKILLS                                                                     |
 |   [Comandancia]  [Oratoria de muelle]  [Lectura de columna]                |
@@ -231,7 +246,7 @@ Observaciones sobre la hoja:
 
 - La cabecera respeta el **orden definitivo** documentado en el changelog v0.2.5.
 - `FILIACION` es campo derivado, no persistido. Se compone como `"{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"`.
-- `VESTIDURA` muestra la identidad visual del personaje (categoría `equipo.vestidura`). El campo `armor` queda como TODO pendiente de decisión del cliente — ver OQ #14.
+- `VESTIDURA` muestra la identidad visual del personaje (categoría `equipo.vestidura`). El campo `armor` fue eliminado del sistema en v0.3.0 (ver changelog y resolución de OQ #14).
 - `MANDO si` corresponde a `mando: true` en el JSON.
 - `ESTADO Activo` corresponde a `estado: activo` (asignación operativa), distinto de `ESTADO SALUD saludable` (condición física).
 
@@ -349,7 +364,6 @@ personaje:
   #
   #   filiacion       : string         (ya documentado arriba en cabecera)
   #   fza_aportada    : integer 1..3   (tag rol=heroe → 3; rol=lider → 2; sin → 1)
-  #   armor           : TODO OQ#14 (campo derivado pendiente de decisión tras rectificación armadura→vestidura)
   #
   # Si el cliente quiere derivar localmente, los puede recalcular desde los tags.
 
@@ -391,18 +405,16 @@ personaje:
   | `trait` | Rasgos de carácter o condición, sin polaridad fija | `Sangre fría`, `Miope`, `Objetivo prioritario`, `Hemorragia lenta`, `Voz grave`, `Obstinado` |
   | `perk` | Ventajas mecánicas activables | `Voz de mando`, `Recarga rápida`, `Cobertura instintiva`, `Sucesor de Ricardo` |
   | `equipo.arma` | Arma de fuego o cuerpo a cuerpo (incluye alcance en el valor) | `Fusil FAL (alcance media)`, `Pistola Browning (alcance corta)` |
-  | `equipo.utilitario` | Consumible o accesorio sin capacidad de armor | `cargador 9mm`, `vendaje`, `brújula de oficial`, `silbato de contramaestre` |
+  | `equipo.utilitario` | Consumible o accesorio táctico | `cargador 9mm`, `vendaje`, `brújula de oficial`, `silbato de contramaestre` |
   | `equipo.vestidura` | Identidad visual de facción (no defensiva) | `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico` |
 
   La categoría es string libre — los enums son abiertos — pero el canon de v0.2.5 son las seis listadas. Usar valores fuera del canon es válido; el riesgo semántico está documentado en tensiones 13.1 y 13.2.
 
   **Reglas de derivación que dependen de tags:**
-  - `armor` (DERIVADO): **TODO OQ#14**. El campo `armor` queda pendiente de decisión del cliente tras la rectificación `armadura`→`vestidura`. La vestidura es identidad visual, no protección; la pregunta de si `armor` sigue siendo derivado, vuelve a campo escalar, o desaparece queda documentada en OQ #14.
   - `fza_aportada` (DERIVADO): tag `{categoria: rol, valor: heroe}` → 3; `{categoria: rol, valor: lider}` → 2; sin ninguno → 1. El campo no se persiste; la API lo computa al servir.
   - `sobrenombre` en Ejército Rojo (DERIVADO): se construye desde el tag `skill` de mando más prominente: `Comandancia` → `"Comandante {nombre}"`; `Medicina` → `"Doctor {nombre}"`; `Ingeniería` → `"Ingeniero {nombre}"`; `Comisariado` → `"Camarada Puntero {nombre}"`; sin ninguno → `"Camarada {nombre}"`. Ver 7.3.
 - **Decisión consciente — sub-categorías con punto**: el equipo se modela como `equipo.arma`, `equipo.utilitario`, `equipo.vestidura` (jerárquico con punto) en lugar de un sub-campo aparte. Ventajas: filtrado por prefijo `equipo.*`, legibilidad visual, sin nuevos sub-campos en el schema. Este patrón puede aplicarse a futuro a otras categorías que necesiten subdivisión.
 - **`fza_aportada`** (DERIVADO, no persistido): tag `categoria: rol, valor: heroe` → 3; `categoria: rol, valor: lider` → 2; sin ninguno → 1. El motor lo computa al servir.
-- **`armor`** (DERIVADO): TODO OQ#14 — ver nota en sección de campos derivados.
 - **Categoría `trait` sin polaridad**: incluye positivos (`Sangre fria`), neutros (`Voz grave`) y penalidades que antes eran complicaciones (`Miope`, `Hemorragia lenta`, `Objetivo prioritario`). El motor downstream decide cómo aplicar polaridad, opcionalmente consultando `/meta/traits/{valor}.polaridad` si existe. Ver tensión 13.6.
 - **`vinculos[].ref_personaje_id`**: la API **no valida** que el id exista. `descripcion` es el fallback obligatorio.
 - **`historia`**: prosa original. Se congela al canonizar.
@@ -552,7 +564,6 @@ personaje:
   # Derivados servidos por la API (no persistidos):
   #   filiacion: ya en cabecera
   #   fza_aportada: 2   (tag rol=lider)
-  #   armor: TODO OQ#14
 
   extras: null
 ```
@@ -701,7 +712,6 @@ personaje:
   # Derivados servidos por la API (no persistidos):
   #   filiacion: ya en cabecera
   #   fza_aportada: 2   (tag rol=lider)
-  #   armor: TODO OQ#14
 
   extras: null
 ```
@@ -728,7 +738,7 @@ El cliente pasa hasta tres parámetros: `faccion`, `rango` (o un alias de rango 
 10. Inicializar bloques vacíos (`lealtades.secretos: []`, `vinculos: []`, `historial: []`).
 11. Generar `historia` con LLM, anclada en facción + rango + rol + skills/traits/perks + lugar implícito.
 12. Copiar `tags` a `tags_iniciales` (snapshot inmutable).
-13. La API compone `filiacion`, `fza_aportada` y `armor` derivados al servir.
+13. La API compone `filiacion` y `fza_aportada` derivados al servir.
 
 ### 7.2. Atributos, `mando`, `estado` (determinísticos por rango)
 
@@ -854,8 +864,6 @@ Pool curado `rango × faccion` produce tags en lugar de objetos estructurados.
 - **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico (`cargador`, `vendaje`, `cantimplora`). En mocks: hasta 4-5 narrativos.
 - **`equipo.vestidura`**: tabla determinística por facción. Todos los Confederados: `uniforme confederado`. Rojos integrados (líderes, veteranos): `uniforme rojo`. Rojos de origen civil reciente o andrajosos: `ropa de civil` o `camuflaje básico`. Catálogo canon: `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico`.
 
-El campo derivado `armor` queda pendiente — ver OQ #14.
-
 ### 7.12. `vinculos` y `historial`
 
 - **En generados dinámicamente**: ambos vacíos.
@@ -918,7 +926,7 @@ Los cambios ocurren vía `POST /character/{id}/event`. La API apendea al `histor
 
 **`edad`**: mutable vía decisión narrativa explícita; sin hito formal.
 
-**`filiacion`, `fza_aportada`**: derivados al servir; no mutables porque no son persistidos. **`armor`**: TODO OQ#14.
+**`filiacion`, `fza_aportada`**: derivados al servir; no mutables porque no son persistidos.
 
 ### 9.4. Granularidad del historial
 
@@ -1054,8 +1062,6 @@ Abierto — futuras categorías se agregan sin breaking change.
 
 Devuelve el catálogo canon de vestiduras. Ej: `GET /meta/equipo/vestiduras` → `[{ valor: "uniforme confederado", faccion: "Confederación" }, { valor: "uniforme rojo", faccion: "Ejército Rojo" }, { valor: "ropa de civil" }, { valor: "camuflaje básico" }]`.
 
-**TODO OQ#14**: el endpoint `/meta/equipo/armaduras/{valor}` (aporte de `armor` por armadura) queda suspendido hasta resolución de OQ #14.
-
 ### `GET /meta/equipo/armas`, `GET /meta/equipo/utilitarios`
 
 Catálogos sugeridos de armas y utilitarios con alcance y facción predominante. Sin validación — el generador los usa como pool; el cliente puede listarlos para UIs.
@@ -1070,13 +1076,71 @@ Si se introduce un endpoint de escuadras, devolvería `id`, `nombre`, `cuerpo`, 
 
 Mapea (todos los `/meta/*`): UC-09.
 
+### 10.1. Catálogo canon `/meta/*` — 74 tags semilla (v0.3.0)
+
+Cada endpoint `/meta/*` devuelve esta **semilla canónica** más cualquier valor agregado por los mocks o personajes canonizados existentes. El catálogo es semilla, **no autoridad**: otros usuarios crearán tags personalizados que entran al catálogo emergente. La fragmentación semántica que esto introduce está documentada como tensión en 13.9.
+
+**`/meta/rasgos` — 10 rasgos físicos canon:**
+```
+alto, medio, bajo, delgado, atletico, corpulento,
+piel curtida, manos grandes, barba canosa, cicatriz facial
+```
+
+**`/meta/roles` — 10 roles canon (etiquetas mecánicas + funcionales de campo):**
+```
+lider, sargento, cabo, camarada, apuntador, artillero,
+infanteria, recargador, comisariado, veterano
+```
+
+**`/meta/skills` — 10 skills canon:**
+```
+Comandancia, Tiro de precisión, Manejo de FAP, Manejo de ametralladora,
+Primeros auxilios, Lectura de mapas, Lectura de terreno boscoso,
+Conocimiento mapuche, Oratoria de muelle, Comisariado político
+```
+
+**`/meta/traits` — 10 traits canon (sin polaridad fija):**
+```
+Objetivo prioritario, Voz grave, Mirada larga, Obstinado,
+Pánico en abierto, Hemorragia lenta, Recluta novato, Templado bajo fuego,
+Lealtad obrera, Fatigado crónico
+```
+
+**`/meta/perks` — 10 perks canon del reglamento:**
+```
+Voz de mando, Puntería fría, Cobertura instintiva, Resistencia al dolor,
+Veterano de flanqueo, Sangre fría, Recarga rápida, Olfato del terreno,
+Tenaz, Disparo de oportunidad
+```
+
+**`/meta/equipo/armas` — 10 armas canon:**
+```
+Fusil FAL, FAP, Fusil de precisión Mauser, Pistola reglamentaria M9,
+Subfusil Halcón, Fusil Mauser 1909, Ametralladora ligera,
+Pistola Browning capturada, Bayoneta, Granada de mano
+```
+
+**`/meta/equipo/utilitarios` — 10 utilitarios canon:**
+```
+cargador 7.62, cargador 9mm, cargador 7.65, silbato de contramaestre,
+cuaderno de campaña, brújula, prismáticos, kit de primeros auxilios,
+radio de campo PRC-77, mapa topográfico
+```
+
+**`/meta/equipo/vestiduras` — 4 vestiduras (cerrado por decisión del cliente en v0.2.6):**
+```
+ropa de civil, uniforme rojo, uniforme confederado, camuflaje básico
+```
+
+**Total: 74 tags semilla**. La categoría `aspecto` queda **reservada para v0.4.0** (próxima ola — ver sección 16); no se materializa pool semilla en v0.3.0.
+
 ---
 
 ## 11. Los 22 mock — alcance del MVP
 
 Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
 
-**Estado de migración.** Los 22 fixtures actuales están al schema v0.2.0/v0.2.1 y **no han sido actualizados al schema v0.2.5**. Requieren regeneración completa: nueva cabecera (sobrenombre/filiacion/estado/rango/escuadra_id/mando bool), aspectos disueltos en tags `skill`/`trait`/`perk`, equipo migrado a sub-categorías `equipo.*`, eliminación de `rol_id`, `origen_geografico`, `especialidad`, `apariencia`, `fza_aportada` (como campo) y `equipo.armor` (como campo). v0.2.6 ya aplicó la rectificación `armadura`→`vestidura` a los 22 mocks. La regeneración se realizará en iteración separada. Hasta entonces, los mocks son válidos solo para tests que no dependan del schema nuevo.
+**Estado de migración.** Los 22 fixtures fueron regenerados al schema v0.2.5/v0.2.6 y normalizados en v0.3.0 (eliminación residual de `armor` — no existía en la regeneración; reemplazo del único `Springfield 1903` por `Mauser 1909` en el mock del Tirador Antinao). Cada mock tiene exactamente 1 tag `equipo.vestidura` del catálogo de 4 valores cerrado. Tags emergentes (oficios, customs narrativos) coexisten con el catálogo canon de 74 tags semilla descripto en 10.1 — el catálogo es semilla, no purga.
 
 ### 11.1. Escuadra Confederación (11)
 
@@ -1129,7 +1193,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 - Canonización persistente (solo DB de la API).
 - **Memoria viva**: endpoint de evento, mutación de campos vigentes, historial inline.
 - **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, equipo.{arma,utilitario,vestidura}.
-- **Campos derivados**: `filiacion`, `fza_aportada` — computados al servir. `armor`: TODO OQ#14.
+- **Campos derivados**: `filiacion`, `fza_aportada` — computados al servir.
 - **`mando` como booleano**: capacidad de mando; titularidad derivada.
 - **`estado` como dimensión de asignación**: activo/disponible/kia/licencia.
 - **Lealtades estructuradas** con secretos.
@@ -1231,6 +1295,16 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 **Mitigación.** El generador es determinístico y usa el vocab del catálogo `/meta/*`. El problema surge cuando humanos o motores externos escriben tags manualmente. Documentar claramente en `/meta/tag_categories` los valores canónicos. Normalización de case (lowercase en `valor`) es una solución mínima viable que debería resolverse antes de v1.
 
+### 13.9. Catálogo `/meta/*` como semilla, no como autoridad
+
+**Decisión.** El catálogo canon de 74 tags semilla (sección 10.1) es vocabulario sugerido, no enum cerrado. La excepción es `equipo.vestidura`, cerrado en 4 valores por decisión del cliente en v0.2.6.
+
+**Costo.** Convive con la fragmentación documentada en 13.2 y 13.7: distintos usuarios pueden crear sinónimos del mismo concepto (`Tiro de precisión` canon vs `Francotirador` custom), y el catálogo emergente termina mezclando registros canónicos con customs no normalizados.
+
+**Por qué se acepta.** El usuario explicitó: "completamos lo estándar, los casos más normales solamente; otros usuarios crearán tags personalizados". Forzar enum cerrado en `skill`/`trait`/`perk`/`equipo.{arma,utilitario}` paralizaría la creatividad narrativa, que es exactamente el diferencial del producto.
+
+**Mitigación.** El catálogo semilla cubre los casos comunes del MVP — un cliente sano resuelve >80% de los personajes contra la semilla. Los `/meta/*` pueden marcar entradas con `origen: "canon" | "emergente"` para que el cliente discrimine. La normalización de case (OQ #12) y el mecanismo de alias (OQ #11) atacan el síntoma cuando lleguen a v1.
+
 ### 13.8. Denormalización opt-in de efectos de tags → dos fuentes de verdad potenciales
 
 **Decisión.** Los efectos mecánicos de skills, traits y perks viven en `/meta/*`, no inlineados en cada tag de cada personaje.
@@ -1259,11 +1333,11 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 ### 14.3. Campos derivados → cómputo al servir, no al persistir
 
-`filiacion` y `fza_aportada` son derivados que la API computa al armar la respuesta. El campo `armor` queda pendiente de decisión — ver OQ #14. La rectificación `armadura`→`vestidura` (identidad visual, no protección) abre la pregunta de si `armor` sigue siendo derivado, vuelve a campo escalar, o desaparece.
+`filiacion` y `fza_aportada` son derivados que la API computa al armar la respuesta. El campo `armor` fue eliminado del sistema en v0.3.0 (ver changelog y resolución de OQ #14): la vestidura es identidad visual y no aporta protección numérica; si más adelante se necesita defensa, vuelve como tag `trait: blindado` derivado de vestidura o skill defensiva.
 
 ---
 
-## 15. Open questions v0.2.5
+## 15. Open questions v0.3.0
 
 1. **Nombre final del campo derivado `filiacion`.** Alternativas en evaluación: `designacion`, `titulo`, `pie_de_firma`. El nombre `filiacion` se usa como provisorio en v0.2.5. Decidir antes de v1.0.
 
@@ -1271,7 +1345,7 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 3. **Polaridad de `trait`.** ¿Existe `/meta/traits/{valor}.polaridad` como hint sugerido, o se deja al motor downstream interpretar libremente? Documentado en 13.6 pero el endpoint no está decidido.
 
-4. **`armor` derivado siempre vs on-demand.** ¿La API devuelve `armor` total siempre derivado en la respuesta de `GET /character/{id}`, o solo cuando el cliente expande tags `equipo.armadura` con sus efectos? Recomendación implícita: siempre devolverlo, costo CPU bajo. Confirmar. **Nota**: esta OQ queda subordinada a OQ #14 — la rectificación a vestidura abre si `armor` sigue existiendo.
+4. **`armor` derivado siempre vs on-demand.** ~~Cerrada en v0.3.0~~ — pregunta sin objeto tras la eliminación del campo `armor` (ver resolución de OQ #14).
 
 5. **Schema completo de la entidad `escuadra`.** v0.2.5 introduce `escuadra_id` y la entidad implícita (`id`, `nombre`, `cuerpo`, `faccion`) pero no especifica un schema completo ni endpoints CRUD. Definir en v1.1 o cuando aparezca el primer consumidor que necesite gestionar escuadras.
 
@@ -1291,7 +1365,31 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 13. **Límite de tags por categoría.** ¿Hay un máximo razonable de tags por categoría? Un personaje con 20 `equipo.utilitario` es sintácticamente válido pero semánticamente raro. ¿El generador tiene caps internos? ¿La API los valida o advierte?
 
-14. **Futuro del campo `armor` tras renombrar armadura → vestidura.** La rectificación de `equipo.armadura` a `equipo.vestidura` (donde la vestidura es identidad visual, no protección) abre la pregunta: ¿qué pasa con el campo derivado `armor`? Opciones: (a) eliminar el concepto de armor del sistema; (b) volver a campo escalar 0–3 independiente; (c) derivar armor de alguna otra cosa (rol_id, vestidura específica, tag separado). Decidir antes de v1.0.
+14. **Futuro del campo `armor` tras renombrar armadura → vestidura.** **CERRADA en v0.3.0 — resolución (a)**: eliminado del sistema. La vestidura es identidad visual, no protección numérica; el campo `armor` no se sostenía conceptualmente. Si más adelante hace falta defensa numérica, vuelve como tag `trait: blindado` derivado de vestidura específica o de skill defensiva. No persiste hasta entonces. El endpoint `/meta/equipo/armaduras/{valor}` queda eliminado del PRD.
+
+---
+
+## 16. Próximas olas planeadas — aspectos como frases (v0.4.0)
+
+La próxima iteración del schema introduce una nueva categoría de tag: **`aspecto`**. A diferencia de `trait` (etiqueta corta: `Obstinado`, `Voz grave`) o `skill` (sustantivo nominal: `Lectura de mapas`), un aspecto es una **frase narrativa larga** (10–25 palabras) en la que el personaje "dice algo de sí mismo" en oración completa.
+
+Inspiración directa: el patrón de aspectos de **H.I.T.O.S.** y **Cultos Innombrables** — juegos de rol narrativos donde el aspecto es una declaración que el motor de juego puede invocar para favorecer o complicar una acción.
+
+Ejemplos tentativos (no canon hasta v0.4.0):
+
+- `"Cuando la columna se quiebra, alguien tiene que mantener la voz."` (aspecto de líder)
+- `"Aprendí a cazar antes que a leer; el monte no perdona el apuro."` (aspecto de tirador rural)
+- `"No le debo nada a la Confederación, pero le debo todo a los muchachos de mi escuadra."` (aspecto de lealtad fracturada)
+
+**Reserva en v0.3.0.** La categoría `aspecto` queda **reservada** en el espacio de categorías canon. No se materializa pool semilla, no se generan ejemplos en la hoja ASCII, no se modifica el schema. Solo se deja esta nota arquitectónica para que la próxima iteración tenga camino claro:
+
+- **Categoría**: `aspecto` (string libre, abierto).
+- **Capa**: narrativa de alto nivel, distinta del trait corto. Conviven sin colisionar.
+- **Consumo**: el motor narrativo o de batalla puede invocar el aspecto como modificador situacional (favorable o complicación según escena), siguiendo el patrón H.I.T.O.S./Cultos.
+- **Generación**: en v0.4.0 el LLM compondrá aspectos durante creación efímera, anclados en facción + rol + historia. Los mocks recibirán aspectos a mano.
+- **Mutación**: vía hito `agregar_aspecto` / `quitar_aspecto` (o reutilizando `agregar_tag` con `categoria: aspecto`). Decisión pendiente.
+
+Esta categoría es la apuesta narrativa principal de la próxima ola: subir la temperatura del personaje canonizado de "ficha técnica con rasgos" a "voz que habla de sí misma".
 
 ---
 
@@ -1300,5 +1398,5 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 - `/Dev/syv-battle-game-system/reglamento/02_hoja_personaje.md` — esquema y matriz de stats por rango.
 - `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md` — pools de perks y complicaciones (estos últimos migrados como traits con polaridad negativa en v0.2.5).
 - `/Dev/syv-battle-game-system/lore/universo.md` — descriptores de facción usados como contexto del LLM.
-- `/Dev/syv-battle-game-system/personajes/` — 22 fichas canon base que alimentan los mocks (pendientes de regeneración al schema v0.2.5).
+- `/Dev/syv-battle-game-system/personajes/` — 22 fichas canon base que alimentan los mocks (regenerados al schema v0.2.6 y normalizados en v0.3.0).
 - `https://github.com/kodexArg/syv-game-system/blob/main/arquitectura/esquemas/personaje.schema.json` — schema público de referencia.
