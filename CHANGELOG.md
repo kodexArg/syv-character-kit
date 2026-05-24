@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.1] - 2026-05-24
+### Changed
+- Todos los tags del sistema reducidos a forma mínima (1-2 palabras, sin prosa interna, sin paréntesis, sin guiones largos, sin comas). Principio rector: el tag es identificador; el contexto narrativo vive en `historia`, en el catálogo `/meta/*`, o en una futura entidad `notas`.
+- Aplicado en los 22 mocks YAML más ejemplos Aguirre y Mansilla del PRD más hoja ASCII canónica del Comandante Miguel. Total 638 tags mantenidos (igual count); valores únicos consolidados de 190 a 159 por eliminación de sinónimos: `Oratoria de muelle` + `Oratoria sindical` → `Oratoria`; `Manejo de FAP Confederado M2A` + `Manejo de FAP Modelo 45` + `Carga del FAP` → `Manejo de ametralladora`; `cargador 7.62` + `cargador 9mm` + `cargador 7.65 Mauser` + `cargador 7.92 Mauser` → `cargador`; entre otros.
+- Información contextual incrustada en tags eliminada (`brújula de oficial — regalo del instructor de Stroeder`, `cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen`, calibres de cargador, modelos específicos de armas). Lo documentado en prosa de `historia` se preserva; lo solo incrustado en tag y no en prosa se acepta como pérdida funcional — costo del minimalismo.
+
+### Added
+- Tensión 13.11 al PRD: trade-off entre tag mínimo y riqueza contextual.
+- OQ #16 nueva: futura entidad `notas: array<{tag_ref, texto}>` como capa enriquecida opcional para tags que ameriten contexto persistido.
+- OQ #13 (cargadores genéricos) marcada resuelta: genericidad a `cargador` implícitamente cierra la pregunta de simetría con armas.
+
+### Notes
+- Commits: `a1d5e66` y merge `d385875` (2026-05-24).
+- PRD bumped a v0.4.1 (parche, refinamiento). PRD ahora 1550 líneas. Total tags semilla canon: 80 (sin cambios).
+- Validación con script Python: cero tags con paréntesis, guiones largos, comas; máximo 4 palabras solo en nombres propios canon (Brazo derecho funcional, Arma pesada sin dotación, Veterano de flanqueo). 22 mocks parseables.
+
 ## [0.4.0] - 2026-05-24
 ### Added
 - Categoría `aspecto` promovida de "reservada" (v0.3.0 sección 16) a implementación efectiva. Pool semilla de 10 aspectos canon: 3 dados por el cliente (`cabrón`, `ojo-de-halcón`, `muy-fuerte`) más 7 curados (`cobarde`, `carismático`, `terco`, `veloz`, `veterano-cicatrizado`, `devoto`, `impredecible`). Cada aspecto es un tag corto kebab-case con efecto mecánico embebido como mini-frase (probabilístico, condicional, bonus, o activa otros tags).
