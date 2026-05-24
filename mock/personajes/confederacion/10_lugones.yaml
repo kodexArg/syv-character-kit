@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-10
 
-  nombre: Recluta Patricia Lugones
-  edad: 20
-  genero: femenino
+  nombre: Patricia Lugones
+  sobrenombre: Recluta Patricia Lugones
+  filiacion: "Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina"
 
   faccion: Confederación
-  rol: Recluta — Recargador
-  rol_id: recluta
-  tag_rol: [recargador]
 
-  origen_geografico:
-    region: Tierra del Fuego
-    localidad: Ushuaia
+  edad: 20
+  genero: femenino
+  estado_salud: saludable
 
-  apariencia:
-    altura: bajo
-    complexion: robusto
-    rasgos:
-      - pelo negro recogido
-      - cara observadora
-      - habla breve
-    cicatrices: []
+  rol: Recluta — Recargador móvil
+
+  estado: activo
+  rango: Recluta
+  escuadra_id: esq_conf_03
+  escuadra:
+    nombre: Escuadra Ricardo
+    cuerpo: Ejército de la Confederación Argentina
+  mando: false
 
   lealtades:
     primaria: Confederación
@@ -36,29 +34,21 @@ personaje:
     tac: 2
     men: 2
 
-  aspectos:
-    concepto: "Guía de senderismo aprendiendo que en el frente la iniciativa no es ejecución."
-    perk_fijo:
-      id: p_custom_escudo_humano
-      nombre: Escudo humano
-      descripcion: >
-        Cuando un impacto se asigna al líder o a un especialista en su sector,
-        Lugones puede interceptar el impacto y realizar la salvación en su lugar.
-    complicacion_fija:
-      id: c_custom_peso_muerto
-      nombre: Peso muerto
-      descripcion: >
-        Cuando debe superar un chequeo físico en terreno difícil (barro, pendiente,
-        terreno irregular), tirada de FIS desfavorable.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Fusil FAL
-        categoria_alcance: corta
-    equipo_tactico: null
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura baja" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "pelo negro recogido" }
+    - { categoria: rasgo, valor: "cara observadora" }
+    - { categoria: rasgo, valor: "habla breve" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Movimiento en terreno abrupto" }
+    - { categoria: skill, valor: "Carga móvil" }
+    - { categoria: trait, valor: "Observadora" }
+    - { categoria: trait, valor: "Peso muerto" }
+    - { categoria: perk, valor: "Escudo humano" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
 
   vinculos:
     - tipo: mentor
@@ -81,8 +71,19 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [recargador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura baja" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "pelo negro recogido" }
+    - { categoria: rasgo, valor: "cara observadora" }
+    - { categoria: rasgo, valor: "habla breve" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Movimiento en terreno abrupto" }
+    - { categoria: skill, valor: "Carga móvil" }
+    - { categoria: trait, valor: "Observadora" }
+    - { categoria: trait, valor: "Peso muerto" }
+    - { categoria: perk, valor: "Escudo humano" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

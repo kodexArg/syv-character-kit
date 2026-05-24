@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-04
 
-  nombre: Soldado de Primera Dardo Funes
-  edad: 26
-  genero: masculino
+  nombre: Dardo Funes
+  sobrenombre: Soldado de Primera Dardo Funes
+  filiacion: "Artillero de la Escuadra Ricardo del Ejército de la Confederación Argentina"
 
   faccion: Confederación
-  rol: Artillero FAP
-  rol_id: artillero
-  tag_rol: [artillero]
 
-  origen_geografico:
-    region: Nordeste
-    localidad: Resistencia
+  edad: 26
+  genero: masculino
+  estado_salud: saludable
 
-  apariencia:
-    altura: alto
-    complexion: corpulento
-    rasgos:
-      - hombros anchos
-      - manos grandes de carga
-      - mirada parca
-    cicatrices: []
+  rol: Artillero FAP Confederado
+
+  estado: activo
+  rango: Artillero
+  escuadra_id: esq_conf_03
+  escuadra:
+    nombre: Escuadra Ricardo
+    cuerpo: Ejército de la Confederación Argentina
+  mando: false
 
   lealtades:
     primaria: Confederación
@@ -36,35 +34,24 @@ personaje:
     tac: 4
     men: 3
 
-  aspectos:
-    concepto: "Hombre parco asignado al FAP por corpulencia, lo aprendió por método."
-    perk_fijo:
-      id: p_custom_recarga_rapida
-      nombre: Recarga rápida
-      descripcion: >
-        Cuando el recargador asignado está activo en la escuadra y en posición,
-        Funes puede disparar el FAP sin penalización de munición ese turno.
-    complicacion_fija:
-      id: c_custom_arma_pesada_sin_dotacion
-      nombre: Arma pesada sin dotación
-      descripcion: >
-        Cuando no hay ninguna unidad con tag `recargador` activa en su sector,
-        tirada de TAC desfavorable al atacar con el FAP.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: FAP Confederado M2A
-        categoria_alcance: media
-      - nombre: Cuchillo de campo
-        categoria_alcance: corta
-    equipo_tactico:
-      - nombre: bandolera de munición FAP
-        descripcion: "Reservas extra. Funes calcula al cartucho."
-      - nombre: almanaque de bolsillo
-        descripcion: "Registra el clima diario. Costumbre."
-
-  fza_aportada: 2
+  tags:
+    - { categoria: rasgo, valor: "altura alta" }
+    - { categoria: rasgo, valor: "complexion corpulenta" }
+    - { categoria: rasgo, valor: "hombros anchos" }
+    - { categoria: rasgo, valor: "manos grandes de carga" }
+    - { categoria: rasgo, valor: "mirada parca" }
+    - { categoria: rol, valor: "artillero" }
+    - { categoria: skill, valor: "Manejo de FAP Confederado M2A" }
+    - { categoria: skill, valor: "Gestión de munición" }
+    - { categoria: trait, valor: "Metódico" }
+    - { categoria: trait, valor: "Parco" }
+    - { categoria: perk, valor: "Recarga rápida" }
+    - { categoria: "equipo.arma", valor: "FAP Confederado M2A" }
+    - { categoria: "equipo.arma", valor: "Cuchillo de campo" }
+    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
+    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
+    - { categoria: "equipo.utilitario", valor: "almanaque de bolsillo — registra el clima diario, costumbre" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -86,8 +73,22 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [artillero]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura alta" }
+    - { categoria: rasgo, valor: "complexion corpulenta" }
+    - { categoria: rasgo, valor: "hombros anchos" }
+    - { categoria: rasgo, valor: "manos grandes de carga" }
+    - { categoria: rasgo, valor: "mirada parca" }
+    - { categoria: rol, valor: "artillero" }
+    - { categoria: skill, valor: "Manejo de FAP Confederado M2A" }
+    - { categoria: skill, valor: "Gestión de munición" }
+    - { categoria: trait, valor: "Metódico" }
+    - { categoria: trait, valor: "Parco" }
+    - { categoria: perk, valor: "Recarga rápida" }
+    - { categoria: "equipo.arma", valor: "FAP Confederado M2A" }
+    - { categoria: "equipo.arma", valor: "Cuchillo de campo" }
+    - { categoria: "equipo.utilitario", valor: "almanaque de bolsillo — registra el clima diario, costumbre" }
+    - { categoria: "equipo.armadura", valor: "chaleco antifragmentos reglamentario" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

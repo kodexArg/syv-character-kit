@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-22
 
-  nombre: Voluntario Sebastián Bordagaray
-  edad: 22
-  genero: masculino
+  nombre: Sebastián Bordagaray
+  sobrenombre: Voluntario Sebastián Bordagaray
+  filiacion: "Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
-  rol: Voluntario (Recargador)
-  rol_id: recluta
-  tag_rol: [recargador]
 
-  origen_geografico:
-    region: Pampa Bonaerense
-    localidad: Bahía Blanca (barrio Noroeste)
+  edad: 22
+  genero: masculino
+  estado_salud: saludable
 
-  apariencia:
-    altura: medio
-    complexion: robusto
-    rasgos:
-      - pelo oscuro abundante
-      - rasgos vascos marcados
-      - manos manchadas de aceite del taller
-    cicatrices: []
+  rol: Voluntario — Recargador
+
+  estado: activo
+  rango: Recluta
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: Ejército Rojo
@@ -38,29 +36,21 @@ personaje:
     tac: 2
     men: 2
 
-  aspectos:
-    concepto: "Tercera generación de huelguistas; el peso familiar lo empuja sin que lo note."
-    perk_fijo:
-      id: p_custom_escudo_humano
-      nombre: Escudo humano
-      descripcion: >
-        Si un impacto se asigna al Camarada Puntero o a Iturra, Bordagaray
-        puede interceptar el impacto y realizar la salvación en su lugar.
-    complicacion_fija:
-      id: c_custom_hemorragia_lenta
-      nombre: Hemorragia lenta
-      descripcion: >
-        Si Bordagaray tiene el tag `herido` al inicio de la hora, chequeo de
-        MEN; fallo = pierde 1 punto de FIS adicional ese ciclo.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Subfusil Halcón
-        categoria_alcance: corta
-    equipo_tactico: null
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "pelo oscuro abundante" }
+    - { categoria: rasgo, valor: "rasgos vascos marcados" }
+    - { categoria: rasgo, valor: "manos manchadas de aceite del taller" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Mecánica de taller" }
+    - { categoria: skill, valor: "Carga rápida" }
+    - { categoria: trait, valor: "Voluntarioso" }
+    - { categoria: trait, valor: "Hemorragia lenta" }
+    - { categoria: perk, valor: "Escudo humano" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
 
   vinculos:
     - tipo: subordinado
@@ -87,8 +77,19 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [recargador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "pelo oscuro abundante" }
+    - { categoria: rasgo, valor: "rasgos vascos marcados" }
+    - { categoria: rasgo, valor: "manos manchadas de aceite del taller" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Mecánica de taller" }
+    - { categoria: skill, valor: "Carga rápida" }
+    - { categoria: trait, valor: "Voluntarioso" }
+    - { categoria: trait, valor: "Hemorragia lenta" }
+    - { categoria: perk, valor: "Escudo humano" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

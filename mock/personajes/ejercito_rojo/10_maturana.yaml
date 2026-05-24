@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-21
 
-  nombre: Voluntario Claudio Maturana
-  edad: 21
-  genero: no_binario
+  nombre: Claudio Maturana
+  sobrenombre: Voluntario Claudio Maturana
+  filiacion: "Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
-  rol: Voluntario (Recargador)
-  rol_id: recluta
-  tag_rol: [recargador]
 
-  origen_geografico:
-    region: Patagonia Central (meseta)
-    localidad: Sarmiento (Chubut)
+  edad: 21
+  genero: no_binario
+  estado_salud: saludable
 
-  apariencia:
-    altura: medio
-    complexion: delgado
-    rasgos:
-      - pelo lacio cortado al cuchillo
-      - rostro andrógino curtido por el viento
-      - habla escasa
-    cicatrices: []
+  rol: Voluntario — Recargador
+
+  estado: activo
+  rango: Recluta
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: Ejército Rojo (utilitaria)
@@ -36,30 +34,21 @@ personaje:
     tac: 2
     men: 2
 
-  aspectos:
-    concepto: "Ex-peón rural; el Rojo le ofreció pan y un lugar antes que doctrina."
-    perk_fijo:
-      id: p_custom_olfato_del_terreno
-      nombre: Olfato del terreno
-      descripcion: >
-        Si el escenario tiene modificadores de visión reducida (niebla, lluvia),
-        Maturana ignora penalizadores de visión en su tirada de TAC.
-    complicacion_fija:
-      id: c_custom_vacio_de_mando
-      nombre: Vacío de mando
-      descripcion: >
-        Si no hay ninguna unidad con tag `líder` activa en la escuadra, todas
-        las tiradas de iniciativa de la escuadra son desfavorables (Maturana
-        como factor agravante moral).
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Subfusil Halcón
-        categoria_alcance: corta
-    equipo_tactico: null
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo lacio cortado al cuchillo" }
+    - { categoria: rasgo, valor: "rostro andrógino curtido por el viento" }
+    - { categoria: rasgo, valor: "habla escasa" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Movimiento en niebla" }
+    - { categoria: skill, valor: "Lectura del viento patagónico" }
+    - { categoria: trait, valor: "Pragmático" }
+    - { categoria: trait, valor: "Vacío de mando" }
+    - { categoria: perk, valor: "Olfato del terreno" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -83,8 +72,19 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [recargador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "pelo lacio cortado al cuchillo" }
+    - { categoria: rasgo, valor: "rostro andrógino curtido por el viento" }
+    - { categoria: rasgo, valor: "habla escasa" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Movimiento en niebla" }
+    - { categoria: skill, valor: "Lectura del viento patagónico" }
+    - { categoria: trait, valor: "Pragmático" }
+    - { categoria: trait, valor: "Vacío de mando" }
+    - { categoria: perk, valor: "Olfato del terreno" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-20
 
-  nombre: Voluntario Luciano Bordón
-  edad: 19
-  genero: masculino
+  nombre: Luciano Bordón
+  sobrenombre: Voluntario Luciano Bordón
+  filiacion: "Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
-  rol: Voluntario (Recargador)
-  rol_id: recluta
-  tag_rol: [recargador]
 
-  origen_geografico:
-    region: Pampa Bonaerense
-    localidad: Bahía Blanca
+  edad: 19
+  genero: masculino
+  estado_salud: saludable
 
-  apariencia:
-    altura: medio
-    complexion: delgado
-    rasgos:
-      - cara aniñada
-      - anteojos manchados
-      - manos limpias todavía
-    cicatrices: []
+  rol: Voluntario — Recargador
+
+  estado: activo
+  rango: Recluta
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: Ejército Rojo
@@ -37,31 +35,22 @@ personaje:
     tac: 2
     men: 2
 
-  aspectos:
-    concepto: "Estudiante de ingeniería desertado, más teoría que práctica."
-    perk_fijo:
-      id: p_custom_disparo_de_oportunidad
-      nombre: Disparo de oportunidad
-      descripcion: >
-        Si un enemigo actúa primero en el track de iniciativa, Bordón puede
-        ejecutar una tirada de TAC desfavorable como reacción fuera de su turno.
-    complicacion_fija:
-      id: c_custom_novato_asustado
-      nombre: Novato asustado
-      descripcion: >
-        Si recibe fuego estando fuera de cobertura, tirada de FIS desfavorable
-        en salvación.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Subfusil Halcón
-        categoria_alcance: corta
-    equipo_tactico:
-      - nombre: cuaderno de notas
-        descripcion: "Apuntes de doctrina y dudas anotadas para discutir luego."
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "cara aniñada" }
+    - { categoria: rasgo, valor: "anteojos manchados" }
+    - { categoria: rasgo, valor: "manos limpias todavía" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Carga del FAP" }
+    - { categoria: skill, valor: "Apuntes de doctrina" }
+    - { categoria: trait, valor: "Intelectual" }
+    - { categoria: trait, valor: "Novato asustado" }
+    - { categoria: perk, valor: "Disparo de oportunidad" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — apuntes de doctrina y dudas anotadas para discutir luego" }
 
   vinculos:
     - tipo: subordinado
@@ -88,8 +77,20 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [recargador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion delgada" }
+    - { categoria: rasgo, valor: "cara aniñada" }
+    - { categoria: rasgo, valor: "anteojos manchados" }
+    - { categoria: rasgo, valor: "manos limpias todavía" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Carga del FAP" }
+    - { categoria: skill, valor: "Apuntes de doctrina" }
+    - { categoria: trait, valor: "Intelectual" }
+    - { categoria: trait, valor: "Novato asustado" }
+    - { categoria: perk, valor: "Disparo de oportunidad" }
+    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.utilitario", valor: "cuaderno de notas — apuntes de doctrina y dudas anotadas para discutir luego" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

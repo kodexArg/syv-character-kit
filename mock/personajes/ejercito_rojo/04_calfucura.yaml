@@ -3,28 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-15
 
-  nombre: Ametrallador Ignacio Calfucurá
-  edad: 34
-  genero: masculino
+  nombre: Ignacio Calfucurá
+  sobrenombre: Ametrallador Ignacio Calfucurá
+  filiacion: "Artillero de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
-  rol: Ametrallador (FAP)
-  rol_id: artillero
-  tag_rol: [artillero]
 
-  origen_geografico:
-    region: Pampa Bonaerense (norte)
-    localidad: San Nicolás
+  edad: 34
+  genero: masculino
+  estado_salud: saludable
 
-  apariencia:
-    altura: medio
-    complexion: corpulento
-    rasgos:
-      - antebrazos cicatrizados hasta el codo
-      - manos endurecidas por el acero
-      - mirada que no se inmuta
-    cicatrices:
-      - salpicaduras de acero fundido en antebrazos (SOMISA)
+  rol: Ametrallador FAP
+
+  estado: activo
+  rango: Artillero
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: Ejército Rojo
@@ -37,33 +34,25 @@ personaje:
     tac: 4
     men: 3
 
-  aspectos:
-    concepto: "Siderúrgico convertido en ametrallador, opera el FAP por ritual."
-    perk_fijo:
-      id: p_custom_recarga_rapida
-      nombre: Recarga rápida
-      descripcion: >
-        Si el recargador asignado no está disponible, Calfucurá puede disparar
-        el FAP sin penalización de desabastecimiento ese turno.
-    complicacion_fija:
-      id: c_custom_arma_pesada_sin_dotacion
-      nombre: Arma pesada sin dotación
-      descripcion: >
-        Si no hay ninguna unidad con tag `apuntador` activa en la escuadra,
-        tirada de TAC desfavorable al atacar con el FAP.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: FAP Modelo 45
-        categoria_alcance: media
-      - nombre: Cuchillo de trabajo
-        categoria_alcance: corta
-    equipo_tactico:
-      - nombre: kit de desencasquillamiento
-        descripcion: "Improvisado. Lo arma por reflejo cada noche."
-
-  fza_aportada: 2
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion corpulenta" }
+    - { categoria: rasgo, valor: "antebrazos cicatrizados hasta el codo" }
+    - { categoria: rasgo, valor: "manos endurecidas por el acero" }
+    - { categoria: rasgo, valor: "mirada que no se inmuta" }
+    - { categoria: rasgo, valor: "salpicaduras de acero fundido en antebrazos (SOMISA)" }
+    - { categoria: rol, valor: "artillero" }
+    - { categoria: skill, valor: "Manejo de FAP Modelo 45" }
+    - { categoria: skill, valor: "Desencasquillamiento ritual" }
+    - { categoria: trait, valor: "Imperturbable" }
+    - { categoria: trait, valor: "Arma pesada sin dotación" }
+    - { categoria: perk, valor: "Recarga rápida" }
+    - { categoria: "equipo.arma", valor: "FAP Modelo 45" }
+    - { categoria: "equipo.arma", valor: "Cuchillo de trabajo" }
+    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
+    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
+    - { categoria: "equipo.utilitario", valor: "kit de desencasquillamiento improvisado" }
+    - { categoria: "equipo.utilitario", valor: "brazalete rojo del Pueblo" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -86,8 +75,21 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [artillero]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion corpulenta" }
+    - { categoria: rasgo, valor: "antebrazos cicatrizados hasta el codo" }
+    - { categoria: rasgo, valor: "manos endurecidas por el acero" }
+    - { categoria: rasgo, valor: "mirada que no se inmuta" }
+    - { categoria: rol, valor: "artillero" }
+    - { categoria: skill, valor: "Manejo de FAP Modelo 45" }
+    - { categoria: skill, valor: "Desencasquillamiento ritual" }
+    - { categoria: trait, valor: "Imperturbable" }
+    - { categoria: trait, valor: "Arma pesada sin dotación" }
+    - { categoria: perk, valor: "Recarga rápida" }
+    - { categoria: "equipo.arma", valor: "FAP Modelo 45" }
+    - { categoria: "equipo.arma", valor: "Cuchillo de trabajo" }
+    - { categoria: "equipo.utilitario", valor: "kit de desencasquillamiento improvisado" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

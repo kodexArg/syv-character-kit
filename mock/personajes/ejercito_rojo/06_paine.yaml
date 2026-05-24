@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-17
 
-  nombre: Miliciana Veterana Rosa Painé
-  edad: 30
-  genero: femenino
+  nombre: Rosa Painé
+  sobrenombre: Miliciana Veterana Rosa Painé
+  filiacion: "Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
 
   faccion: Ejército Rojo
+
+  edad: 30
+  genero: femenino
+  estado_salud: saludable
+
   rol: Miliciana Veterana
-  rol_id: fusilero
-  tag_rol: [infantería]
 
-  origen_geografico:
-    region: Patagonia Central
-    localidad: comunidad mapuche al norte del lago Musters
-
-  apariencia:
-    altura: bajo
-    complexion: atletico
-    rasgos:
-      - pelo negro trenzado
-      - cara curtida por el sol de meseta
-      - habla pausada, acento de comunidad
-    cicatrices: []
+  estado: activo
+  rango: Fusilero
+  escuadra_id: esq_rojo_07
+  escuadra:
+    nombre: Escuadra Mardones
+    cuerpo: Ejército Revolucionario del Pueblo
+  mando: false
 
   lealtades:
     primaria: su comunidad mapuche
@@ -37,29 +35,21 @@ personaje:
     tac: 3
     men: 3
 
-  aspectos:
-    concepto: "Mapuche que se opone a la Confederación; el Rojo es la herramienta disponible."
-    perk_fijo:
-      id: p_custom_tenaz
-      nombre: Tenaz
-      descripcion: >
-        Si Painé tiene el tag `cansado` o `exhausto`, tirada de FIS favorable
-        en cualquier chequeo físico.
-    complicacion_fija:
-      id: c_custom_panico_en_abierto
-      nombre: Pánico en abierto
-      descripcion: >
-        Si está en terreno sin cobertura y recibe fuego, tirada de MEN
-        desfavorable para mantenerse en posición.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Fusil de cerrojo Mauser 1909
-        categoria_alcance: larga
-    equipo_tactico: null
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura baja" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo negro trenzado" }
+    - { categoria: rasgo, valor: "cara curtida por el sol de meseta" }
+    - { categoria: rasgo, valor: "habla pausada, acento de comunidad" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Conocimiento de meseta" }
+    - { categoria: trait, valor: "Reservada" }
+    - { categoria: trait, valor: "Pánico en abierto" }
+    - { categoria: perk, valor: "Tenaz" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
 
   vinculos:
     - tipo: hermano_de_armas
@@ -82,8 +72,19 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [infantería]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura baja" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo negro trenzado" }
+    - { categoria: rasgo, valor: "cara curtida por el sol de meseta" }
+    - { categoria: rasgo, valor: "habla pausada, acento de comunidad" }
+    - { categoria: rol, valor: "infanteria" }
+    - { categoria: skill, valor: "Tiro de cerrojo Mauser" }
+    - { categoria: skill, valor: "Conocimiento de meseta" }
+    - { categoria: trait, valor: "Reservada" }
+    - { categoria: trait, valor: "Pánico en abierto" }
+    - { categoria: perk, valor: "Tenaz" }
+    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

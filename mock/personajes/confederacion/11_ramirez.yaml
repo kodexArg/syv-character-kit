@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-11
 
-  nombre: Recluta Esteban Ramírez
-  edad: 18
-  genero: masculino
+  nombre: Esteban Ramírez
+  sobrenombre: Recluta Esteban Ramírez
+  filiacion: "Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina"
 
   faccion: Confederación
+
+  edad: 18
+  genero: masculino
+  estado_salud: saludable
+
   rol: Recluta — Recargador
-  rol_id: recluta
-  tag_rol: [recargador]
 
-  origen_geografico:
-    region: Pampa Bonaerense
-    localidad: Bahía Blanca
-
-  apariencia:
-    altura: medio
-    complexion: atletico
-    rasgos:
-      - pelo claro recién cortado
-      - cara aún sin marcar
-      - mirada que pregunta sin preguntar
-    cicatrices: []
+  estado: activo
+  rango: Recluta
+  escuadra_id: esq_conf_03
+  escuadra:
+    nombre: Escuadra Ricardo
+    cuerpo: Ejército de la Confederación Argentina
+  mando: false
 
   lealtades:
     primaria: Confederación
@@ -36,29 +34,20 @@ personaje:
     tac: 2
     men: 2
 
-  aspectos:
-    concepto: "El más joven de la escuadra. Obediencia rápida del que sabe que no sabe."
-    perk_fijo:
-      id: p_custom_disparo_de_oportunidad
-      nombre: Disparo de oportunidad
-      descripcion: >
-        Cuando un enemigo actúa primero en el track de iniciativa, Ramírez puede
-        ejecutar una tirada de TAC desfavorable como reacción fuera de su turno.
-    complicacion_fija:
-      id: c_custom_vacio_de_mando
-      nombre: Vacío de mando
-      descripcion: >
-        Si no hay ninguna unidad con tag `líder` activa en su sector inmediato,
-        todas sus tiradas de iniciativa son desfavorables.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Fusil FAL
-        categoria_alcance: corta
-    equipo_tactico: null
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo claro recién cortado" }
+    - { categoria: rasgo, valor: "cara aún sin marcar" }
+    - { categoria: rasgo, valor: "mirada que pregunta sin preguntar" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Recarga rápida de cargador" }
+    - { categoria: trait, valor: "Obediente" }
+    - { categoria: trait, valor: "Vacío de mando" }
+    - { categoria: perk, valor: "Disparo de oportunidad" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
 
   vinculos:
     - tipo: mentor
@@ -84,8 +73,18 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [recargador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion atletica" }
+    - { categoria: rasgo, valor: "pelo claro recién cortado" }
+    - { categoria: rasgo, valor: "cara aún sin marcar" }
+    - { categoria: rasgo, valor: "mirada que pregunta sin preguntar" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Recarga rápida de cargador" }
+    - { categoria: trait, valor: "Obediente" }
+    - { categoria: trait, valor: "Vacío de mando" }
+    - { categoria: perk, valor: "Disparo de oportunidad" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

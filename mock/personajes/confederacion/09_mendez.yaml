@@ -3,27 +3,25 @@ personaje:
   origen: mock
   semilla: mock-fixed-09
 
-  nombre: Recluta Ignacio Méndez
-  edad: 19
-  genero: masculino
+  nombre: Ignacio Méndez
+  sobrenombre: Recluta Ignacio Méndez
+  filiacion: "Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina"
 
   faccion: Confederación
+
+  edad: 19
+  genero: masculino
+  estado_salud: saludable
+
   rol: Recluta — Recargador
-  rol_id: recluta
-  tag_rol: [recargador]
 
-  origen_geografico:
-    region: Cuyo
-    localidad: San Rafael
-
-  apariencia:
-    altura: medio
-    complexion: robusto
-    rasgos:
-      - cara redonda recién afeitada
-      - manos curtidas por la viña
-      - movimientos un toque lentos
-    cicatrices: []
+  estado: activo
+  rango: Recluta
+  escuadra_id: esq_conf_03
+  escuadra:
+    nombre: Escuadra Ricardo
+    cuerpo: Ejército de la Confederación Argentina
+  mando: false
 
   lealtades:
     primaria: Confederación
@@ -36,31 +34,20 @@ personaje:
     tac: 2
     men: 2
 
-  aspectos:
-    concepto: "Pibe de viña que aprende el rol mientras lo ejerce."
-    perk_fijo:
-      id: p_custom_tenaz
-      nombre: Tenaz
-      descripcion: >
-        Cuando tiene el tag `cansado` o `exhausto`, tirada de FIS favorable en
-        cualquier chequeo físico.
-    complicacion_fija:
-      id: c_custom_novato_asustado
-      nombre: Novato asustado
-      descripcion: >
-        Cuando recibe fuego estando fuera de cobertura, tirada de FIS desfavorable
-        en la salvación.
-
-  equipo:
-    armor: 0
-    armas:
-      - nombre: Fusil FAL
-        categoria_alcance: corta
-    equipo_tactico:
-      - nombre: bandolera de munición FAP
-        descripcion: "Para alimentar el arma de Funes."
-
-  fza_aportada: 1
+  tags:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "cara redonda recién afeitada" }
+    - { categoria: rasgo, valor: "manos curtidas por la viña" }
+    - { categoria: rasgo, valor: "movimientos un toque lentos" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Carga del FAP" }
+    - { categoria: trait, valor: "Tenaz" }
+    - { categoria: trait, valor: "Novato asustado" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
+    - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
+    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP — para alimentar el arma de Funes" }
+    - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
 
   vinculos:
     - tipo: subordinado
@@ -83,8 +70,17 @@ personaje:
 
   historial: []
 
-  estado_salud: activo
-  tags_iniciales: [recargador]
+  tags_iniciales:
+    - { categoria: rasgo, valor: "altura media" }
+    - { categoria: rasgo, valor: "complexion robusta" }
+    - { categoria: rasgo, valor: "cara redonda recién afeitada" }
+    - { categoria: rasgo, valor: "manos curtidas por la viña" }
+    - { categoria: rasgo, valor: "movimientos un toque lentos" }
+    - { categoria: rol, valor: "recargador" }
+    - { categoria: skill, valor: "Carga del FAP" }
+    - { categoria: trait, valor: "Tenaz" }
+    - { categoria: trait, valor: "Novato asustado" }
+    - { categoria: "equipo.arma", valor: "Fusil FAL" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"
