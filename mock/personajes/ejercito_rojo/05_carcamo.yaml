@@ -47,7 +47,7 @@ personaje:
     - { categoria: trait, valor: "Pragmático" }
     - { categoria: trait, valor: "Gatillo rápido" }
     - { categoria: perk, valor: "Cobertura instintiva" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
@@ -85,7 +85,7 @@ personaje:
     - { categoria: trait, valor: "Pragmático" }
     - { categoria: trait, valor: "Gatillo rápido" }
     - { categoria: perk, valor: "Cobertura instintiva" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

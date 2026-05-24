@@ -47,7 +47,7 @@ personaje:
     - { categoria: trait, valor: "Paciente" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Puntería fría" }
-    - { categoria: "equipo.arma", valor: "Fusil Mauser 1909 con mira" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.65 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.65 Mauser" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
@@ -84,7 +84,7 @@ personaje:
     - { categoria: trait, valor: "Paciente" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Puntería fría" }
-    - { categoria: "equipo.arma", valor: "Fusil Mauser 1909 con mira" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
 
   metadatos:

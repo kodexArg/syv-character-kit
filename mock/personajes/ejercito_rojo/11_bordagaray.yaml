@@ -48,7 +48,7 @@ personaje:
     - { categoria: trait, valor: "Voluntarioso" }
     - { categoria: trait, valor: "Hemorragia lenta" }
     - { categoria: perk, valor: "Escudo humano" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
@@ -90,7 +90,7 @@ personaje:
     - { categoria: trait, valor: "Voluntarioso" }
     - { categoria: trait, valor: "Hemorragia lenta" }
     - { categoria: perk, valor: "Escudo humano" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

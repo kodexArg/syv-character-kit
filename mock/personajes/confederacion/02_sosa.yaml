@@ -48,7 +48,7 @@ personaje:
     - { categoria: trait, valor: "Confiable" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Brazo derecho funcional" }
-    - { categoria: "equipo.arma", valor: "Fusil FAL" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.62" }
     - { categoria: "equipo.utilitario", valor: "radio de campo PRC-77" }
@@ -89,7 +89,7 @@ personaje:
     - { categoria: trait, valor: "Confiable" }
     - { categoria: trait, valor: "Obstinado" }
     - { categoria: perk, valor: "Brazo derecho funcional" }
-    - { categoria: "equipo.arma", valor: "Fusil FAL" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.utilitario", valor: "radio de campo PRC-77" }
     - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
 

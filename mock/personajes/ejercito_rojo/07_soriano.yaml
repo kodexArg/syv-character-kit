@@ -46,7 +46,7 @@ personaje:
     - { categoria: trait, valor: "Aguantador" }
     - { categoria: trait, valor: "Peso muerto" }
     - { categoria: perk, valor: "Resistencia al dolor" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cinto lumbar reforzado improvisado del puerto" }
@@ -85,7 +85,7 @@ personaje:
     - { categoria: trait, valor: "Aguantador" }
     - { categoria: trait, valor: "Peso muerto" }
     - { categoria: perk, valor: "Resistencia al dolor" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.utilitario", valor: "cinto lumbar reforzado improvisado del puerto" }
 
   metadatos:

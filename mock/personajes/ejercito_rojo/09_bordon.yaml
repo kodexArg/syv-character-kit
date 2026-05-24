@@ -47,7 +47,7 @@ personaje:
     - { categoria: trait, valor: "Intelectual" }
     - { categoria: trait, valor: "Novato asustado" }
     - { categoria: perk, valor: "Disparo de oportunidad" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — apuntes de doctrina y dudas anotadas para discutir luego" }
@@ -90,7 +90,7 @@ personaje:
     - { categoria: trait, valor: "Intelectual" }
     - { categoria: trait, valor: "Novato asustado" }
     - { categoria: perk, valor: "Disparo de oportunidad" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.utilitario", valor: "cuaderno de notas — apuntes de doctrina y dudas anotadas para discutir luego" }
 
   metadatos:

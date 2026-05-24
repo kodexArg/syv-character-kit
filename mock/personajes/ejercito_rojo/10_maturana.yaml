@@ -46,7 +46,7 @@ personaje:
     - { categoria: trait, valor: "Pragmático" }
     - { categoria: trait, valor: "Vacío de mando" }
     - { categoria: perk, valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.utilitario", valor: "cargador 9mm" }
     - { categoria: "equipo.vestidura", valor: "ropa de civil" }
@@ -85,7 +85,7 @@ personaje:
     - { categoria: trait, valor: "Pragmático" }
     - { categoria: trait, valor: "Vacío de mando" }
     - { categoria: perk, valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma", valor: "Subfusil Halcón" }
+    - { categoria: "equipo.arma", valor: "SMG" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"

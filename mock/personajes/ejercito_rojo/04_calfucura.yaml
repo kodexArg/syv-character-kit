@@ -47,8 +47,8 @@ personaje:
     - { categoria: trait, valor: "Imperturbable" }
     - { categoria: trait, valor: "Arma pesada sin dotación" }
     - { categoria: perk, valor: "Recarga rápida" }
-    - { categoria: "equipo.arma", valor: "FAP Modelo 45" }
-    - { categoria: "equipo.arma", valor: "Cuchillo de trabajo" }
+    - { categoria: "equipo.arma", valor: "ametralladora" }
+    - { categoria: "equipo.utilitario", valor: "cuchillo de trabajo" }
     - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
     - { categoria: "equipo.utilitario", valor: "bandolera de munición FAP" }
     - { categoria: "equipo.utilitario", valor: "kit de desencasquillamiento improvisado" }
@@ -87,8 +87,8 @@ personaje:
     - { categoria: trait, valor: "Imperturbable" }
     - { categoria: trait, valor: "Arma pesada sin dotación" }
     - { categoria: perk, valor: "Recarga rápida" }
-    - { categoria: "equipo.arma", valor: "FAP Modelo 45" }
-    - { categoria: "equipo.arma", valor: "Cuchillo de trabajo" }
+    - { categoria: "equipo.arma", valor: "ametralladora" }
+    - { categoria: "equipo.utilitario", valor: "cuchillo de trabajo" }
     - { categoria: "equipo.utilitario", valor: "kit de desencasquillamiento improvisado" }
 
   metadatos:

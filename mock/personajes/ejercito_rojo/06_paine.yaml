@@ -47,7 +47,7 @@ personaje:
     - { categoria: trait, valor: "Reservada" }
     - { categoria: trait, valor: "Pánico en abierto" }
     - { categoria: perk, valor: "Tenaz" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.utilitario", valor: "cargador 7.92 Mauser" }
     - { categoria: "equipo.vestidura", valor: "ropa de civil" }
@@ -85,7 +85,7 @@ personaje:
     - { categoria: trait, valor: "Reservada" }
     - { categoria: trait, valor: "Pánico en abierto" }
     - { categoria: perk, valor: "Tenaz" }
-    - { categoria: "equipo.arma", valor: "Fusil de cerrojo Mauser 1909" }
+    - { categoria: "equipo.arma", valor: "rifle militar" }
 
   metadatos:
     creado_en: "2026-05-24T00:00:00Z"
