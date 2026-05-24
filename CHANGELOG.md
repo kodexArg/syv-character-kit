@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.3.1] - 2026-05-24
+### Changed
+- Catálogo `equipo.arma` rectificado de 10 valores específicos (Fusil FAL, FAP, Subfusil Halcón, Mauser 1909, etc.) a 6 genéricos: `pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora`. Coherente con la rectificación previa de vestidura. Detalle específico (calibre, modelo, óptica) se difumina; la diferenciación mecánica de tipos pesados (artilleros) se preserva con `ametralladora` como sexto tag.
+- 22 YAMLs normalizados con el nuevo catálogo. Distribución resultante: 30 `rifle militar`, 12 `SMG`, 4 `pistola`, 4 `ametralladora`, 0 `rifle`, 0 `revolver`. `rifle` y `revolver` quedan en catálogo sin uso actual (disponibles para personajes futuros).
+- "Cuchillo de campo" (Funes) y "Cuchillo de trabajo" (Calfucurá) movidos de `equipo.arma` a `equipo.utilitario` — no son armas de fuego, no encajan en el catálogo nuevo, pero son equipamiento narrativo legítimo.
+
+### Removed
+- Del catálogo de armas — bayoneta y granada de mano (implícitas en rifle militar / pueden aparecer como tags emergentes si la prosa lo justifica).
+
+### Added
+- OQ #15 — "¿Cargadores por calibre (7.62, 9mm, 7.65) deberían también generizarse a `munición rifle` / `munición pistola` / `munición SMG`? La rectificación de armas abre la pregunta de simetría. Sin decidir."
+
+### Notes
+- PRD bumped a v0.3.1. PRD ahora 1417 líneas. Total tags semilla: 70 (74 − 4 por armas: de 10 a 6).
+
+## [0.3.0] - 2026-05-24
+### Removed
+- Concepto `armor` eliminado del sistema entero. Sin armaduras estructurales, sin defensa numérica. Cerrada OQ #14 con resolución (a). Si en el futuro hace falta defensa, vuelve como tag `trait: blindado` o derivado de skill defensiva.
+
+### Changed
+- "Fusil de cerrojo Springfield 1903 con mira" reemplazado por "Fusil Mauser 1909 con mira" en ficha de Antinao (Springfield no era canon del lore SyV). Cargadores 30-06 → 7.65 Mauser (calibre canon del Mauser argentino 1909). Reemplazos en `mock/ejercito_rojo/03_antinao.yaml`.
+
+### Added
+- Catálogo canon `/meta/*` materializado con 74 tags semilla (10 por categoría × 7 categorías abiertas + 4 vestiduras fijadas). Endpoints `/meta/rasgos`, `/meta/roles`, `/meta/skills`, `/meta/traits`, `/meta/perks`, `/meta/equipo/armas`, `/meta/equipo/utilitarios`, `/meta/equipo/vestiduras` documentados. Vestidura cerrada (4 valores); resto como semilla abierta — usuarios futuros agregan customs.
+- Sección 16 nueva — preview arquitectónica de la próxima ola "Aspectos como frases (H.I.T.O.S. / Cultos Innombrables)". Reserva la categoría `aspecto` para v0.4.0 como capa narrativa de alto nivel (frases largas distintas de los traits cortos). Sin implementar todavía.
+- Tensión 13.9 nueva — "Catálogo `/meta/*` como semilla, no como autoridad". Formaliza el principio del cliente sobre customs.
+
+### Notes
+- PRD bumped a v0.3.0 (mayor — cierre de fase). PRD ahora 1402 líneas.
+
 ## [0.2.6] - 2026-05-24
 ### Changed
 - Sub-categoría de tag `equipo.armadura` renombrada a `equipo.vestidura`. Cambio conceptual: la vestidura es identidad visual del combatiente, no protección estructural. Catálogo canon reducido a 4 valores genéricos: `ropa de civil`, `uniforme rojo`, `uniforme confederado`, `camuflaje básico`. Aplicado en PRD.md y en los 22 mocks: 11 confederados con `uniforme confederado`, 8 rojos con `uniforme rojo`, 3 rojos con `ropa de civil` (Paine por identidad mapuche con contradicción; Bordón universitario voluntario reciente; Maturana captado sin convicción ideológica). `camuflaje básico` queda disponible en catálogo sin uso en el corpus actual.
