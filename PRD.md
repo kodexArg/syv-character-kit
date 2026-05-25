@@ -48,6 +48,7 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 - **LLM solo para prosa, solo una vez.** El modelo generativo escribe el campo `historia` en la creación efímera. Si el personaje se canoniza, esa prosa se congela.
 - **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables del battle-system. Los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
 - **El PRD es contrato; el repo es implementación.** Este documento define formas y reglas. Cómo se almacenan tablas, dónde corre el LLM, qué binding usa la persistencia — fuera de scope.
+- **Agnosis al renderer.** El schema describe *qué* tiene un personaje, no *cómo* se muestra. Los tags se agrupan por categorías para que cualquier consumidor (CLI ASCII, UI web, motor de batalla, exportador a PDF) decida cómo presentarlos como secciones visuales. El modelo no impone una forma de renderizado. Una misma hoja puede aparecer como bloques ASCII, tarjetas, filas de tabla, o grafo de relaciones — todas son vistas válidas del mismo recurso.
 - **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), pertenencia (`faccion`), posicionamiento operativo (`rol`, `rango`, `estado`, `escuadra_id`, `mando`, `estado_salud`), `atributos`, `lealtades`, `vinculos`, `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista (ej. `rango` para decidir mando, `estado` para filtrar disponibilidad). Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, `aspecto`, y la familia jerárquica `equipo.{arma,utilitario,vestidura}`.
 
 ## 5. Casos de uso
@@ -143,6 +144,8 @@ Calculadas en caliente al servir desde tags + atributos:
 - **`fatiga_max`** — `atributos.fis + atributos.men`.
 - **`moral_max`** — `atributos.men`.
 - **`fza_aportada`** — `3` con `rol.mecanico.heroe`, `2` con `rol.mecanico.lider`, `1` sin ninguno.
+- **`aliados`** — lista derivada de personajes a los que el portador ha jurado lealtad personal. Computada proyectando los tags `lealtad.pj.*`. Comienza vacía al crear el personaje y se puebla en caliente al agregarse el tag relacional.
+- **`nemesis`** — lista derivada de personajes identificados como rivales individuales. Computada proyectando los tags `nemesis.pj.*`. Mismo lifecycle que `aliados`: empieza vacía, se puebla en caliente. Un personaje puede tener un némesis del propio bando (accidente, traición personal); el sistema no lo prohíbe.
 
 ### 6.4. Lo que NO es tag
 
@@ -179,6 +182,12 @@ Tres ejes de extensibilidad, todos sin permiso ni migración:
 **Implicación para el cliente**: cualquier persona narrando una sesión, alimentando una batalla o creando un personaje a mano puede inventar el tag que su escena necesita. Si un personaje tiene un sombrero específico que importa para el lore, se crea `equipo.vestidura.sombrero_de_su_abuelo` y se aplica. Si esa idea cobra fuerza, alguien curará una entrada de catálogo para que otros la usen. Si no, queda como custom y muere con esa ficha. Ambos caminos son válidos.
 
 Esta libertad es deliberada y central al diseño del producto: la mayoría de los personajes encajan en el andamiaje canon, pero los que necesitan algo único pueden expresarlo sin pelearse con el schema. Es el mismo trade-off que se asume con `extras: object` para los casos extremos, pero a nivel de tags conserva la semántica de búsqueda y filtrado.
+
+### 6.7. Coherencia declarativa: el bloque `requires`
+
+Cada entrada de catálogo puede declarar un bloque opcional `requires` con dos listas combinables — `require_all` y `require_any` — que enumeran tags pre-requisito para que el tag sea coherente sobre un personaje. Cualquier entrada admite el prefijo literal `"no:"` para invertir la condición (ej. `"no:salud.herido"` significa "el personaje debe NO tener `salud.herido`").
+
+Esto es **documentación ejecutable**, no validación de schema. La API acepta personajes con combinaciones incoherentes; los generadores, validadores opcionales y curadores son quienes pueden consultar `requires` para decidir si aplicar, advertir o rechazar. La semántica precisa y un ejemplo completo viven en `docs/tag-modelo.md §4.3`.
 
 ---
 

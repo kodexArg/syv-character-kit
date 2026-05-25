@@ -1,6 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+- group: tag-system-redesign
+  priority: high
+  commit: pending
+  changes:
+    - refactor(docs/tag-modelo): restructure from closed canon to universal mechanics + curated examples; move prosa explaining tag universality to §1; declare agnosis principle for renderers
+    - feat(docs/tag-modelo): new system `requires` with `require_all` and `require_any` sub-blocks; NOT modifier as literal `"no:"` prefix in strings (no nested objects); complete example with `perk.tirador_preciso`
+    - feat(docs/tag-modelo): document derived containers `aliados` and `nemesis` in §5 as computed views from `lealtad.pj.*` and `nemesis.pj.*`; no band restriction for nemesis (traición intra-bando allowed); start empty, populate at serve time
+    - feat(docs/tag-modelo): formalize four obligatory catálogo fields `slug`, `nombre` (new — human-readable label for renderers), `categoria`, `descripcion`; all else optional
+    - feat(docs/tag-modelo): new optional fields `excluye`, `tags_relacionados`, `peso_narrativo`; category-specific blocks for `perk`, `aspecto`, `skill`, `equipo.arma`, `equipo.vestidura`
+    - refactor(docs/tag-modelo.yaml): rewrite as demonstrative template; four mandatory fields at top; all other blocks marked OPCIONAL with comments; no templates for future tag types (montura, vicio, mascota)
+    - feat(prd): new bullet "Agnosis al renderer" in §4 Principios de diseño; §6.3 documents `aliados` and `nemesis` as derivados; new subsection §6.7 "Coherencia declarativa: el bloque `requires`" cross-referencing tag-modelo.md §4.3
+    - docs(prd/oq): close OQ-tag-2 (slug is now explicit obligatory field); open OQ-tag-4 ("does `excluye` add value over `no:` in `require_all`? consolidate?")
 - group: prd-roadmap-agnosis
   priority: high
   commit: 612c23c
