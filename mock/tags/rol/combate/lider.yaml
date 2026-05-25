@@ -1,0 +1,6 @@
+tag:
+  slug: lider
+  nombre: "Líder"
+  categoria: rol
+  descripcion: >
+    Rol de combate asignado a comandantes y oficiales que coordinan e influyen en la moral de la escuadra. Aporta 2 a la fuerza de la escuadra.

@@ -45,7 +45,7 @@ Un tag se escribe como un **string único** con la forma `<categoria>[.<subcateg
 
 **Reglas del slug de tag**: lowercase, underscores como único separador, sin acentos, sin espacios, sin caracteres especiales. Ejemplos: `pistola`, `tirador_preciso`, `ejercito_rojo`, `lider_de_escuadra`. El slug de un tag es **legible por diseño** — es la pieza humana de la notación punto.
 
-> **Importante** — el slug de tag es distinto del **slug de personaje** (`identidad.slug`). Este último es una **patente opaca de 8 caracteres `[A-Z0-9]`** (ej. `K9F2H3M4`), no un nombre legible. Ver `hoja-modelo.md` para las reglas del slug de personaje. Cuando un tag relacional referencia un personaje (ej. `lealtad.pj.K9F2H3M4`), el segmento final es la patente del personaje, no su nombre. La asimetría es deliberada: los tags son metadato curado y se leen; los personajes son entidades del juego y se identifican por patente para evitar colisiones de nombre.
+> **Importante** — el slug de tag es distinto del **slug de personaje** (`identidad.slug`). Este último es una **patente opaca de 8 caracteres `[A-Z0-9]`** (ej. `K9F2H3M4`), no un nombre legible. Ver `hoja-modelo.md` para las reglas del slug de personaje. Las refs a otros personajes (vínculos personales) **no son tags** — viven en las colecciones `personaje.aliados[]` y `personaje.nemesis[]`. Ver §5.1.
 
 **Repetibilidad**: `tags[]` es un multiset. Tres `equipo.utilitario.cargador` significan tres cargadores físicos. El motor itera, no deduplica.
 
@@ -101,13 +101,12 @@ Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta
 
   rol:
     significado: Roles operativos.
-    subcategorias: [oficio, jerarquia, narrativo, mecanico]
+    subcategorias: [oficio, jerarquia, narrativo, combate]
 
   lealtad:
-    significado: Lealtad real y declarable. Relacional. Ver §5.
-
-  nemesis:
-    significado: Enemistad personal identificada en batalla. Relacional. Ver §5.
+    significado: Lealtad a facción o escuadra. Relacional. Ver §5.
+    subcategorias_implicitas: [faccion, escuadra]
+    nota: Las lealtades personales viven en personaje.aliados[], NO acá.
 
 El motor acepta tags fuera del canon. Marcalos con `origen: custom`. La coherencia del catálogo la sostiene la curaduría, no la integridad referencial.
 
@@ -211,9 +210,9 @@ El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml)
 
 ---
 
-## §5 — Categorías relacionales: `lealtad` y `nemesis`
+## §5 — Categoría relacional: `lealtad` (a facciones y escuadras)
 
-Estas dos categorías codifican **vínculos dirigidos** hacia otra entidad. Su slug no es identificador libre — es una **referencia compuesta** con prefijo que indica el tipo de entidad apuntada.
+`lealtad` codifica **vínculos dirigidos** hacia una facción o escuadra. Su slug no es identificador libre — es una **referencia compuesta** con prefijo que indica el tipo de entidad apuntada.
 
 Patrón de referencia compuesta:
 
@@ -221,47 +220,40 @@ Patrón de referencia compuesta:
     apunta_a: Facción del catálogo.
     forma: lealtad.faccion.{slug}
 
-  pj.:
-    apunta_a: Personaje persistido.
-    forma: lealtad.pj.{slug}  |  nemesis.pj.{slug}
-
   escuadra.:
     apunta_a: Escuadra (catálogo TBD).
     forma: lealtad.escuadra.{slug}
 
 El prefijo es parte literal del slug compuesto. Un parser que ve `lealtad.faccion.confederados` sabe que es una ref a la facción de slug `confederados`.
 
-### 5.1. `lealtad`
-
 Solo lealtades **reales y declarables**. Las latentes, aspiracionales o secretas se manejan por sistema aparte (TBD). Múltiples `lealtad.*` conviven en un mismo personaje; el orden es indicativo, no normativo.
 
-Para entidades fuera del corpus (personajes históricos no persistidos), **sintetizá un slug estable**. Ejemplo: `lealtad.pj.sargento_ricardo_postmortem` para citar a un mentor caído que no está en el roster activo. La ref no resuelve a registro persistido, pero conserva forma estable.
+### 5.1. Lealtades y enemistades personales — NO son tags
 
-### 5.2. `nemesis`
+Los vínculos personales (a otro personaje) **no se expresan como tags**. Viven en colecciones persistidas de primera clase sobre la hoja:
 
-Se crea **en caliente** cuando un personaje identifica a otro como rival individual en batalla. Habilita reglas downstream del motor (ej. 50% de probabilidad de seleccionar al némesis como objetivo prioritario — sistema concreto TBD).
+- `personaje.aliados[]` — list de `{ref, descripcion, desde?}`. Ver [`hoja-modelo.md §3.4`](hoja-modelo.md).
+- `personaje.nemesis[]` — list de `{ref, descripcion, desde?}`. Mismo lifecycle.
 
-Formato único: `nemesis.pj.{slug}`. No se aceptan refs a facciones ni conceptos abstractos.
+**Por qué no son tags**: un vínculo personal lleva prosa (la historia del vínculo). Un tag puede afirmar la relación pero no contarla. Las colecciones llevan la textura narrativa.
 
-Un personaje acumula múltiples némesis a lo largo de su vida. **No hay restricción de bando** — un personaje puede tener un némesis del propio bando por accidente, traición personal o vieja deuda. El sistema no lo prohíbe.
+**Ejemplo**:
 
-### 5.3. Contenedores derivados: Aliados y Némesis
+  personaje.aliados:
+    - ref: SRG1H4F9
+      descripcion: >
+        El sargento Ricardo lo formó tirador. Cayó en la ofensiva del Tercer Año.
+        Cabral no falla un disparo a menos de doscientos metros — es la manera que
+        encontró de no olvidarlo.
+      desde: "2024-03-15"
 
-Los tags `lealtad.pj.{slug}` y `nemesis.pj.{slug}` alimentan dos **vistas derivadas** que el motor expone al servir la hoja:
+  personaje.nemesis:
+    - ref: K9F2H3M4
+      descripcion: >
+        Lo identificó como rival en el cruce del río — vio al otro disparar contra
+        un médico desarmado. Desde entonces busca su cabeza específicamente.
 
-  aliados:
-    fuente: Proyección de todos los tags lealtad.pj.* del personaje.
-    contenido: Lista de personajes a los que el portador ha jurado lealtad personal.
-
-  nemesis:
-    fuente: Proyección de todos los tags nemesis.pj.* del personaje.
-    contenido: Lista de personajes identificados como rivales individuales.
-
-Ambos contenedores:
-
-- **Empiezan vacíos** al crear un personaje. Se pueblan en caliente durante batalla, narrativa o curaduría, siempre como consecuencia de agregar el tag relacional correspondiente.
-- **No son campos persistidos del schema**. Son vistas computadas al servir, equivalentes a `filiacion` o `fatiga_max` (ver PRD §6.3).
-- Son **agnósticas al renderer**: un cliente los muestra como bloques ASCII, tarjetas, grafo de relaciones, o los ignora. El modelo no impone forma.
+**Sin restricción de bando para némesis**: un personaje puede tener un némesis del propio bando por accidente, traición personal o vieja deuda. El sistema no lo prohíbe.
 
 ---
 

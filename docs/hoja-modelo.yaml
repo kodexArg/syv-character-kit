@@ -13,7 +13,7 @@ personaje:
   identidad:
     slug:        str         # (+) requerido al persistir. Patente opaca [A-Z0-9]{8}. Ver hoja-modelo.md §1.1.
     nombre:      str         # (*)
-    sobrenombre: str         #     null si coincide con nombre o no hay distinción.
+    sobrenombre: str
     rol:         str         # (*) narrativo base. Default "ciudadano".
     genero:      str         # (*) masculino | femenino | no_binario | otro
     edad:        int         # (*)
@@ -21,7 +21,7 @@ personaje:
   atributos:
     fis:         int         # (*) 2..5
     tac:         int         # (*) 2..5
-    men:         int         # (*) 2..7 (líderes hasta 7)
+    men:         int         # (*) 2..7
 
   # Lista plana de tags en notación punto: <categoria>[.<subcategoria>].<slug>.
   # Multiset — admite repetidos. Vacía al crear; se puebla según rango/facción y/o curaduría.
@@ -45,11 +45,9 @@ personaje:
     - rol.oficio.*
     - rol.jerarquia.*
     - rol.narrativo.*
-    - rol.mecanico.*         #     lider | heroe — afecta fza_aportada derivada
+    - rol.combate.*          #     lider | heroe — afecta fza_aportada derivada
     - lealtad.faccion.*
-    - lealtad.pj.*           #     ref a patente [A-Z0-9]{8} de personaje
     - lealtad.escuadra.*
-    - nemesis.pj.*           #     ref a patente [A-Z0-9]{8} de personaje
 
   historia:    str           # (+) requerido al canonizar. 120-200 palabras. Congelada tras persistir.
 
@@ -60,13 +58,19 @@ personaje:
       ref_batalla: str       #     slug de batalla externa | null
       metadata:    object    #     libre
 
+  aliados:                   # (*) lista; default []. Persistida, no derivada.
+    - ref:         str       # (*) patente [A-Z0-9]{8} del aliado
+      descripcion: str       # (*) prosa breve sobre el vínculo
+      desde:       str       #     ISO-8601 opcional
+
+  nemesis:                   # (*) lista; default []. Persistida, no derivada.
+    - ref:         str       # (*) patente [A-Z0-9]{8} del némesis
+      descripcion: str       # (*) prosa breve sobre la enemistad
+      desde:       str       #     ISO-8601 opcional
+
   metadatos:
     creado_en:            str   # (*) ISO-8601
     canonizado_en:        str   # (+) ISO-8601 al persistir; null en efímeros
     ultima_actualizacion: str   # (*) ISO-8601; actualiza con cada hito
 
   extras: object             #     escape hatch libre; null por defecto
-
-# Campos derivados al servir (NO persistidos, NO declarados acá):
-#   filiacion, sobrenombre (cuando derivable), fatiga_max, moral_max, fza_aportada,
-#   aliados, nemesis. Fórmulas en hoja-modelo.md §3.1.

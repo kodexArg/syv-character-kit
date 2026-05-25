@@ -21,7 +21,7 @@ personaje:
   - rasgo.pelo_rapado
   - rasgo.manos_grandes
   - rasgo.habla_parca
-  - rol.mecanico.lider
+  - rol.combate.lider
   - skill.coordinacion
   - skill.operacion_de_radio
   - skill.inventario

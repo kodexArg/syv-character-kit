@@ -124,18 +124,12 @@ El motor calcula al servir, sin persistir, para evitar drift:
     tipo: int
 
   fza_aportada:
-    fuente: tags rol.mecanico.*
-    valores: { rol.mecanico.heroe: 3, rol.mecanico.lider: 2, default: 1 }
-
-  aliados:
-    fuente: Proyección de tags lealtad.pj.*
-    contenido: Personajes a los que el portador ha jurado lealtad personal.
-
-  nemesis:
-    fuente: Proyección de tags nemesis.pj.*
-    contenido: Personajes identificados como rivales individuales.
+    fuente: tags rol.combate.*
+    valores: { rol.combate.heroe: 3, rol.combate.lider: 2, default: 1 }
 
 Cambios post-creación en `tags[]` se registran como hito `agregar_tag` / `quitar_tag` con metadata `{tag}`.
+
+> **Aliados y némesis NO son derivados**. Son colecciones persistidas de primera clase. Ver §3.4.
 
 ### 3.2. Slug de tag ≠ slug de personaje
 
@@ -145,6 +139,35 @@ Asimetría deliberada:
 - **Slug de personaje** (`identidad.slug`): patente opaca `^[A-Z0-9]{8}$`. Ejemplo: `K9F2H3M4`. Ver §1.1.
 
 Cuando un tag relacional referencia un personaje (ej. `lealtad.pj.K9F2H3M4`), el segmento final es la patente del personaje, no su nombre. Cuando un tag relacional referencia una entidad del catálogo (ej. `lealtad.faccion.ejercito_rojo`), el segmento final es el slug legible de la entidad. La distinción operativa: tags son metadato curado y se leen; personajes son entidades del juego y se identifican por patente.
+
+### 3.4. Aliados y némesis — colecciones persistidas
+
+Vínculos dirigidos a otros personajes. **No son derivados de tags** — son colecciones de primera clase, como `historial`. Cada entrada lleva ref a la patente del otro personaje + prosa breve sobre el vínculo.
+
+  aliados:
+    tipo: list[{ref, descripcion, desde?}]
+    default: []
+    contenido: Personajes con los que el portador tiene una alianza real y declarable.
+    forma:
+      ref:         patente [A-Z0-9]{8} del aliado
+      descripcion: 1-3 frases sobre cómo se formó el vínculo
+      desde:       ISO-8601 opcional
+
+  nemesis:
+    tipo: list[{ref, descripcion, desde?}]
+    default: []
+    contenido: Personajes identificados como rivales individuales.
+    nota: Sin restricción de bando — un némesis del propio bando es legal (accidente, traición personal, vieja deuda).
+    forma:
+      ref:         patente [A-Z0-9]{8} del némesis
+      descripcion: 1-3 frases sobre cómo se formó la enemistad
+      desde:       ISO-8601 opcional
+
+**Lifecycle**: ambas colecciones empiezan vacías. Se pueblan en caliente durante batalla o narrativa, vía hito `formacion_lealtad` (aliado) / `identificacion_nemesis` (némesis), o por curaduría directa.
+
+**Por qué persistidas y no derivadas**: la relación lleva prosa (descripción del vínculo). Un tag `lealtad.pj.X` solo puede afirmar el vínculo, no contarlo. Las colecciones llevan la textura narrativa que el motor downstream necesita.
+
+**Relación con tags `lealtad.*`**: las lealtades a facciones y escuadras siguen siendo tags (`lealtad.faccion.*`, `lealtad.escuadra.*`) porque son membresías declarativas sin necesidad de prosa. Las lealtades personales (`lealtad.pj.*`) y enemistades personales (`nemesis.pj.*`) **dejan de ser tags** y viven en estas colecciones.
 
 ### 3.3. Extensibilidad
 

@@ -22,7 +22,7 @@ personaje:
   - rasgo.dedos_cicatrizados
   - rasgo.voz_grave
   - rasgo.cicatriz_en_mano
-  - rol.mecanico.lider
+  - rol.combate.lider
   - skill.tiro_de_precision
   - skill.coordinacion
   - trait.sangre_fria

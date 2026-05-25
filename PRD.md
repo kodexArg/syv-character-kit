@@ -87,7 +87,7 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 
 - [`docs/hoja-modelo.md`](docs/hoja-modelo.md) — estructura de la hoja campo por campo, derivaciones, mutabilidad, slug-protocolo.
 - [`docs/hoja-modelo.yaml`](docs/hoja-modelo.yaml) — template programático vacío.
-- [`docs/tag-modelo.md`](docs/tag-modelo.md) — sistema de tags: notación punto, categorías, catálogo, `requires`, relacionales (`lealtad`, `nemesis`), extensibilidad.
+- [`docs/tag-modelo.md`](docs/tag-modelo.md) — sistema de tags: notación punto, categorías, catálogo, `requires`, relacional `lealtad` (a facciones/escuadras), extensibilidad.
 - [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml) — template de entrada de catálogo.
 - [`docs/tag-modelo-ejemplos.yaml`](docs/tag-modelo-ejemplos.yaml) — cinco personajes ejemplo en composición.
 
@@ -101,11 +101,13 @@ Tres compromisos que este producto sostiene sobre el schema; los detalles de có
 
 ### 6.2. Derivaciones del motor (no persistidas)
 
-Recordatorio operativo — los campos que cualquier consumidor del API verá calculados al servir, no en la base: `filiacion`, `sobrenombre`, `fatiga_max`, `moral_max`, `fza_aportada`, `aliados`, `nemesis`. Fórmulas exactas y semántica en [`hoja-modelo.md §3.1`](docs/hoja-modelo.md).
+Recordatorio operativo — los campos que cualquier consumidor del API verá calculados al servir, no en la base: `filiacion`, `sobrenombre`, `fatiga_max`, `moral_max`, `fza_aportada`. Fórmulas exactas y semántica en [`hoja-modelo.md §3.1`](docs/hoja-modelo.md).
+
+**`aliados[]` y `nemesis[]` NO son derivados** — son colecciones persistidas de primera clase sobre la hoja, cada entrada con `{ref, descripcion, desde?}`. Los vínculos personales llevan prosa que no puede derivarse de un tag. Ver [`hoja-modelo.md §3.4`](docs/hoja-modelo.md).
 
 ### 6.3. Slug del personaje — patente, no nombre
 
-`identidad.slug` es una **patente opaca** `^[A-Z0-9]{8}$` generada al persistir (ej. `K9F2H3M4`). No es el nombre legible; ese vive en `identidad.nombre`. Las refs `lealtad.pj.{slug}` y `nemesis.pj.{slug}` apuntan a la patente. Reglas completas y motivación en [`hoja-modelo.md §1.1`](docs/hoja-modelo.md).
+`identidad.slug` es una **patente opaca** `^[A-Z0-9]{8}$` generada al persistir (ej. `K9F2H3M4`). No es el nombre legible; ese vive en `identidad.nombre`. Las refs en `aliados[].ref` y `nemesis[].ref` apuntan a la patente. Reglas completas y motivación en [`hoja-modelo.md §1.1`](docs/hoja-modelo.md).
 
 ---
 

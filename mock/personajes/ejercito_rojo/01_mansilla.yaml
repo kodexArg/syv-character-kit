@@ -21,7 +21,7 @@ personaje:
   - rasgo.pelo_entrecano
   - rasgo.lentes
   - rasgo.voz_grave
-  - rol.mecanico.lider
+  - rol.combate.lider
   - skill.comisariado
   - skill.oratoria
   - skill.lectura_de_mapas

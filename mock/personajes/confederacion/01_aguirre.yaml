@@ -22,7 +22,7 @@ personaje:
   - rasgo.barba_corta
   - rasgo.mirada_lenta
   - rasgo.cicatriz_en_ceja
-  - rol.mecanico.lider
+  - rol.combate.lider
   - rol.jerarquia.sargento
   - skill.comandancia
   - skill.lectura_de_terreno
