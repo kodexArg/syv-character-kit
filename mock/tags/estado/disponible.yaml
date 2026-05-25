@@ -1,0 +1,6 @@
+tag:
+  slug: disponible
+  nombre: "Disponible"
+  categoria: estado
+  descripcion: >
+    El personaje está en condiciones de ser asignado a una escuadra, pero actualmente no está desplegado.

@@ -1,0 +1,6 @@
+tag:
+  slug: activo
+  nombre: "Activo"
+  categoria: estado
+  descripcion: >
+    El personaje está operando activamente y asignado a una escuadra en el frente.

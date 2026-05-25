@@ -1,0 +1,6 @@
+tag:
+  slug: capaz
+  nombre: "Capaz"
+  categoria: mando
+  descripcion: >
+    Indica que el personaje posee capacidades y preparación para asumir el mando de la unidad si el líder actual cae.
