@@ -42,7 +42,7 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 
 - **SOLID y open/close como pilar.** El schema se diseña desde el día uno para extenderse sin romperse. Nuevos perks, nuevos tipos de hito, nuevas categorías de equipamiento, nuevas facciones — se agregan sin migraciones, sin breaking changes. Si una decisión de diseño nos obligaría a romper esto, se rechaza la decisión.
 - **Customs libres + enums abiertos como política deliberada.** El producto acepta tags `skill`/`trait`/`perk` con valores fuera del canon. Los enums (`tipo` de hito, `tipo` de vínculo, sub-categoría de tag, etc.) tienen valores **sugeridos** pero no rechazan otros. **Tensión asumida**: el motor downstream que consuma estos customs tiene que poder interpretarlos. Ver sección 12.
-- **Stats determinísticos por rango, narrativa sorteada.** En creación, los atributos se derivan de una matriz fija por rango operativo. Nombre, género, rasgos, skills/traits/perks, equipamiento e historia se sortean.
+- **Stats determinísticos por rango, identidad sorteada.** En creación, los atributos `{fis, tac, men}` se derivan de una tabla fija por rango operativo (ver [GDDR-01 §3](gddr/01-flujo-obligatorio-creacion.md)). Cero aleatoriedad en stats. Nombre, género, edad, rasgos, skills/traits/perks, equipamiento e historia sí se sortean. Ascensos posteriores **no** mueven stats — solo lo hacen hitos narrativos como `triple_cero` o `mejora_atributo`.
 - **Memoria viva como naturaleza del recurso canonizado.** Un canonizado tiene historial y muta. No es un payload; es una entidad. Ver sección 8.
 - **Reproducibilidad por seed para efímeros.** Toda creación admite `?seed=`. La misma `(seed, faccion, rango)` produce el mismo personaje, incluida la prosa inicial. **Limitación aceptada**: los canonizados pierden esta propiedad tras el primer hito.
 - **LLM solo para prosa, solo una vez.** El modelo generativo escribe el campo `historia` en la creación efímera. Si el personaje se canoniza, esa prosa se congela.
@@ -116,78 +116,38 @@ Recordatorio operativo — los campos que cualquier consumidor del API verá cal
 
 Cómo se completa cada campo en un personaje **generado dinámicamente** (origen `"generado"`). Los mocks ignoran estas reglas: vienen escritos a mano. Los canonizados nacen como un generado o como un body explícito, y a partir de ahí mutan vía hitos (sección 8).
 
-### 7.1. Inputs y orden de resolución
+### 7.1. Fases del flujo
 
-El cliente pasa hasta tres parámetros: `faccion`, `rango` (o un alias de rango operativo), `seed`. Si falta alguno, se sortea desde la semilla. Orden:
+El detalle paso-a-paso vive en [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md). Resumen del contrato:
 
-1. Resolver `seed` (si no vino, generar uno criptográfico y devolverlo).
-2. Inicializar PRNG determinístico con `seed`.
-3. Resolver `faccion` (input o sorteo uniforme entre las 2 facciones MVP).
-4. Resolver `rango` (input o sorteo según distribución de escuadra de 11: ver 7.2).
-5. Derivar atributos `{fis, tac, men}` desde la matriz por rango.
-6. Derivar `mando` (bool) y `estado` default según rango (ver 7.2).
-7. Sortear campos narrativos (nombre, edad, género, rasgos, rol cultural).
-8. Componer `sobrenombre` determinísticamente según facción (ver 7.3).
-9. Inicializar `tags` con pools sorteados de `rasgo`, `rol.*`, `skill`, `trait`, `perk`, `equipo.arma`, `equipo.utilitario`, `equipo.vestidura` — cada categoría tiene sus propias reglas de sorteo detalladas en 7.4–7.8.
-10. Inicializar `historial: []`.
-11. Generar `historia` con LLM, anclada en facción + rango + rol + skills/traits/perks + lugar implícito.
-12. La API compone `filiacion`, `sobrenombre` y `fza_aportada` derivados al servir.
+1. **Afiliación** — Rango → Facción → Subfacción. Solicitada al usuario; sorteo ponderado solo como fallback.
+2. **Identidad** — Género, Edad, Nombre, Sobrenombre. Pools en [`resources/nombres/`](resources/nombres/), sampler de referencia en [`scripts/sample_name.py`](scripts/sample_name.py). Restricciones cruzadas (rango/facción → género/edad) se resuelven contra la tabla de reglas del proyecto.
+3. **Atributos** — `{fis, tac, men}` por lookup determinista sobre el tag `rango.*`. Cero aleatoriedad. Tabla canónica en GDDR-01 §3.
+4. **Resto** — tags adicionales (rol, skills, perks, equipo, lealtad), historia (LLM), historial vacío.
 
-### 7.2. Atributos, `mando`, `estado` (determinísticos por rango)
+### 7.2. Atributos por rango — referencia rápida
 
-Tabla derivada de `/Dev/syv-battle-game-system/reglamento/02_hoja_personaje.md`. **No se sortean.** La columna `rol_id` interna del motor de creación mapea al `rango` público.
+Lookup determinista. Detalle y diseño en [GDDR-01 §3](gddr/01-flujo-obligatorio-creacion.md). Topes:
 
-| `rango` (público) | Rol Confederación (rol cultural) | Rol Ejército Rojo (rol cultural) | FIS | TAC | MEN | `mando` default | `estado` default |
-|---|---|---|---|---|---|---|---|
-| `Lider de escuadra` | Sargento Confederado | Líder Revolucionario | 3 | 5 | 7 | `true` | `disponible` |
-| `Segundo al mando` | Cabo Primero | Segundo Camarada | 3 | 5 | 6 | `true` | `disponible` |
-| `Apuntador` | Apuntador | Tirador | 3 | 5 | 5 | `false` | `disponible` |
-| `Artillero` | Artillero FAP | Ametrallador | 3 | 4 | 3 | `false` | `disponible` |
-| `Fusilero` | Fusilero / Soldado 1ª | Miliciano Veterano | 3 | 3 | 3 | `false` | `disponible` |
-| `Recluta` | Recluta / Soldado 2ª | Voluntario | 3 | 2 | 2 | `false` | `disponible` |
+- `fis 5` → exclusivo `artillero`.
+- `tac 6` → exclusivo `francotirador`.
+- `men 7` → exclusivo `lider_de_escuadra`.
 
-**`mando` default**: `true` para `Lider de escuadra` y `Segundo al mando` (capacidad de asumir liderazgo); `false` para el resto. Cambiar `mando` post-creación requiere hito `cambio_mando`.
+**`mando` default**: `true` para `lider_de_escuadra` y `segundo_al_mando`; `false` para el resto. Cambiar `mando` post-creación requiere hito `cambio_mando`.
 
-**`estado` default**: `disponible` para todo generado sin escuadra asignada. Cuando se asigna `escuadra_id` (vía hito `asignacion_escuadra`), pasa a `activo`.
+**`estado` default**: `disponible` para todo generado sin escuadra asignada.
 
-**Distribución por escuadra de 11**: 1 + 1 + 1 + 1 + 4 + 3.
+#### 7.2.1. Estado vital derivado
 
-**Sorteo de rango cuando no se fija**: proporcional a la composición (la API tiende a entregar fusileros/reclutas, lo cual es realista).
+Derivado al servir, no persistido: `fatiga_max = fis + men`; `moral_max = men`. Ver [`hoja-modelo.md §3.1`](docs/hoja-modelo.md). Los valores cambian solo si cambia el atributo base.
 
-#### 7.2.1. Estado vital derivado por rango
+### 7.3. Identidad personal — referencia rápida
 
-Tabla de referencia de `fatiga_max` y `moral_max` según la matriz de atributos de §7.2. Derivada en creación: `fatiga_max = fis + men`; `moral_max = men`. Los valores persisten en la hoja y mutan solo si cambia el atributo base.
+- **Nombre + apellido + sobrenombre**: pools en [`resources/nombres/`](resources/nombres/) (25M, 25F, 50 apellidos), apodos curados a mano con 50% de probabilidad de emisión. Detalle en GDDR-01 §2.3–2.4.
+- **Edad**: uniforme 12–70 por defecto; rango se estrecha por reglas de facción/rango.
+- **Género**: 45/45/5/5 (m/f/no_binario/desconocido) por defecto; set se restringe por reglas de facción/rango.
 
-| Rango | FIS | TAC | MEN | `fatiga_max` (FIS+MEN) | `moral_max` (MEN) |
-|---|---|---|---|---|---|
-| `Lider de escuadra` | 3 | 5 | 7 | **10** | **7** |
-| `Segundo al mando`  | 3 | 5 | 6 | **9**  | **6** |
-| `Apuntador`         | 3 | 5 | 5 | **8**  | **5** |
-| `Artillero`         | 3 | 4 | 3 | **6**  | **3** |
-| `Fusilero`          | 3 | 3 | 3 | **6**  | **3** |
-| `Recluta`           | 3 | 2 | 2 | **5**  | **2** |
-
-Promedio de escuadra (composición 1+1+1+1+4+3): ≈ 6.5 de fatiga, ≈ 3.9 de moral.
-
-### 7.3. `nombre` y `sobrenombre` (sorteo + composición determinística)
-
-**`nombre`**: tabla curada de nombres reales (sin prefijo de rango), segmentada por facción. Excluye los 22 ya canonizados.
-
-- **Confederación**: tono militar formal, gentilicios del centro/norte/cuyo. Ejemplos canon: *Aguirre, Sosa, Quiroga, Funes, Rodríguez, Olivares, Acosta, Pereyra, Méndez, Lugones, Ramírez*.
-- **Ejército Rojo**: tono obrero/patagónico, apellidos con presencia mapuche y costa sur. Ejemplos canon: *Mansilla, Iturra, Antinao, Calfucurá, Cárcamo, Paine, Soriano, Belenchini, Bordón, Maturana, Bordagaray, Quilodran*.
-
-**`sobrenombre`**: composición determinística desde `nombre` real:
-
-- **Confederación**: `{rango militar narrativo} + {nombre}`. Ej. "Sargento Walter Aguirre".
-- **Ejército Rojo**: usa un título derivado de una **skill** de comandancia, medicina o ingeniería si está presente; si no, título revolucionario genérico + nombre. Ej. con skill `Medicina` → "Doctor Quilodran"; con skill `Comandancia` → "Camarada Puntero Quilodran"; sin ninguna → "Camarada Quilodran".
-- **`null`**: cuando no hay distinción con el nombre real.
-
-### 7.4. `edad`, `genero`
-
-- **`edad`**: sorteo en rango sugerido por rango operativo (reclutas: 18–24; fusileros: 20–35; líderes: 28–45). Tabla curada.
-- **`genero`**: distribución curada por facción (Confederación ~85/15/0/0; Ejército Rojo ~70/25/5/0). Abierto.
-
-(El bloque `origen_geografico` fue eliminado. Si la procedencia importa narrativamente, se cuenta en `historia` o se añade como `rasgo` / `extras`.)
+(El bloque `origen_geografico` fue eliminado. Si la procedencia importa narrativamente, va a `historia` o entra como tag `rasgo` / `extras`.)
 
 ### 7.5. Pools de tags por categoría
 
@@ -365,8 +325,8 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ### Dentro de v1
 
-- 2 facciones jugables: Confederación y Ejército Rojo.
-- 6 rangos operativos canon con su matriz determinística.
+- 2 facciones jugables: Confederación y Ejército Rojo, con sus subfacciones (`pelicanos`, `ejercito_revolucionario_del_pueblo`).
+- 8 rangos operativos canon con tabla determinística de atributos (`militante`, `recluta`, `fusilero`, `apuntador`, `artillero`, `francotirador`, `segundo_al_mando`, `lider_de_escuadra`). `ciudadano` como rama no-combatiente.
 - Pools canon de `skill`, `trait`, `perk` (este último con metadato `rangos_naturales`).
 - Tablas curadas de nombres, edades, géneros, equipo por facción.
 - Generación efímera con seed reproducible.
@@ -510,13 +470,13 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ### 13.10. Estructuración de triggers y efectos en los tags
 
-**Decisión.** Los tags que poseen comportamiento reactivo o modifican propiedades en juego definen esta lógica mediante campos estructurados: un bloque `trigger` con la lista `trigger-action` (para efectos reactivos/temporales) o un mapa `efecto` a nivel raíz (para efectos pasivos/permanentes inline). Esto unifica el tratamiento mecánico y reemplaza el campo informal de texto libre `aspecto.efecto`.
+**Decisión.** Los tags con comportamiento reactivo o modificador definen su lógica mediante campos estructurados: bloque `trigger` con `trigger-action` (reactivos/temporales) o `efecto` a nivel raíz como string o lista de strings (pasivos/permanentes). Los efectos apuntan a un set canónico de variables — atributos base (`FISICO`, `TACTICO`, `MENTAL`) y estadísticas calculadas (`INICIATIVA`, `MORAL`, `FATIGA`, `MOVIMIENTO`, `ESTRESS`) — documentadas en [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md).
 
-**Costo.** La definición y curaduría del catálogo requiere crear tags específicos de tipo `efecto` (bajo `tags/efecto/{slug}.yaml`) para especificar las instrucciones concretas. Los clientes downstream deben parsear este esquema estructurado para aplicar la lógica en combate.
+**Costo.** La curaduría del catálogo requiere tags `efecto.*` independientes para casos reutilizables. Los clientes downstream parsean este esquema para aplicar lógica en combate.
 
-**Por qué se acepta.** Permite que un mismo tag aplique múltiples efectos predefinidos y reutilizables, y facilita la interpretación automatizada de las reglas sin requerir análisis heurístico en caliente. Los detalles del esquema y sus campos viven en [`docs/tag-modelo.md`](docs/tag-modelo.md).
+**Por qué se acepta.** Habilita interpretación automatizada sin heurísticas en caliente, y vincula los efectos a un vocabulario cerrado de variables (no a texto libre).
 
-**Mitigación.** La estructura mantiene los campos `trigger` y `efectos` como opcionales, asegurando que los tags puramente narrativos o de equipamiento sin mecánica compleja sigan siendo mínimos y directos.
+**Mitigación.** `trigger` y `efecto` son opcionales: tags narrativos o de equipamiento sin mecánica siguen siendo mínimos. Detalle del esquema en [`docs/tag-modelo.md §4.6`](docs/tag-modelo.md).
 
 ---
 
