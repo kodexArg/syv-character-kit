@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+- group: estado-vital-block
+  priority: high
+  commit: 823b5a3
+  changes:
+    - feat(schema): introduce ESTADO_VITAL block with fatiga/moral tracking in hoja-modelo
+
 ## [0.4.1] - 2026-05-24
 ### Changed
 - Todos los tags del sistema reducidos a forma mínima (1-2 palabras, sin prosa interna, sin paréntesis, sin guiones largos, sin comas). Principio rector: el tag es identificador; el contexto narrativo vive en `historia`, en el catálogo `/meta/*`, o en una futura entidad `notas`.
