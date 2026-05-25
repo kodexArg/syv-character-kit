@@ -149,6 +149,12 @@ Estos campos son obligatorios solo cuando la categoría o subcategoría del tag 
     obligatorio_si: categoria ∈ {equipo, rol}
     uso: Segmento intermedio del tag (ej. "arma" para equipo.arma.pistola).
 
+  peso:
+    obligatorio_si: categoria = equipo
+    tipo: int (0..50)
+    unidad: kg
+    nota: No confundir con peso_narrativo (hint 1..5 al sorteador).
+
   aspecto.efecto:
     obligatorio_si: categoria = aspecto
     uso: Mini-frase trigger + probabilidad + efecto.
@@ -156,6 +162,8 @@ Estos campos son obligatorios solo cuando la categoría o subcategoría del tag 
   equipo_arma.tipo_accion:
     obligatorio_si: subcategoria = arma
     enum: [cerrojo, semiauto, automatico, cuerpo_a_cuerpo]
+
+Ver también [`tag-requeridos-por-categoria.md`](tag-requeridos-por-categoria.md) — índice rápido bullet-point de todos los `(+)` por categoría.
 
 ### 4.3. Campos comunes opcionales
 
