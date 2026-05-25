@@ -2,6 +2,11 @@ tag:
   slug: ametralladora
   nombre: "Ametralladora"
   categoria: equipo
+  subcategoria: arma
   descripcion: >
     Arma automática pesada diseñada para proveer fuego de supresión continuo.
   peso: 11
+  equipo_arma:
+    tipo_accion: automatico
+    alcance: largo
+

@@ -1,5 +1,5 @@
 # Template de archivo de catálogo de un tag.
-# Ubicación: mock/tags/{categoria}/{slug}.yaml  o  mock/tags/{categoria}/{subcategoria}/{slug}.yaml
+# Ubicación: tags/{categoria}/{slug}.yaml  o  tags/{categoria}/{subcategoria}/{slug}.yaml
 # Referencia narrativa: tag-modelo.md
 # Ejemplos de uso compuesto: tag-modelo-ejemplos.yaml
 #
@@ -86,7 +86,7 @@ tag:
     calibre:           str
     tipo_accion:       str   # (+) requerido si subcategoria = arma. cerrojo | semiauto | automatico | cuerpo_a_cuerpo
     municion_tag_ref:  tag equipo.utilitario.*
-    alcance_narrativo: str   # corto | medio | largo
+    alcance:           str   # corto | medio | largo
 
   equipo_vestidura:
     faccion_asociada: tag faccion.*

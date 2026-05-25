@@ -6,7 +6,7 @@
 > **Material de referencia**:
 > - [`tag-modelo.yaml`](tag-modelo.yaml) — template completo del archivo de catálogo de un tag.
 > - [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml) — cinco personajes que muestran cómo los tags componen una hoja real.
-> - `mock/tags/**/*.yaml` — catálogo canon sembrado; consultar para ver tags reales por categoría.
+> - `tags/**/*.yaml` — catálogo canon sembrado; consultar para ver tags reales por categoría.
 
 ---
 
@@ -49,7 +49,7 @@ Un tag se escribe como un **string único** con la forma `<categoria>[.<subcateg
 
 **Repetibilidad**: `tags[]` es un multiset. Tres `equipo.utilitario.cargador` significan tres cargadores físicos. El motor itera, no deduplica.
 
-**Resolución contra el catálogo**: el parser troza el tag por `.` y mapea segmentos a directorios. `equipo.arma.pistola` resuelve a `mock/tags/equipo/arma/pistola.yaml`. Ver §6.
+**Resolución contra el catálogo**: el parser troza el tag por `.` y mapea segmentos a directorios. `equipo.arma.pistola` resuelve a `tags/equipo/arma/pistola.yaml`. Ver §6.
 
 Para ver tags concretos en uso compuesto sobre personajes, consultar [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml).
 
@@ -57,7 +57,7 @@ Para ver tags concretos en uso compuesto sobre personajes, consultar [`tag-model
 
 ## §3 — Categorías de referencia
 
-Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta categorías nuevas sin migración (ver §7). Tomalas como puntos de referencia, no como menú restrictivo. Para ver los slugs reales de cada categoría, consultar el directorio `mock/tags/{categoria}/` correspondiente.
+Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta categorías nuevas sin migración (ver §7). Tomalas como puntos de referencia, no como menú restrictivo. Para ver los slugs reales de cada categoría, consultar el directorio `tags/{categoria}/` correspondiente.
 
   faccion:
     significado: Pertenencia macro (bando).
@@ -166,6 +166,10 @@ Estos campos son obligatorios solo cuando la categoría o subcategoría del tag 
     obligatorio_si: subcategoria = arma
     enum: [cerrojo, semiauto, automatico, cuerpo_a_cuerpo]
 
+  equipo_arma.alcance:
+    obligatorio_si: subcategoria = arma
+    enum: [corto, medio, largo]
+
 Ver también [`tag-requeridos-por-categoria.md`](tag-requeridos-por-categoria.md) — índice rápido bullet-point de todos los `(+)` por categoría.
 
 ### 4.3. Campos comunes opcionales
@@ -207,7 +211,7 @@ El bloque `requires` declara cuándo un tag es coherente sobre un personaje. Tie
 
 **Modificador NOT**: prefijá cualquier entrada con `"no:"` para invertir la condición. La forma es **string con prefijo literal** — sin objetos anidados, queryable con un `startswith("no:")` desde cualquier consumidor, obvia a la lectura humana.
 
-Para ver el bloque `requires` aplicado a un tag real, consultar `mock/tags/perk/tirador_preciso.yaml`.
+Para ver el bloque `requires` aplicado a un tag real, consultar `tags/perk/tirador_preciso.yaml`.
 
 `requires` es **documentación ejecutable, no validación de schema**. La API acepta personajes con tags incoherentes. La coherencia es responsabilidad del generador y del curador. Cualquier validador opcional puede consultar `requires`; el contrato duro no lo impone.
 
@@ -215,7 +219,7 @@ Para ver el bloque `requires` aplicado a un tag real, consultar `mock/tags/perk/
 
 Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `aspecto`, `skill`, `equipo_arma`, `equipo_vestidura`. Sus campos internos son opcionales salvo los marcados `(+)` en §4.2.
 
-El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml). Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `mock/tags/`.
+El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml). Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `tags/`.
 
 **Los tipos de tag aún no introducidos** (montura, vicio, mascota, etc.) no llevan template anticipado. Se documentan el día que aparece el primer caso real.
 
@@ -226,7 +230,7 @@ Para modularizar el comportamiento mecánico de los tags y habilitar que un mism
 La estructura distingue entre dos comportamientos mecánicos:
 
 - **Efectos Gatillados (Con Trigger y Reactivos)**: Si el efecto se aplica de forma temporal o reactiva ante un evento en partida (ej. al fallar un chequeo moral o recibir daño), se define el bloque `trigger` en la raíz. En este caso, se usa la propiedad `trigger-action` dentro del bloque `trigger` para listar las referencias a los efectos gatillados (los cuales se definen en archivos independientes en la categoría `efecto.*`).
-- **Efectos Pasivos/Permanentes (Sin Trigger)**: Si los efectos se aplican de forma permanente y constante mientras el personaje posea el tag, no se define el bloque `trigger`. En su lugar, el tag define su efecto de forma **inline** bajo la propiedad `efecto`, tomando la forma de un mapa `{slug_efecto: [instrucciones]}`. Esto elimina la necesidad de crear un archivo independiente en `mock/tags/efecto/`.
+- **Efectos Pasivos/Permanentes (Sin Trigger)**: Si los efectos se aplican de forma permanente y constante mientras el personaje posea el tag, no se define el bloque `trigger`. En su lugar, el tag define su efecto de forma **inline** bajo la propiedad `efecto`, tomando la forma de un mapa `{slug_efecto: [instrucciones]}`. Esto elimina la necesidad de crear un archivo independiente en `tags/efecto/`.
 
 Estructura del bloque `trigger`:
 
@@ -243,7 +247,7 @@ Estructura de efectos permanentes/pasivos inline (a nivel raíz del tag):
     {slug_efecto}:       # Slug del efecto (usualmente el mismo del aspecto)
       - str              # Lista de instrucciones. Ej: "(+2) iniciativa"
 
-Los tags de la categoría `efecto.*` que se definen como archivos independientes (bajo `mock/tags/efecto/{slug}.yaml`) detallan sus instrucciones utilizando el campo `efecto` a nivel de categoría como una lista simple:
+Los tags de la categoría `efecto.*` que se definen como archivos independientes (bajo `tags/efecto/{slug}.yaml`) detallan sus instrucciones utilizando el campo `efecto` a nivel de categoría como una lista simple:
 
   efecto:                # Lista de instrucciones o modificadores de comportamiento
     - str                # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
@@ -342,14 +346,14 @@ Los vínculos personales (a otro personaje) **no se expresan como tags**. Viven 
 
 ### 6.1. Estructura de archivos
 
-  tag de un nivel:           mock/tags/{categoria}/{slug}.yaml
-  tag con sub-categoría:     mock/tags/{categoria}/{subcategoria}/{slug}.yaml
+  tag de un nivel:           tags/{categoria}/{slug}.yaml
+  tag con sub-categoría:     tags/{categoria}/{subcategoria}/{slug}.yaml
 
 Las categorías relacionales (`lealtad`, `nemesis`) **no tienen entradas en el catálogo**. Su semántica es del formato del tag, no del contenido. Las refs `pj.{slug}` y `faccion.{slug}` resuelven contra los catálogos de personajes y facciones.
 
 ### 6.2. Indistinción mock/DB
 
-Los tags del mock y los tags creados en caliente desde la API o el motor de batalla son **indistinguibles**. No hay campo `origen: mock` en el tag aplicado al personaje. Un tag `faccion.ejercito_rojo` cargado de `mock/tags/faccion/ejercito_rojo.yaml` y otro creado al vuelo en una batalla resuelven al mismo identificador. El catálogo `mock/tags/**` es la fuente inicial que siembra la DB al arrancar.
+Los tags del mock y los tags creados en caliente desde la API o el motor de batalla son **indistinguibles**. No hay campo `origen: mock` en el tag aplicado al personaje. Un tag `faccion.ejercito_rojo` cargado de `tags/faccion/ejercito_rojo.yaml` y otro creado al vuelo en una batalla resuelven al mismo identificador. El catálogo `tags/**` es la fuente inicial que siembra la DB al arrancar.
 
 Implicaciones:
 

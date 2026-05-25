@@ -19,6 +19,7 @@
 ## equipo.arma
 
 - `equipo_arma.tipo_accion` ∈ {`cerrojo`, `semiauto`, `automatico`, `cuerpo_a_cuerpo`}
+- `equipo_arma.alcance` ∈ {`corto`, `medio`, `largo`}
 
 ## aspecto
 

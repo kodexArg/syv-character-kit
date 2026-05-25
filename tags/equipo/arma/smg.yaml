@@ -2,6 +2,11 @@ tag:
   slug: smg
   nombre: "SMG"
   categoria: equipo
+  subcategoria: arma
   descripcion: >
     Subfusil automático (pistola ametralladora) ideal para combates a corta distancia.
   peso: 5
+  equipo_arma:
+    tipo_accion: automatico
+    alcance: corto
+

@@ -2,6 +2,11 @@ tag:
   slug: rifle
   nombre: "Rifle"
   categoria: equipo
+  subcategoria: arma
   descripcion: >
     Arma de fuego larga y estriada para disparos precisos a media distancia.
   peso: 4
+  equipo_arma:
+    tipo_accion: cerrojo
+    alcance: medio
+

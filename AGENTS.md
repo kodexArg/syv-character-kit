@@ -27,7 +27,7 @@ Mismo principio que el PRD: rolling release, sin versionado ni changelog. Los ar
 
 ---
 
-## Mocks (`mock/personajes/`, `mock/tags/`)
+## Mocks (`mock/personajes/`) y Catálogo (`tags/`)
 
 Los 22 fixtures de personajes y los archivos de catálogo de tags son **datos**, no documentación. Se versionan vía git como cualquier otro código. Cuando el schema cambia, los mocks se migran (idealmente con un script Python en el commit que aplica el cambio) y el commit cuenta la historia.
 

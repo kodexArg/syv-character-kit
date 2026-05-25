@@ -191,7 +191,7 @@ Promedio de escuadra (composición 1+1+1+1+4+3): ≈ 6.5 de fatiga, ≈ 3.9 de m
 
 ### 7.5. Pools de tags por categoría
 
-**Vocabulario**: el generador sortea de los catálogos curados en `mock/tags/{categoria}/`. Cada slug que aparece allí es candidato natural. Cuando el generador necesita algo fuera del catálogo, lo crea con `origen: emergente`.
+**Vocabulario**: el generador sortea de los catálogos curados en `tags/{categoria}/`. Cada slug que aparece allí es candidato natural. Cuando el generador necesita algo fuera del catálogo, lo crea con `origen: emergente`.
 
 Reglas algorítmicas de sorteo (lo único PRD-específico; el vocabulario vive en el catálogo):
 
@@ -311,7 +311,7 @@ Ejemplos representativos:
 
 **Fuente de verdad: [`API.md`](API.md).** Los endpoints, parámetros, payloads y mapeo a UC viven íntegramente ahí. Si una ruta no figura ahí, no existe en el contrato.
 
-**Catálogos `/meta/*`**: convención uniforme — `GET /meta/{categoria}` devuelve el catálogo curado de esa categoría de tag, sembrado desde `mock/tags/{categoria}/`. Para listar valores reales, consultar el directorio. Detalle en `API.md`.
+**Catálogos `/meta/*`**: convención uniforme — `GET /meta/{categoria}` devuelve el catálogo curado de esa categoría de tag, sembrado desde `tags/{categoria}/`. Para listar valores reales, consultar el directorio. Detalle en `API.md`.
 
 Las tensiones y open questions vinculadas a endpoints (gobernanza de `POST /event`, endpoint de escuadras, expansión `?expand=tags`, etc.) se mantienen en este PRD; el **contrato** vive en `API.md`.
 
@@ -512,7 +512,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 **Decisión.** Los tags que poseen comportamiento reactivo o modifican propiedades en juego definen esta lógica mediante campos estructurados: un bloque `trigger` con la lista `trigger-action` (para efectos reactivos/temporales) o un mapa `efecto` a nivel raíz (para efectos pasivos/permanentes inline). Esto unifica el tratamiento mecánico y reemplaza el campo informal de texto libre `aspecto.efecto`.
 
-**Costo.** La definición y curaduría del catálogo requiere crear tags específicos de tipo `efecto` (bajo `mock/tags/efecto/{slug}.yaml`) para especificar las instrucciones concretas. Los clientes downstream deben parsear este esquema estructurado para aplicar la lógica en combate.
+**Costo.** La definición y curaduría del catálogo requiere crear tags específicos de tipo `efecto` (bajo `tags/efecto/{slug}.yaml`) para especificar las instrucciones concretas. Los clientes downstream deben parsear este esquema estructurado para aplicar la lógica en combate.
 
 **Por qué se acepta.** Permite que un mismo tag aplique múltiples efectos predefinidos y reutilizables, y facilita la interpretación automatizada de las reglas sin requerir análisis heurístico en caliente. Los detalles del esquema y sus campos viven en [`docs/tag-modelo.md`](docs/tag-modelo.md).
 
@@ -551,7 +551,7 @@ Decisiones de producto que el PRD no resuelve todavía. Cuando una se resuelve, 
 - **Nombre final del campo derivado `filiacion`.** Alternativas: `designacion`, `titulo`, `pie_de_firma`.
 - **Gobernanza de mutaciones de personaje vía API.** Sin auth, cualquiera con la URL puede emitir hitos. Tokens, lista blanca, o aceptación porque el corpus es curable.
 - **Polaridad de `trait`.** ¿Existe `/meta/traits/{slug}.polaridad` como hint sugerido, o el motor downstream interpreta libremente? Tensión 12.6.
-- **Schema completo de la entidad `escuadra`.** El tag `escuadra.{slug}` necesita un catálogo análogo a `mock/tags/faccion/`. Definir slug canónico y campos del archivo (nombre legible, cuerpo, facción asociada).
+- **Schema completo de la entidad `escuadra`.** El tag `escuadra.{slug}` necesita un catálogo análogo a `tags/faccion/`. Definir slug canónico y campos del archivo (nombre legible, cuerpo, facción asociada).
 - **Interpretación de tags `custom` por el motor.** ¿LLM al aplicar la regla, o curador humano traduce a regla mecánica antes? Tensión 12.1.
 - **Versionado de categorías canon de tags.** Las sub-categorías de la notación punto son ciudadanos explícitos del catálogo. Gobernanza pendiente.
 - **Catálogo de tags canon por facción.** El campo `skill.facciones_predominantes` está documentado (`docs/tag-modelo.md §5`); falta política de avisos cuando el generador sortea un tag fuera de su facción esperada.

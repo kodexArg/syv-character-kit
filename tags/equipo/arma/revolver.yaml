@@ -2,6 +2,11 @@ tag:
   slug: revolver
   nombre: "Revólver"
   categoria: equipo
+  subcategoria: arma
   descripcion: >
     Arma de fuego corta con tambor giratorio, confiable y robusta.
   peso: 1
+  equipo_arma:
+    tipo_accion: semiauto
+    alcance: corto
+

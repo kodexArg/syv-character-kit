@@ -2,6 +2,11 @@ tag:
   slug: pistola
   nombre: "Pistola"
   categoria: equipo
+  subcategoria: arma
   descripcion: >
     Arma de fuego corta para defensa personal a corta distancia.
   peso: 1
+  equipo_arma:
+    tipo_accion: semiauto
+    alcance: corto
+
