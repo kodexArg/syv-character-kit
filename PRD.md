@@ -25,7 +25,7 @@ Pasada transversal de **normalización de tags a forma mínima**: tag = identifi
 
 ### v0.4.0
 
-Implementación efectiva de **aspectos como categoría canon de primera clase**. Cierra la reserva que dejó v0.3.0 (sección 16) y materializa la primera ola de capa narrativa-mecánica del schema. Bump mayor — categoría nueva ciudadana del modelo de tags.
+Implementación efectiva de **aspectos como categoría canon de primera clase**. Cierra la reserva que dejó v0.3.0 (sección 17) y materializa la primera ola de capa narrativa-mecánica del schema. Bump mayor — categoría nueva ciudadana del modelo de tags.
 
 - **Categoría `aspecto` canon**: nueva sub-familia de tag `{categoria: aspecto, valor: kebab-case}`. Distinta de `trait` (rasgo de carácter sin mecánica activa) y de `perk` (ventaja del reglamento canónico del juego). Un aspecto es un mini-tag identitario con efecto mecánico embebido en una **mini-frase** servida por `/meta/aspectos/{valor}`. Pool abierto, semilla curada, customs permitidos pero no auto-generables.
 - **Pool semilla de 10 aspectos canon en `/meta/aspectos`**: `cabrón`, `ojo-de-halcón`, `muy-fuerte` (los tres dados por el cliente como referencia obligada), más 7 curados: `cobarde`, `carismático`, `terco`, `veloz`, `veterano-cicatrizado`, `devoto`, `impredecible`. Cada uno con efecto en frase corta (trigger + probabilidad opcional + efecto).
@@ -33,7 +33,7 @@ Implementación efectiva de **aspectos como categoría canon de primera clase**.
 - **Ejemplos del PRD actualizados**: Aguirre suma aspecto `ojo-de-halcón` (su olfato de terreno y disciplina visual encajan). Mansilla suma aspecto `carismático` (orador sindical, comisariado). Prosa de `historia` e `historial[]` literalmente preservada.
 - **Hitos `agregar_aspecto` y `quitar_aspecto`**: dos tipos nuevos en 9.5 con `metadata: { valor, motivo }`. Patrón consistente con la mutabilidad ya canon de skills/traits/perks.
 - **Categoría implícita `estado_temporal`**: se reconoce el patrón de tags activables por aspecto (`berserker`, `pánico`) como sub-categoría conceptual de tag. No se canoniza con catálogo cerrado en v0.4.0 — solo se documenta el patrón para que el motor downstream lo identifique.
-- **Sección 16 promovida**: deja de ser "preview reservado" y pasa a "Aspectos como ciudadanos canon — capa narrativa-mecánica". Conserva la nota arquitectónica original como contexto histórico y deja apuntada una posible próxima ola (aspectos largos al estilo H.I.T.O.S./Cultos Innombrables, frases narrativas de 10–25 palabras) sin implementarla.
+- **Sección 17 promovida**: deja de ser "preview reservado" y pasa a "Aspectos como ciudadanos canon — capa narrativa-mecánica". Conserva la nota arquitectónica original como contexto histórico y deja apuntada una posible próxima ola (aspectos largos al estilo H.I.T.O.S./Cultos Innombrables, frases narrativas de 10–25 palabras) sin implementarla.
 - **Nueva tensión 13.10**: el efecto del aspecto vive en texto libre; el motor downstream necesita interpretar la mini-frase (probable vía LLM o regla heurística). Aceptado, mismo compromiso que customs de perks/traits.
 - **Total tags semilla**: pasa de 70 a 80 (los 70 anteriores + 10 aspectos canon).
 
@@ -72,7 +72,7 @@ Cierre de fase del schema del personaje. Reconcilia los tres pendientes que dej�
 - **Eliminación de `armor`**: el campo derivado `armor` se elimina del sistema. La rectificación de v0.2.6 (armadura → vestidura como identidad visual, no protección) dejó al campo sin sustento conceptual. Si más adelante se necesita defensa numérica, vuelve como tag `trait: blindado` derivado de vestidura específica o de skill defensiva. Cierra OQ #14 con resolución (a). El endpoint `/meta/equipo/armaduras/{valor}` queda fuera del PRD.
 - **Springfield 1903 → Mauser 1909**: tag `equipo.arma` con valor "Fusil de cerrojo Springfield 1903 con mira" reemplazado en el mock afectado por "Fusil Mauser 1909 con mira" (arma de cerrojo canon del Ejército Rojo). Cargadores de calibre 30-06 normalizados a 7.65 Mauser. Prosa de los personajes no se toca.
 - **Catálogo canon `/meta/*` con 74 tags semilla**: se materializa la lista de tags estándar que cada endpoint `/meta/skills`, `/meta/traits`, `/meta/perks`, `/meta/rasgos`, `/meta/roles`, `/meta/equipo/{armas,utilitarios,vestiduras}` devuelve como vocabulario sugerido. 10 rasgos + 10 roles + 10 skills + 10 traits + 10 perks + 10 armas + 10 utilitarios + 4 vestiduras = 74. La lista cubre los casos normales del MVP; otros usuarios crearán tags personalizados que entrarán al catálogo emergente. Documentado en sección 10 y como tensión en 13.9.
-- **Reserva de la categoría `aspecto` para v0.4.0**: la próxima ola introduce aspectos como **frases narrativas largas** (10–25 palabras), inspirados en el patrón de H.I.T.O.S. y Cultos Innombrables. No se implementa hoy; se documenta como nota arquitectónica en sección 16 para que la próxima iteración tenga camino claro.
+- **Reserva de la categoría `aspecto` para v0.4.0**: la próxima ola introduce aspectos como **frases narrativas largas** (10–25 palabras), inspirados en el patrón de H.I.T.O.S. y Cultos Innombrables. No se implementa hoy; se documenta como nota arquitectónica en sección 17 para que la próxima iteración tenga camino claro.
 - **Bump mayor a v0.3.0**: el sistema de tags está sólido, los 22 mocks normalizados, los pendientes cerrados. Cierra una fase entera del schema.
 
 **Breaking changes vs v0.2.6.**
@@ -1526,11 +1526,98 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 
 ---
 
-## 16. Aspectos como ciudadanos canon — capa narrativa-mecánica (v0.4.0)
+## 16. Roadmap y naturaleza del entregable
 
-### 16.1. Implementación efectiva
+### 16.1. Naturaleza agnóstica del PRD
 
-En v0.4.0 la categoría **`aspecto`** se promueve de reserva a ciudadana canon del sistema de tags. La forma final de la primera ola es distinta de la previsión original (ver 16.3): se opta por **mini-tags identitarios cortos en kebab-case** (`cabrón`, `ojo-de-halcón`, `muy-fuerte`) con efecto mecánico embebido en una mini-frase corta servida por `/meta/aspectos/{valor}`, en lugar de la frase larga de 10–25 palabras que se había anticipado.
+Este documento describe el sistema de creación de personajes y sus reglas **sin comprometerse con un lenguaje de programación, framework, plataforma de despliegue ni stack concreto**. Las decisiones de implementación quedan diferidas.
+
+Lo único canónico aquí es:
+
+- **Schema de la hoja**: la forma completa del recurso `personaje` (§6) con todos sus campos, tipos y restricciones.
+- **Reglas de atributos / tags / aspectos / estado_vital**: las invariantes de distribución por rango (§7), el sistema de tags categorizado (§6.2, §8, §10), la mecánica de aspectos (§10, §13.10), y el bloque `estado_vital` con sus derivados.
+- **Generador de personajes**: el algoritmo determinístico y el pipeline de prosa que lo acompaña (§7, §7.2, §7.2.1, §7.9.5).
+- **Suite de tests del generador**: las invariantes que todo generador conforme debe satisfacer (golden mocks, distribuciones esperadas, idempotencia por semilla).
+
+Cualquier otro detalle — base de datos, lenguaje de programación, framework HTTP, runtime, infraestructura — es implementación y vive fuera de este PRD.
+
+---
+
+### 16.2. Hito 1 — Creación perfecta de personajes (**ACTIVO**)
+
+Único hito al que apunta este PRD en su versión vigente. Cubre los cuatro entregables siguientes, todos agnósticos respecto del stack:
+
+#### 16.2.1. Schema + reglas + validación
+
+La hoja canónica (documentada en `docs/hoja-modelo.{yml,md}` y en §6–§10 de este PRD), las invariantes de atributos / tags / aspectos / estado_vital, y los validadores correspondientes. Entregable estático: no requiere servidor ni persistencia para ser validado.
+
+#### 16.2.2. Generador procedural
+
+Algoritmo (sin LLM) capaz de producir personajes nuevos respetando:
+
+- Distribuciones de atributos por rango (§7.2 / §7.2.1).
+- Pool de tags semilla por categoría (§8 y catálogos `/meta/*`).
+- Pool de aspectos (§10).
+- Semilla reproducible (`metadatos.semilla`): la misma `(semilla, faccion, rango)` produce siempre el mismo resultado.
+
+#### 16.2.3. Generador vía LLM (prosa)
+
+Pipeline que rellena el campo `historia` y enriquece descripciones narrativas a partir del personaje procedural. En los mocks actuales el campo `metadatos.modelo_prosa` vale `null`; este hito activa ese campo para los personajes generados. El LLM solo interviene en la prosa — la estructura y los atributos los produce el algoritmo procedural (§16.2.2).
+
+#### 16.2.4. Suite de tests del generador
+
+Tests agnósticos que validan el comportamiento del generador:
+
+- **Golden mocks**: el generador reproduce los 22 personajes existentes fijando su semilla canónica.
+- **Invariantes de schema**: todo personaje generado satisface las restricciones de §6 (tipos, campos obligatorios, rangos de atributos).
+- **Distribuciones por rango**: los atributos generados caen dentro de las bandas de §7.2.1.
+- **Idempotencia con semilla fija**: `generar(semilla, faccion, rango)` devuelve el mismo payload en llamadas sucesivas.
+
+Esta suite es entregable del Hito 1, no del Hito 2.
+
+---
+
+### 16.3. Hito 2 — API en contenedor Docker (**BLOQUEADO**)
+
+<!-- BLOQUEADO: no se avanza con este hito hasta autorización explícita del usuario kodex. -->
+
+Convertir el sistema del Hito 1 en un servicio HTTP empaquetado en Docker. Endpoints mínimos:
+
+- Obtener personaje existente por ID (mock o canonizado).
+- Generar personaje nuevo con o sin semilla explícita.
+
+Incluye **tests de contrato y de integración** del servicio HTTP. Lenguaje y framework sin definir todavía — la decisión queda para cuando se autorice el hito.
+
+---
+
+### 16.4. Hito 3 — Sistema de escuadras (**BLOQUEADO**)
+
+<!-- BLOQUEADO: no se avanza con este hito hasta autorización explícita del usuario kodex. -->
+
+Modelado y API del sistema de escuadras: composición de escuadra, `fza_aportada` agregada, lealtad de escuadra, dinámicas inter-escuadra. También empaquetado como API en Docker. Mismo criterio de bloqueo que el Hito 2.
+
+---
+
+### 16.5. Excluido del alcance actual
+
+Mientras los Hitos 2 y 3 permanezcan bloqueados, los siguientes elementos están **fuera del PRD vigente**:
+
+- La API HTTP y sus endpoints.
+- El contenedor Docker y cualquier decisión de infraestructura.
+- El sistema de escuadras (schema completo, CRUD, dinámicas de grupo).
+- Persistencia en base de datos.
+- Autenticación y autorización de llamadas.
+- Cualquier interfaz de usuario (UI, CLI de usuario final, dashboards).
+
+Estos temas pueden documentarse en PRDs separados cuando sus hitos sean autorizados.
+
+---
+
+## 17. Aspectos como ciudadanos canon — capa narrativa-mecánica (v0.4.0)
+
+### 17.1. Implementación efectiva
+
+En v0.4.0 la categoría **`aspecto`** se promueve de reserva a ciudadana canon del sistema de tags. La forma final de la primera ola es distinta de la previsión original (ver 17.3): se opta por **mini-tags identitarios cortos en kebab-case** (`cabrón`, `ojo-de-halcón`, `muy-fuerte`) con efecto mecánico embebido en una mini-frase corta servida por `/meta/aspectos/{valor}`, en lugar de la frase larga de 10–25 palabras que se había anticipado.
 
 Referencias cruzadas al resto del PRD:
 
@@ -1545,11 +1632,11 @@ Referencias cruzadas al resto del PRD:
 - **Catálogo**: 10.1 — los 10 aspectos canon en la lista de tags semilla; total sube a 80.
 - **Tensión**: 13.10 — efecto en texto libre, motor downstream interpreta.
 
-### 16.2. Diferencia entre `aspecto`, `trait` y `perk`
+### 17.2. Diferencia entre `aspecto`, `trait` y `perk`
 
 La primera ola de aspectos abre una capa intermedia entre los rasgos de carácter sin mecánica (`trait`) y las ventajas activables canónicas del reglamento (`perk`). El aspecto **embebe su mecánica** en una mini-frase, no la delega al reglamento; y es **abierto al custom**, no fijo. Esa combinación lo vuelve la pieza ideal para capturar identidad mecánicamente activa sin saturar el catálogo cerrado de perks. Ver 6.2 para la tabla completa de la distinción.
 
-### 16.3. Contexto histórico — la previsión original de aspectos como frases largas
+### 17.3. Contexto histórico — la previsión original de aspectos como frases largas
 
 La nota arquitectónica de v0.3.0 anticipaba aspectos como **frases narrativas largas** (10–25 palabras) al estilo de H.I.T.O.S. y Cultos Innombrables, donde el personaje "dice algo de sí mismo" en oración completa. Ejemplos previstos en aquel momento:
 
@@ -1559,7 +1646,7 @@ La nota arquitectónica de v0.3.0 anticipaba aspectos como **frases narrativas l
 
 La primera ola de v0.4.0 prefirió el formato corto porque encaja mejor con el resto del sistema de tags (kebab-case, query-friendly, inverted-index-friendly) y porque el efecto mecánico embebido en mini-frase ya cubre la función operacional del aspecto sin necesidad de la frase larga.
 
-### 16.4. Próxima ola especulativa — aspectos largos como segunda capa
+### 17.4. Próxima ola especulativa — aspectos largos como segunda capa
 
 Queda apuntada (sin implementación ni reserva de categoría) una posible **segunda capa** de aspectos largos al estilo H.I.T.O.S./Cultos clásico, que viviría junto a la capa corta sin desplazarla. Podría modelarse como `categoria: aspecto_largo` o como un subcampo de cada `aspecto` corto. Decisión deferida hasta que aparezca un caso de uso narrativo que la justifique. Si llega, su consumo natural sería el motor narrativo (no el de batalla), invocando la frase como modificador situacional discrecional.
 
