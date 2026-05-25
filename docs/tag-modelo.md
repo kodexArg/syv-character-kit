@@ -43,7 +43,9 @@ Un tag se escribe como un **string único** con la forma `<categoria>[.<subcateg
 - Los segmentos intermedios son **sub-categorías** anidadas.
 - El último segmento es el **slug** específico (lowercase + underscore, sin acentos).
 
-**Reglas del slug**: lowercase, underscores como único separador, sin acentos, sin espacios, sin caracteres especiales. Aplica a todo slug del sistema — personajes (`aguirre_walter`), facciones (`ejercito_rojo`), escuadras, rangos (`lider_de_escuadra`), tags.
+**Reglas del slug de tag**: lowercase, underscores como único separador, sin acentos, sin espacios, sin caracteres especiales. Ejemplos: `pistola`, `tirador_preciso`, `ejercito_rojo`, `lider_de_escuadra`. El slug de un tag es **legible por diseño** — es la pieza humana de la notación punto.
+
+> **Importante** — el slug de tag es distinto del **slug de personaje** (`identidad.slug`). Este último es una **patente opaca de 8 caracteres `[A-Z0-9]`** (ej. `K9F2H3M4`), no un nombre legible. Ver `hoja-modelo.md` para las reglas del slug de personaje. Cuando un tag relacional referencia un personaje (ej. `lealtad.pj.K9F2H3M4`), el segmento final es la patente del personaje, no su nombre. La asimetría es deliberada: los tags son metadato curado y se leen; los personajes son entidades del juego y se identifican por patente para evitar colisiones de nombre.
 
 **Repetibilidad**: `tags[]` es un multiset. Tres `equipo.utilitario.cargador` significan tres cargadores físicos. El motor itera, no deduplica.
 

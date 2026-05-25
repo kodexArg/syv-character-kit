@@ -8,12 +8,17 @@
 #   3. Líder revolucionario sin mando formal — rol narrativo desacoplado de rango.
 #   4. Pandillero drogado, herido y desorientado — acumulación de tags salud/mental.
 #   5. Soldado entrenado confederado — caso base limpio.
+#
+# NOTA — slug de personaje:
+#   identidad.slug es una "patente" opaca de 8 caracteres [A-Z0-9]. No es el nombre.
+#   El nombre legible vive en identidad.nombre. Las refs lealtad.pj.* y nemesis.pj.*
+#   apuntan a esta patente, no al nombre del personaje.
 
 personajes:
 
   # ─── 1. Médico confederado ────────────────────────────────────────────────
   - identidad:
-      slug: salgado_ernesto
+      slug: SLG3D7K2
       nombre: Ernesto Salgado
       sobrenombre: Doctor Salgado
       rol: Médico de campaña
@@ -48,7 +53,7 @@ personajes:
 
   # ─── 2. Chamán del Ejército Rojo ──────────────────────────────────────────
   - identidad:
-      slug: ñamcupan_lautaro
+      slug: NMC8H5P9
       nombre: Lautaro Ñamcupán
       sobrenombre: El que habla con el monte
       rol: Chamán de columna
@@ -73,7 +78,7 @@ personajes:
       - equipo.utilitario.cuaderno
       - equipo.vestidura.ropa_de_civil
       - lealtad.faccion.ejercito_rojo
-      - lealtad.pj.calfucura_aniceto
+      - lealtad.pj.CLF2M9K7    # Aniceto Calfucurá
     historia: >
       Nunca empuñó un fusil hasta los cincuenta. Lo siguen porque conoce los pasos del
       monte, lee las nubes y entierra a los muertos con palabras que la columna entiende
@@ -82,7 +87,7 @@ personajes:
 
   # ─── 3. Líder revolucionario sin mando formal ─────────────────────────────
   - identidad:
-      slug: bordagaray_emilia
+      slug: BRD4F2M7
       nombre: Emilia Bordagaray
       sobrenombre: Camarada Emilia
       rol: Agitadora de columna
@@ -110,7 +115,7 @@ personajes:
       - equipo.utilitario.cuaderno
       - equipo.vestidura.uniforme_rojo
       - lealtad.faccion.ejercito_rojo
-      - lealtad.pj.mansilla_eduardo
+      - lealtad.pj.MNS5X3P8    # Eduardo Mansilla, líder de escuadra
     historia: >
       Llegó al frente como cuadro político y se quedó como fusilera. El líder de su
       escuadra le pide la palabra cuando hay que arengar; el resto de los días carga
@@ -119,7 +124,7 @@ personajes:
 
   # ─── 4. Pandillero drogado, desorientado y herido ─────────────────────────
   - identidad:
-      slug: morales_kuky
+      slug: MRL9K3X1
       nombre: Joaquín Morales
       sobrenombre: El Kuky
       rol: Irregular del litoral
@@ -151,7 +156,7 @@ personajes:
 
   # ─── 5. Soldado bien entrenado confederado ────────────────────────────────
   - identidad:
-      slug: cabral_diego
+      slug: CBR7H4N6
       nombre: Diego Cabral
       sobrenombre: Cabo Cabral
       rol: Fusilero de primera
@@ -180,7 +185,7 @@ personajes:
       - equipo.utilitario.prismaticos
       - equipo.vestidura.uniforme_confederado
       - lealtad.faccion.confederados
-      - lealtad.pj.sargento_ricardo_postmortem
+      - lealtad.pj.SRG1H4F9    # Sargento Ricardo (caído, patente sintética)
     historia: >
       Tercer ciclo de entrenamiento completo, dos campañas detrás y todas las medallas
       reglamentarias. Hace su trabajo y deja que otros hablen. El sargento Ricardo lo
