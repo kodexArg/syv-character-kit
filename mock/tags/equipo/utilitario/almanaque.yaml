@@ -3,4 +3,5 @@ tag:
   nombre: almanaque
   categoria: equipo
   descripcion: 'Equipo de tipo utilitario: almanaque.'
+  peso: 0
   subcategoria: utilitario

@@ -3,4 +3,5 @@ tag:
   nombre: herramientas
   categoria: equipo
   descripcion: 'Equipo de tipo utilitario: herramientas.'
+  peso: 3
   subcategoria: utilitario
