@@ -8,5 +8,5 @@ tag:
     evento: chequeo_moral
     condicion: fallado
     probabilidad: 0.5
-  efectos:
-    - efecto.furioso
+    trigger-action:
+      - efecto.furioso

@@ -47,15 +47,17 @@ tag:
 
   peso_narrativo: int        # 1..5
 
-  trigger:                   # opcional. Define cuándo se activa el comportamiento/efectos del tag
+  trigger:                   # opcional. Define cuándo y qué efectos se activan ante eventos
     evento:       str        # Evento disparador. Ej: "chequeo_moral", "daño_recibido", "bajo_fuego"
     condicion:    str        # Condición del evento. Ej: "fallado", "primera_vez"
     probabilidad: float      # opcional. Rango 0.0..1.0 (o string de porcentaje tipo "50%")
+    trigger-action:          # Lista de referencias a tags de la categoría efecto.* que se activan
+      - tag efecto.*         # Ej: efecto.furioso
 
-  efectos:                   # (+) requerido si categoria = aspecto.
-                             #     Lista de referencias a tags de la categoría efecto.*
-                             #     (Los aspectos asocian múltiples efectos a nivel de juego).
-    - tag efecto.*           # Ej: efecto.furioso
+  efectos:                   # (+) requerido si categoria = aspecto (solo si es pasivo/sin trigger).
+                             #     Lista de referencias a tags de la categoría efecto.* que se aplican
+                             #     de forma permanente/pasiva (los aspectos con trigger usan trigger-action).
+    - tag efecto.*           # Ej: efecto.vanguardia
 
   perk:
     efecto_reglado: str

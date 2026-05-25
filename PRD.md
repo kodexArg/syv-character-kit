@@ -510,13 +510,13 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ### 13.10. Estructuración de triggers y efectos en los tags
 
-**Decisión.** Los tags que poseen comportamiento reactivo o modifican propiedades en juego definen esta lógica mediante campos estructurados `trigger` (desencadenador opcional) y `efectos` (lista de referencias a tags de la categoría `efecto.*`). Esto unifica el tratamiento mecánico y reemplaza el campo informal de texto libre `aspecto.efecto`.
+**Decisión.** Los tags que poseen comportamiento reactivo o modifican propiedades en juego definen esta lógica mediante campos estructurados: un bloque `trigger` con la lista `trigger-action` (para efectos reactivos/temporales) o una lista `efectos` a nivel raíz (para efectos pasivos/permanentes). Esto unifica el tratamiento mecánico y reemplaza el campo informal de texto libre `aspecto.efecto`.
 
 **Costo.** La definición y curaduría del catálogo requiere crear tags específicos de tipo `efecto` (bajo `mock/tags/efecto/{slug}.yaml`) para especificar las instrucciones concretas. Los clientes downstream deben parsear este esquema estructurado para aplicar la lógica en combate.
 
 **Por qué se acepta.** Permite que un mismo tag aplique múltiples efectos predefinidos y reutilizables, y facilita la interpretación automatizada de las reglas sin requerir análisis heurístico en caliente. Los detalles del esquema y sus campos viven en [`docs/tag-modelo.md`](docs/tag-modelo.md).
 
-**Mitigación.** La estructura mantiene los campos `trigger` y `efectos` como opcionales a nivel raíz, asegurando que los tags puramente narrativos o de equipamiento sin mecánica compleja sigan siendo mínimos y directos.
+**Mitigación.** La estructura mantiene los campos `trigger` y `efectos` como opcionales, asegurando que los tags puramente narrativos o de equipamiento sin mecánica compleja sigan siendo mínimos y directos.
 
 ---
 

@@ -221,19 +221,26 @@ El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml)
 
 ### 4.6. Efectos y triggers
 
-Para modularizar el comportamiento mecánico de los tags y habilitar que un mismo tag aplique múltiples efectos discretos o responda a eventos en partida, se incorporan los bloques opcionales `trigger` y `efectos` a nivel raíz del tag. Los efectos representan modificaciones o estados de juego estructurados, por lo general de tiempo limitado o con una duración máxima (incluso un solo turno).
+Para modularizar el comportamiento mecánico de los tags y habilitar que un mismo tag aplique múltiples efectos discretos o responda a eventos en partida, se incorporan los bloques opcionales `trigger` (con su propiedad `trigger-action`) y `efectos` a nivel raíz del tag. Los efectos representan modificaciones o estados de juego estructurados.
+
+La estructura distingue entre dos comportamientos mecánicos:
+
+- **Efectos Gatillados (Con Trigger)**: Si el efecto se aplica de forma temporal o reactiva ante un evento en partida (ej. al fallar un chequeo moral o recibir daño), se define el bloque `trigger` en la raíz. En este caso, **no** se utiliza el campo `efectos` a nivel raíz; en su lugar, se usa la propiedad `trigger-action` dentro del bloque `trigger` para listar las referencias a los efectos gatillados.
+- **Efectos Pasivos (Sin Trigger)**: Si los efectos se aplican de forma permanente y constante mientras el personaje posea el tag, no se define el bloque `trigger`. En su lugar, se utiliza la lista de `efectos` a nivel raíz.
+
+Estructura del bloque `trigger`:
 
   trigger:
     evento: str          # Evento que dispara el trigger (ej. chequeo_moral, daño_recibido, bajo_fuego).
     condicion: str       # Condición del evento (ej. fallado, primera_vez).
     probabilidad: float  # Opcional. Rango 0.0..1.0 (o string de porcentaje tipo "50%").
+    trigger-action:      # Lista de referencias a tags de la categoría efecto.*
+      - tag efecto.*     # Ej: efecto.furioso
+
+Estructura de efectos permanentes/pasivos (a nivel raíz del tag):
 
   efectos:               # Lista de referencias a tags de la categoría efecto.*
-    - tag efecto.*       # Referencia al tag de efecto (ej. efecto.furioso).
-
-**Comportamiento del motor**:
-- **Con Trigger**: Los efectos declarados en la lista de `efectos` se aplican únicamente cuando el evento de `trigger` es capturado y se cumplen sus condiciones.
-- **Sin Trigger (Pasivos)**: Si no se define un bloque `trigger`, los `efectos` se aplican de forma permanente y constante mientras el personaje posea el tag (ej. modificadores de atributos o de moral máxima).
+    - tag efecto.*       # Ej: efecto.vanguardia
 
 Los tags de la categoría `efecto.*` (definidos en su propia sección del catálogo, bajo `mock/tags/efecto/{slug}.yaml`) detallan las instrucciones específicas del efecto utilizando el campo `efecto` a nivel de categoría:
 
@@ -242,14 +249,31 @@ Los tags de la categoría `efecto.*` (definidos en su propia sección del catál
 
 ### 4.7. Aspectos
 
-Los **aspectos** (`aspecto.*`) son tags identitarios de grano medio que aportan color, particularidad y trasfondo al personaje. A diferencia de los efectos simples (que suelen ser temporales o de corta duración), los aspectos representan frases complejas de identidad y comportamiento que pueden gatillar o aplicar múltiples efectos (en muchos casos de forma permanente o condicionada por un trigger).
+Los **aspectos** (`aspecto.*`) son tags identitarios de grano medio que aportan color, particularidad y trasfondo al personaje. A diferencia de los efectos simples (que suelen ser temporales o de corta duración), los aspectos representan frases complejas de identidad y comportamiento que pueden gatillar o aplicar múltiples efectos.
 
 Los aspectos más comunes y básicos del catálogo (como `aspecto.vanguardia` o `aspecto.cabron`) se usan como referencia, pero la categoría está diseñada para ser abierta y expandirse ante necesidades narrativas.
 
 #### Estructura de un Aspecto
-Un aspecto siempre requiere definir su bloque raíz de `efectos`, el cual apunta a uno o más tags de la categoría `efecto.*` que el aspecto pone en juego.
+- Si el aspecto es **reactivo/temporal** (se gatilla ante un evento), define un bloque `trigger` con su correspondiente lista de `trigger-action`.
+- Si el aspecto es **pasivo/permanente**, define directamente el bloque raíz `efectos`.
 
-Ejemplo de Aspecto (`aspecto.vanguardia`):
+Ejemplo de Aspecto Reactivo (`aspecto.cabron`):
+```yaml
+tag:
+  slug: cabron
+  nombre: "Cabrón"
+  categoria: aspecto
+  descripcion: >
+    De temperamento hosco y difícil, no tolera tonterías y reacciona de forma agresiva.
+  trigger:
+    evento: chequeo_moral
+    condicion: fallado
+    probabilidad: 0.5
+    trigger-action:
+      - efecto.furioso
+```
+
+Ejemplo de Aspecto Permanente (`aspecto.vanguardia`):
 ```yaml
 tag:
   slug: vanguardia
