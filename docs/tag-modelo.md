@@ -2,6 +2,11 @@
 
 > **Estado**: rolling release; este documento describe el vigente.
 > **Propósito**: definir qué es un tag, cómo se escribe, qué puede expresar y cómo se relaciona con la hoja de personaje. La estructura de la hoja completa vive en [`hoja-modelo.md`](hoja-modelo.md).
+>
+> **Material de referencia**:
+> - [`tag-modelo.yaml`](tag-modelo.yaml) — template completo del archivo de catálogo de un tag.
+> - [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml) — cinco personajes que muestran cómo los tags componen una hoja real.
+> - `mock/tags/**/*.yaml` — catálogo canon sembrado; consultar para ver tags reales por categoría.
 
 ---
 
@@ -38,97 +43,69 @@ Un tag se escribe como un **string único** con la forma `<categoria>[.<subcateg
 - Los segmentos intermedios son **sub-categorías** anidadas.
 - El último segmento es el **slug** específico (lowercase + underscore, sin acentos).
 
-Ejemplos canónicos:
-
-    faccion.ejercito_rojo            categoria: faccion        slug: ejercito_rojo
-    mental.panico                    categoria: mental         slug: panico
-    salud.herido                     categoria: salud          slug: herido
-    rasgo.altura_media               categoria: rasgo          slug: altura_media
-    skill.comandancia                categoria: skill          slug: comandancia
-    equipo.arma.pistola              categoria: equipo         sub: arma         slug: pistola
-    equipo.vestidura.uniforme_rojo   categoria: equipo         sub: vestidura    slug: uniforme_rojo
-    rol.oficio.francotirador         categoria: rol            sub: oficio       slug: francotirador
-    lealtad.faccion.ejercito_rojo    categoria: lealtad        ref compuesta:    faccion.ejercito_rojo
-    lealtad.pj.aguirre_walter        categoria: lealtad        ref compuesta:    pj.aguirre_walter
-    nemesis.pj.iturra_delia          categoria: nemesis        ref compuesta:    pj.iturra_delia
-
 **Reglas del slug**: lowercase, underscores como único separador, sin acentos, sin espacios, sin caracteres especiales. Aplica a todo slug del sistema — personajes (`aguirre_walter`), facciones (`ejercito_rojo`), escuadras, rangos (`lider_de_escuadra`), tags.
 
 **Repetibilidad**: `tags[]` es un multiset. Tres `equipo.utilitario.cargador` significan tres cargadores físicos. El motor itera, no deduplica.
 
 **Resolución contra el catálogo**: el parser troza el tag por `.` y mapea segmentos a directorios. `equipo.arma.pistola` resuelve a `mock/tags/equipo/arma/pistola.yaml`. Ver §6.
 
+Para ver tags concretos en uso compuesto sobre personajes, consultar [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml).
+
 ---
 
 ## §3 — Categorías de referencia
 
-Las categorías más usadas hasta hoy. **No es un canon cerrado**: el sistema acepta categorías nuevas sin migración (ver §7). Tomalas como puntos de referencia, no como menú restrictivo.
+Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta categorías nuevas sin migración (ver §7). Tomalas como puntos de referencia, no como menú restrictivo. Para ver los slugs reales de cada categoría, consultar el directorio `mock/tags/{categoria}/` correspondiente.
 
   faccion:
     significado: Pertenencia macro (bando).
-    ejemplos: [faccion.confederados, faccion.ejercito_rojo]
 
   rango:
     significado: Designación operativa jerárquica de campo.
-    ejemplos: [rango.lider_de_escuadra, rango.apuntador, rango.fusilero]
 
   escuadra:
     significado: Asignación a una escuadra concreta.
-    ejemplos: [escuadra.ricardo, escuadra.mansilla]
 
   mando:
     significado: Capacidad de mando dentro de la facción.
-    ejemplos: [mando.capaz]
 
   estado:
     significado: Disponibilidad operativa. Exactamente uno por personaje.
-    ejemplos: [estado.activo, estado.disponible, estado.kia, estado.licencia]
 
   salud:
     significado: Estado físico actual. Acumulable.
-    ejemplos: [salud.cansado, salud.exhausto, salud.herido, salud.malherido, salud.sangrando, salud.enfermo, salud.aturdido]
 
   mental:
     significado: Estado anímico actual. Acumulable.
-    ejemplos: [mental.panico, mental.confundido, mental.desmoralizado, mental.iracundo, mental.traumatizado, mental.berserker, mental.sereno]
 
   rasgo:
     significado: Rasgo físico observable.
-    ejemplos: [rasgo.altura_media, rasgo.cicatriz_en_ceja, rasgo.pelo_corto]
 
   trait:
     significado: Rasgo de carácter sin mecánica activa.
-    ejemplos: [trait.taciturno, trait.miope, trait.mirada_larga]
 
   perk:
     significado: Ventaja reglada con efecto numérico.
-    ejemplos: [perk.sucesor_de_ricardo, perk.veterano, perk.tirador_preciso]
 
   aspecto:
     significado: Mini-tag identitario con efecto mecánico en mini-frase.
-    ejemplos: [aspecto.cabron, aspecto.ojo_de_halcon, aspecto.muy_fuerte, aspecto.terco]
 
   skill:
     significado: Habilidad aprendida o entrenada.
-    ejemplos: [skill.comandancia, skill.medicina, skill.lectura_de_terreno]
 
   equipo:
     significado: Equipo cargado por el personaje.
     subcategorias: [arma, utilitario, vestidura]
-    ejemplos: [equipo.arma.rifle_militar, equipo.utilitario.cargador, equipo.vestidura.uniforme_confederado]
 
   rol:
-    significado: Roles operativos (oficio, jerarquía militar, narrativo, mecánico).
+    significado: Roles operativos.
     subcategorias: [oficio, jerarquia, narrativo, mecanico]
-    ejemplos: [rol.oficio.francotirador, rol.jerarquia.sargento, rol.mecanico.lider]
 
   lealtad:
     significado: Lealtad real y declarable. Relacional. Ver §5.
-    ejemplos: [lealtad.faccion.confederados, lealtad.pj.aguirre_walter]
 
   nemesis:
     significado: Enemistad personal identificada en batalla. Relacional. Ver §5.
-    ejemplos: [nemesis.pj.iturra_delia]
 
 El motor acepta tags fuera del canon. Marcalos con `origen: custom`. La coherencia del catálogo la sostiene la curaduría, no la integridad referencial.
 
@@ -138,9 +115,12 @@ El motor acepta tags fuera del canon. Marcalos con `origen: custom`. La coherenc
 
 Cada tag canon o emergente tiene una entrada en el catálogo. La filosofía es **mostrativa, no obligatoria**: cuatro campos son siempre requeridos. Todo lo demás es opcional y se declara solo si suma información real.
 
-### 4.1. Campos obligatorios
+El template completo con todos los campos posibles vive en [`tag-modelo.yaml`](tag-modelo.yaml), usando dos marcas:
 
-Estos cuatro campos están **siempre** en el archivo:
+- `(*)` — campo obligatorio siempre.
+- `(+)` — campo obligatorio cuando la categoría o subcategoría lo demanda.
+
+### 4.1. Campos obligatorios siempre — los cuatro `(*)`
 
   slug:
     tipo: string
@@ -150,24 +130,35 @@ Estos cuatro campos están **siempre** en el archivo:
     tipo: string
     regla: Etiqueta legible humana corta, 1-3 palabras, sin slugificar.
     proposito: Lo que un renderer muestra como label.
-    ejemplos: ["Tirador preciso", "Pánico", "Cabrón"]
 
   categoria:
     tipo: string
-    regla: Primer segmento del tag. Si la categoría tiene sub-niveles, este campo guarda solo la raíz; `subcategoria` (opcional) lleva el intermedio.
+    regla: Primer segmento del tag. Si la categoría tiene sub-niveles, este campo guarda solo la raíz; `subcategoria` lleva el intermedio.
 
   descripcion:
     tipo: string
     regla: 1-3 frases canónicas.
     proposito: Única fuente de la prosa del tag. Nunca se persiste dentro del personaje.
 
-### 4.2. Campos comunes opcionales
+### 4.2. Campos obligatorios condicionales — los `(+)`
 
-Declaralos solo si aportan información real:
+Estos campos son obligatorios solo cuando la categoría o subcategoría del tag los demanda. Fuera de su contexto, no aplican.
 
   subcategoria:
-    uso: Segmento intermedio cuando aplica.
-    ejemplo: "arma" para equipo.arma.pistola
+    obligatorio_si: categoria ∈ {equipo, rol}
+    uso: Segmento intermedio del tag (ej. "arma" para equipo.arma.pistola).
+
+  aspecto.efecto:
+    obligatorio_si: categoria = aspecto
+    uso: Mini-frase trigger + probabilidad + efecto.
+
+  equipo_arma.tipo_accion:
+    obligatorio_si: subcategoria = arma
+    enum: [cerrojo, semiauto, automatico, cuerpo_a_cuerpo]
+
+### 4.3. Campos comunes opcionales
+
+Declaralos solo si aportan información real:
 
   origen:
     enum: [canon, emergente, custom]
@@ -176,26 +167,23 @@ Declaralos solo si aportan información real:
 
   metadatos:
     uso: Auditoría del catálogo.
-    campos:
-      version_introducida: SemVer
-      creado_en: ISO-8601
-      ultima_actualizacion: ISO-8601
+    campos: [version_introducida, creado_en, ultima_actualizacion]
 
   requires:
-    uso: Precondiciones de coherencia. Ver §4.3.
+    uso: Precondiciones de coherencia. Ver §4.4.
 
   excluye:
     uso: Lista de tags incompatibles. Si el personaje tiene cualquiera, el tag no debería aplicarse.
     nota: Simétrico al prefijo `no:` de `requires`. Ver OQ-tag-4.
 
   tags_relacionados:
-    uso: Tags que típicamente acompañan a este. Informativo, no normativo. Ayuda al curador y al sorteador.
+    uso: Tags que típicamente acompañan a este. Informativo, no normativo.
 
   peso_narrativo:
     tipo: int (1..5)
-    uso: Hint al sorteador sobre frecuencia apropiada para personajes random. No es probabilidad estricta.
+    uso: Hint al sorteador sobre frecuencia apropiada. No es probabilidad estricta.
 
-### 4.3. Sistema `requires` — dependencias del tag
+### 4.4. Sistema `requires` — dependencias del tag
 
 El bloque `requires` declara cuándo un tag es coherente sobre un personaje. Tiene dos sub-bloques, ambos opcionales y combinables:
 
@@ -207,55 +195,17 @@ El bloque `requires` declara cuándo un tag es coherente sobre un personaje. Tie
 
 **Modificador NOT**: prefijá cualquier entrada con `"no:"` para invertir la condición. La forma es **string con prefijo literal** — sin objetos anidados, queryable con un `startswith("no:")` desde cualquier consumidor, obvia a la lectura humana.
 
-Ejemplo completo — `perk.tirador_preciso`:
-
-  tag:
-    slug: tirador_preciso
-    nombre: "Tirador preciso"
-    categoria: perk
-    descripcion: >
-      Bonus al primer disparo apuntado tras un turno sin moverse.
-      Requiere oficio de francotirador y condiciones físicas decentes.
-    requires:
-      require_all:
-        - rol.oficio.francotirador
-        - "no:salud.herido"
-        - "no:salud.malherido"
-      require_any:
-        - equipo.arma.rifle_militar
-        - equipo.arma.rifle_de_caza
-
-Lectura: el personaje **debe** ser francotirador de oficio, **no debe** estar herido ni malherido, **y** debe portar uno de los dos rifles aceptados. Si cualquier condición falla, el tag es incoherente sobre ese personaje. La política downstream decide si el motor lo rechaza, emite warning o lo aplica igual.
+Para ver el bloque `requires` aplicado a un tag real, consultar `mock/tags/perk/tirador_preciso.yaml`.
 
 `requires` es **documentación ejecutable, no validación de schema**. La API acepta personajes con tags incoherentes. La coherencia es responsabilidad del generador y del curador. Cualquier validador opcional puede consultar `requires`; el contrato duro no lo impone.
 
-### 4.4. Campos específicos por categoría
+### 4.5. Bloques específicos por categoría
 
-Cada familia de tag puede declarar bloques propios para atributos exclusivos. Todos son opcionales. Hoy hay curados estos:
+Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `aspecto`, `skill`, `equipo_arma`, `equipo_vestidura`. Sus campos internos son opcionales salvo los marcados `(+)` en §4.2.
 
-  perk:
-    efecto_reglado: string  # frase con bonus/penalidad numérico
+El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml). Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `mock/tags/`.
 
-  aspecto:
-    efecto: string                          # mini-frase trigger + probabilidad + efecto
-    tags_activables: [tag mental.*, ...]    # tags que el aspecto puede disparar
-
-  skill:
-    atributo_dominante: fis | tac | men
-    rangos_naturales: [tag rango.*, ...]
-    facciones_predominantes: [tag faccion.*, ...]
-    equipo_sugerido: [tag equipo.*, ...]
-
-  equipo.arma:
-    calibre: string                          # null si no aplica
-    tipo_accion: cerrojo | semiauto | automatico | cuerpo_a_cuerpo
-    municion_tag_ref: tag equipo.utilitario.*
-    alcance_narrativo: corto | medio | largo
-
-  equipo.vestidura:
-    faccion_asociada: tag faccion.*
-
-El template programático completo con todos los bloques marcados opcionales vive en [`tag-modelo.yaml`](tag-modelo.yaml). **Los tipos de tag aún no introducidos** (montura, vicio, mascota, etc.) no llevan template anticipado. Se documentan el día que aparece el primer caso real.
+**Los tipos de tag aún no introducidos** (montura, vicio, mascota, etc.) no llevan template anticipado. Se documentan el día que aparece el primer caso real.
 
 ---
 
@@ -266,15 +216,15 @@ Estas dos categorías codifican **vínculos dirigidos** hacia otra entidad. Su s
 Patrón de referencia compuesta:
 
   faccion.:
-    apunta_a: Facción del catálogo
+    apunta_a: Facción del catálogo.
     forma: lealtad.faccion.{slug}
 
   pj.:
-    apunta_a: Personaje persistido
+    apunta_a: Personaje persistido.
     forma: lealtad.pj.{slug}  |  nemesis.pj.{slug}
 
   escuadra.:
-    apunta_a: Escuadra (catálogo TBD)
+    apunta_a: Escuadra (catálogo TBD).
     forma: lealtad.escuadra.{slug}
 
 El prefijo es parte literal del slug compuesto. Un parser que ve `lealtad.faccion.confederados` sabe que es una ref a la facción de slug `confederados`.
@@ -320,8 +270,6 @@ Ambos contenedores:
   tag de un nivel:           mock/tags/{categoria}/{slug}.yaml
   tag con sub-categoría:     mock/tags/{categoria}/{subcategoria}/{slug}.yaml
 
-Ejemplos: `mock/tags/faccion/ejercito_rojo.yaml`, `mock/tags/equipo/arma/pistola.yaml`.
-
 Las categorías relacionales (`lealtad`, `nemesis`) **no tienen entradas en el catálogo**. Su semántica es del formato del tag, no del contenido. Las refs `pj.{slug}` y `faccion.{slug}` resuelven contra los catálogos de personajes y facciones.
 
 ### 6.2. Indistinción mock/DB
@@ -347,6 +295,8 @@ El catálogo canon es **andamiaje, no jaula**. Tres ejes de extensibilidad sin p
 **No promesa**: que dos generadores coincidan sobre cómo nombrar el mismo concepto.
 
 La fragmentación se mitiga con curaduría, no con validación. Ver PRD §6.6 y tensión 13.7.
+
+Para ver extensibilidad en uso real, consultar [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml) — los personajes 2 (chamán) y 4 (pandillero) usan tags `origen: custom` para roles narrativos que no existían antes.
 
 ---
 

@@ -1,0 +1,188 @@
+# Ejemplos canónicos de personajes — muestran cómo los tags componen una hoja real.
+# Referencia narrativa: tag-modelo.md
+# Estructura de la hoja: hoja-modelo.md / hoja-modelo.yaml
+#
+# Cinco arquetipos pensados para ilustrar combinaciones diversas del sistema de tags:
+#   1. Médico confederado — categorías canon, perfil entrenado.
+#   2. Chamán del Ejército Rojo — tags emergentes/custom, extensibilidad en uso.
+#   3. Líder revolucionario sin mando formal — rol narrativo desacoplado de rango.
+#   4. Pandillero drogado, herido y desorientado — acumulación de tags salud/mental.
+#   5. Soldado entrenado confederado — caso base limpio.
+
+personajes:
+
+  # ─── 1. Médico confederado ────────────────────────────────────────────────
+  - identidad:
+      slug: salgado_ernesto
+      nombre: Ernesto Salgado
+      sobrenombre: Doctor Salgado
+      rol: Médico de campaña
+      genero: m
+      edad: 38
+    atributos: {fis: 3, tac: 4, men: 5}
+    tags:
+      - faccion.confederados
+      - rango.segundo_al_mando
+      - mando.capaz
+      - estado.disponible
+      - rasgo.altura_media
+      - rasgo.manos_grandes
+      - trait.taciturno
+      - perk.resistencia_al_dolor
+      - skill.medicina
+      - skill.primeros_auxilios
+      - skill.lectura_de_terreno
+      - rol.oficio.medico
+      - rol.jerarquia.sargento
+      - equipo.arma.pistola
+      - equipo.utilitario.botiquin
+      - equipo.utilitario.vendaje
+      - equipo.utilitario.vendaje
+      - equipo.utilitario.cuaderno
+      - equipo.vestidura.uniforme_confederado
+      - lealtad.faccion.confederados
+    historia: >
+      Cirujano civil reclutado tras la ofensiva del Tercer Año. Aprendió a operar bajo fuego
+      en los hospitales de campaña del norte y nunca volvió a la práctica civil. Habla poco,
+      pero su escuadra sabe que mientras él esté en pie nadie muere desangrado en la trinchera.
+
+  # ─── 2. Chamán del Ejército Rojo ──────────────────────────────────────────
+  - identidad:
+      slug: ñamcupan_lautaro
+      nombre: Lautaro Ñamcupán
+      sobrenombre: El que habla con el monte
+      rol: Chamán de columna
+      genero: m
+      edad: 54
+    atributos: {fis: 3, tac: 3, men: 6}
+    tags:
+      - faccion.ejercito_rojo
+      - rango.fusilero
+      - estado.disponible
+      - rasgo.alto
+      - rasgo.delgado
+      - rasgo.piel_curtida
+      - rasgo.barba_canosa
+      - trait.taciturno
+      - aspecto.devoto
+      - skill.conocimiento_de_meseta
+      - skill.medicina
+      - skill.oratoria          # origen: emergente — uso comunitario, no de mando
+      - rol.narrativo.chaman    # origen: custom — categoría narrativa nueva
+      - equipo.arma.revolver
+      - equipo.utilitario.cuaderno
+      - equipo.vestidura.ropa_de_civil
+      - lealtad.faccion.ejercito_rojo
+      - lealtad.pj.calfucura_aniceto
+    historia: >
+      Nunca empuñó un fusil hasta los cincuenta. Lo siguen porque conoce los pasos del
+      monte, lee las nubes y entierra a los muertos con palabras que la columna entiende
+      aunque no las hable. El revólver lo carga sin balas — dice que pesa lo justo para
+      recordarse que la guerra todavía no terminó.
+
+  # ─── 3. Líder revolucionario sin mando formal ─────────────────────────────
+  - identidad:
+      slug: bordagaray_emilia
+      nombre: Emilia Bordagaray
+      sobrenombre: Camarada Emilia
+      rol: Agitadora de columna
+      genero: f
+      edad: 31
+    atributos: {fis: 3, tac: 4, men: 6}
+    tags:
+      - faccion.ejercito_rojo
+      - rango.fusilero
+      - estado.activo
+      - escuadra.mansilla
+      - rasgo.altura_media
+      - rasgo.pelo_corto
+      - trait.lealtad_obrera
+      - trait.mirada_larga
+      - aspecto.carismatico
+      - perk.voz_de_mando
+      - skill.oratoria
+      - skill.comisariado
+      - skill.lectura_de_mapas
+      - rol.narrativo.lider_revolucionario
+      - equipo.arma.smg
+      - equipo.utilitario.cargador
+      - equipo.utilitario.cargador
+      - equipo.utilitario.cuaderno
+      - equipo.vestidura.uniforme_rojo
+      - lealtad.faccion.ejercito_rojo
+      - lealtad.pj.mansilla_eduardo
+    historia: >
+      Llegó al frente como cuadro político y se quedó como fusilera. El líder de su
+      escuadra le pide la palabra cuando hay que arengar; el resto de los días carga
+      munición igual que cualquiera. Mando informal sin charreteras — exactamente
+      como ella lo prefiere.
+
+  # ─── 4. Pandillero drogado, desorientado y herido ─────────────────────────
+  - identidad:
+      slug: morales_kuky
+      nombre: Joaquín Morales
+      sobrenombre: El Kuky
+      rol: Irregular del litoral
+      genero: m
+      edad: 22
+    atributos: {fis: 3, tac: 2, men: 2}
+    tags:
+      - faccion.ejercito_rojo
+      - rango.recluta
+      - estado.disponible
+      - rasgo.delgado
+      - rasgo.cicatriz_facial
+      - trait.recluta_novato
+      - trait.panico_en_abierto
+      - salud.herido
+      - salud.sangrando
+      - salud.cansado
+      - mental.confundido
+      - mental.iracundo
+      - rol.oficio.irregular        # origen: custom
+      - equipo.arma.pistola
+      - equipo.utilitario.cuchillo
+      - equipo.vestidura.ropa_de_civil
+    historia: >
+      Lo levantaron en una redada de puerto y le pusieron un fusil en la mano dos días
+      después. Pelea bien cuando pelea, pero hace cuatro horas que mastica algo que le
+      sacó a un muerto y ya no escucha las órdenes. Sangra por la pierna y todavía no
+      lo nota.
+
+  # ─── 5. Soldado bien entrenado confederado ────────────────────────────────
+  - identidad:
+      slug: cabral_diego
+      nombre: Diego Cabral
+      sobrenombre: Cabo Cabral
+      rol: Fusilero de primera
+      genero: m
+      edad: 29
+    atributos: {fis: 3, tac: 5, men: 4}
+    tags:
+      - faccion.confederados
+      - rango.apuntador
+      - estado.activo
+      - escuadra.ricardo
+      - rasgo.atletico
+      - rasgo.pelo_corto
+      - trait.templado_bajo_fuego
+      - perk.punteria_fria
+      - perk.recarga_rapida
+      - perk.cobertura_instintiva
+      - skill.tiro_de_precision
+      - skill.lectura_de_terreno
+      - rol.oficio.francotirador
+      - rol.jerarquia.sargento
+      - equipo.arma.rifle_militar
+      - equipo.utilitario.cargador
+      - equipo.utilitario.cargador
+      - equipo.utilitario.cargador
+      - equipo.utilitario.prismaticos
+      - equipo.vestidura.uniforme_confederado
+      - lealtad.faccion.confederados
+      - lealtad.pj.sargento_ricardo_postmortem
+    historia: >
+      Tercer ciclo de entrenamiento completo, dos campañas detrás y todas las medallas
+      reglamentarias. Hace su trabajo y deja que otros hablen. El sargento Ricardo lo
+      formó tirador y desde que cayó, Cabral no falla un disparo a menos de doscientos
+      metros — es la manera que encontró de no olvidarlo.

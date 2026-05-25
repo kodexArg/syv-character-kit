@@ -1,134 +1,76 @@
 # Template de archivo de catálogo de un tag.
 # Ubicación: mock/tags/{categoria}/{slug}.yaml  o  mock/tags/{categoria}/{subcategoria}/{slug}.yaml
 # Referencia narrativa: tag-modelo.md
+# Ejemplos de uso compuesto: tag-modelo-ejemplos.yaml
 #
-# Filosofía del template:
-#   - Sólo cuatro campos son OBLIGATORIOS (ver bloque "REQUIRED").
-#   - TODO lo demás es OPCIONAL — declarar sólo lo que el tag concreto necesita.
-#   - El template es MOSTRATIVO: lista todas las opciones imaginables hoy para que
-#     el curador sepa qué puede declarar. No completar campos sin información real.
-#   - NO se incluyen templates para tipos de tag que aún no existen (montura, vicio,
-#     mascota, etc.). Cuando aparezca el primer caso real se documenta acá.
+# Convención de marcas:
+#   (*) campo obligatorio siempre
+#   (+) campo obligatorio cuando la categoría / subcategoría lo demanda
+#   sin marca: campo opcional
+#
+# Forma canónica del tag en personaje.tags[]:  <categoria>[.<subcategoria>].<slug>
 
 tag:
 
-  # ═══════════════════════════════════════════════════════════════════════════
-  # REQUIRED — los cuatro únicos campos obligatorios. SIEMPRE presentes.
-  # ═══════════════════════════════════════════════════════════════════════════
+  slug:          str         # (*)
+  nombre:        str         # (*)
+  categoria:     str         # (*)  rasgo | trait | perk | aspecto | skill | faccion | rango |
+                             #      escuadra | mando | estado | salud | mental | equipo | rol |
+                             #      lealtad | nemesis | <nueva>
+  descripcion:   str         # (*)
 
-  slug: str                 # REQUIRED. Último segmento del tag. lowercase + underscore, sin acentos.
-                            #   Ej: "tirador_preciso", "panico", "ejercito_rojo".
+  subcategoria:  str         # (+) requerido si categoria ∈ {equipo, rol}
+  origen:        str         #     canon | emergente | custom
+  metadatos:
+    version_introducida: str
+    creado_en:           str
+    ultima_actualizacion: str
 
-  nombre: str               # REQUIRED. Etiqueta legible humana (1-3 palabras, sin slugificar).
-                            #   Es lo que un renderer muestra como label.
-                            #   Ej: "Tirador preciso", "Pánico", "Ejército Rojo".
+  requires:
+    require_all:
+      - tag
+      - "no:tag"             # prefijo literal "no:" invierte la condición
+    require_any:
+      - tag
+      - "no:tag"
 
-  categoria: str            # REQUIRED. Primer segmento del tag (raíz).
-                            #   Canónicos hoy: rasgo | trait | perk | aspecto | skill |
-                            #   faccion | rango | escuadra | mando | estado | salud | mental |
-                            #   equipo | rol | lealtad | nemesis. Categorías nuevas son válidas.
+  excluye:
+    - tag
 
-  descripcion: str          # REQUIRED. 1-3 frases canónicas. Única fuente de la prosa del tag.
-                            #   Nunca se persiste dentro del personaje.
+  tags_relacionados:
+    - tag
 
-  # Forma canónica completa del tag (cómo aparece en personaje.tags[]):
-  #   <categoria>[.<subcategoria>].<slug>
-  # Ej: equipo.arma.pistola | mental.panico | faccion.ejercito_rojo
+  peso_narrativo: int        # 1..5
 
-  # ═══════════════════════════════════════════════════════════════════════════
-  # OPCIONAL — campos comunes que aplican a cualquier categoría.
-  # Declarar sólo si suman información real sobre el tag.
-  # ═══════════════════════════════════════════════════════════════════════════
+  perk:
+    efecto_reglado: str
 
-  # subcategoria: str       # OPCIONAL. Segmento intermedio cuando la categoría tiene sub-niveles.
-                            #   Ej: "arma" para equipo.arma.pistola; null si no aplica.
+  aspecto:
+    efecto: str              # (+) requerido si categoria = aspecto
+    tags_activables:
+      - tag mental.*
 
-  # origen: str             # OPCIONAL. Procedencia en el catálogo. Enum: canon | emergente | custom.
-                            #   Asumir "emergente" si nació al vuelo y luego se promovió.
+  skill:
+    atributo_dominante: str  # fis | tac | men
+    rangos_naturales:
+      - tag rango.*
+    facciones_predominantes:
+      - tag faccion.*
+    equipo_sugerido:
+      - tag equipo.*
 
-  # metadatos:              # OPCIONAL. Bloque de auditoría del catálogo.
-  #   version_introducida: str  # SemVer del schema donde entró el tag. Ej: "0.5.1".
-  #   creado_en: str            # ISO-8601.
-  #   ultima_actualizacion: str # ISO-8601.
+  equipo_arma:
+    calibre:           str
+    tipo_accion:       str   # (+) requerido si subcategoria = arma. cerrojo | semiauto | automatico | cuerpo_a_cuerpo
+    municion_tag_ref:  tag equipo.utilitario.*
+    alcance_narrativo: str   # corto | medio | largo
 
-  # ── requires — sistema de dependencias del tag ────────────────────────────
-  # OPCIONAL. Declara cuándo el tag es coherente sobre un personaje.
-  # Ambos sub-bloques son opcionales y combinables.
-  # Modificador NOT: prefijar cualquier entrada con "no:" para invertir la condición.
-  #
-  # requires:
-  #   require_all:          # OPCIONAL. El personaje debe tener TODOS estos tags.
-  #     - "rol.oficio.francotirador"
-  #     - "no:salud.herido"         # NOT — debe NO tener este tag
-  #     - "no:salud.malherido"
-  #   require_any:          # OPCIONAL. Basta con UNO de estos tags.
-  #     - "equipo.arma.rifle_militar"
-  #     - "equipo.arma.rifle_de_caza"
+  equipo_vestidura:
+    faccion_asociada: tag faccion.*
 
-  # ── excluye — incompatibilidades declaradas (simétrico a no:) ─────────────
-  # OPCIONAL. Lista de tags incompatibles. Si el personaje tiene alguno, este tag no aplica.
-  # Equivalente a "no:" en require_all pero declarado desde el lado correcto.
-  #
-  # excluye:
-  #   - "estado.kia"
-  #   - "salud.agotado"
-
-  # ── tags_relacionados — informativo, no normativo ─────────────────────────
-  # OPCIONAL. Tags que típicamente acompañan a este. Ayuda al curador y al sorteador.
-  #
-  # tags_relacionados:
-  #   - "skill.lectura_de_terreno"
-  #   - "trait.taciturno"
-
-  # peso_narrativo: int     # OPCIONAL. Hint al sorteador (1..5). No es probabilidad estricta.
-
-  # ═══════════════════════════════════════════════════════════════════════════
-  # OPCIONAL — bloques específicos por categoría.
-  # Incluir SOLO el bloque que corresponde a la categoría del tag (si alguno).
-  # Las categorías sin bloque específico se sirven con los campos comunes solamente
-  # (rasgo, trait, faccion, rango, escuadra, mando, estado, salud, mental,
-  #  equipo.utilitario, rol.*).
-  # ═══════════════════════════════════════════════════════════════════════════
-
-  # categoria: perk
-  # perk:
-  #   efecto_reglado: str         # OPCIONAL. Frase con bonus/penalidad numérico.
-
-  # categoria: aspecto
-  # aspecto:
-  #   efecto: str                 # OPCIONAL. Mini-frase: trigger + [probabilidad] + efecto.
-  #   tags_activables:            # OPCIONAL. Tags mental.* que el aspecto puede disparar.
-  #     - "mental.berserker"
-  #     - "mental.panico"
-
-  # categoria: skill
-  # skill:
-  #   atributo_dominante: str     # OPCIONAL. fis | tac | men.
-  #   rangos_naturales:           # OPCIONAL.
-  #     - "rango.lider_de_escuadra"
-  #   facciones_predominantes:    # OPCIONAL.
-  #     - "faccion.ejercito_rojo"
-  #   equipo_sugerido:            # OPCIONAL.
-  #     - "equipo.arma.rifle_militar"
-
-  # categoria: equipo, subcategoria: arma
-  # equipo_arma:
-  #   calibre: str                # OPCIONAL. Ej: "7.65 Mauser"; null si no aplica.
-  #   tipo_accion: str            # OPCIONAL. cerrojo | semiauto | automatico | cuerpo_a_cuerpo.
-  #   municion_tag_ref: str       # OPCIONAL. Ref a tag equipo.utilitario.* (ej. "equipo.utilitario.cargador").
-  #   alcance_narrativo: str      # OPCIONAL. corto | medio | largo.
-
-  # categoria: equipo, subcategoria: vestidura
-  # equipo_vestidura:
-  #   faccion_asociada: str       # OPCIONAL. Ref a tag faccion.* (ej. "faccion.confederados").
-
-  # ═══════════════════════════════════════════════════════════════════════════
-  # NO PERSISTIDAS COMO CATÁLOGO — categorías relacionales.
-  # ═══════════════════════════════════════════════════════════════════════════
-  # Las categorías "lealtad" y "nemesis" NO tienen archivo de catálogo —
-  # su semántica es del FORMATO del tag, no de su contenido. Forma:
-  #   lealtad.faccion.{slug}   |   lealtad.pj.{slug}   |   lealtad.escuadra.{slug}
-  #   nemesis.pj.{slug}
-  # Las refs resuelven contra los catálogos de personajes y facciones.
-  # Los contenedores derivados "aliados" y "nemesis" se computan al servir
-  # (ver PRD §6.3 y tag-modelo.md §5).
+# Categorías relacionales (lealtad, nemesis) NO tienen archivo de catálogo.
+# Su semántica vive en el formato del tag:
+#   lealtad.faccion.{slug}  |  lealtad.pj.{slug}  |  lealtad.escuadra.{slug}
+#   nemesis.pj.{slug}
+# Las refs resuelven contra los catálogos de personajes y facciones.
+# Los contenedores derivados "aliados" y "nemesis" se computan al servir (ver tag-modelo.md §5).
