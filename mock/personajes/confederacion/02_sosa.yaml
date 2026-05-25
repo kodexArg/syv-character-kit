@@ -1,67 +1,68 @@
 personaje:
-  id: mock.confederacion.02.sosa
-  origen: mock
-  semilla: mock-fixed-02
-
-  nombre: Horacio Sosa
-  sobrenombre: Cabo Primero Horacio Sosa
-  filiacion: "Segundo al mando de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 27
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Cabo Primero Confederado
-
-  estado: activo
-  rango: Segundo al mando
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: true
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - el Sargento Aguirre
-      - su escuadra
-    secretos: []
-
+  identidad:
+    slug: sosa_horacio
+    nombre: Horacio Sosa
+    sobrenombre: Cabo Primero Horacio Sosa
+    rol: Cabo Primero Confederado
+    genero: masculino
+    edad: 27
+  faccion:
+    faccion: Confederación
+    filiacion: Segundo al mando de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Segundo al mando
+    mando: true
+    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 6
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo rapado" }
-    - { categoria: rasgo, valor: "manos grandes" }
-    - { categoria: rasgo, valor: "habla parca" }
-    - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Coordinación" }
-    - { categoria: skill, valor: "Operación de radio" }
-    - { categoria: skill, valor: "Inventario" }
-    - { categoria: trait, valor: "Confiable" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: perk, valor: "Brazo derecho funcional" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "radio" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: pelo rapado
+    - categoria: rasgo
+      valor: manos grandes
+    - categoria: rasgo
+      valor: habla parca
+    - categoria: rol
+      valor: lider
+    - categoria: skill
+      valor: Coordinación
+    - categoria: skill
+      valor: Operación de radio
+    - categoria: skill
+      valor: Inventario
+    - categoria: trait
+      valor: Confiable
+    - categoria: trait
+      valor: Obstinado
+    - categoria: perk
+      valor: Brazo derecho funcional
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: radio
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.confederacion.01.aguirre
-      descripcion: "Sargento Aguirre lo eligió personalmente. Confianza recíproca, sin palabras."
+      ref_personaje_slug: aguirre_walter
+      descripcion: Sargento Aguirre lo eligió personalmente. Confianza recíproca, sin palabras.
     - tipo: subordinado
-      ref_personaje_id: mock.confederacion.10.lugones
-      descripcion: "Recluta Lugones, recargador móvil. Sosa la mueve según la situación."
-
+      ref_personaje_slug: lugones_patricia
+      descripcion: Recluta Lugones, recargador móvil. Sosa la mueve según la situación.
   historia: |
     Horacio Sosa es cordobés, del cinturón industrial. Antes del servicio trabajaba
     turno noche en una planta de procesado de aceite — sin quejarse porque era lo
@@ -73,31 +74,42 @@ personaje:
     — Sosa estaba en otro frente —, pero el expediente habla solo. Sosa aceptó sin
     preguntar sobre el ascenso ni sobre cómo murió el sargento anterior. Eso
     también es parte de por qué lo eligieron.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo rapado" }
-    - { categoria: rasgo, valor: "manos grandes" }
-    - { categoria: rasgo, valor: "habla parca" }
-    - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Coordinación" }
-    - { categoria: skill, valor: "Operación de radio" }
-    - { categoria: skill, valor: "Inventario" }
-    - { categoria: trait, valor: "Confiable" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: perk, valor: "Brazo derecho funcional" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "radio" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: pelo rapado
+    - categoria: rasgo
+      valor: manos grandes
+    - categoria: rasgo
+      valor: habla parca
+    - categoria: rol
+      valor: lider
+    - categoria: skill
+      valor: Coordinación
+    - categoria: skill
+      valor: Operación de radio
+    - categoria: skill
+      valor: Inventario
+    - categoria: trait
+      valor: Confiable
+    - categoria: trait
+      valor: Obstinado
+    - categoria: perk
+      valor: Brazo derecho funcional
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: radio
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

@@ -1,63 +1,63 @@
 personaje:
-  id: mock.ejercito_rojo.08.belenchini
-  origen: mock
-  semilla: mock-fixed-19
-
-  nombre: Esteban Belenchini
-  sobrenombre: Miliciano Veterano Esteban Belenchini
-  filiacion: "Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 39
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Miliciano Veterano
-
-  estado: activo
-  rango: Fusilero
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: false
-
-  lealtades:
-    primaria: Ejército Rojo
-    secundarias:
-      - los metalúrgicos de la primera hora
-      - sus tres hijos
-    secretos: []
-
+  identidad:
+    slug: belenchini_esteban
+    nombre: Esteban Belenchini
+    sobrenombre: Miliciano Veterano Esteban Belenchini
+    rol: Miliciano Veterano
+    genero: masculino
+    edad: 39
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Fusilero
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo con canas" }
-    - { categoria: rasgo, valor: "cicatriz facial" }
-    - { categoria: rasgo, valor: "mirada firme" }
-    - { categoria: rasgo, valor: "cicatriz facial" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de precisión" }
-    - { categoria: skill, valor: "Flanqueo" }
-    - { categoria: trait, valor: "Veterano" }
-    - { categoria: trait, valor: "Objetivo prioritario" }
-    - { categoria: perk, valor: "Veterano de flanqueo" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: pelo con canas
+    - categoria: rasgo
+      valor: cicatriz facial
+    - categoria: rasgo
+      valor: mirada firme
+    - categoria: rasgo
+      valor: cicatriz facial
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Tiro de precisión
+    - categoria: skill
+      valor: Flanqueo
+    - categoria: trait
+      valor: Veterano
+    - categoria: trait
+      valor: Objetivo prioritario
+    - categoria: perk
+      valor: Veterano de flanqueo
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.ejercito_rojo.05.carcamo
-      descripcion: "Ambos bahienses. La ciudad los une más que la doctrina."
-
+      ref_personaje_slug: carcamo_fermin
+      descripcion: Ambos bahienses. La ciudad los une más que la doctrina.
   historia: |
     Esteban Belenchini tiene treinta y nueve años y una quemadura en la mejilla
     izquierda del tamaño de una palma que data del año uno de la revolución,
@@ -71,35 +71,43 @@ personaje:
     de satisfacción y náuseas que no sabe cómo resolver. La revolución
     supuestamente cambió las condiciones. Siguen siendo condiciones de mierda,
     pero son las condiciones de ellos ahora.
-
   historial:
-    - fecha: "2022-06-01T00:00:00Z"
+    - fecha: '2022-06-01T00:00:00Z'
       tipo: herida
-      descripcion: "Quemadura grave en mejilla izquierda durante el incendio del local sindical."
+      descripcion: Quemadura grave en mejilla izquierda durante el incendio del local sindical.
       ref_batalla: null
       metadata:
         gravedad: grave
-        cicatriz: "quemadura en mejilla izquierda"
-
+        cicatriz: quemadura en mejilla izquierda
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo con canas" }
-    - { categoria: rasgo, valor: "cicatriz facial" }
-    - { categoria: rasgo, valor: "mirada firme" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de precisión" }
-    - { categoria: skill, valor: "Flanqueo" }
-    - { categoria: trait, valor: "Veterano" }
-    - { categoria: trait, valor: "Objetivo prioritario" }
-    - { categoria: perk, valor: "Veterano de flanqueo" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: pelo con canas
+    - categoria: rasgo
+      valor: cicatriz facial
+    - categoria: rasgo
+      valor: mirada firme
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Tiro de precisión
+    - categoria: skill
+      valor: Flanqueo
+    - categoria: trait
+      valor: Veterano
+    - categoria: trait
+      valor: Objetivo prioritario
+    - categoria: perk
+      valor: Veterano de flanqueo
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

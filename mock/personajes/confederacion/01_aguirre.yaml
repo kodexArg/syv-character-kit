@@ -1,75 +1,78 @@
 personaje:
-  id: mock.confederacion.01.aguirre
-  origen: mock
-  semilla: mock-fixed-01
-
-  nombre: Walter Aguirre
-  sobrenombre: Sargento Walter Aguirre
-  filiacion: "Lider de escuadra de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 28
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Sargento Confederado
-
-  estado: activo
-  rango: Lider de escuadra
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: true
-
-  lealtades:
-    primaria: Sargento Ricardo (post mortem)
-    secundarias:
-      - su escuadra
-      - los aserraderos del alto valle
-    secretos: []
-
+  identidad:
+    slug: aguirre_walter
+    nombre: Walter Aguirre
+    sobrenombre: Sargento Walter Aguirre
+    rol: Sargento Confederado
+    genero: masculino
+    edad: 28
+  faccion:
+    faccion: Confederación
+    filiacion: Lider de escuadra de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Lider de escuadra
+    mando: true
+    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 7
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo corto" }
-    - { categoria: rasgo, valor: "barba corta" }
-    - { categoria: rasgo, valor: "mirada lenta" }
-    - { categoria: rasgo, valor: "cicatriz en ceja" }
-    - { categoria: rol, valor: "lider" }
-    - { categoria: rol, valor: "sargento" }
-    - { categoria: skill, valor: "Comandancia" }
-    - { categoria: skill, valor: "Lectura de terreno" }
-    - { categoria: trait, valor: "Mirada larga" }
-    - { categoria: trait, valor: "Eco del peñasco" }
-    - { categoria: perk, valor: "Sucesor de Ricardo" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: pelo corto
+    - categoria: rasgo
+      valor: barba corta
+    - categoria: rasgo
+      valor: mirada lenta
+    - categoria: rasgo
+      valor: cicatriz en ceja
+    - categoria: rol
+      valor: lider
+    - categoria: rol
+      valor: sargento
+    - categoria: skill
+      valor: Comandancia
+    - categoria: skill
+      valor: Lectura de terreno
+    - categoria: trait
+      valor: Mirada larga
+    - categoria: trait
+      valor: Eco del peñasco
+    - categoria: perk
+      valor: Sucesor de Ricardo
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.arma
+      valor: pistola
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cuaderno
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: Sargento Ricardo (post mortem)
   vinculos:
     - tipo: mentor
-      ref_personaje_id: null
-      descripcion: >
-        Sargento Ricardo, su mentor, caído en el Sector 12,15. Aguirre heredó
-        el parche y el peso.
+      ref_personaje_slug: null
+      descripcion: |
+        Sargento Ricardo, su mentor, caído en el Sector 12,15. Aguirre heredó el parche y el peso.
     - tipo: subordinado
-      ref_personaje_id: mock.confederacion.02.sosa
-      descripcion: "Cabo Primero Sosa, su mano derecha. Lo eligió personalmente."
+      ref_personaje_slug: sosa_horacio
+      descripcion: Cabo Primero Sosa, su mano derecha. Lo eligió personalmente.
     - tipo: subordinado
-      ref_personaje_id: mock.confederacion.03.quiroga
-      descripcion: "Cabo Apuntador Quiroga, especialista del sector. Le confía la lectura del terreno."
-
+      ref_personaje_slug: quiroga_lisandro
+      descripcion: Cabo Apuntador Quiroga, especialista del sector. Le confía la lectura del terreno.
   historia: |
     Walter Aguirre es de Neuquén, aunque hace tres años que no pisa la provincia.
     Antes del servicio trabajaba con su padre en corte de madera en el alto valle —
@@ -82,45 +85,57 @@ personaje:
     Ricardo cayó, Walter organizó la columna y sacó a todos. Semanas después
     llegó el parche. No lo festejó. La escuadra que le asignaron es nueva. Los
     va a cuidar o los va a perder, y las dos cosas lo mantienen despierto.
-
   historial:
-    - fecha: "2026-03-12T14:20:00Z"
+    - fecha: '2026-03-12T14:20:00Z'
       tipo: baja_lider
-      descripcion: "Sargento Ricardo cayó en el Sector 12,15. Aguirre organizó la retirada."
-      ref_batalla: "batalla_sector_12_15"
+      descripcion: Sargento Ricardo cayó en el Sector 12,15. Aguirre organizó la retirada.
+      ref_batalla: batalla_sector_12_15
       metadata:
         nombre: Ricardo
-    - fecha: "2026-03-20T09:00:00Z"
+    - fecha: '2026-03-20T09:00:00Z'
       tipo: ascenso
-      descripcion: "Ascendido a Sargento tras la pérdida de Ricardo."
+      descripcion: Ascendido a Sargento tras la pérdida de Ricardo.
       ref_batalla: null
       metadata:
-        rango_anterior: "Segundo al mando"
-        rango_nuevo: "Lider de escuadra"
-
+        rango_anterior: Segundo al mando
+        rango_nuevo: Lider de escuadra
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo corto" }
-    - { categoria: rasgo, valor: "barba corta" }
-    - { categoria: rasgo, valor: "mirada lenta" }
-    - { categoria: rol, valor: "lider" }
-    - { categoria: rol, valor: "sargento" }
-    - { categoria: skill, valor: "Comandancia" }
-    - { categoria: skill, valor: "Lectura de terreno" }
-    - { categoria: trait, valor: "Mirada larga" }
-    - { categoria: trait, valor: "Eco del peñasco" }
-    - { categoria: perk, valor: "Sucesor de Ricardo" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: pelo corto
+    - categoria: rasgo
+      valor: barba corta
+    - categoria: rasgo
+      valor: mirada lenta
+    - categoria: rol
+      valor: lider
+    - categoria: rol
+      valor: sargento
+    - categoria: skill
+      valor: Comandancia
+    - categoria: skill
+      valor: Lectura de terreno
+    - categoria: trait
+      valor: Mirada larga
+    - categoria: trait
+      valor: Eco del peñasco
+    - categoria: perk
+      valor: Sucesor de Ricardo
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.arma
+      valor: pistola
+    - categoria: equipo.utilitario
+      valor: cuaderno
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: Sargento Ricardo (post mortem)
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

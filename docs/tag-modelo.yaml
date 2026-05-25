@@ -1,54 +1,65 @@
+# Template de archivo de catálogo de un tag.
+# Ubicación: mock/tags/{categoria}/{slug}.yaml  o  mock/tags/{categoria}/{subcategoria}/{slug}.yaml
+# Referencia narrativa: tag-modelo.md
+
 tag:
 
-  # ── Campos comunes a todos los tags ───────────────────────────────────────
-  categoria: str
-  valor: str
-  slug: str
-  descripcion: str
-  origen: str
+  # ── Identificación ────────────────────────────────────────────────────────
+  categoria: str            # rasgo | trait | perk | aspecto | skill | faccion | rango | escuadra | mando | estado | salud | mental | equipo | rol
+  subcategoria: str         # null si la categoría no tiene sub-niveles; ej. "arma" para equipo.arma
+  slug: str                 # lowercase + underscore, sin acentos
+
+  # Forma canónica completa del tag (cómo aparece en personaje.tags[]):
+  #   <categoria>[.<subcategoria>].<slug>
+  # Ej: equipo.arma.pistola | mental.panico | faccion.ejercito_rojo
+
+  # ── Descripción y procedencia ─────────────────────────────────────────────
+  descripcion: str          # 1-3 frases canónicas; única fuente de la prosa del tag
+  origen: str               # canon | emergente | custom
 
   metadatos:
-    version_introducida: str
-    creado_en: str
-    ultima_actualizacion: str
+    version_introducida: str  # SemVer ej. "0.5.0"
+    creado_en: str            # ISO-8601
+    ultima_actualizacion: str # ISO-8601
 
   # ── Específicos por categoría (incluir solo el bloque que aplica) ─────────
 
-  # categoria: rasgo
-
-  # categoria: trait
+  # categoria: rasgo | trait | faccion | rango | escuadra | mando | estado | salud | mental | equipo.utilitario
+  #   (solo campos comunes)
 
   # categoria: perk
   perk:
-    efecto_reglado: str
+    efecto_reglado: str     # frase con bonus/penalidad numérico
 
   # categoria: aspecto
   aspecto:
-    efecto: str
+    efecto: str             # mini-frase: trigger + [probabilidad] + efecto
     tags_activables:
-      - "[tags estado_temporal]"
+      - "[tag mental.*]"    # ref al tag mental que el aspecto puede disparar
 
   # categoria: skill
   skill:
-    atributo_dominante: str
+    atributo_dominante: str # fis | tac | men
     rangos_naturales:
-      - "[variable rango_natural]"
+      - "[tag rango.*]"
     facciones_predominantes:
-      - "[variable faccion_predominante]"
+      - "[tag faccion.*]"
     equipo_sugerido:
-      - "[tags equipo]"
+      - "[tag equipo.*]"
 
-  # categoria: equipo.arma
+  # categoria: equipo, subcategoria: arma
   equipo_arma:
-    calibre: str
-    tipo_accion: str
-    municion_tag_ref: "[tags equipo.utilitario]"
-    alcance_narrativo: str
+    calibre: str            # ej. "7.65 Mauser"; null si no aplica
+    tipo_accion: str        # cerrojo | semiauto | automatico | cuerpo_a_cuerpo
+    municion_tag_ref: "[tag equipo.utilitario.*]"
+    alcance_narrativo: str  # corto | medio | largo
 
-  # categoria: equipo.utilitario
-
-  # categoria: equipo.vestidura
+  # categoria: equipo, subcategoria: vestidura
   equipo_vestidura:
-    faccion_asociada: str
+    faccion_asociada: "[tag faccion.*]"
 
-  # categoria: rol.* — pendiente OQ-tag-1
+  # categoria: lealtad | nemesis
+  #   NO se persisten como entradas de catálogo — su slug es una ref compuesta:
+  #     lealtad.faccion.{slug}   |   lealtad.pj.{slug}   |   lealtad.escuadra.{slug}
+  #     nemesis.pj.{slug}
+  #   Ver tag-modelo.md §4.

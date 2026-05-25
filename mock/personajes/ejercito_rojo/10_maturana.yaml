@@ -1,61 +1,61 @@
 personaje:
-  id: mock.ejercito_rojo.10.maturana
-  origen: mock
-  semilla: mock-fixed-21
-
-  nombre: Claudio Maturana
-  sobrenombre: Voluntario Claudio Maturana
-  filiacion: "Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 21
-  genero: no_binario
-  estado_salud: saludable
-
-  rol: Voluntario — Recargador
-
-  estado: activo
-  rango: Recluta
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: false
-
-  lealtades:
-    primaria: Ejército Rojo (utilitaria)
-    secundarias:
-      - el sueldo fijo y las tres comidas
-    secretos: []
-
+  identidad:
+    slug: maturana_claudio
+    nombre: Claudio Maturana
+    sobrenombre: Voluntario Claudio Maturana
+    rol: Voluntario — Recargador
+    genero: no_binario
+    edad: 21
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Recluta
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo lacio" }
-    - { categoria: rasgo, valor: "rostro andrógino" }
-    - { categoria: rasgo, valor: "habla escasa" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Movimiento sigiloso" }
-    - { categoria: skill, valor: "Lectura del viento" }
-    - { categoria: trait, valor: "Pragmático" }
-    - { categoria: trait, valor: "Vacío de mando" }
-    - { categoria: perk, valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "ropa de civil" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo lacio
+    - categoria: rasgo
+      valor: rostro andrógino
+    - categoria: rasgo
+      valor: habla escasa
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Movimiento sigiloso
+    - categoria: skill
+      valor: Lectura del viento
+    - categoria: trait
+      valor: Pragmático
+    - categoria: trait
+      valor: Vacío de mando
+    - categoria: perk
+      valor: Olfato del terreno
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: ropa de civil
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.ejercito_rojo.11.bordagaray
-      descripcion: "Llegaron los dos tarde a la formación final. Se hicieron compañía sin proponérselo."
-
+      ref_personaje_slug: bordagaray_sebastian
+      descripcion: Llegaron los dos tarde a la formación final. Se hicieron compañía sin proponérselo.
   historia: |
     Claudio Maturana pasó cuatro años trabajando en estancias al sur del Chubut
     — esquila, marcación, alambrado. Los estancieros de esa zona no distinguían
@@ -70,29 +70,38 @@ personaje:
     No conoce bien el contexto del Sector 12,15. Sigue a Mansilla porque
     Mansilla parece saber lo que hace. Si resulta que no sabe, Maturana va a
     notar el problema probablemente antes que el resto.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo lacio" }
-    - { categoria: rasgo, valor: "rostro andrógino" }
-    - { categoria: rasgo, valor: "habla escasa" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Movimiento sigiloso" }
-    - { categoria: skill, valor: "Lectura del viento" }
-    - { categoria: trait, valor: "Pragmático" }
-    - { categoria: trait, valor: "Vacío de mando" }
-    - { categoria: perk, valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo lacio
+    - categoria: rasgo
+      valor: rostro andrógino
+    - categoria: rasgo
+      valor: habla escasa
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Movimiento sigiloso
+    - categoria: skill
+      valor: Lectura del viento
+    - categoria: trait
+      valor: Pragmático
+    - categoria: trait
+      valor: Vacío de mando
+    - categoria: perk
+      valor: Olfato del terreno
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras:
-    curator_note: "Género no_binario asignado por curaduría — la prosa fuente no fija pronombres conclusivos; cumple distribución de diversidad pedida en la escuadra roja."
+    curator_note: Género no_binario asignado por curaduría — la prosa fuente no fija pronombres conclusivos;
+      cumple distribución de diversidad pedida en la escuadra roja.

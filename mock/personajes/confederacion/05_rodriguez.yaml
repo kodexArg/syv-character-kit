@@ -1,64 +1,65 @@
 personaje:
-  id: mock.confederacion.05.rodriguez
-  origen: mock
-  semilla: mock-fixed-05
-
-  nombre: Marcela Rodríguez
-  sobrenombre: Soldado de Primera Marcela Rodríguez
-  filiacion: "Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 22
-  genero: femenino
-  estado_salud: saludable
-
-  rol: Fusilero de Primera
-
-  estado: activo
-  rango: Fusilero
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: false
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - su escuadra
-    secretos: []
-
+  identidad:
+    slug: rodriguez_marcela
+    nombre: Marcela Rodríguez
+    sobrenombre: Soldado de Primera Marcela Rodríguez
+    rol: Fusilero de Primera
+    genero: femenino
+    edad: 22
+  faccion:
+    faccion: Confederación
+    filiacion: Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Fusilero
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo atado" }
-    - { categoria: rasgo, valor: "discreto" }
-    - { categoria: rasgo, valor: "modales suaves" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Sastrería" }
-    - { categoria: trait, valor: "Discreta" }
-    - { categoria: trait, valor: "Pánico en abierto" }
-    - { categoria: perk, valor: "Cobertura instintiva" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo atado
+    - categoria: rasgo
+      valor: discreto
+    - categoria: rasgo
+      valor: modales suaves
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Sastrería
+    - categoria: trait
+      valor: Discreta
+    - categoria: trait
+      valor: Pánico en abierto
+    - categoria: perk
+      valor: Cobertura instintiva
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.confederacion.06.olivares
-      descripcion: "Mismo pelotón de asignación. Se conocen lo suficiente para saber cuándo el otro funciona mal."
+      ref_personaje_slug: olivares_tomas
+      descripcion: Mismo pelotón de asignación. Se conocen lo suficiente para saber cuándo el otro funciona
+        mal.
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.confederacion.08.pereyra
-      descripcion: "Misma escuadra por azar de numeración. Cuidado mudo."
-
+      ref_personaje_slug: pereyra_graciela
+      descripcion: Misma escuadra por azar de numeración. Cuidado mudo.
   historia: |
     Marcela Rodríguez es de Mar del Plata. Trabajaba de costurera en un taller
     familiar — confección de uniformes, ironías del destino — antes de que la
@@ -71,28 +72,36 @@ personaje:
     prevé. En combate es regular, sin más. Dispara cuando le dicen, se cubre
     cuando hay cobertura, y trata de no pensar demasiado en lo que pasa a dos
     metros. Hasta ahora le alcanzó.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo atado" }
-    - { categoria: rasgo, valor: "discreto" }
-    - { categoria: rasgo, valor: "modales suaves" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Sastrería" }
-    - { categoria: trait, valor: "Discreta" }
-    - { categoria: trait, valor: "Pánico en abierto" }
-    - { categoria: perk, valor: "Cobertura instintiva" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo atado
+    - categoria: rasgo
+      valor: discreto
+    - categoria: rasgo
+      valor: modales suaves
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Sastrería
+    - categoria: trait
+      valor: Discreta
+    - categoria: trait
+      valor: Pánico en abierto
+    - categoria: perk
+      valor: Cobertura instintiva
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: lealtad
+      valor: faccion.confederados
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

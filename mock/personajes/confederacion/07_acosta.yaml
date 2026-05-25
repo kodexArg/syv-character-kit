@@ -1,64 +1,65 @@
 personaje:
-  id: mock.confederacion.07.acosta
-  origen: mock
-  semilla: mock-fixed-07
-
-  nombre: Rubén Acosta
-  sobrenombre: Soldado de Primera Rubén Acosta
-  filiacion: "Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 26
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Fusilero de Primera
-
-  estado: activo
-  rango: Fusilero
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: false
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - su escuadra
-      - los compañeros del frente norte
-    secretos: []
-
+  identidad:
+    slug: acosta_ruben
+    nombre: Rubén Acosta
+    sobrenombre: Soldado de Primera Rubén Acosta
+    rol: Fusilero de Primera
+    genero: masculino
+    edad: 26
+  faccion:
+    faccion: Confederación
+    filiacion: Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Fusilero
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "barba descuidada" }
-    - { categoria: rasgo, valor: "pelo con canas" }
-    - { categoria: rasgo, valor: "postura torcida" }
-    - { categoria: rasgo, valor: "cicatriz en costado" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Primeros auxilios" }
-    - { categoria: trait, valor: "Veterano" }
-    - { categoria: trait, valor: "Hemorragia lenta" }
-    - { categoria: perk, valor: "Resistencia al dolor" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "vendaje" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: barba descuidada
+    - categoria: rasgo
+      valor: pelo con canas
+    - categoria: rasgo
+      valor: postura torcida
+    - categoria: rasgo
+      valor: cicatriz en costado
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Primeros auxilios
+    - categoria: trait
+      valor: Veterano
+    - categoria: trait
+      valor: Hemorragia lenta
+    - categoria: perk
+      valor: Resistencia al dolor
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: vendaje
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   vinculos:
     - tipo: mentor
-      ref_personaje_id: mock.confederacion.11.ramirez
-      descripcion: "Recluta Ramírez le pregunta cuando no sabe. Acosta responde corto."
-
+      ref_personaje_slug: ramirez_esteban
+      descripcion: Recluta Ramírez le pregunta cuando no sabe. Acosta responde corto.
   historia: |
     Rubén Acosta es de Mendoza, aunque pasó años en el norte antes de que la
     guerra lo enviara al sur. Tiene veintiséis años y ya lleva tres en servicio
@@ -72,35 +73,43 @@ personaje:
     no lo ignora, lo clasifica junto con el frío y el hambre. En el frente
     patagónico lo sorprendió el silencio que hace la niebla. Todavía no se
     acostumbró del todo.
-
   historial:
-    - fecha: "2024-08-15T00:00:00Z"
+    - fecha: '2024-08-15T00:00:00Z'
       tipo: herida
-      descripcion: "Impacto de metralla en costado derecho durante operación en frente norte."
+      descripcion: Impacto de metralla en costado derecho durante operación en frente norte.
       ref_batalla: null
       metadata:
         gravedad: grave
-        cicatriz: "cicatriz larga en costado derecho"
-
+        cicatriz: cicatriz larga en costado derecho
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "barba descuidada" }
-    - { categoria: rasgo, valor: "pelo con canas" }
-    - { categoria: rasgo, valor: "postura torcida" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Primeros auxilios" }
-    - { categoria: trait, valor: "Veterano" }
-    - { categoria: perk, valor: "Resistencia al dolor" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "vendaje" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: barba descuidada
+    - categoria: rasgo
+      valor: pelo con canas
+    - categoria: rasgo
+      valor: postura torcida
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Primeros auxilios
+    - categoria: trait
+      valor: Veterano
+    - categoria: perk
+      valor: Resistencia al dolor
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: vendaje
+    - categoria: lealtad
+      valor: faccion.confederados
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

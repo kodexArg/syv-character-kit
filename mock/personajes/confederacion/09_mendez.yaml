@@ -1,60 +1,59 @@
 personaje:
-  id: mock.confederacion.09.mendez
-  origen: mock
-  semilla: mock-fixed-09
-
-  nombre: Ignacio Méndez
-  sobrenombre: Recluta Ignacio Méndez
-  filiacion: "Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 19
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Recluta — Recargador
-
-  estado: activo
-  rango: Recluta
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: false
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - su familia en San Rafael
-    secretos: []
-
+  identidad:
+    slug: mendez_ignacio
+    nombre: Ignacio Méndez
+    sobrenombre: Recluta Ignacio Méndez
+    rol: Recluta — Recargador
+    genero: masculino
+    edad: 19
+  faccion:
+    faccion: Confederación
+    filiacion: Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Recluta
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "cara redonda" }
-    - { categoria: rasgo, valor: "manos curtidas" }
-    - { categoria: rasgo, valor: "movimientos lentos" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Manejo de ametralladora" }
-    - { categoria: trait, valor: "Tenaz" }
-    - { categoria: trait, valor: "Novato asustado" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "bandolera" }
-    - { categoria: "equipo.utilitario", valor: "bandolera" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: cara redonda
+    - categoria: rasgo
+      valor: manos curtidas
+    - categoria: rasgo
+      valor: movimientos lentos
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Manejo de ametralladora
+    - categoria: trait
+      valor: Tenaz
+    - categoria: trait
+      valor: Novato asustado
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: bandolera
+    - categoria: equipo.utilitario
+      valor: bandolera
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   vinculos:
     - tipo: subordinado
-      ref_personaje_id: mock.confederacion.04.funes
-      descripcion: "Recargador asignado del artillero Funes."
-
+      ref_personaje_slug: funes_dardo
+      descripcion: Recargador asignado del artillero Funes.
   historia: |
     Ignacio Méndez tiene diecinueve años y es de San Rafael, Mendoza. Trabajaba
     en la viña familiar — cosecha, poda, los trabajos que dicta el calendario
@@ -68,26 +67,32 @@ personaje:
     logística vio la nota de resistencia física y lo marcó para carga pesada.
     Méndez no protestó porque no sabe bien qué implica el rol todavía. Lo está
     aprendiendo.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "cara redonda" }
-    - { categoria: rasgo, valor: "manos curtidas" }
-    - { categoria: rasgo, valor: "movimientos lentos" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Manejo de ametralladora" }
-    - { categoria: trait, valor: "Tenaz" }
-    - { categoria: trait, valor: "Novato asustado" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: cara redonda
+    - categoria: rasgo
+      valor: manos curtidas
+    - categoria: rasgo
+      valor: movimientos lentos
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Manejo de ametralladora
+    - categoria: trait
+      valor: Tenaz
+    - categoria: trait
+      valor: Novato asustado
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: lealtad
+      valor: faccion.confederados
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

@@ -1,62 +1,61 @@
 personaje:
-  id: mock.ejercito_rojo.05.carcamo
-  origen: mock
-  semilla: mock-fixed-16
-
-  nombre: Fermín Cárcamo
-  sobrenombre: Miliciano Veterano Fermín Cárcamo
-  filiacion: "Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 32
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Miliciano Veterano
-
-  estado: activo
-  rango: Fusilero
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: false
-
-  lealtades:
-    primaria: Ejército Rojo
-    secundarias:
-      - el sindicato ferroviario del sur
-      - sus dos hijos en Bahía Blanca
-    secretos: []
-
+  identidad:
+    slug: carcamo_fermin
+    nombre: Fermín Cárcamo
+    sobrenombre: Miliciano Veterano Fermín Cárcamo
+    rol: Miliciano Veterano
+    genero: masculino
+    edad: 32
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Fusilero
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo entrecano" }
-    - { categoria: rasgo, valor: "ojeras" }
-    - { categoria: rasgo, valor: "habla seca" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de precisión" }
-    - { categoria: skill, valor: "Resistencia" }
-    - { categoria: trait, valor: "Pragmático" }
-    - { categoria: trait, valor: "Gatillo rápido" }
-    - { categoria: perk, valor: "Cobertura instintiva" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: pelo entrecano
+    - categoria: rasgo
+      valor: ojeras
+    - categoria: rasgo
+      valor: habla seca
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Tiro de precisión
+    - categoria: skill
+      valor: Resistencia
+    - categoria: trait
+      valor: Pragmático
+    - categoria: trait
+      valor: Gatillo rápido
+    - categoria: perk
+      valor: Cobertura instintiva
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.ejercito_rojo.08.belenchini
-      descripcion: "Ambos de Bahía Blanca. Hijos de la misma ciudad, oficios distintos."
-
+      ref_personaje_slug: belenchini_esteban
+      descripcion: Ambos de Bahía Blanca. Hijos de la misma ciudad, oficios distintos.
   historia: |
     Fermín Cárcamo era garrafero de playa en el ferrocarril del sur. Treinta y
     dos años, divorciado, dos hijos en Bahía Blanca que ve cuando la rotación
@@ -70,28 +69,36 @@ personaje:
     por nombre y apellido le parece más propio de un ajuste que de una guerra.
     Pero Mansilla da las órdenes y Cárcamo las cumple. Tiene hijos que esperan
     que vuelva.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo entrecano" }
-    - { categoria: rasgo, valor: "ojeras" }
-    - { categoria: rasgo, valor: "habla seca" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Tiro de precisión" }
-    - { categoria: skill, valor: "Resistencia" }
-    - { categoria: trait, valor: "Pragmático" }
-    - { categoria: trait, valor: "Gatillo rápido" }
-    - { categoria: perk, valor: "Cobertura instintiva" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: pelo entrecano
+    - categoria: rasgo
+      valor: ojeras
+    - categoria: rasgo
+      valor: habla seca
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Tiro de precisión
+    - categoria: skill
+      valor: Resistencia
+    - categoria: trait
+      valor: Pragmático
+    - categoria: trait
+      valor: Gatillo rápido
+    - categoria: perk
+      valor: Cobertura instintiva
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

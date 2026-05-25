@@ -1,62 +1,61 @@
 personaje:
-  id: mock.ejercito_rojo.03.antinao
-  origen: mock
-  semilla: mock-fixed-14
-
-  nombre: Héctor Antinao
-  sobrenombre: Tirador Vanguardia Héctor Antinao
-  filiacion: "Apuntador de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 26
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Tirador Vanguardia
-
-  estado: activo
-  rango: Apuntador
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: false
-
-  lealtades:
-    primaria: Ejército Rojo
-    secundarias:
-      - los agitadores ferroviarios de Viedma
-      - el oficio del cazador
-    secretos: []
-
+  identidad:
+    slug: antinao_hector
+    nombre: Héctor Antinao
+    sobrenombre: Tirador Vanguardia Héctor Antinao
+    rol: Tirador Vanguardia
+    genero: masculino
+    edad: 26
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Apuntador de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Apuntador
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 5
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo lacio" }
-    - { categoria: rasgo, valor: "rasgos mapuche" }
-    - { categoria: rasgo, valor: "manos firmes" }
-    - { categoria: rol, valor: "apuntador" }
-    - { categoria: skill, valor: "Tiro de precisión" }
-    - { categoria: skill, valor: "Caza" }
-    - { categoria: trait, valor: "Paciente" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: perk, valor: "Puntería fría" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo lacio
+    - categoria: rasgo
+      valor: rasgos mapuche
+    - categoria: rasgo
+      valor: manos firmes
+    - categoria: rol
+      valor: apuntador
+    - categoria: skill
+      valor: Tiro de precisión
+    - categoria: skill
+      valor: Caza
+    - categoria: trait
+      valor: Paciente
+    - categoria: trait
+      valor: Obstinado
+    - categoria: perk
+      valor: Puntería fría
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.ejercito_rojo.01.mansilla
-      descripcion: "Mansilla decide qué blanco. Antinao decide cuándo."
-
+      ref_personaje_slug: mansilla_ramon
+      descripcion: Mansilla decide qué blanco. Antinao decide cuándo.
   historia: |
     Héctor Antinao creció en la meseta, entre Roca y el Limay. Cazaba con su
     padre desde los doce años: liebre, martineta, guanaco cuando la temporada
@@ -69,29 +68,38 @@ personaje:
     simplemente la única forma sensata de proceder. El objetivo del operativo
     no le genera ni repulsión ni entusiasmo. Si Mansilla lo pone en la mira,
     Antinao va a hacer lo que sabe hacer.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo lacio" }
-    - { categoria: rasgo, valor: "rasgos mapuche" }
-    - { categoria: rasgo, valor: "manos firmes" }
-    - { categoria: rol, valor: "apuntador" }
-    - { categoria: skill, valor: "Tiro de precisión" }
-    - { categoria: skill, valor: "Caza" }
-    - { categoria: trait, valor: "Paciente" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: perk, valor: "Puntería fría" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo lacio
+    - categoria: rasgo
+      valor: rasgos mapuche
+    - categoria: rasgo
+      valor: manos firmes
+    - categoria: rol
+      valor: apuntador
+    - categoria: skill
+      valor: Tiro de precisión
+    - categoria: skill
+      valor: Caza
+    - categoria: trait
+      valor: Paciente
+    - categoria: trait
+      valor: Obstinado
+    - categoria: perk
+      valor: Puntería fría
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

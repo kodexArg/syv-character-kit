@@ -1,0 +1,14 @@
+tag:
+  categoria: faccion
+  valor: confederados
+  slug: confederados
+  descripcion: >
+    Ejército regular de la Confederación Argentina. Estructura jerárquica
+    clásica (Lider de escuadra, Segundo al mando, Apuntador, Artillero,
+    Fusilero, Recluta). Sobrenombre operativo construido como
+    "{rango narrativo} {nombre}".
+  origen: canon
+  metadatos:
+    version_introducida: "0.5.0"
+    creado_en: "2026-05-25"
+    ultima_actualizacion: "2026-05-25"

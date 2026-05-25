@@ -1,66 +1,64 @@
 personaje:
-  id: mock.ejercito_rojo.11.bordagaray
-  origen: mock
-  semilla: mock-fixed-22
-
-  nombre: Sebastián Bordagaray
-  sobrenombre: Voluntario Sebastián Bordagaray
-  filiacion: "Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 22
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Voluntario — Recargador
-
-  estado: activo
-  rango: Recluta
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: false
-
-  lealtades:
-    primaria: Ejército Rojo
-    secundarias:
-      - la memoria de su abuelo huelguista
-      - su padre metalúrgico
-    secretos:
-      - inquietud no articulada sobre la naturaleza del operativo de caza
-
+  identidad:
+    slug: bordagaray_sebastian
+    nombre: Sebastián Bordagaray
+    sobrenombre: Voluntario Sebastián Bordagaray
+    rol: Voluntario — Recargador
+    genero: masculino
+    edad: 22
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Recluta
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo abundante" }
-    - { categoria: rasgo, valor: "rasgos vascos" }
-    - { categoria: rasgo, valor: "manos manchadas" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Mecánica" }
-    - { categoria: skill, valor: "Carga rápida" }
-    - { categoria: trait, valor: "Voluntarioso" }
-    - { categoria: trait, valor: "Hemorragia lenta" }
-    - { categoria: perk, valor: "Escudo humano" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: pelo abundante
+    - categoria: rasgo
+      valor: rasgos vascos
+    - categoria: rasgo
+      valor: manos manchadas
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Mecánica
+    - categoria: skill
+      valor: Carga rápida
+    - categoria: trait
+      valor: Voluntarioso
+    - categoria: trait
+      valor: Hemorragia lenta
+    - categoria: perk
+      valor: Escudo humano
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: subordinado
-      ref_personaje_id: mock.ejercito_rojo.01.mansilla
-      descripcion: "Mansilla notó su disposición a meterse adelante. Iturra dijo que eso podía matarlo."
+      ref_personaje_slug: mansilla_ramon
+      descripcion: Mansilla notó su disposición a meterse adelante. Iturra dijo que eso podía matarlo.
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.ejercito_rojo.10.maturana
-      descripcion: "Llegaron tarde a la formación. Se hicieron compañía sin proponérselo."
-
+      ref_personaje_slug: maturana_claudio
+      descripcion: Llegaron tarde a la formación. Se hicieron compañía sin proponérselo.
   historia: |
     El abuelo de Sebastián Bordagaray llegó del País Vasco en 1923 y terminó
     en los frigoríficos de Bahía Blanca. El padre fue metalúrgico. Sebastián
@@ -75,28 +73,36 @@ personaje:
     le dijo a nadie es que el operativo de caza lo inquieta de un modo que no
     puede articular. No es el peligro — es la especificidad: ir a matar a
     alguien en particular.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion robusta" }
-    - { categoria: rasgo, valor: "pelo abundante" }
-    - { categoria: rasgo, valor: "rasgos vascos" }
-    - { categoria: rasgo, valor: "manos manchadas" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Mecánica" }
-    - { categoria: skill, valor: "Carga rápida" }
-    - { categoria: trait, valor: "Voluntarioso" }
-    - { categoria: trait, valor: "Hemorragia lenta" }
-    - { categoria: perk, valor: "Escudo humano" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion robusta
+    - categoria: rasgo
+      valor: pelo abundante
+    - categoria: rasgo
+      valor: rasgos vascos
+    - categoria: rasgo
+      valor: manos manchadas
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Mecánica
+    - categoria: skill
+      valor: Carga rápida
+    - categoria: trait
+      valor: Voluntarioso
+    - categoria: trait
+      valor: Hemorragia lenta
+    - categoria: perk
+      valor: Escudo humano
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

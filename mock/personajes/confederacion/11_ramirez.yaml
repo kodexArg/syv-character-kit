@@ -1,63 +1,62 @@
 personaje:
-  id: mock.confederacion.11.ramirez
-  origen: mock
-  semilla: mock-fixed-11
-
-  nombre: Esteban Ramírez
-  sobrenombre: Recluta Esteban Ramírez
-  filiacion: "Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 18
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Recluta — Recargador
-
-  estado: activo
-  rango: Recluta
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: false
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - su familia (Villa Mitre, Bahía Blanca)
-    secretos: []
-
+  identidad:
+    slug: ramirez_esteban
+    nombre: Esteban Ramírez
+    sobrenombre: Recluta Esteban Ramírez
+    rol: Recluta — Recargador
+    genero: masculino
+    edad: 18
+  faccion:
+    faccion: Confederación
+    filiacion: Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Recluta
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo corto" }
-    - { categoria: rasgo, valor: "cara joven" }
-    - { categoria: rasgo, valor: "mirada inquisitiva" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Recarga rápida" }
-    - { categoria: trait, valor: "Obediente" }
-    - { categoria: trait, valor: "Vacío de mando" }
-    - { categoria: perk, valor: "Disparo de oportunidad" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: pelo corto
+    - categoria: rasgo
+      valor: cara joven
+    - categoria: rasgo
+      valor: mirada inquisitiva
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Recarga rápida
+    - categoria: trait
+      valor: Obediente
+    - categoria: trait
+      valor: Vacío de mando
+    - categoria: perk
+      valor: Disparo de oportunidad
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   vinculos:
     - tipo: mentor
-      ref_personaje_id: mock.confederacion.07.acosta
-      descripcion: "Le pregunta a Acosta cuando no sabe. Acosta responde corto."
+      ref_personaje_slug: acosta_ruben
+      descripcion: Le pregunta a Acosta cuando no sabe. Acosta responde corto.
     - tipo: subordinado
-      ref_personaje_id: mock.confederacion.01.aguirre
-      descripcion: "El Sargento lo notó al segundo día: obedece con la rapidez del que sabe que no sabe."
-
+      ref_personaje_slug: aguirre_walter
+      descripcion: 'El Sargento lo notó al segundo día: obedece con la rapidez del que sabe que no sabe.'
   historia: |
     Esteban Ramírez es de Bahía Blanca, tiene dieciocho años, y antes del
     servicio terminó el secundario con notas mediocres en todo excepto educación
@@ -71,27 +70,34 @@ personaje:
     la rapidez del que sabe que no sabe, que es el tipo de obediencia más útil
     en un recluta. No es valor ni entrenamiento — es que todavía no aprendió
     a dudar de las órdenes.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion atletica" }
-    - { categoria: rasgo, valor: "pelo corto" }
-    - { categoria: rasgo, valor: "cara joven" }
-    - { categoria: rasgo, valor: "mirada inquisitiva" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Recarga rápida" }
-    - { categoria: trait, valor: "Obediente" }
-    - { categoria: trait, valor: "Vacío de mando" }
-    - { categoria: perk, valor: "Disparo de oportunidad" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion atletica
+    - categoria: rasgo
+      valor: pelo corto
+    - categoria: rasgo
+      valor: cara joven
+    - categoria: rasgo
+      valor: mirada inquisitiva
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Recarga rápida
+    - categoria: trait
+      valor: Obediente
+    - categoria: trait
+      valor: Vacío de mando
+    - categoria: perk
+      valor: Disparo de oportunidad
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: lealtad
+      valor: faccion.confederados
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

@@ -1,63 +1,65 @@
 personaje:
-  id: mock.confederacion.04.funes
-  origen: mock
-  semilla: mock-fixed-04
-
-  nombre: Dardo Funes
-  sobrenombre: Soldado de Primera Dardo Funes
-  filiacion: "Artillero de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 26
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Artillero FAP Confederado
-
-  estado: activo
-  rango: Artillero
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: false
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - su escuadra
-    secretos: []
-
+  identidad:
+    slug: funes_dardo
+    nombre: Dardo Funes
+    sobrenombre: Soldado de Primera Dardo Funes
+    rol: Artillero FAP Confederado
+    genero: masculino
+    edad: 26
+  faccion:
+    faccion: Confederación
+    filiacion: Artillero de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Artillero
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 4
     men: 3
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura alta" }
-    - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "hombros anchos" }
-    - { categoria: rasgo, valor: "manos grandes" }
-    - { categoria: rasgo, valor: "mirada parca" }
-    - { categoria: rol, valor: "artillero" }
-    - { categoria: skill, valor: "Manejo de ametralladora" }
-    - { categoria: skill, valor: "Munición" }
-    - { categoria: trait, valor: "Metódico" }
-    - { categoria: trait, valor: "Parco" }
-    - { categoria: perk, valor: "Recarga rápida" }
-    - { categoria: "equipo.arma", valor: "ametralladora" }
-    - { categoria: "equipo.utilitario", valor: "cuchillo" }
-    - { categoria: "equipo.utilitario", valor: "bandolera" }
-    - { categoria: "equipo.utilitario", valor: "bandolera" }
-    - { categoria: "equipo.utilitario", valor: "almanaque" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura alta
+    - categoria: rasgo
+      valor: complexion corpulenta
+    - categoria: rasgo
+      valor: hombros anchos
+    - categoria: rasgo
+      valor: manos grandes
+    - categoria: rasgo
+      valor: mirada parca
+    - categoria: rol
+      valor: artillero
+    - categoria: skill
+      valor: Manejo de ametralladora
+    - categoria: skill
+      valor: Munición
+    - categoria: trait
+      valor: Metódico
+    - categoria: trait
+      valor: Parco
+    - categoria: perk
+      valor: Recarga rápida
+    - categoria: equipo.arma
+      valor: ametralladora
+    - categoria: equipo.utilitario
+      valor: cuchillo
+    - categoria: equipo.utilitario
+      valor: bandolera
+    - categoria: equipo.utilitario
+      valor: bandolera
+    - categoria: equipo.utilitario
+      valor: almanaque
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.confederacion.09.mendez
-      descripcion: "Recluta Méndez es su recargador asignado. Funes le marca el ritmo del arma."
-
+      ref_personaje_slug: mendez_ignacio
+      descripcion: Recluta Méndez es su recargador asignado. Funes le marca el ritmo del arma.
   historia: |
     Dardo Funes es de Resistencia, Chaco. Llegó al frente patagónico sin saber
     que el frío del sur es otro tipo de frío — no el húmedo del nordeste, sino
@@ -70,31 +72,42 @@ personaje:
     traerla al frente. Su única rareza: lleva un almanaque de bolsillo con el que
     registra el clima diario. No lo usa para nada en particular. Dice que es por
     costumbre.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura alta" }
-    - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "hombros anchos" }
-    - { categoria: rasgo, valor: "manos grandes" }
-    - { categoria: rasgo, valor: "mirada parca" }
-    - { categoria: rol, valor: "artillero" }
-    - { categoria: skill, valor: "Manejo de ametralladora" }
-    - { categoria: skill, valor: "Munición" }
-    - { categoria: trait, valor: "Metódico" }
-    - { categoria: trait, valor: "Parco" }
-    - { categoria: perk, valor: "Recarga rápida" }
-    - { categoria: "equipo.arma", valor: "ametralladora" }
-    - { categoria: "equipo.utilitario", valor: "cuchillo" }
-    - { categoria: "equipo.utilitario", valor: "almanaque" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura alta
+    - categoria: rasgo
+      valor: complexion corpulenta
+    - categoria: rasgo
+      valor: hombros anchos
+    - categoria: rasgo
+      valor: manos grandes
+    - categoria: rasgo
+      valor: mirada parca
+    - categoria: rol
+      valor: artillero
+    - categoria: skill
+      valor: Manejo de ametralladora
+    - categoria: skill
+      valor: Munición
+    - categoria: trait
+      valor: Metódico
+    - categoria: trait
+      valor: Parco
+    - categoria: perk
+      valor: Recarga rápida
+    - categoria: equipo.arma
+      valor: ametralladora
+    - categoria: equipo.utilitario
+      valor: cuchillo
+    - categoria: equipo.utilitario
+      valor: almanaque
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

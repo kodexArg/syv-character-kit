@@ -2,76 +2,65 @@ personaje:
 
   # ── Identidad ─────────────────────────────────────────────────────────────
   identidad:
-    slug: str               # generado al persistir (mock o DB); única clave de referencia
+    slug: str               # generado al persistir; única clave estable de referencia
     nombre: str
     sobrenombre: str        # null si coincide con nombre
     rol: str                # narrativo base; default "ciudadano"
     genero: str
     edad: int
 
-  # ── Facción ───────────────────────────────────────────────────────────────
-  faccion:
-    faccion: str            # "Confederación" | "Ejército Rojo" | otro
-    filiacion: str          # null si no aplica; derivable
-    escuadra: str           # slug de la escuadra; null si no asignado
-    rango: str              # null si civil/sin rango
-    mando: bool             # ¿tiene mando en la facción?
-    estado: str             # activo | disponible | kia | licencia
-
   # ── Atributos ─────────────────────────────────────────────────────────────
   atributos:
-    fis: int
-    tac: int
-    men: int
+    fis: int                # 2-5
+    tac: int                # 2-5
+    men: int                # 2-7 (líderes hasta 7)
 
-  # ── Salud (agrupación de tags; fatiga se calcula en caliente) ─────────────
-  salud:
-    - "[variable salud_tag]"   # cansado | exhausto | agotado | herido | malherido | sangrando | enfermo | aturdido
-
-  # ── Mental (agrupación de tags; moral se calcula en caliente) ─────────────
-  mental:
-    - "[variable mental_tag]"  # pánico | confundido | desmoralizado | iracundo | traumatizado | conmocionado | berserker | sereno
-
-  # ── Lealtades ─────────────────────────────────────────────────────────────
-  lealtades:
-    primaria: "[variable lealtad_primaria]"
-    secundarias:
-      - "[variable lealtad_secundaria]"
-    secretos:
-      - "[variable lealtad_secreta]"
-
-  # ── Tags (el resto: rasgos, traits, perks, aspectos, skills, equipo, rol.*) ─
+  # ── Tags ──────────────────────────────────────────────────────────────────
+  # Lista plana de tags en notación punto: <categoria>[.<subcategoria>].<slug>.
+  # Todo lo discreto vive aquí: facción, rango, escuadra, mando, estado,
+  # salud, mental, rasgos, traits, perks, aspectos, skills, equipo.*, rol.*,
+  # lealtades y némesis. Ver tag-modelo.md para categorías y ejemplos.
+  # Lista repetible (multiset): equipo.utilitario.cargador puede aparecer N veces.
   tags:
-    - categoria: str
-      valor: str
-
-  # ── Vínculos ──────────────────────────────────────────────────────────────
-  vinculos:
-    - tipo: "[variable vinculo_tipo]"
-      ref_personaje_slug: "[variable vinculo_ref_personaje_slug]"
-      descripcion: "[variable vinculo_descripcion]"
+    - "[tag faccion.*]"             # ej. faccion.ejercito_rojo
+    - "[tag rango.*]"               # ej. rango.lider_de_escuadra
+    - "[tag escuadra.*]"            # ej. escuadra.ricardo
+    - "[tag mando.capaz]"           # presencia = capacidad de mando
+    - "[tag estado.*]"              # exactamente uno: activo | disponible | kia | licencia
+    - "[tag salud.*]"               # acumulable; cansado | herido | sangrando | ...
+    - "[tag mental.*]"              # acumulable; panico | confundido | sereno | ...
+    - "[tag rasgo.*]"               # rasgo físico observable
+    - "[tag trait.*]"               # rasgo de carácter sin mecánica
+    - "[tag perk.*]"                # ventaja reglada
+    - "[tag aspecto.*]"             # mini-tag identitario con efecto
+    - "[tag skill.*]"               # habilidad aprendida
+    - "[tag equipo.arma.*]"         # arma cargada
+    - "[tag equipo.utilitario.*]"   # objeto utilitario (repetible)
+    - "[tag equipo.vestidura.*]"    # identidad visual
+    - "[tag rol.oficio.*]"          # oficio operativo (ej. francotirador)
+    - "[tag rol.jerarquia.*]"       # título militar (ej. sargento)
+    - "[tag rol.narrativo.*]"       # papel cultural en lore
+    - "[tag rol.mecanico.*]"        # rol mecánico (lider, heroe — afecta fza_aportada)
+    - "[tag lealtad.faccion.*]"     # lealtad a una facción
+    - "[tag lealtad.pj.*]"          # lealtad a un personaje persistido
+    - "[tag nemesis.pj.*]"          # enemistad identificada en batalla
 
   # ── Prosa biográfica ──────────────────────────────────────────────────────
   historia: str             # 120-200 palabras; LLM en creación; congelada al persistir
 
   # ── Historial de hitos ────────────────────────────────────────────────────
   historial:
-    - fecha: "[variable hito_fecha]"
-      tipo: "[variable hito_tipo]"
+    - fecha: "[variable hito_fecha]"        # ISO-8601
+      tipo: "[variable hito_tipo]"          # agregar_tag | quitar_tag | ascenso | herida | ...
       descripcion: "[variable hito_descripcion]"
-      ref_batalla: "[variable hito_ref_batalla]"
+      ref_batalla: "[variable hito_ref_batalla]"  # slug o null
       metadata: {}
-
-  # ── Snapshot de auditoría ─────────────────────────────────────────────────
-  tags_iniciales:
-    - categoria: str
-      valor: str
 
   # ── Metadatos ─────────────────────────────────────────────────────────────
   metadatos:
-    creado_en: str
-    canonizado_en: str
+    creado_en: str          # ISO-8601
+    canonizado_en: str      # ISO-8601 | null (null antes de persistir)
     ultima_actualizacion: str
 
-  # ── Escape hatch (estructura libre, cualquier llave) ──────────────────────
-  extras: object
+  # ── Escape hatch ──────────────────────────────────────────────────────────
+  extras: object            # diccionario libre, cualquier llave; null por defecto

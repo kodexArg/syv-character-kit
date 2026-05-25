@@ -1,62 +1,63 @@
 personaje:
-  id: mock.ejercito_rojo.07.soriano
-  origen: mock
-  semilla: mock-fixed-18
-
-  nombre: Norberto Soriano
-  sobrenombre: Miliciano Veterano Norberto Soriano
-  filiacion: "Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 40
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Miliciano Veterano
-
-  estado: activo
-  rango: Fusilero
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: false
-
-  lealtades:
-    primaria: Ejército Rojo
-    secundarias:
-      - los compañeros del puerto de Madryn
-    secretos: []
-
+  identidad:
+    slug: soriano_norberto
+    nombre: Norberto Soriano
+    sobrenombre: Miliciano Veterano Norberto Soriano
+    rol: Miliciano Veterano
+    genero: masculino
+    edad: 40
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Fusilero
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "espalda ancha" }
-    - { categoria: rasgo, valor: "manos grandes" }
-    - { categoria: rasgo, valor: "respiración pesada" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Carga" }
-    - { categoria: trait, valor: "Aguantador" }
-    - { categoria: trait, valor: "Peso muerto" }
-    - { categoria: perk, valor: "Resistencia al dolor" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cinto" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion corpulenta
+    - categoria: rasgo
+      valor: espalda ancha
+    - categoria: rasgo
+      valor: manos grandes
+    - categoria: rasgo
+      valor: respiración pesada
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Carga
+    - categoria: trait
+      valor: Aguantador
+    - categoria: trait
+      valor: Peso muerto
+    - categoria: perk
+      valor: Resistencia al dolor
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cinto
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.ejercito_rojo.06.paine
-      descripcion: "Comparten turnos largos. Pocos verbos."
-
+      ref_personaje_slug: paine_rosa
+      descripcion: Comparten turnos largos. Pocos verbos.
   historia: |
     Norberto Soriano tiene cuarenta años y dos hernias de disco que el médico
     del sindicato le diagnosticó hace tres años. "No cargues más de veinte
@@ -70,29 +71,38 @@ personaje:
     conclusiones — solo le faltaba una estructura donde meterlas. No le cuesta
     obedecer órdenes. La diferencia es que aquí las órdenes vienen de camaradas,
     no de gerentes. O al menos eso le dijeron.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion corpulenta" }
-    - { categoria: rasgo, valor: "espalda ancha" }
-    - { categoria: rasgo, valor: "manos grandes" }
-    - { categoria: rasgo, valor: "respiración pesada" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Carga" }
-    - { categoria: trait, valor: "Aguantador" }
-    - { categoria: trait, valor: "Peso muerto" }
-    - { categoria: perk, valor: "Resistencia al dolor" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cinto" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion corpulenta
+    - categoria: rasgo
+      valor: espalda ancha
+    - categoria: rasgo
+      valor: manos grandes
+    - categoria: rasgo
+      valor: respiración pesada
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Carga
+    - categoria: trait
+      valor: Aguantador
+    - categoria: trait
+      valor: Peso muerto
+    - categoria: perk
+      valor: Resistencia al dolor
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.utilitario
+      valor: cinto
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

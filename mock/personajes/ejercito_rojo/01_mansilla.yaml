@@ -1,81 +1,84 @@
 personaje:
-  id: mock.ejercito_rojo.01.mansilla
-  origen: mock
-  semilla: mock-fixed-12
-
-  nombre: Ramón Mansilla
-  sobrenombre: Camarada Puntero Ramón Mansilla
-  filiacion: "Lider de escuadra de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 34
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Líder Revolucionario
-
-  estado: activo
-  rango: Lider de escuadra
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: true
-
-  lealtades:
-    primaria: Ejército Rojo
-    secundarias:
-      - el boletín sindical de los metalúrgicos
-      - los instructores de Stroeder
-    secretos: []
-
+  identidad:
+    slug: mansilla_ramon
+    nombre: Ramón Mansilla
+    sobrenombre: Camarada Puntero Ramón Mansilla
+    rol: Líder Revolucionario
+    genero: masculino
+    edad: 34
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Lider de escuadra de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Lider de escuadra
+    mando: true
+    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 7
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura alta" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo entrecano" }
-    - { categoria: rasgo, valor: "lentes" }
-    - { categoria: rasgo, valor: "voz grave" }
-    - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Comisariado" }
-    - { categoria: skill, valor: "Oratoria" }
-    - { categoria: skill, valor: "Lectura de mapas" }
-    - { categoria: trait, valor: "Voz grave" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: trait, valor: "Objetivo prioritario" }
-    - { categoria: perk, valor: "Voz de mando" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno" }
-    - { categoria: "equipo.utilitario", valor: "brújula" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura alta
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo entrecano
+    - categoria: rasgo
+      valor: lentes
+    - categoria: rasgo
+      valor: voz grave
+    - categoria: rol
+      valor: lider
+    - categoria: skill
+      valor: Comisariado
+    - categoria: skill
+      valor: Oratoria
+    - categoria: skill
+      valor: Lectura de mapas
+    - categoria: trait
+      valor: Voz grave
+    - categoria: trait
+      valor: Obstinado
+    - categoria: trait
+      valor: Objetivo prioritario
+    - categoria: perk
+      valor: Voz de mando
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.arma
+      valor: pistola
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cuaderno
+    - categoria: equipo.utilitario
+      valor: brújula
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: mentor
-      ref_personaje_id: null
-      descripcion: >
-        Instructor del campo de Stroeder, que le enseñó a leer mapas cuando
-        todavía redactaba comunicados sindicales.
+      ref_personaje_slug: null
+      descripcion: |
+        Instructor del campo de Stroeder, que le enseñó a leer mapas cuando todavía redactaba comunicados sindicales.
     - tipo: rival
-      ref_personaje_id: mock.confederacion.01.aguirre
-      descripcion: >
-        Sargento Aguirre. Mansilla anotó su nombre en el informe del Sector
-        12,15. No se conocen en persona; el rival es de papel y de mapa.
+      ref_personaje_slug: aguirre_walter
+      descripcion: |
+        Sargento Aguirre. Mansilla anotó su nombre en el informe del Sector 12,15. No se conocen en persona; el rival es de papel y de mapa.
     - tipo: subordinado
-      ref_personaje_id: mock.ejercito_rojo.02.iturra
-      descripcion: "Segundo Camarada Iturra. La señaló como segunda en la formación de la escuadra."
+      ref_personaje_slug: iturra_delia
+      descripcion: Segundo Camarada Iturra. La señaló como segunda en la formación de la escuadra.
     - tipo: subordinado
-      ref_personaje_id: mock.ejercito_rojo.03.antinao
-      descripcion: "Tirador Antinao. Su ojo elegido para el objetivo."
-
+      ref_personaje_slug: antinao_hector
+      descripcion: Tirador Antinao. Su ojo elegido para el objetivo.
   historia: |
     Mansilla no disparó un arma en combate hasta los treinta y dos años. Era
     redactor del boletín sindical de los metalúrgicos de Bahía Blanca, después
@@ -87,47 +90,60 @@ personaje:
     competente del oficial azul". Después recomendó eliminarlo antes de la
     siguiente operación. El alto mando lo comisionó para liderar la escuadra
     de caza — no por tirador, sino porque conoce el informe y no carga rencor.
-
   historial:
-    - fecha: "2026-02-28T10:00:00Z"
+    - fecha: '2026-02-28T10:00:00Z'
       tipo: traslado
-      descripcion: "Comisionado de Stroeder al frente sur como líder de escuadra de caza."
+      descripcion: Comisionado de Stroeder al frente sur como líder de escuadra de caza.
       ref_batalla: null
       metadata:
-        motivo: "decisión del alto mando tras análisis del Sector 12,15"
-    - fecha: "2026-04-18T17:30:00Z"
+        motivo: decisión del alto mando tras análisis del Sector 12,15
+    - fecha: '2026-04-18T17:30:00Z'
       tipo: formacion_vinculo
-      descripcion: "Identifica formalmente al Sargento Aguirre como objetivo prioritario."
+      descripcion: Identifica formalmente al Sargento Aguirre como objetivo prioritario.
       ref_batalla: null
       metadata:
         vinculo_creado:
           tipo: rival
           ref: mock.confederacion.01.aguirre
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura alta" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "pelo entrecano" }
-    - { categoria: rasgo, valor: "lentes" }
-    - { categoria: rasgo, valor: "voz grave" }
-    - { categoria: rol, valor: "lider" }
-    - { categoria: skill, valor: "Comisariado" }
-    - { categoria: skill, valor: "Oratoria" }
-    - { categoria: skill, valor: "Lectura de mapas" }
-    - { categoria: trait, valor: "Voz grave" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: perk, valor: "Voz de mando" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.arma", valor: "pistola" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno" }
-    - { categoria: "equipo.utilitario", valor: "brújula" }
-    - { categoria: "equipo.vestidura", valor: "uniforme rojo" }
-
+    - categoria: rasgo
+      valor: altura alta
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: pelo entrecano
+    - categoria: rasgo
+      valor: lentes
+    - categoria: rasgo
+      valor: voz grave
+    - categoria: rol
+      valor: lider
+    - categoria: skill
+      valor: Comisariado
+    - categoria: skill
+      valor: Oratoria
+    - categoria: skill
+      valor: Lectura de mapas
+    - categoria: trait
+      valor: Voz grave
+    - categoria: trait
+      valor: Obstinado
+    - categoria: perk
+      valor: Voz de mando
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.arma
+      valor: pistola
+    - categoria: equipo.utilitario
+      valor: cuaderno
+    - categoria: equipo.utilitario
+      valor: brújula
+    - categoria: equipo.vestidura
+      valor: uniforme rojo
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

@@ -1,66 +1,66 @@
 personaje:
-  id: mock.ejercito_rojo.09.bordon
-  origen: mock
-  semilla: mock-fixed-20
-
-  nombre: Luciano Bordón
-  sobrenombre: Voluntario Luciano Bordón
-  filiacion: "Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo"
-
-  faccion: Ejército Rojo
-
-  edad: 19
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Voluntario — Recargador
-
-  estado: activo
-  rango: Recluta
-  escuadra_id: esq_rojo_07
-  escuadra:
-    nombre: Escuadra Mardones
-    cuerpo: Ejército Revolucionario del Pueblo
-  mando: false
-
-  lealtades:
-    primaria: Ejército Rojo
-    secundarias:
-      - las ideas, sin orden establecido
-    secretos:
-      - duda intelectual permanente sobre la doctrina antimaquinista
-
+  identidad:
+    slug: bordon_luciano
+    nombre: Luciano Bordón
+    sobrenombre: Voluntario Luciano Bordón
+    rol: Voluntario — Recargador
+    genero: masculino
+    edad: 19
+  faccion:
+    faccion: Ejército Rojo
+    filiacion: Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo
+    escuadra: esq_rojo_07
+    rango: Recluta
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "cara aniñada" }
-    - { categoria: rasgo, valor: "anteojos" }
-    - { categoria: rasgo, valor: "manos limpias" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Manejo de ametralladora" }
-    - { categoria: skill, valor: "Doctrina" }
-    - { categoria: trait, valor: "Intelectual" }
-    - { categoria: trait, valor: "Novato asustado" }
-    - { categoria: perk, valor: "Disparo de oportunidad" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno" }
-    - { categoria: "equipo.vestidura", valor: "ropa de civil" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: cara aniñada
+    - categoria: rasgo
+      valor: anteojos
+    - categoria: rasgo
+      valor: manos limpias
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Manejo de ametralladora
+    - categoria: skill
+      valor: Doctrina
+    - categoria: trait
+      valor: Intelectual
+    - categoria: trait
+      valor: Novato asustado
+    - categoria: perk
+      valor: Disparo de oportunidad
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cuaderno
+    - categoria: equipo.vestidura
+      valor: ropa de civil
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   vinculos:
     - tipo: subordinado
-      ref_personaje_id: mock.ejercito_rojo.04.calfucura
-      descripcion: "Recargador asignado del ametrallador. Aprende sin que le expliquen."
+      ref_personaje_slug: calfucura_ignacio
+      descripcion: Recargador asignado del ametrallador. Aprende sin que le expliquen.
     - tipo: mentor
-      ref_personaje_id: mock.ejercito_rojo.01.mansilla
-      descripcion: "Le pidió a Mansilla aclaraciones doctrinarias una vez. La respuesta no le alcanzó."
-
+      ref_personaje_slug: mansilla_ramon
+      descripcion: Le pidió a Mansilla aclaraciones doctrinarias una vez. La respuesta no le alcanzó.
   historia: |
     Luciano Bordón estudió dos años y medio de ingeniería industrial en la
     Universidad Nacional del Sur antes de que la revolución cambiara la
@@ -75,29 +75,38 @@ personaje:
     una vez. Mansilla le explicó que las contradicciones tácticas se resuelven
     después de la victoria estratégica. Bordón anotó la respuesta y sigue sin
     estar convencido.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "cara aniñada" }
-    - { categoria: rasgo, valor: "anteojos" }
-    - { categoria: rasgo, valor: "manos limpias" }
-    - { categoria: rol, valor: "recargador" }
-    - { categoria: skill, valor: "Manejo de ametralladora" }
-    - { categoria: skill, valor: "Doctrina" }
-    - { categoria: trait, valor: "Intelectual" }
-    - { categoria: trait, valor: "Novato asustado" }
-    - { categoria: perk, valor: "Disparo de oportunidad" }
-    - { categoria: "equipo.arma", valor: "SMG" }
-    - { categoria: "equipo.utilitario", valor: "cuaderno" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: cara aniñada
+    - categoria: rasgo
+      valor: anteojos
+    - categoria: rasgo
+      valor: manos limpias
+    - categoria: rol
+      valor: recargador
+    - categoria: skill
+      valor: Manejo de ametralladora
+    - categoria: skill
+      valor: Doctrina
+    - categoria: trait
+      valor: Intelectual
+    - categoria: trait
+      valor: Novato asustado
+    - categoria: perk
+      valor: Disparo de oportunidad
+    - categoria: equipo.arma
+      valor: SMG
+    - categoria: equipo.utilitario
+      valor: cuaderno
+    - categoria: lealtad
+      valor: faccion.ejercito_rojo
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

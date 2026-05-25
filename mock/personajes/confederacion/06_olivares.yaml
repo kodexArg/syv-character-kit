@@ -1,64 +1,62 @@
 personaje:
-  id: mock.confederacion.06.olivares
-  origen: mock
-  semilla: mock-fixed-06
-
-  nombre: Tomás Olivares
-  sobrenombre: Soldado de Primera Tomás Olivares
-  filiacion: "Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-
-  edad: 22
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Fusilero de Primera
-
-  estado: activo
-  rango: Fusilero
-  escuadra_id: esq_conf_03
-  escuadra:
-    nombre: Escuadra Ricardo
-    cuerpo: Ejército de la Confederación Argentina
-  mando: false
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - su escuadra
-      - la duda como método
-    secretos: []
-
+  identidad:
+    slug: olivares_tomas
+    nombre: Tomás Olivares
+    sobrenombre: Soldado de Primera Tomás Olivares
+    rol: Fusilero de Primera
+    genero: masculino
+    edad: 22
+  faccion:
+    faccion: Confederación
+    filiacion: Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina
+    escuadra: esq_conf_03
+    rango: Fusilero
+    mando: false
+    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-
+  salud: []
+  mental: []
   tags:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "anteojos" }
-    - { categoria: rasgo, valor: "pelo desordenado" }
-    - { categoria: rasgo, valor: "dicción cuidada" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Análisis táctico" }
-    - { categoria: trait, valor: "Sangre fría" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: anteojos
+    - categoria: rasgo
+      valor: pelo desordenado
+    - categoria: rasgo
+      valor: dicción cuidada
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Análisis táctico
+    - categoria: trait
+      valor: Sangre fría
+    - categoria: trait
+      valor: Obstinado
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.utilitario
+      valor: cargador
+    - categoria: equipo.vestidura
+      valor: uniforme confederado
+    - categoria: lealtad
+      valor: faccion.confederados
   vinculos:
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.confederacion.05.rodriguez
-      descripcion: "Mismo pelotón. Confianza tácita."
+      ref_personaje_slug: rodriguez_marcela
+      descripcion: Mismo pelotón. Confianza tácita.
     - tipo: hermano_de_armas
-      ref_personaje_id: mock.confederacion.08.pereyra
-      descripcion: "Compañera de asignación; los tres llegaron juntos al sur."
-
+      ref_personaje_slug: pereyra_graciela
+      descripcion: Compañera de asignación; los tres llegaron juntos al sur.
   historia: |
     Tomás Olivares es porteño, Caballito. Su madre es profesora de historia en
     un secundario y su padre maneja un remis desde que Olivares tiene memoria.
@@ -72,27 +70,34 @@ personaje:
     son argumentos filosóficos que ningún texto anticipa bien. Lo menciona
     ocasionalmente, sin ironía. Sus compañeros no saben si es gracioso o si
     algo le falta.
-
   historial: []
-
   tags_iniciales:
-    - { categoria: rasgo, valor: "altura media" }
-    - { categoria: rasgo, valor: "complexion delgada" }
-    - { categoria: rasgo, valor: "anteojos" }
-    - { categoria: rasgo, valor: "pelo desordenado" }
-    - { categoria: rasgo, valor: "dicción cuidada" }
-    - { categoria: rol, valor: "infanteria" }
-    - { categoria: skill, valor: "Fuego sostenido" }
-    - { categoria: skill, valor: "Análisis táctico" }
-    - { categoria: trait, valor: "Sangre fría" }
-    - { categoria: trait, valor: "Obstinado" }
-    - { categoria: "equipo.arma", valor: "rifle militar" }
-
+    - categoria: rasgo
+      valor: altura media
+    - categoria: rasgo
+      valor: complexion delgada
+    - categoria: rasgo
+      valor: anteojos
+    - categoria: rasgo
+      valor: pelo desordenado
+    - categoria: rasgo
+      valor: dicción cuidada
+    - categoria: rol
+      valor: infanteria
+    - categoria: skill
+      valor: Fuego sostenido
+    - categoria: skill
+      valor: Análisis táctico
+    - categoria: trait
+      valor: Sangre fría
+    - categoria: trait
+      valor: Obstinado
+    - categoria: equipo.arma
+      valor: rifle militar
+    - categoria: lealtad
+      valor: faccion.confederados
   metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-05-24T00:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
+    creado_en: '2026-05-24T00:00:00Z'
+    canonizado_en: '2026-05-24T00:00:00Z'
+    ultima_actualizacion: '2026-05-24T00:00:00Z'
   extras: null

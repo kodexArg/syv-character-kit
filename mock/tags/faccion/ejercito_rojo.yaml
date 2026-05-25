@@ -1,0 +1,14 @@
+tag:
+  categoria: faccion
+  valor: ejercito_rojo
+  slug: ejercito_rojo
+  descripcion: >
+    Fuerza armada revolucionaria. Estructura de comandancia con énfasis en
+    comisariado político y oratoria. Roles de mando se derivan de la skill
+    dominante; el sobrenombre operativo se construye sobre el título
+    revolucionario más prominente.
+  origen: canon
+  metadatos:
+    version_introducida: "0.5.0"
+    creado_en: "2026-05-25"
+    ultima_actualizacion: "2026-05-25"
