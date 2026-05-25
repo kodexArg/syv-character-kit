@@ -1,66 +1,72 @@
+# Template programático del personaje.
+# Referencia narrativa: hoja-modelo.md
+# Sistema de tags: tag-modelo.md
+# Ejemplos compuestos: tag-modelo-ejemplos.yaml
+#
+# Convención de marcas:
+#   (*) campo obligatorio siempre
+#   (+) campo obligatorio cuando el contexto lo demanda (canonización, presencia de tags, etc.)
+#   sin marca: campo opcional
+
 personaje:
 
-  # ── Identidad ─────────────────────────────────────────────────────────────
   identidad:
-    slug: str               # generado al persistir; única clave estable de referencia
-    nombre: str
-    sobrenombre: str        # null si coincide con nombre
-    rol: str                # narrativo base; default "ciudadano"
-    genero: str
-    edad: int
+    slug:        str         # (+) requerido al persistir. Patente opaca [A-Z0-9]{8}. Ver hoja-modelo.md §1.1.
+    nombre:      str         # (*)
+    sobrenombre: str         #     null si coincide con nombre o no hay distinción.
+    rol:         str         # (*) narrativo base. Default "ciudadano".
+    genero:      str         # (*) masculino | femenino | no_binario | otro
+    edad:        int         # (*)
 
-  # ── Atributos ─────────────────────────────────────────────────────────────
   atributos:
-    fis: int                # 2-5
-    tac: int                # 2-5
-    men: int                # 2-7 (líderes hasta 7)
+    fis:         int         # (*) 2..5
+    tac:         int         # (*) 2..5
+    men:         int         # (*) 2..7 (líderes hasta 7)
 
-  # ── Tags ──────────────────────────────────────────────────────────────────
   # Lista plana de tags en notación punto: <categoria>[.<subcategoria>].<slug>.
-  # Todo lo discreto vive aquí: facción, rango, escuadra, mando, estado,
-  # salud, mental, rasgos, traits, perks, aspectos, skills, equipo.*, rol.*,
-  # lealtades y némesis. Ver tag-modelo.md para categorías y ejemplos.
-  # Lista repetible (multiset): equipo.utilitario.cargador puede aparecer N veces.
-  tags:
-    - "[tag faccion.*]"             # ej. faccion.ejercito_rojo
-    - "[tag rango.*]"               # ej. rango.lider_de_escuadra
-    - "[tag escuadra.*]"            # ej. escuadra.ricardo
-    - "[tag mando.capaz]"           # presencia = capacidad de mando
-    - "[tag estado.*]"              # exactamente uno: activo | disponible | kia | licencia
-    - "[tag salud.*]"               # acumulable; cansado | herido | sangrando | ...
-    - "[tag mental.*]"              # acumulable; panico | confundido | sereno | ...
-    - "[tag rasgo.*]"               # rasgo físico observable
-    - "[tag trait.*]"               # rasgo de carácter sin mecánica
-    - "[tag perk.*]"                # ventaja reglada
-    - "[tag aspecto.*]"             # mini-tag identitario con efecto
-    - "[tag skill.*]"               # habilidad aprendida
-    - "[tag equipo.arma.*]"         # arma cargada
-    - "[tag equipo.utilitario.*]"   # objeto utilitario (repetible)
-    - "[tag equipo.vestidura.*]"    # identidad visual
-    - "[tag rol.oficio.*]"          # oficio operativo (ej. francotirador)
-    - "[tag rol.jerarquia.*]"       # título militar (ej. sargento)
-    - "[tag rol.narrativo.*]"       # papel cultural en lore
-    - "[tag rol.mecanico.*]"        # rol mecánico (lider, heroe — afecta fza_aportada)
-    - "[tag lealtad.faccion.*]"     # lealtad a una facción
-    - "[tag lealtad.pj.*]"          # lealtad a un personaje persistido
-    - "[tag nemesis.pj.*]"          # enemistad identificada en batalla
+  # Multiset — admite repetidos. Vacía al crear; se puebla según rango/facción y/o curaduría.
+  # Categorías canon y reglas en tag-modelo.md §3.
+  tags:                      # (*) lista; default []
+    - faccion.*
+    - rango.*
+    - escuadra.*
+    - mando.capaz
+    - estado.*               # (+) exactamente uno: activo | disponible | kia | licencia
+    - salud.*                #     acumulable
+    - mental.*               #     acumulable
+    - rasgo.*
+    - trait.*
+    - perk.*
+    - aspecto.*
+    - skill.*
+    - equipo.arma.*
+    - equipo.utilitario.*    #     repetible (multiset)
+    - equipo.vestidura.*
+    - rol.oficio.*
+    - rol.jerarquia.*
+    - rol.narrativo.*
+    - rol.mecanico.*         #     lider | heroe — afecta fza_aportada derivada
+    - lealtad.faccion.*
+    - lealtad.pj.*           #     ref a patente [A-Z0-9]{8} de personaje
+    - lealtad.escuadra.*
+    - nemesis.pj.*           #     ref a patente [A-Z0-9]{8} de personaje
 
-  # ── Prosa biográfica ──────────────────────────────────────────────────────
-  historia: str             # 120-200 palabras; LLM en creación; congelada al persistir
+  historia:    str           # (+) requerido al canonizar. 120-200 palabras. Congelada tras persistir.
 
-  # ── Historial de hitos ────────────────────────────────────────────────────
-  historial:
-    - fecha: "[variable hito_fecha]"        # ISO-8601
-      tipo: "[variable hito_tipo]"          # agregar_tag | quitar_tag | ascenso | herida | ...
-      descripcion: "[variable hito_descripcion]"
-      ref_batalla: "[variable hito_ref_batalla]"  # slug o null
-      metadata: {}
+  historial:                 # (*) lista; default []
+    - fecha:       str       # (*) ISO-8601
+      tipo:        str       # (*) enum abierto. Ver hoja-modelo.md §5.
+      descripcion: str       # (*)
+      ref_batalla: str       #     slug de batalla externa | null
+      metadata:    object    #     libre
 
-  # ── Metadatos ─────────────────────────────────────────────────────────────
   metadatos:
-    creado_en: str          # ISO-8601
-    canonizado_en: str      # ISO-8601 | null (null antes de persistir)
-    ultima_actualizacion: str
+    creado_en:            str   # (*) ISO-8601
+    canonizado_en:        str   # (+) ISO-8601 al persistir; null en efímeros
+    ultima_actualizacion: str   # (*) ISO-8601; actualiza con cada hito
 
-  # ── Escape hatch ──────────────────────────────────────────────────────────
-  extras: object            # diccionario libre, cualquier llave; null por defecto
+  extras: object             #     escape hatch libre; null por defecto
+
+# Campos derivados al servir (NO persistidos, NO declarados acá):
+#   filiacion, sobrenombre (cuando derivable), fatiga_max, moral_max, fza_aportada,
+#   aliados, nemesis. Fórmulas en hoja-modelo.md §3.1.
