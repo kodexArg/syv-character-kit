@@ -1,0 +1,28 @@
+# Nombres masculinos argentinos modernos con apodo asignado.
+# Formato: Nombre|Apodo
+# 25 entradas.
+Francisco|Pancho
+Ignacio|Nacho
+Joaquín|Joaco
+Lucas|Lucho
+Matías|Mati
+Sebastián|Seba
+Federico|Fede
+Gonzalo|Gonza
+Santiago|Santi
+Agustín|Agus
+Tomás|Tomi
+Martín|Tincho
+Nicolás|Nico
+Mariano|Marian
+Rodrigo|Rodri
+Diego|Dieguito
+Leandro|Lea
+Maximiliano|Maxi
+Cristian|Cris
+Ezequiel|Eze
+Facundo|Facu
+Juan|Juanchi
+Alejandro|Ale
+Emiliano|Emi
+Pablo|Pablito

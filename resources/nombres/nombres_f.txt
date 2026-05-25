@@ -1,0 +1,28 @@
+# Nombres femeninos argentinos modernos con apodo asignado.
+# Formato: Nombre|Apodo
+# 25 entradas.
+María|Mari
+Sofía|Sofi
+Valentina|Vale
+Camila|Cami
+Martina|Tina
+Lucía|Lu
+Florencia|Flor
+Agustina|Agus
+Catalina|Cata
+Victoria|Vicky
+Julieta|Juli
+Milagros|Mili
+Carolina|Caro
+Romina|Romi
+Daniela|Dani
+Antonella|Anto
+Micaela|Mica
+Belén|Bel
+Rocío|Ro
+Guadalupe|Lupe
+Macarena|Maca
+Brenda|Bren
+Paula|Pau
+Constanza|Coni
+Renata|Rena

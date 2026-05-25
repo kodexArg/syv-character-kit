@@ -86,11 +86,11 @@ Tres valores numéricos que definen la capacidad base.
 
   tac:
     significado: Precisión, coordinación, reflejos.
-    rango: 2..5
+    rango: 2..6                # hasta 6 en francotirador (especialista de tope)
 
   men:
     significado: Liderazgo, moral base, resistencia psicológica.
-    rango: 2..7                # hasta 7 en líderes
+    rango: 2..7                # hasta 7 en líder de escuadra
 
 **Determinísticos por rango en creación**. Mutables solo vía hito `triple_cero` o `mejora_atributo`. Son las **únicas magnitudes numéricas persistidas** — toda otra capacidad derivada (fatiga máxima, moral máxima, mando vigente, fza_aportada) se calcula en caliente con fórmulas fijas, no se persiste, para evitar drift.
 
@@ -167,7 +167,7 @@ Vínculos dirigidos a otros personajes. **No son derivados de tags** — son col
 
 **Por qué persistidas y no derivadas**: la relación lleva prosa (descripción del vínculo). Un tag `lealtad.pj.X` solo puede afirmar el vínculo, no contarlo. Las colecciones llevan la textura narrativa que el motor downstream necesita.
 
-**Relación con tags `lealtad.*`**: las lealtades a facciones y escuadras siguen siendo tags (`lealtad.faccion.*`, `lealtad.escuadra.*`) porque son membresías declarativas sin necesidad de prosa. Las lealtades personales (`lealtad.pj.*`) y enemistades personales (`nemesis.pj.*`) **dejan de ser tags** y viven en estas colecciones.
+**Relación con tags `lealtad.*`**: las lealtades a facciones, subfacciones y escuadras siguen siendo tags (`lealtad.faccion.*`, `lealtad.subfaccion.*`, `lealtad.escuadra.*`) porque son membresías declarativas sin necesidad de prosa. Las lealtades personales (`lealtad.pj.*`) y enemistades personales (`nemesis.pj.*`) **dejan de ser tags** y viven en estas colecciones.
 
 ### 3.3. Extensibilidad
 
@@ -266,7 +266,7 @@ Refactor mayor — v0.5.0 (rolling release a partir de ese punto).
 
   bloque_faccion:
     antes: faccion + filiacion + escuadra + rango + mando + estado (campos separados)
-    ahora: Tags faccion.*, escuadra.*, rango.*, mando.capaz, estado.*. Filiacion derivada al servir.
+    ahora: Tags faccion.*, subfaccion.*, escuadra.*, rango.*, mando.capaz, estado.*. Filiacion derivada al servir.
 
   rol:
     antes: Campo rol aislado.
@@ -278,7 +278,7 @@ Refactor mayor — v0.5.0 (rolling release a partir de ese punto).
 
   lealtades:
     antes: { primaria, secundarias, secretos }
-    ahora: Tags lealtad.faccion.* / lealtad.pj.* / lealtad.escuadra.*. Lealtades secundarias/secretas: sistema aparte TBD.
+    ahora: Tags lealtad.faccion.* / lealtad.subfaccion.* / lealtad.pj.* / lealtad.escuadra.*. Lealtades secundarias/secretas: sistema aparte TBD.
 
   vinculos:
     antes: [{tipo, ref, descripcion}]
