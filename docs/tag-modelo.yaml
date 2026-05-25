@@ -21,6 +21,8 @@ tag:
                              #      escuadra | mando | estado | salud | mental | equipo | rol |
                              #      lealtad | nemesis | <nueva>
   descripcion:   str         # (*)
+  peso:          int         # (+) requerido si categoria = equipo. Kilos. Rango 0..50.
+                             #     No confundir con peso_narrativo (hint 1..5).
 
   subcategoria:  str         # (+) requerido si categoria ∈ {equipo, rol}
   origen:        str         #     canon | emergente | custom
