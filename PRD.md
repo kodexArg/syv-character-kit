@@ -831,6 +831,21 @@ Tabla derivada de `/Dev/syv-battle-game-system/reglamento/02_hoja_personaje.md`.
 
 **Sorteo de rango cuando no se fija**: proporcional a la composición (la API tiende a entregar fusileros/reclutas, lo cual es realista).
 
+#### 7.2.1. Estado vital derivado por rango
+
+Tabla de referencia de `fatiga_max` y `moral_max` según la matriz de atributos de §7.2. Derivada en creación: `fatiga_max = fis + men`; `moral_max = men`. Los valores persisten en la hoja y mutan solo si cambia el atributo base.
+
+| Rango | FIS | TAC | MEN | `fatiga_max` (FIS+MEN) | `moral_max` (MEN) |
+|---|---|---|---|---|---|
+| `Lider de escuadra` | 3 | 5 | 7 | **10** | **7** |
+| `Segundo al mando`  | 3 | 5 | 6 | **9**  | **6** |
+| `Apuntador`         | 3 | 5 | 5 | **8**  | **5** |
+| `Artillero`         | 3 | 4 | 3 | **6**  | **3** |
+| `Fusilero`          | 3 | 3 | 3 | **6**  | **3** |
+| `Recluta`           | 3 | 2 | 2 | **5**  | **2** |
+
+Promedio de escuadra (composición 1+1+1+1+4+3): ≈ 6.5 de fatiga, ≈ 3.9 de moral.
+
 ### 7.3. `nombre` y `sobrenombre` (sorteo + composición determinística)
 
 **`nombre`**: tabla curada de nombres reales (sin prefijo de rango), segmentada por facción. Excluye los 22 ya canonizados.
@@ -1034,6 +1049,7 @@ Solo hitos importantes. **Sin límite ni paginación en v1.**
 | `ruptura_vinculo` | Narrador | remove o transformación de `vinculos[]` |
 | `cambio_lealtad` | Narrador | mutación de `lealtades.secundarias` o `lealtades.secretos` |
 | `condecoracion` | Narrador | no muta campos vigentes (hito puro) |
+| `cambio_estado_vital` | Motor o narrador | mutación de `estado_vital.{fatiga_actual,moral_actual,fatiga_max,moral_max}`; `metadata: { campo, valor_anterior, valor_nuevo, motivo }` |
 
 **Detalle de `agregar_tag` y `quitar_tag` — los hitos de tags son el mecanismo central de evolución del personaje.**
 
@@ -1499,6 +1515,14 @@ Esta píldora no fija stack; solo registra que el diseño v0.2.5 hace que las op
 15. **Versionado del pool semilla de aspectos.** ¿El catálogo canon de 10 aspectos en `/meta/aspectos` se versiona con bump explícito del schema cuando se agregan o retiran entries, o evoluciona libremente como semilla abierta (mismo trato que `/meta/skills` o `/meta/traits`)? Los aspectos cargan más peso mecánico que un skill o trait, lo cual sugiere gobernanza más estricta. Sin decidir.
 
 16. **Entidad `notas` como capa enriquecida de tags (v0.4.1).** ¿Implementar `notas: array<{tag_ref, texto}>` para persistir contexto narrativo o mecánico atado a tags específicos sin contaminar el `valor` del tag? Caso típico: el `cuaderno` de Aguirre tenía "anotaciones de terreno, firma con la inicial R en el margen" — info que hoy o vive en la prosa de `historia` (si pertenece a la voz narrativa) o se pierde. Una entidad `notas` permitiría persistirla estructuradamente sin romper el principio del tag mínimo (13.11). Pendiente; se acepta pérdida actual.
+
+17. **Umbrales de Fatiga.** ¿Hay niveles que disparen penalidades automáticas (ej. `fatiga_actual <= 3` → tag `estado_temporal: fatigado`; `fatiga_actual = 0` → tag `estado_temporal: exhausto`)? El PRD ya registra `Fatigado crónico` como trait canon y los aspectos `veterano-cicatrizado` y `devoto` hacen referencia a tags `cansado` / `exhausto` (§10.1 y pool de aspectos), lo cual sugiere que el patrón existe pero aún no está sistematizado. Candidato natural para una ola de `estado_temporal` una vez que el motor de batalla lo requiera.
+
+18. **Umbrales de Moral.** ¿`moral_actual = 0` → `pánico` automático (análogo al aspecto `cobarde`)? ¿O se deja al criterio del narrador? El pool de aspectos ya usa `pánico` como tag activable (§10 `/meta/aspectos`), pero no hay regla canónica de umbral definida en el PRD.
+
+19. **Recalibración de topes tras `triple_cero`.** Cuando un hito `triple_cero` incrementa `atributos.men`, ¿el narrador debe emitir además un hito `cambio_estado_vital` para actualizar `fatiga_max` y `moral_max`? ¿O la API los recalcula derivados al servir (igual que `fza_aportada`)? El PRD opta por persistir `fatiga_max` y `moral_max` para que el motor de batalla los lea sin recalcular — pero eso requiere un hito coordinado. Decisión pendiente de confirmación con el cliente.
+
+20. **Tipo de hito canónico `cambio_estado_vital`.** El nombre sugerido en la tabla de hitos canon (§9.5) cubre mutaciones de `fatiga_actual`, `moral_actual`, `fatiga_max` y `moral_max`. Falta incorporarlo formalmente a la tabla §9.5 si el cliente lo aprueba.
 
 ---
 
