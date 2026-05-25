@@ -1,0 +1,8 @@
+tag:
+  slug: ejercito_revolucionario_del_pueblo
+  nombre: "Ejército Revolucionario Del Pueblo"
+  categoria: subfaccion
+  descripcion: >
+    Subfacción del Ejército Rojo con fuerte arraigo popular e impronta combativa.
+  subfaccion:
+    faccion_padre: faccion.ejercito_rojo

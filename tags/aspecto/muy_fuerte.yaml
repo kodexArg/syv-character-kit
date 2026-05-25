@@ -4,6 +4,4 @@ tag:
   categoria: aspecto
   descripcion: >
     Fuerza física bruta que destaca considerablemente sobre la media militar.
-  efecto:
-    muy_fuerte:
-      - "(+1) fis"
+  efecto: "(+1) FISICO"

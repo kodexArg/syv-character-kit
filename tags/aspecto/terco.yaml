@@ -5,6 +5,5 @@ tag:
   descripcion: >
     Obstinación férrea que le impide cambiar de rumbo o admitir errores frente a otros.
   efecto:
-    terco:
-      - "(+1) moral"
-      - "(-1) iniciativa"
+    - "(+1) MORAL"
+    - "(-1) INICIATIVA"

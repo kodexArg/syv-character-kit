@@ -23,8 +23,13 @@
 
 ## aspecto
 
-- `efecto` (a nivel raíz como mapa) o `trigger` (con su `trigger-action`) — requerido para asociar efectos al aspecto. Se usa `efecto` a nivel raíz (como mapa `{slug_efecto: [modificadores]}`) para efectos pasivos/permanentes; se usa `trigger` con `trigger-action` si es reactivo/temporal.
+- `efecto` (a nivel raíz como string o lista de strings) o `trigger` (con su `trigger-action`) — requerido para asociar efectos al aspecto. Se usa `efecto` a nivel raíz (como string o lista de strings de modificadores de atributos base o estadísticas calculadas) para efectos pasivos/permanentes; se usa `trigger` con `trigger-action` si es reactivo/temporal.
 
 ## rol
 
 - `subcategoria` ∈ {`oficio`, `jerarquia`, `narrativo`, `combate`}
+
+## subfaccion
+
+- `subfaccion.faccion_padre` — tag `faccion.*` obligatorio que apunta a la facción principal a la que pertenece la subfacción.
+

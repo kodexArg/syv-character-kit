@@ -4,7 +4,4 @@ tag:
   categoria: aspecto
   descripcion: >
     Agudeza visual extraordinaria que facilita detectar amenazas camufladas a la distancia.
-  efecto:
-    ojo_de_halcon:
-      - "(+1) pun"
-      - "(+1) deteccion"
+  efecto: "(+1) TACTICO"

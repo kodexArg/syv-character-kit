@@ -17,7 +17,7 @@ tag:
                              #     El slug de personaje es una patente opaca [A-Z0-9]{8} —
                              #     ver hoja-modelo.md.
   nombre:        str         # (*)
-  categoria:     str         # (*)  rasgo | trait | perk | aspecto | skill | faccion | rango |
+  categoria:     str         # (*)  rasgo | trait | perk | aspecto | skill | faccion | subfaccion | rango |
                              #      escuadra | mando | estado | salud | mental | equipo | rol |
                              #      lealtad | nemesis | <nueva>
   descripcion:   str         # (*)
@@ -63,15 +63,15 @@ tag:
       - tag mental.*
 
   efecto:                    # (+) requerido si categoria = efecto, o si es un aspecto pasivo/permanente.
+                             #     String o lista de strings.
+                             #     Variables permitidas: FISICO, TACTICO, MENTAL, INICIATIVA, MORAL, FATIGA, MOVIMIENTO, ESTRESS
                              #
-                             # Estructura para categoria = efecto:
-                             #   - str
+                             # Ejemplos:
+                             #   efecto: "(+1) MENTAL"
                              #
-                             # Estructura para aspecto pasivo inline:
-                             #   vanguardia:
-                             #     - "(+2) defensa"
-                             #     - "(+2) iniciativa"
-                             #     - "(+2) aggro"
+                             #   efecto:
+                             #     - "(+2) INICIATIVA"
+                             #     - "(+1) MORAL"
 
   skill:
     atributo_dominante: str  # fis | tac | men
@@ -91,9 +91,12 @@ tag:
   equipo_vestidura:
     faccion_asociada: tag faccion.*
 
+  subfaccion:
+    faccion_padre: tag faccion.*  # (*) facción a la que pertenece
+
 # Categorías relacionales (lealtad, nemesis) NO tienen archivo de catálogo.
 # Su semántica vive en el formato del tag:
-#   lealtad.faccion.{slug}  |  lealtad.pj.{slug}  |  lealtad.escuadra.{slug}
+#   lealtad.faccion.{slug}  |  lealtad.subfaccion.{slug}  |  lealtad.pj.{slug}  |  lealtad.escuadra.{slug}
 #   nemesis.pj.{slug}
-# Las refs resuelven contra los catálogos de personajes y facciones.
+# Las refs resuelven contra los catálogos de personajes, facciones y subfacciones.
 # Los contenedores derivados "aliados" y "nemesis" se computan al servir (ver tag-modelo.md §5).

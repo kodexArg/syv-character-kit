@@ -62,6 +62,9 @@ Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta
   faccion:
     significado: Pertenencia macro (bando).
 
+  subfaccion:
+    significado: Grupo militar o político subordinado a una facción principal (bando).
+
   rango:
     significado: Designación operativa jerárquica de campo.
 
@@ -107,8 +110,8 @@ Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta
     subcategorias: [oficio, jerarquia, narrativo, combate]
 
   lealtad:
-    significado: Lealtad a facción o escuadra. Relacional. Ver §5.
-    subcategorias_implicitas: [faccion, escuadra]
+    significado: Lealtad a facción, subfacción o escuadra. Relacional. Ver §5.
+    subcategorias_implicitas: [faccion, subfaccion, escuadra]
     nota: Las lealtades personales viven en personaje.aliados[], NO acá.
 
 El motor acepta tags fuera del canon. Marcalos con `origen: custom`. La coherencia del catálogo la sostiene la curaduría, no la integridad referencial.
@@ -158,9 +161,9 @@ Estos campos son obligatorios solo cuando la categoría o subcategoría del tag 
     unidad: kg
     nota: No confundir con peso_narrativo (hint 1..5 al sorteador).
 
-  efectos:
-    obligatorio_si: categoria = aspecto
-    uso: Lista de referencias a tags de la categoría efecto.* que se aplican con el tag (reemplaza a aspecto.efecto).
+  efecto:
+    obligatorio_si: categoria = aspecto (salvo si tiene trigger)
+    uso: String o lista de strings con los modificadores de atributos o estadísticas calculadas (reemplaza al viejo formato de mapa anidado).
 
   equipo_arma.tipo_accion:
     obligatorio_si: subcategoria = arma
@@ -169,6 +172,11 @@ Estos campos son obligatorios solo cuando la categoría o subcategoría del tag 
   equipo_arma.alcance:
     obligatorio_si: subcategoria = arma
     enum: [corto, medio, largo]
+
+  subfaccion.faccion_padre:
+    obligatorio_si: categoria = subfaccion
+    tipo: tag faccion.*
+    uso: Referencia a la facción principal a la que pertenece la subfacción.
 
 Ver también [`tag-requeridos-por-categoria.md`](tag-requeridos-por-categoria.md) — índice rápido bullet-point de todos los `(+)` por categoría.
 
@@ -217,7 +225,7 @@ Para ver el bloque `requires` aplicado a un tag real, consultar `tags/perk/tirad
 
 ### 4.5. Bloques específicos por categoría
 
-Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `aspecto`, `skill`, `equipo_arma`, `equipo_vestidura`. Sus campos internos son opcionales salvo los marcados `(+)` en §4.2.
+Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `aspecto`, `skill`, `equipo_arma`, `equipo_vestidura`, `subfaccion`. Sus campos internos son opcionales salvo los marcados `(+)` en §4.2.
 
 El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml). Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `tags/`.
 
@@ -243,11 +251,16 @@ Estructura del bloque `trigger`:
 
 Estructura de efectos permanentes/pasivos inline (a nivel raíz del tag):
 
-  efecto:                # Mapa del efecto inline
-    {slug_efecto}:       # Slug del efecto (usualmente el mismo del aspecto)
-      - str              # Lista de instrucciones. Ej: "(+2) iniciativa"
+  efecto:                # String o lista de strings. Modificadores directos de atributos base o estadísticas calculadas.
+    - str                # Ej: "(+2) INICIATIVA"
 
-Los tags de la categoría `efecto.*` que se definen como archivos independientes (bajo `tags/efecto/{slug}.yaml`) detallan sus instrucciones utilizando el campo `efecto` a nivel de categoría como una lista simple:
+> **Variables permitidas en efectos**: Los modificadores de efectos solo pueden apuntar a:
+> - Atributos base: `FISICO`, `TACTICO`, `MENTAL`
+> - Estadísticas calculadas: `INICIATIVA`, `MORAL`, `FATIGA`, `MOVIMIENTO`, `ESTRESS`
+>
+> Ejemplos: `"(+1) MENTAL"`, `"-100% MOVIMIENTO"`, `"(-1) FATIGA"`, `"(-1) ESTRESS"`.
+
+Los tags de la categoría `efecto.*` que se definen como archivos independientes (bajo `tags/efecto/{slug}.yaml`) detallan sus instrucciones utilizando el campo `efecto` a nivel de categoría como una lista simple de strings:
 
   efecto:                # Lista de instrucciones o modificadores de comportamiento
     - str                # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
@@ -287,17 +300,15 @@ tag:
   descripcion: >
     Personajes que siempre van al frente con confianza. Es el aspecto más valioso para un defensor.
   efecto:
-    vanguardia:
-      - "(+2) defensa"
-      - "(+2) iniciativa"
-      - "(+2) aggro" # El aggro se utiliza para el sistema de elección de objetivos
+    - "(+2) INICIATIVA"
+    - "(+1) MORAL"
 ```
 
 ---
 
-## §5 — Categoría relacional: `lealtad` (a facciones y escuadras)
+## §5 — Categoría relacional: `lealtad` (a facciones, subfacciones y escuadras)
 
-`lealtad` codifica **vínculos dirigidos** hacia una facción o escuadra. Su slug no es identificador libre — es una **referencia compuesta** con prefijo que indica el tipo de entidad apuntada.
+`lealtad` codifica **vínculos dirigidos** hacia una facción, subfacción o escuadra. Su slug no es identificador libre — es una **referencia compuesta** con prefijo que indica el tipo de entidad apuntada.
 
 Patrón de referencia compuesta:
 
@@ -305,11 +316,15 @@ Patrón de referencia compuesta:
     apunta_a: Facción del catálogo.
     forma: lealtad.faccion.{slug}
 
+  subfaccion.:
+    apunta_a: Subfacción del catálogo.
+    forma: lealtad.subfaccion.{slug}
+
   escuadra.:
     apunta_a: Escuadra (catálogo TBD).
     forma: lealtad.escuadra.{slug}
 
-El prefijo es parte literal del slug compuesto. Un parser que ve `lealtad.faccion.confederados` sabe que es una ref a la facción de slug `confederados`.
+El prefijo es parte literal del slug compuesto. Un parser que ve `lealtad.faccion.confederados` sabe que es una ref a la facción de slug `confederados`, y `lealtad.subfaccion.pelicanos` apunta a la subfacción de slug `pelicanos`.
 
 Solo lealtades **reales y declarables**. Las latentes, aspiracionales o secretas se manejan por sistema aparte (TBD). Múltiples `lealtad.*` conviven en un mismo personaje; el orden es indicativo, no normativo.
 

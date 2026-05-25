@@ -28,6 +28,7 @@ personaje:
   # Categorías canon y reglas en tag-modelo.md §3.
   tags:                      # (*) lista; default []
     - faccion.*
+    - subfaccion.*
     - rango.*
     - escuadra.*
     - mando.capaz
@@ -47,6 +48,7 @@ personaje:
     - rol.narrativo.*
     - rol.combate.*          #     lider | heroe — afecta fza_aportada derivada
     - lealtad.faccion.*
+    - lealtad.subfaccion.*
     - lealtad.escuadra.*
 
   historia:    str           # (+) requerido al canonizar. 120-200 palabras. Congelada tras persistir.

@@ -1,0 +1,8 @@
+tag:
+  slug: pelicanos
+  nombre: "Pelícanos"
+  categoria: subfaccion
+  descripcion: >
+    Grupo táctico especial de la Confederación, especializado en operaciones rápidas y despliegue anfibio.
+  subfaccion:
+    faccion_padre: faccion.confederados

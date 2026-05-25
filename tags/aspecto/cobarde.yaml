@@ -5,6 +5,6 @@ tag:
   descripcion: >
     Propensión a evitar el peligro directo y priorizar la propia supervivencia sobre el deber.
   efecto:
-    cobarde:
-      - "(-1) moral"
-      - "(-1) iniciativa"
+    - "(-1) MORAL"
+    - "(-1) INICIATIVA"
+    - "(-1) ESTRESS"

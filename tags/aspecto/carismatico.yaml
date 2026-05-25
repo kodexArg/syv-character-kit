@@ -4,6 +4,4 @@ tag:
   categoria: aspecto
   descripcion: >
     Atracción personal y magnetismo que inspira de forma natural confianza en los demás.
-  efecto:
-    carismatico:
-      - "(+1) men"
+  efecto: "(+1) MENTAL"
