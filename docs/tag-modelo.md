@@ -92,6 +92,9 @@ Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta
   aspecto:
     significado: Mini-tag identitario con efecto mecánico en mini-frase.
 
+  efecto:
+    significado: Bloque de efecto de juego estructurado, referenciable por otros tags.
+
   skill:
     significado: Habilidad aprendida o entrenada.
 
@@ -155,9 +158,9 @@ Estos campos son obligatorios solo cuando la categoría o subcategoría del tag 
     unidad: kg
     nota: No confundir con peso_narrativo (hint 1..5 al sorteador).
 
-  aspecto.efecto:
+  efectos:
     obligatorio_si: categoria = aspecto
-    uso: Mini-frase trigger + probabilidad + efecto.
+    uso: Lista de referencias a tags de la categoría efecto.* que se aplican con el tag (reemplaza a aspecto.efecto).
 
   equipo_arma.tipo_accion:
     obligatorio_si: subcategoria = arma
@@ -215,6 +218,27 @@ Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `
 El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml). Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `mock/tags/`.
 
 **Los tipos de tag aún no introducidos** (montura, vicio, mascota, etc.) no llevan template anticipado. Se documentan el día que aparece el primer caso real.
+
+### 4.6. Triggers y efectos estructurados
+
+Para modularizar el comportamiento mecánico de los tags y habilitar que un mismo tag aplique múltiples efectos discretos o responda a eventos en partida, se incorporan los bloques opcionales `trigger` y `efectos` a nivel raíz del tag.
+
+  trigger:
+    evento: str          # Evento que dispara el trigger (ej. chequeo_moral, daño_recibido, bajo_fuego).
+    condicion: str       # Condición del evento (ej. fallado, primera_vez).
+    probabilidad: float  # Opcional. Rango 0.0..1.0 (o string de porcentaje tipo "50%").
+
+  efectos:               # Lista de referencias a tags de la categoría efecto.*
+    - tag efecto.*       # Referencia al tag de efecto (ej. efecto.furioso).
+
+**Comportamiento del motor**:
+- **Con Trigger**: Los efectos declarados en la lista de `efectos` se aplican únicamente cuando el evento de `trigger` es capturado y se cumplen sus condiciones.
+- **Sin Trigger (Pasivos)**: Si no se define un bloque `trigger`, los `efectos` se aplican de forma permanente y constante mientras el personaje posea el tag (ej. modificadores de atributos o de moral máxima).
+
+Los tags de la categoría `efecto.*` (definidos en su propia sección del catálogo, bajo `mock/tags/efecto/{slug}.yaml`) detallan las instrucciones específicas del efecto utilizando el campo `efecto` a nivel de categoría:
+
+  efecto:                # Lista de instrucciones o modificadores de comportamiento
+    - str                # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
 
 ---
 

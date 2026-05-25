@@ -4,3 +4,9 @@ tag:
   categoria: aspecto
   descripcion: >
     De temperamento hosco y difícil, no tolera tonterías y reacciona de forma agresiva.
+  trigger:
+    evento: chequeo_moral
+    condicion: fallado
+    probabilidad: 0.5
+  efectos:
+    - efecto.furioso

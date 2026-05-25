@@ -22,7 +22,7 @@
 
 ## aspecto
 
-- `aspecto.efecto` — mini-frase trigger + probabilidad + efecto.
+- `efectos` — bloque estructurado de modificaciones (modifica, valor) que aplica el tag.
 
 ## rol
 

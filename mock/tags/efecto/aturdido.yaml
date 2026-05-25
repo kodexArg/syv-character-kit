@@ -1,0 +1,8 @@
+tag:
+  slug: aturdido
+  nombre: "Aturdido"
+  categoria: efecto
+  descripcion: >
+    Estado de confusión o aturdimiento táctico que dificulta todas las acciones.
+  efecto:
+    - "-50% a todas sus tiradas"

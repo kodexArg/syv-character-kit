@@ -49,7 +49,7 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 - **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables del battle-system. Los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
 - **El PRD es contrato; el repo es implementación.** Este documento define formas y reglas. Cómo se almacenan tablas, dónde corre el LLM, qué binding usa la persistencia — fuera de scope.
 - **Agnosis al renderer.** El schema describe *qué* tiene un personaje, no *cómo* se muestra. Los tags se agrupan por categorías para que cualquier consumidor (CLI ASCII, UI web, motor de batalla, exportador a PDF) decida cómo presentarlos como secciones visuales. El modelo no impone una forma de renderizado. Una misma hoja puede aparecer como bloques ASCII, tarjetas, filas de tabla, o grafo de relaciones — todas son vistas válidas del mismo recurso.
-- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), pertenencia (`faccion`), posicionamiento operativo (`rol`, `rango`, `estado`, `escuadra_id`, `mando`, `estado_salud`), `atributos`, `lealtades`, `vinculos`, `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista (ej. `rango` para decidir mando, `estado` para filtrar disponibilidad). Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, `aspecto`, y la familia jerárquica `equipo.{arma,utilitario,vestidura}`.
+- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), pertenencia (`faccion`), posicionamiento operativo (`rol`, `rango`, `estado`, `escuadra_id`, `mando`, `estado_salud`), `atributos`, `lealtades`, `vinculos`, `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista (ej. `rango` para decidir mando, `estado` para filtrar disponibilidad). Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, `aspecto`, `efecto`, y la familia jerárquica `equipo.{arma,utilitario,vestidura}`.
 - **GDDR (Game Design Decision Record) como puente de diseño.** En este kit de gestión de personajes de *Subordinación y Valor*, el diseño de juego precede al software. Las decisiones de diseño de mecánicas y uso de recursos se asientan en el directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) sin mezclarse con la lógica de la API o la infraestructura. Los GDDRs definen cómo queremos que se utilicen los archivos que hemos preparado (modelos, schemas y tags) y se referencian mutuamente con ellos, usando incluso los personajes de `mock/personajes/` como ejemplos prácticos de diseño.
 
 ## 5. Casos de uso
@@ -373,7 +373,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 - 22 mocks regenerados al schema en iteración separada.
 - Canonización persistente (solo DB de la API).
 - **Memoria viva**: endpoint de evento, mutación de campos vigentes, historial inline.
-- **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, aspecto, equipo.{arma,utilitario,vestidura}.
+- **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, aspecto, efecto, equipo.{arma,utilitario,vestidura}.
 - **Campos derivados**: `filiacion`, `fza_aportada` — computados al servir.
 - **`mando` como booleano**: capacidad de mando; titularidad derivada.
 - **`estado` como dimensión de asignación**: activo/disponible/kia/licencia.
@@ -508,15 +508,15 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ---
 
-### 13.10. Efecto del aspecto en texto libre → motor downstream interpreta mini-frase
+### 13.10. Estructuración de triggers y efectos en los tags
 
-**Decisión.** El campo `efecto` de cada entrada de `/meta/aspectos/{valor}` es **string libre** en castellano (consistente con `perk.efecto_mecanico`). No se estructura en parsing rígido (trigger / probabilidad / efecto / tag activado).
+**Decisión.** Los tags que poseen comportamiento reactivo o modifican propiedades en juego definen esta lógica mediante campos estructurados `trigger` (desencadenador opcional) y `efectos` (lista de referencias a tags de la categoría `efecto.*`). Esto unifica el tratamiento mecánico y reemplaza el campo informal de texto libre `aspecto.efecto`.
 
-**Costo.** El motor de batalla necesita interpretar la mini-frase para aplicarla — probablemente vía LLM resolver o regla heurística (`split` por "si", "%", "+", "repite", "activa tag"). Aspectos custom escritos por humanos cargan más riesgo de parsing fallido que los 10 canon.
+**Costo.** La definición y curaduría del catálogo requiere crear tags específicos de tipo `efecto` (bajo `mock/tags/efecto/{slug}.yaml`) para especificar las instrucciones concretas. Los clientes downstream deben parsear este esquema estructurado para aplicar la lógica en combate.
 
-**Por qué se acepta.** Mismo compromiso de 13.1 (customs libres) y 13.8 (denormalización opt-in): forzar estructura rígida ahora paralizaría la curaduría de aspectos custom. El catálogo canon de 10 aspectos tiene mini-frases **bien formadas y predecibles** (patrón verbo + porcentaje + condición). Los customs cargan el riesgo.
+**Por qué se acepta.** Permite que un mismo tag aplique múltiples efectos predefinidos y reutilizables, y facilita la interpretación automatizada de las reglas sin requerir análisis heurístico en caliente. Los detalles del esquema y sus campos viven en [`docs/tag-modelo.md`](docs/tag-modelo.md).
 
-**Mitigación.** El catálogo `/meta/aspectos` puede declarar `activa_tag` como campo opcional estructurado cuando el efecto dispara un tag transitorio (`berserker`, `pánico`). Esto absorbe el caso más común sin estructurar todo el efecto. Si la fricción crece, una ola futura puede introducir `efecto_estructurado: { trigger, probabilidad, efecto, activa_tag }` como hint opcional junto al texto libre.
+**Mitigación.** La estructura mantiene los campos `trigger` y `efectos` como opcionales a nivel raíz, asegurando que los tags puramente narrativos o de equipamiento sin mecánica compleja sigan siendo mínimos y directos.
 
 ---
 

@@ -1,0 +1,9 @@
+tag:
+  slug: furioso
+  nombre: "Furioso"
+  categoria: efecto
+  descripcion: >
+    Estado de furia descontrolada que obliga a marcar a un enemigo y atacarlo.
+  efecto:
+    - "marcar objetivo: cualquier enemigo"
+    - "atacar"
