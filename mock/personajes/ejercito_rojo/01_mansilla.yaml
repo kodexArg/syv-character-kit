@@ -18,8 +18,8 @@ personaje:
   - estado.activo
   - rasgo.alto
   - rasgo.delgado
-  - rasgo.pelo_entrecano
-  - rasgo.lentes
+  - rasgo.pelo_canoso
+  - rasgo.anteojos
   - rasgo.voz_grave
   - rol.combate.lider
   - skill.comisariado

@@ -17,7 +17,7 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.delgado
-  - rasgo.cara_aninada
+  - rasgo.cara_joven
   - rasgo.anteojos
   - rasgo.manos_limpias
   - rol.oficio.recargador

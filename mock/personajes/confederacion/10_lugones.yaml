@@ -17,9 +17,9 @@ personaje:
   - estado.activo
   - rasgo.bajo
   - rasgo.corpulento
-  - rasgo.pelo_recogido
-  - rasgo.cara_observadora
-  - rasgo.habla_breve
+  - rasgo.pelo_largo
+  - rasgo.cara_curtida
+  - rasgo.habla_parca
   - rol.oficio.recargador
   - skill.movimiento
   - skill.carga

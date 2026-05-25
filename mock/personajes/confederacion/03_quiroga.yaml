@@ -17,9 +17,9 @@ personaje:
   - estado.activo
   - rasgo.alto
   - rasgo.delgado
-  - rasgo.pelo_lacio
-  - rasgo.ojos_atentos
-  - rasgo.habla_escasa
+  - rasgo.pelo_corto
+  - rasgo.mirada_firme
+  - rasgo.habla_parca
   - rol.oficio.apuntador
   - skill.tiro_de_precision
   - skill.lectura_de_mapas

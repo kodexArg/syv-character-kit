@@ -17,9 +17,9 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
-  - rasgo.pelo_abundante
+  - rasgo.pelo_largo
   - rasgo.rasgos_vascos
-  - rasgo.manos_manchadas
+  - rasgo.manos_curtidas
   - rol.oficio.recargador
   - skill.mecanica
   - skill.carga_rapida

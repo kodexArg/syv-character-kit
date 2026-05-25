@@ -17,7 +17,7 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.delgado
-  - rasgo.pelo_lacio
+  - rasgo.pelo_corto
   - rasgo.rasgos_mapuche
   - rasgo.manos_firmes
   - rol.oficio.apuntador

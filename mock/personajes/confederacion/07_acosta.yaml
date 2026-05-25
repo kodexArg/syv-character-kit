@@ -17,10 +17,10 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.atletico
-  - rasgo.barba_descuidada
-  - rasgo.pelo_con_canas
+  - rasgo.barba
+  - rasgo.pelo_canoso
   - rasgo.postura_torcida
-  - rasgo.cicatriz_en_costado
+  - rasgo.cicatriz_corporal
   - rol.oficio.infanteria
   - skill.fuego_sostenido
   - skill.primeros_auxilios

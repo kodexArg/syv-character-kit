@@ -17,8 +17,8 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
-  - rasgo.antebrazos_cicatrizados
-  - rasgo.manos_endurecidas
+  - rasgo.cicatriz_corporal
+  - rasgo.manos_curtidas
   - rasgo.mirada_firme
   - rol.oficio.artillero
   - skill.manejo_de_ametralladora

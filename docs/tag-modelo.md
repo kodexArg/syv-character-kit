@@ -219,9 +219,9 @@ El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml)
 
 **Los tipos de tag aún no introducidos** (montura, vicio, mascota, etc.) no llevan template anticipado. Se documentan el día que aparece el primer caso real.
 
-### 4.6. Triggers y efectos estructurados
+### 4.6. Efectos y triggers
 
-Para modularizar el comportamiento mecánico de los tags y habilitar que un mismo tag aplique múltiples efectos discretos o responda a eventos en partida, se incorporan los bloques opcionales `trigger` y `efectos` a nivel raíz del tag.
+Para modularizar el comportamiento mecánico de los tags y habilitar que un mismo tag aplique múltiples efectos discretos o responda a eventos en partida, se incorporan los bloques opcionales `trigger` y `efectos` a nivel raíz del tag. Los efectos representan modificaciones o estados de juego estructurados, por lo general de tiempo limitado o con una duración máxima (incluso un solo turno).
 
   trigger:
     evento: str          # Evento que dispara el trigger (ej. chequeo_moral, daño_recibido, bajo_fuego).
@@ -239,6 +239,40 @@ Los tags de la categoría `efecto.*` (definidos en su propia sección del catál
 
   efecto:                # Lista de instrucciones o modificadores de comportamiento
     - str                # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
+
+### 4.7. Aspectos
+
+Los **aspectos** (`aspecto.*`) son tags identitarios de grano medio que aportan color, particularidad y trasfondo al personaje. A diferencia de los efectos simples (que suelen ser temporales o de corta duración), los aspectos representan frases complejas de identidad y comportamiento que pueden gatillar o aplicar múltiples efectos (en muchos casos de forma permanente o condicionada por un trigger).
+
+Los aspectos más comunes y básicos del catálogo (como `aspecto.vanguardia` o `aspecto.cabron`) se usan como referencia, pero la categoría está diseñada para ser abierta y expandirse ante necesidades narrativas.
+
+#### Estructura de un Aspecto
+Un aspecto siempre requiere definir su bloque raíz de `efectos`, el cual apunta a uno o más tags de la categoría `efecto.*` que el aspecto pone en juego.
+
+Ejemplo de Aspecto (`aspecto.vanguardia`):
+```yaml
+tag:
+  slug: vanguardia
+  nombre: "Vanguardia"
+  categoria: aspecto
+  descripcion: >
+    Personajes que siempre van al frente con confianza. Es el aspecto más valioso para un defensor.
+  efectos:
+    - efecto.vanguardia
+```
+
+Y su correspondiente efecto asociado (`efecto.vanguardia`):
+```yaml
+tag:
+  slug: vanguardia
+  nombre: "Vanguardia"
+  categoria: efecto
+  descripcion: >
+    Efecto pasivo que otorga bonificaciones tácticas permanentes a la iniciativa y la defensa.
+  efecto:
+    - "+20% a la iniciativa"
+    - "+10% a la defensa"
+```
 
 ---
 

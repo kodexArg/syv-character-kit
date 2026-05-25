@@ -17,9 +17,9 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
-  - rasgo.cara_redonda
+  - rasgo.cara_joven
   - rasgo.manos_curtidas
-  - rasgo.movimientos_lentos
+  - rasgo.postura_torcida
   - rol.oficio.recargador
   - skill.manejo_de_ametralladora
   - perk.tenaz

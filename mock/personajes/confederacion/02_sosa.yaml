@@ -18,8 +18,8 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
-  - rasgo.pelo_rapado
-  - rasgo.manos_grandes
+  - rasgo.pelo_corto
+  - rasgo.manos_curtidas
   - rasgo.habla_parca
   - rol.combate.lider
   - skill.coordinacion

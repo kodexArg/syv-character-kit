@@ -41,6 +41,18 @@ El directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) contiene los **
 
 ---
 
+## Aleatoriedad: agnóstica al sistema, expresada en porcentajes
+
+El kit **no fija** un sistema de resolución de azar. El motor de batalla, las herramientas downstream o una mesa concreta pueden adoptar el que prefieran (dados, cartas, tirada digital, lo que sea). Para que las fichas, tags y modificadores sean reutilizables entre sistemas, toda probabilidad, ventaja, penalización o bonificación se expresa como **valor porcentual**.
+
+- **Probabilidades y modificadores siempre en %**: `-20% a la puntería`, `+50% a la defensa por cobertura media`, `+10% de iniciativa por entrenamiento`. Nunca en unidades específicas de un sistema concreto (no `+2 al d20`, no `-1d6 al daño`).
+- **Atributos en escala 0–9** (entero, más es mejor): `fis`, `tac`, `men`, `pun`, etc. La interpretación canónica sugerida es **decenas de porcentaje**: `3` ≈ 30–39%, `7` ≈ 70–79%. Esta lectura es solo referencia para diseño y balance; el sistema de resolución concreto decide cómo mapearla a su mecánica.
+- **Coexistencia con sistemas de referencia**: las GDDRs o documentos auxiliares pueden ilustrar mecánicas con un sistema concreto (p. ej. `3d6o1` — tres dados de seis, observando el dado objetivo que suele ser la mediana) **solo como ejemplo didáctico**. El contrato del kit sigue siendo el porcentaje; el ejemplo en dados es ilustrativo, no normativo.
+- **Aspectos** (tags con efecto mecánico) declaran sus modificadores como porcentajes, no como reglas atadas a un sistema. Un aspecto `cobertura_media` aporta `+50% defensa`, no "tirada con ventaja".
+
+**Por qué.** SyV es un universo, no un sistema. Atar el schema a una mecánica concreta amputa la portabilidad. El porcentaje es lingua franca: cualquier sistema sabe convertirlo a su moneda local.
+
+---
 
 ## Convenciones de identificadores
 

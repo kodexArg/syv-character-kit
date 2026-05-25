@@ -19,9 +19,9 @@ personaje:
   - rasgo.altura_media
   - rasgo.atletico
   - rasgo.pelo_corto
-  - rasgo.barba_corta
-  - rasgo.mirada_lenta
-  - rasgo.cicatriz_en_ceja
+  - rasgo.barba
+  - rasgo.mirada_firme
+  - rasgo.cicatriz_facial
   - rol.combate.lider
   - rol.jerarquia.sargento
   - skill.comandancia

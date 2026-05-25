@@ -17,9 +17,8 @@ personaje:
   - estado.activo
   - rasgo.alto
   - rasgo.corpulento
-  - rasgo.hombros_anchos
-  - rasgo.manos_grandes
-  - rasgo.mirada_parca
+  - rasgo.manos_curtidas
+  - rasgo.mirada_firme
   - rol.oficio.artillero
   - skill.manejo_de_ametralladora
   - skill.municion

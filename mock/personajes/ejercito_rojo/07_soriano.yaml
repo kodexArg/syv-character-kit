@@ -17,8 +17,7 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
-  - rasgo.espalda_ancha
-  - rasgo.manos_grandes
+  - rasgo.manos_curtidas
   - rasgo.respiracion_pesada
   - rol.oficio.infanteria
   - skill.fuego_sostenido

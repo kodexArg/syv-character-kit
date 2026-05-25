@@ -19,7 +19,7 @@ personaje:
   - rasgo.atletico
   - rasgo.pelo_corto
   - rasgo.cara_joven
-  - rasgo.mirada_inquisitiva
+  - rasgo.mirada_firme
   - rol.oficio.recargador
   - perk.recarga_rapida
   - trait.obediente

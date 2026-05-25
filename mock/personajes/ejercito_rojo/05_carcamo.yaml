@@ -17,9 +17,9 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.atletico
-  - rasgo.pelo_entrecano
+  - rasgo.pelo_canoso
   - rasgo.ojeras
-  - rasgo.habla_seca
+  - rasgo.habla_parca
   - rol.oficio.infanteria
   - skill.tiro_de_precision
   - skill.resistencia

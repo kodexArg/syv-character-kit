@@ -22,7 +22,7 @@
 
 ## aspecto
 
-- `efectos` — bloque estructurado de modificaciones (modifica, valor) que aplica el tag.
+- `efectos` — lista de referencias a tags de la categoría `efecto.*` que se aplican con el tag.
 
 ## rol
 

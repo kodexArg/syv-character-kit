@@ -1,0 +1,9 @@
+tag:
+  slug: vanguardia
+  nombre: "Vanguardia"
+  categoria: efecto
+  descripcion: >
+    Efecto pasivo que otorga bonificaciones tácticas permanentes a la iniciativa y la defensa.
+  efecto:
+    - "+20% a la iniciativa"
+    - "+10% a la defensa"

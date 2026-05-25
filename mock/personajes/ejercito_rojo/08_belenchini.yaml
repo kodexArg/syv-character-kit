@@ -17,7 +17,7 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
-  - rasgo.pelo_con_canas
+  - rasgo.pelo_canoso
   - rasgo.cicatriz_facial
   - rasgo.mirada_firme
   - rol.oficio.infanteria

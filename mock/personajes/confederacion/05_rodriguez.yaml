@@ -17,13 +17,12 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.delgado
-  - rasgo.pelo_atado
-  - rasgo.discreto
+  - rasgo.pelo_largo
+  - trait.discreta
   - rasgo.modales_suaves
   - rol.oficio.infanteria
   - skill.fuego_sostenido
   - skill.sastreria
-  - trait.discreta
   - trait.panico_en_abierto
   - perk.cobertura_instintiva
   - equipo.arma.rifle_militar

@@ -18,10 +18,9 @@ personaje:
   - estado.activo
   - rasgo.altura_media
   - rasgo.atletico
-  - rasgo.pelo_atado
-  - rasgo.dedos_cicatrizados
+  - rasgo.pelo_largo
+  - rasgo.cicatriz_corporal
   - rasgo.voz_grave
-  - rasgo.cicatriz_en_mano
   - rol.combate.lider
   - skill.tiro_de_precision
   - skill.coordinacion

@@ -54,6 +54,7 @@ tag:
 
   efectos:                   # (+) requerido si categoria = aspecto.
                              #     Lista de referencias a tags de la categoría efecto.*
+                             #     (Los aspectos asocian múltiples efectos a nivel de juego).
     - tag efecto.*           # Ej: efecto.furioso
 
   perk:
@@ -64,7 +65,8 @@ tag:
       - tag mental.*
 
   efecto:                    # (+) requerido si categoria = efecto.
-                             #     Lista de instrucciones o modificadores de comportamiento.
+                             #     Lista de instrucciones o modificadores de comportamiento
+                             #     (Los efectos suelen ser temporales, a veces durando un solo turno).
     - str                    # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
 
   skill:

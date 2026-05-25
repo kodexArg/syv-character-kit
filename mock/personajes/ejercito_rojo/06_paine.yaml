@@ -17,9 +17,9 @@ personaje:
   - estado.activo
   - rasgo.bajo
   - rasgo.atletico
-  - rasgo.pelo_trenzado
+  - rasgo.pelo_largo
   - rasgo.cara_curtida
-  - rasgo.habla_pausada
+  - rasgo.habla_parca
   - rol.oficio.infanteria
   - skill.tiro_de_precision
   - skill.conocimiento_de_meseta

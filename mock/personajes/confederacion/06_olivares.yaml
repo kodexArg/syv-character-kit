@@ -18,8 +18,8 @@ personaje:
   - rasgo.altura_media
   - rasgo.delgado
   - rasgo.anteojos
-  - rasgo.pelo_desordenado
-  - rasgo.diccion_cuidada
+  - rasgo.pelo_corto
+  - rasgo.modales_suaves
   - rol.oficio.infanteria
   - skill.fuego_sostenido
   - skill.analisis_tactico
