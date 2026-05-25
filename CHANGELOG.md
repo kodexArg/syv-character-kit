@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+- group: hoja-modelo-refactor-prd-canonize
+  priority: high
+  commit: c01b6aa
+  changes:
+    - refactor(docs): split hoja-modelo into yml template (89L programmatic) and md narrative reference (111L)
+    - feat(prd): §7.2.1 tabla estado_vital by range; §9.5 cambio_estado_vital in canonical milestones; §15 OQs #17-20 (fatigue/moral thresholds, triple_cero recalibration, estado_vital canonization)
+    - chore(docs): reduce combined hoja-modelo footprint 52% (200 vs 421 lines); mocks intact
 - group: estado-vital-block
   priority: high
   commit: 823b5a3
