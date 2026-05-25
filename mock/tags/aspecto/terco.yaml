@@ -4,3 +4,7 @@ tag:
   categoria: aspecto
   descripcion: >
     Obstinación férrea que le impide cambiar de rumbo o admitir errores frente a otros.
+  efecto:
+    terco:
+      - "(+1) moral"
+      - "(-1) iniciativa"

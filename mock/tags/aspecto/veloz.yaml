@@ -4,3 +4,7 @@ tag:
   categoria: aspecto
   descripcion: >
     Gran rapidez de desplazamiento y reflejos físicos por encima del promedio.
+  efecto:
+    veloz:
+      - "(+1) iniciativa"
+      - "(+1) movimiento"
