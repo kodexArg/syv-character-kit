@@ -1,0 +1,9 @@
+tag:
+  slug: vanguardia
+  nombre: "Vanguardia"
+  categoria: trait
+  descripcion: >
+    Personajes que siempre van al frente con confianza. El rasgo más valioso para un defensor.
+  efecto:
+    - "(+2) INICIATIVA"
+    - "(+1) MORAL"

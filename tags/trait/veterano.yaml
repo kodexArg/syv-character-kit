@@ -1,0 +1,10 @@
+tag:
+  slug: veterano
+  nombre: "Veterano"
+  categoria: trait
+  descripcion: >
+    Múltiples campañas y cicatrices a la espalda; ha sobrevivido a lo peor del combate.
+  efecto:
+    - "(+1) FISICO"
+    - "(+1) MORAL"
+    - "(+1) ESTRESS"

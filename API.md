@@ -8,7 +8,7 @@
 
 ## Convención `GET /meta/{categoria}` — catálogo de tag
 
-Cualquier `GET /meta/{categoria}` devuelve el catálogo canon de esa categoría de tag. La estructura de cada entrada es la definida en [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml). La lista de categorías curadas (`skill`, `trait`, `perk`, `aspecto`, `rasgo`, `equipo.arma`, `equipo.utilitario`, `equipo.vestidura`, `rol.*`, etc.) vive en [`docs/tag-modelo.md §3`](docs/tag-modelo.md).
+Cualquier `GET /meta/{categoria}` devuelve el catálogo canon de esa categoría de tag. La estructura de cada entrada es la definida en [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml). La lista de categorías curadas (`skill`, `trait`, `perk`, `rasgo`, `equipo.arma`, `equipo.utilitario`, `equipo.vestidura`, `rol.*`, etc.) vive en [`docs/tag-modelo.md §3`](docs/tag-modelo.md).
 
 Categorías nuevas se exponen automáticamente bajo `/meta/{categoria}` el día que existen — no requieren entry en este archivo. Para sub-categorías: `GET /meta/equipo/arma`, `GET /meta/rol/oficio`, etc.
 

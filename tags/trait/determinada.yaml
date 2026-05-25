@@ -1,5 +1,7 @@
 tag:
   slug: determinada
-  nombre: Determinada
+  nombre: "Determinada"
   categoria: trait
-  descripcion: 'Rasgo de carácter: determinada.'
+  descripcion: >
+    Voluntad firme: una vez tomada una decisión, la sostiene aunque las condiciones empeoren.
+  efecto: "(+1) MENTAL"

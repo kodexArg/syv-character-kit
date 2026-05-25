@@ -1,5 +1,7 @@
 tag:
   slug: confiable
-  nombre: Confiable
+  nombre: "Confiable"
   categoria: trait
-  descripcion: 'Rasgo de carácter: confiable.'
+  descripcion: >
+    La escuadra le encarga tareas críticas sin dudar; su palabra y su cumplimiento sostienen al grupo.
+  efecto: "(+1) MORAL"

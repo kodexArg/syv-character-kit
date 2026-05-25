@@ -1,5 +1,7 @@
 tag:
   slug: gatillo_rapido
-  nombre: Gatillo rápido
+  nombre: "Gatillo rápido"
   categoria: trait
-  descripcion: 'Rasgo de carácter: gatillo rápido.'
+  descripcion: >
+    Reacciona antes de pensar: en un cruce de fuego es el primero en responder.
+  efecto: "(+1) INICIATIVA"

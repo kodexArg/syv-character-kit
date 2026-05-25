@@ -1,7 +1,9 @@
 tag:
   slug: impredecible
   nombre: "Impredecible"
-  categoria: aspecto
+  categoria: trait
   descripcion: >
     Comportamiento errático y decisiones tácticas inusuales que desorientan tanto a aliados como a enemigos.
-  efecto: "(+1) INICIATIVA"
+  efecto:
+    - "(+1) INICIATIVA"
+    - "(-1) MORAL"

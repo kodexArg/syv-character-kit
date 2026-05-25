@@ -1,0 +1,7 @@
+tag:
+  slug: motivador
+  nombre: "Motivador"
+  categoria: trait
+  descripcion: >
+    Levanta el ánimo del grupo en los momentos duros, con la palabra o el ejemplo.
+  efecto: "(+1) MORAL"

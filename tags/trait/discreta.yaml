@@ -1,5 +1,7 @@
 tag:
   slug: discreta
-  nombre: Discreta
+  nombre: "Discreta"
   categoria: trait
-  descripcion: 'Rasgo de carácter: discreta.'
+  descripcion: >
+    Pasa desapercibida; sus movimientos y decisiones rara vez atraen atención no deseada.
+  efecto: "(-1) ESTRESS"

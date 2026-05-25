@@ -1,5 +1,7 @@
 tag:
   slug: eco_del_penasco
-  nombre: Eco del peñasco
+  nombre: "Eco del peñasco"
   categoria: trait
-  descripcion: 'Rasgo de carácter: eco del peñasco.'
+  descripcion: >
+    Voz grave y resonante que se hace oír por encima del fragor; los suyos la reconocen entre disparos.
+  efecto: "(+1) MORAL"

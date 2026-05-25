@@ -1,0 +1,7 @@
+tag:
+  slug: voz_de_mando
+  nombre: "Voz de mando"
+  categoria: trait
+  descripcion: >
+    Infunde orden y firmeza con la sola voz; las órdenes claras se siguen sin titubeo.
+  efecto: "(+1) MORAL"

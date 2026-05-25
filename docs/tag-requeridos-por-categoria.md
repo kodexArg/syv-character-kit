@@ -21,9 +21,22 @@
 - `equipo_arma.tipo_accion` ∈ {`cerrojo`, `semiauto`, `automatico`, `cuerpo_a_cuerpo`}
 - `equipo_arma.alcance` ∈ {`corto`, `medio`, `largo`}
 
-## aspecto
+## trait
 
-- `efecto` (a nivel raíz como string o lista de strings) o `trigger` (con su `trigger-action`) — requerido para asociar efectos al aspecto. Se usa `efecto` a nivel raíz (como string o lista de strings de modificadores de atributos base o estadísticas calculadas) para efectos pasivos/permanentes; se usa `trigger` con `trigger-action` si es reactivo/temporal.
+- `efecto` (a nivel raíz como string o lista de strings) **o** `trigger` (con su `trigger-action`) — uno de los dos es obligatorio. `efecto` para pasivos/permanentes (sobre el vocabulario canónico de `atributos-y-efectos.md`); `trigger` con `trigger-action` para reactivos/temporales.
+
+## skill
+
+- `skill.atributo_dominante` ∈ {`fis`, `tac`, `men`} — obligatorio. Define el atributo contra el que el motor tira cuando resuelve un chequeo asociado a esta skill. Una skill **no** lleva campo `efecto`: es habilitador de tirada, no modificador.
+
+## perk
+
+- **No lleva `requires` ni `excluye`** — los perks se otorgan al azar como recompensa narrativa (vía hito en campo), sin precondiciones de pertenencia ni dependencias de otros tags. Cualquier perk puede caer sobre cualquier personaje.
+- `efecto` recomendado (no obligatorio en v1): los perks suelen aportar un modificador numérico explícito sobre el vocabulario canónico.
+
+## efecto
+
+- `efecto` (a nivel raíz como lista de strings) — obligatorio. Lista de instrucciones o modificadores. Los tags `efecto.*` son standalone, referenciables desde el `trigger-action` de un trait reactivo.
 
 ## rol
 

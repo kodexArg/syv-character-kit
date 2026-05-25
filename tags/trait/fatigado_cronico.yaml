@@ -4,3 +4,4 @@ tag:
   categoria: trait
   descripcion: >
     Cansancio persistente que no se alivia del todo con el descanso estándar.
+  efecto: "(-1) FATIGA"

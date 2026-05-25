@@ -49,7 +49,7 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 - **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables del battle-system. Los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
 - **El PRD es contrato; el repo es implementación.** Este documento define formas y reglas. Cómo se almacenan tablas, dónde corre el LLM, qué binding usa la persistencia — fuera de scope.
 - **Agnosis al renderer.** El schema describe *qué* tiene un personaje, no *cómo* se muestra. Los tags se agrupan por categorías para que cualquier consumidor (CLI ASCII, UI web, motor de batalla, exportador a PDF) decida cómo presentarlos como secciones visuales. El modelo no impone una forma de renderizado. Una misma hoja puede aparecer como bloques ASCII, tarjetas, filas de tabla, o grafo de relaciones — todas son vistas válidas del mismo recurso.
-- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), `atributos`, `vinculos` (aliados/némesis con prosa), `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista. Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, `aspecto`, `efecto`, `faccion`, `subfaccion`, `rango`, `escuadra`, `mando`, `estado`, `salud`, `mental`, `lealtad`, `nemesis`, y la familia jerárquica `equipo.{arma,utilitario,vestidura}`.
+- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), `atributos`, `vinculos` (aliados/némesis con prosa), `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista. Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, `efecto`, `faccion`, `subfaccion`, `rango`, `escuadra`, `mando`, `estado`, `salud`, `mental`, `lealtad`, `nemesis`, y la familia jerárquica `equipo.{arma,utilitario,vestidura}`.
 - **GDDR (Game Design Decision Record) como puente de diseño.** En este kit de gestión de personajes de *Subordinación y Valor*, el diseño de juego precede al software. Las decisiones de diseño de mecánicas y uso de recursos se asientan en el directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) sin mezclarse con la lógica de la API o la infraestructura. Los GDDRs definen cómo queremos que se utilicen los archivos que hemos preparado (modelos, schemas y tags) y se referencian mutuamente con ellos, usando incluso los personajes de `mock/personajes/` como ejemplos prácticos de diseño.
 
 ## 5. Casos de uso
@@ -161,7 +161,7 @@ Reglas algorítmicas de sorteo (lo único PRD-específico; el vocabulario vive e
 - **`skill`**: 1-3 según rango. Líder garantiza `comandancia`; apuntador garantiza `tiro_de_precision`; el resto sortea 0-2 del pool de su facción/rango. El skill prominente en Ejército Rojo influye en `sobrenombre` (ver 7.3).
 - **`trait`**: 1-2 traits. **80% coherentes** con rol/rango; **20% complicación** (efecto desfavorable en alguna circunstancia). Sin polaridad explícita en el catálogo. Quitar un trait vía hito requiere justificación narrativa.
 - **`perk`**: típicamente 1 perk. **80/20 soft**: ~80% del subconjunto natural del rango, ~20% libre para sabor. Líderes con más probabilidad; reclutas raramente.
-- **`aspecto`**: política deliberadamente rara. **70%**: 0 aspectos. **25%**: 1 aspecto sorteado con peso por rango. **5%**: 2 aspectos (personajes notables). Customs permitidos solo vía hito, **no auto-generables** — deben curarse en el catálogo antes de aplicarse.
+- **`trait`**: 1-2 traits según rango, mezcla de polaridad. Pool curado por facción. Traits emergentes vía hito; customs permitidos pero deben curarse en el catálogo antes de aplicarse. (La categoría `aspecto` fue absorbida por `trait` — todo trait declara `efecto` o `trigger`.)
 - **`equipo.arma`**: tabla determinística `rango × faccion`. Líderes Confederación: `rifle_militar` + `pistola`. Líderes Ejército Rojo: `smg` + `pistola`. Artilleros: `ametralladora`. Apuntadores: `rifle_militar`. Fusileros y reclutas: `rifle_militar` o `smg` según disponibilidad.
 - **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico en generados. En mocks: 3-5 narrativos.
 - **`equipo.vestidura`**: determinística por facción. Confederados → `uniforme_confederado`. Rojos integrados → `uniforme_rojo`. Rojos civiles recientes → `ropa_de_civil` o `camuflaje_basico`.
@@ -233,8 +233,6 @@ Solo hitos importantes. **Sin límite ni paginación en v1.**
 | `asignacion_escuadra` | Narrador o motor | `escuadra_id` se reemplaza; típicamente lleva `estado: activo` cuando pasa a una escuadra real; `metadata: { de, a, motivo }` |
 | `agregar_tag` | Motor o narrador | append a `tags[]`; `metadata: { categoria, valor }` |
 | `quitar_tag` | Motor o narrador | remove de `tags[]`; `metadata: { categoria, valor }` |
-| `agregar_aspecto` | Narrador o motor | append a `tags[]` con `categoria: aspecto`; `metadata: { valor, motivo }`. Atajo semántico de `agregar_tag` para la categoría que requiere curaduría explícita |
-| `quitar_aspecto` | Narrador | remove de `tags[]` con `categoria: aspecto`; `metadata: { valor, motivo }` |
 | `herida` | Motor o narrador | `estado_salud: "herido"`; opcionalmente `agregar_tag` con `categoria: rasgo` |
 | `recuperacion` | Motor o narrador | `estado_salud: "saludable"` |
 | `formacion_vinculo` | Narrador | append a `vinculos[]`; `metadata: { vinculo_creado }` |
@@ -261,7 +259,7 @@ Ejemplos representativos:
 
 **Trayectoria de tags y auditoría.** El estado vigente de `tags[]` se modifica vía hitos `agregar_tag` y `quitar_tag` en el `historial`. La trayectoria completa de tags de un personaje se puede reconstruir hacia adelante reproduciendo el historial, o hacia atrás aplicando los hitos en reversa contra el estado vigente. El schema no expone un snapshot inmutable del estado inicial — la decisión de mantener el schema mínimo prima sobre la queryabilidad directa de "cómo nació el personaje".
 
-**Nota — aspectos mutables.** No existen los hitos `mejora_aspecto`. Los cambios de identidad mecánica (perk, trait, skill) son adiciones/eliminaciones a las categorías correspondientes vía `agregar_tag` / `quitar_tag`.
+**Nota — traits mutables.** Los cambios de identidad mecánica (perk, trait, skill) son adiciones/eliminaciones a las categorías correspondientes vía `agregar_tag` / `quitar_tag`.
 
 **Nota — atributos y rango.** Los atributos `{fis, tac, men}` son propiedad del personaje, no derivados del rango post-creación. Cuando cambia `rango`, los atributos no se tocan. Los tags `categoria: rol` sí se realinean. La matriz por rango (7.2) aplica **únicamente** en creación.
 
@@ -333,7 +331,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 - 22 mocks regenerados al schema en iteración separada.
 - Canonización persistente (solo DB de la API).
 - **Memoria viva**: endpoint de evento, mutación de campos vigentes, historial inline.
-- **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, aspecto, efecto, faccion, subfaccion, rango, escuadra, mando, estado, salud, mental, lealtad, nemesis, y la familia jerárquica equipo.{arma,utilitario,vestidura}.
+- **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, efecto, faccion, subfaccion, rango, escuadra, mando, estado, salud, mental, lealtad, nemesis, y la familia jerárquica equipo.{arma,utilitario,vestidura}.
 - **Campos derivados**: `filiacion`, `fza_aportada` — computados al servir.
 - **`mando` como booleano**: capacidad de mando; titularidad derivada.
 - **`estado` como dimensión de asignación**: activo/disponible/kia/licencia.
@@ -517,8 +515,7 @@ Decisiones de producto que el PRD no resuelve todavía. Cuando una se resuelve, 
 - **Catálogo de tags canon por facción.** El campo `skill.facciones_predominantes` está documentado (`docs/tag-modelo.md §5`); falta política de avisos cuando el generador sortea un tag fuera de su facción esperada.
 - **Política de eviction de tags obsoletos.** Si el catálogo retira un slug, los personajes que lo tienen no se actualizan. Sin mecanismo de alias todavía.
 - **Límite de tags por categoría.** ¿Hay máximo razonable? ¿Caps internos del generador? ¿La API valida o advierte?
-- **Polaridad explícita de aspectos.** ¿Los aspectos admiten `polaridad: positivo | neutro | penalidad`, o se tratan como neutros y el motor interpreta el texto libre del `efecto`?
-- **Gobernanza del pool semilla de aspectos.** Los aspectos cargan más peso mecánico que skills o traits; sugiere gobernanza más estricta del catálogo.
+- **Polaridad explícita de traits.** ¿Los traits admiten un campo `polaridad: positivo | neutro | penalidad` como hint sugerido, o se tratan como neutros y el motor interpreta el contenido del `efecto`?
 - **Entidad `notas` como capa enriquecida de tags.** `notas: array<{tag_ref, texto}>` permitiría persistir contexto narrativo o mecánico atado a tags específicos sin contaminar el slug. Cubriría el caso histórico (cuaderno con anotaciones) y el caso de vínculos (descripción del mentor).
 - **Migración final de los 22 mocks al modelo de lista plana de tags en notación punto.** Bloqueada por la decisión sobre la prosa de `vinculos[].descripcion` (mover a `historia`, a entradas de `historial` con tipo `formacion_vinculo`, o descartar).
 
@@ -533,7 +530,7 @@ Este documento describe el sistema de creación de personajes y sus reglas **sin
 Lo único canónico aquí es:
 
 - **Schema de la hoja**: la forma completa del recurso `personaje` (§6) con todos sus campos, tipos y restricciones.
-- **Reglas de atributos / tags / aspectos / estado_vital**: las invariantes de distribución por rango (§7), el sistema de tags categorizado (§6.2, §8, §9), la mecánica de aspectos (§9, §12.10), y el bloque `estado_vital` con sus derivados.
+- **Reglas de atributos / tags / estado_vital**: las invariantes de distribución por rango (§7), el sistema de tags categorizado (§6.2, §8, §9), la mecánica de traits con efecto declarado (§7.5, §13.10), y el bloque `estado_vital` con sus derivados.
 - **Generador de personajes**: el algoritmo determinístico y el pipeline de prosa que lo acompaña (§7, §7.2, §7.2.1, §7.9.5).
 - **Suite de tests del generador**: las invariantes que todo generador conforme debe satisfacer (golden mocks, distribuciones esperadas, idempotencia por semilla).
 
@@ -547,7 +544,7 @@ Cualquier otro detalle — base de datos, lenguaje de programación, framework H
 
 #### 16.2.1. Schema + reglas + validación
 
-La hoja canónica (documentada en `docs/hoja-modelo.{yml,md}` y en §6–§9 de este PRD), las invariantes de atributos / tags / aspectos / estado_vital, y los validadores correspondientes. Entregable estático: no requiere servidor ni persistencia para ser validado.
+La hoja canónica (documentada en `docs/hoja-modelo.{yml,md}` y en §6–§9 de este PRD), las invariantes de atributos / tags / estado_vital, y los validadores correspondientes. Entregable estático: no requiere servidor ni persistencia para ser validado.
 
 #### 16.2.2. Generador procedural
 
@@ -555,7 +552,7 @@ Algoritmo (sin LLM) capaz de producir personajes nuevos respetando:
 
 - Distribuciones de atributos por rango (§7.2 / §7.2.1).
 - Pool de tags semilla por categoría (§8 y catálogos `/meta/*`).
-- Pool de aspectos (§9).
+- Pool de traits con `efecto` declarado (§7.5).
 - Semilla reproducible (`metadatos.semilla`): la misma `(semilla, faccion, rango)` produce siempre el mismo resultado.
 
 #### 16.2.3. Generador vía LLM (prosa)
@@ -608,45 +605,6 @@ Mientras los Hitos 2 y 3 permanezcan bloqueados, los siguientes elementos están
 - Cualquier interfaz de usuario (UI, CLI de usuario final, dashboards).
 
 Estos temas pueden documentarse en PRDs separados cuando sus hitos sean autorizados.
-
----
-
-## 16. Aspectos como ciudadanos canon — capa narrativa-mecánica
-
-### 17.1. Implementación efectiva
-
-En la categoría **`aspecto`** se promueve de reserva a ciudadana canon del sistema de tags. La forma final de la primera ola es distinta de la previsión original (ver 17.3): se opta por **mini-tags identitarios cortos en kebab-case** (`cabrón`, `ojo-de-halcón`, `muy-fuerte`) con efecto mecánico embebido en una mini-frase corta servida por `/meta/aspectos/{valor}`, en lugar de la frase larga de 10–25 palabras que se había anticipado.
-
-Referencias cruzadas al resto del PRD:
-
-- **Schema**: 6.1 — categoría `aspecto` listada entre las canon previstas.
-- **Hoja ASCII**: 6.0 — Miguel lleva bloque ASPECTOS con `[cabrón]`.
-- **Distinción trait/perk/aspecto**: 6.2 — los tres se separan explícitamente.
-- **Tags activables (`estado_temporal`)**: 6.2 — patrón implícito reconocido (no canon).
-- **Ejemplos**: 6.3 (Aguirre con `ojo-de-halcón`) y 6.4 (Mansilla con `carismático`).
-- **Generación**: 7.9.5 — política de raridad (70/25/5) y customs no auto-generables.
-- **Mutación**: 9.5 — hitos `agregar_aspecto` y `quitar_aspecto`.
-- **Endpoint**: 10 — `GET /meta/aspectos` con pool semilla de 10 entries.
-- **Catálogo**: 10.1 — los 10 aspectos canon en la lista de tags semilla; total sube a 80.
-- **Tensión**: 13.10 — efecto en texto libre, motor downstream interpreta.
-
-### 17.2. Diferencia entre `aspecto`, `trait` y `perk`
-
-La primera ola de aspectos abre una capa intermedia entre los rasgos de carácter sin mecánica (`trait`) y las ventajas activables canónicas del reglamento (`perk`). El aspecto **embebe su mecánica** en una mini-frase, no la delega al reglamento; y es **abierto al custom**, no fijo. Esa combinación lo vuelve la pieza ideal para capturar identidad mecánicamente activa sin saturar el catálogo cerrado de perks. Ver 6.2 para la tabla completa de la distinción.
-
-### 17.3. Contexto histórico — la previsión original de aspectos como frases largas
-
-La nota arquitectónica de anticipaba aspectos como **frases narrativas largas** (10–25 palabras) al estilo de H.I.T.O.S. y Cultos Innombrables, donde el personaje "dice algo de sí mismo" en oración completa. Ejemplos previstos en aquel momento:
-
-- `"Cuando la columna se quiebra, alguien tiene que mantener la voz."` (aspecto de líder)
-- `"Aprendí a cazar antes que a leer; el monte no perdona el apuro."` (aspecto de tirador rural)
-- `"No le debo nada a la Confederación, pero le debo todo a los muchachos de mi escuadra."` (aspecto de lealtad fracturada)
-
-La primera ola de prefirió el formato corto porque encaja mejor con el resto del sistema de tags (kebab-case, query-friendly, inverted-index-friendly) y porque el efecto mecánico embebido en mini-frase ya cubre la función operacional del aspecto sin necesidad de la frase larga.
-
-### 17.4. Próxima ola especulativa — aspectos largos como segunda capa
-
-Queda apuntada (sin implementación ni reserva de categoría) una posible **segunda capa** de aspectos largos al estilo H.I.T.O.S./Cultos clásico, que viviría junto a la capa corta sin desplazarla. Podría modelarse como `categoria: aspecto_largo` o como un subcampo de cada `aspecto` corto. Decisión deferida hasta que aparezca un caso de uso narrativo que la justifique. Si llega, su consumo natural sería el motor narrativo (no el de batalla), invocando la frase como modificador situacional discrecional.
 
 ---
 

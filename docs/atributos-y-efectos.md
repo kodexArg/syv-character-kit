@@ -1,6 +1,6 @@
 # Atributos y Estadísticas Calculadas
 
-Este documento define el catálogo oficial de variables que pueden ser afectadas por los efectos de los tags (ej. en la categoría `aspecto.*` o `efecto.*`) y detalla la mecánica matemática y de diseño de juego que rige a cada una de ellas en *Subordinación y Valor* (SyV).
+Este documento define el catálogo oficial de variables que pueden ser afectadas por los efectos de los tags (ej. en la categoría `trait.*` o `efecto.*`) y detalla la mecánica matemática y de diseño de juego que rige a cada una de ellas en *Subordinación y Valor* (SyV).
 
 ---
 
@@ -9,8 +9,14 @@ Este documento define el catálogo oficial de variables que pueden ser afectadas
 Los atributos base son las únicas magnitudes numéricas de capacidad que se persisten de forma fija en la hoja de personaje (ver [`hoja-modelo.md §2`](hoja-modelo.md)).
 
 - **FISICO** (`fis`): Fuerza física, potencia muscular y resistencia del organismo. Rango: 2..5.
-- **TACTICO** (`tac`): Coordinación, puntería, reflejos y destreza técnica de combate. Rango: 2..5.
-- **MENTAL** (`men`): Fortaleza psicológica, resistencia al estrés, moral base y capacidad de liderazgo. Rango: 2..7.
+- **TACTICO** (`tac`): Coordinación, puntería, reflejos y destreza técnica de combate. Rango: 2..6 (6 exclusivo de `francotirador`).
+- **MENTAL** (`men`): Fortaleza psicológica, resistencia al estrés, moral base y capacidad de liderazgo. Rango: 2..7 (7 exclusivo de `lider_de_escuadra`).
+
+### 1.1. Skills como disparador de chequeos
+
+Los tags `skill.*` no modifican atributos — los **chequean**. Cada skill declara `atributo_dominante` (`fis`, `tac` o `men`); cuando el motor necesita resolver una acción técnica, pregunta "¿el personaje tiene la skill X?" y, si la respuesta es sí, tira contra el atributo dominante de esa skill. Sin la skill, la acción no es intentable o se intenta con penalidad fuerte (regla del motor downstream).
+
+Las skills son por tanto **habilitadores binarios** de tirada, no bonificadores. Toda categoría que sí modifica atributos o estadísticas calculadas (`trait`, `perk`, `efecto` standalone) usa el vocabulario de §2 y §3 vía el campo `efecto`. Ver [`tag-modelo.md §3`](tag-modelo.md) y [`tag-modelo.md §4.6`](tag-modelo.md).
 
 ---
 
@@ -23,7 +29,7 @@ Determina el orden de actuación en combate y la prioridad en el sistema de sele
 
 - **Mecánica de resolución**:
   1. Al inicio del combate, cada personaje realiza una tirada.
-  2. Se calcula su valor base de Iniciativa sumando/restando la iniciativa macro de la escuadra y aplicando los modificadores de los estados (salud/mental) y aspectos del personaje.
+  2. Se calcula su valor base de Iniciativa sumando/restando la iniciativa macro de la escuadra y aplicando los modificadores de los estados (salud/mental) y traits del personaje.
   3. Cada personaje tira **1d3o1** (un dado de tres observando el dado objetivo, es decir, el dado de resolución del sistema) para sumar a su base.
   4. Los personajes se ubican en la fila de iniciativas utilizando un dado de 10 que indica su posición/turno en la cola de iniciativa (1 a 10).
   5. Los empates en el valor final se resuelven de forma puramente aleatoria.
@@ -67,21 +73,21 @@ Medidor de tensión acumulada a corto plazo que previene el colapso mental inmed
 
 Muchos tags del catálogo canon modifican tanto la fatiga como el estrés para reflejar el desgaste físico y mental de sus habilidades.
 
-- **Veloz** (`aspecto.veloz`):
+- **Veloz** (`trait.veloz`):
   ```yaml
   efecto:
     - "(+1) INICIATIVA"
     - "(+1) MOVIMIENTO"
     - "(-1) FATIGA"  # Moverse rápido tiene un costo físico mayor
   ```
-- **Cobarde** (`aspecto.cobarde`):
+- **Cobarde** (`trait.cobarde`):
   ```yaml
   efecto:
     - "(-1) MORAL"
     - "(-1) INICIATIVA"
     - "(-1) ESTRESS"  # Menor tolerancia al estrés; el odómetro llega antes a cero
   ```
-- **Veterano cicatrizado** (`aspecto.veterano_cicatrizado`):
+- **Veterano** (`trait.veterano`):
   ```yaml
   efecto:
     - "(+1) FISICO"

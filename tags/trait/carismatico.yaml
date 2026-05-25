@@ -1,7 +1,7 @@
 tag:
   slug: carismatico
   nombre: "Carismático"
-  categoria: aspecto
+  categoria: trait
   descripcion: >
     Atracción personal y magnetismo que inspira de forma natural confianza en los demás.
   efecto: "(+1) MENTAL"

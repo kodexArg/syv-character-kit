@@ -74,7 +74,7 @@ personajes:
       - rasgo.piel_curtida
       - rasgo.barba_canosa
       - trait.taciturno
-      - aspecto.devoto
+      - trait.devoto
       - skill.conocimiento_de_meseta
       - skill.medicina
       - skill.oratoria          # origen: emergente — uso comunitario, no de mando
@@ -112,7 +112,7 @@ personajes:
       - rasgo.pelo_corto
       - trait.lealtad_obrera
       - trait.mirada_larga
-      - aspecto.carismatico
+      - trait.carismatico
       - perk.voz_de_mando
       - skill.oratoria
       - skill.comisariado

@@ -1,0 +1,7 @@
+tag:
+  slug: punteria
+  nombre: "Puntería"
+  categoria: trait
+  descripcion: >
+    Agudeza visual y pulso fino que mejoran la precisión de tiro a cualquier distancia.
+  efecto: "(+1) TACTICO"

@@ -87,19 +87,29 @@ Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta
     significado: Rasgo físico observable.
 
   trait:
-    significado: Rasgo de carácter sin mecánica activa.
+    significado: >
+      Rasgo de carácter, condición física o identidad mecánicamente activa.
+      Cada trait declara un campo `efecto` con uno o más modificadores sobre
+      el vocabulario canónico (FISICO/TACTICO/MENTAL/INICIATIVA/MORAL/
+      FATIGA/MOVIMIENTO/ESTRESS). Polaridad mixta — admite positivos, neutros
+      y penalidades, todos en la misma bolsa.
 
   perk:
-    significado: Ventaja reglada con efecto numérico.
-
-  aspecto:
-    significado: Mini-tag identitario con efecto mecánico en mini-frase.
+    significado: >
+      Ventaja reglada con efecto numérico, otorgada al azar como recompensa
+      narrativa (típicamente vía hito en campo). Sin pool por rango ni
+      precondiciones — un perk es siempre una sorpresa. No usa `requires`.
 
   efecto:
     significado: Bloque de efecto de juego estructurado, referenciable por otros tags.
 
   skill:
-    significado: Habilidad aprendida o entrenada.
+    significado: >
+      Habilidad técnica aprendida que habilita y resuelve chequeos contra su
+      atributo dominante (`fis`, `tac` o `men`). El motor pregunta "¿el personaje
+      tiene skill X?" y, si la respuesta es sí, tira contra el atributo declarado
+      en el campo `skill.atributo_dominante`. Una skill nunca aplica modificador
+      directo a stats — es siempre un habilitador de tirada. Ver `docs/atributos-y-efectos.md`.
 
   equipo:
     significado: Equipo cargado por el personaje.
@@ -162,8 +172,8 @@ Estos campos son obligatorios solo cuando la categoría o subcategoría del tag 
     nota: No confundir con peso_narrativo (hint 1..5 al sorteador).
 
   efecto:
-    obligatorio_si: categoria = aspecto (salvo si tiene trigger)
-    uso: String o lista de strings con los modificadores de atributos o estadísticas calculadas (reemplaza al viejo formato de mapa anidado).
+    obligatorio_si: categoria = trait (salvo si tiene trigger) o categoria = efecto
+    uso: String o lista de strings con los modificadores de atributos o estadísticas calculadas, sobre el vocabulario canónico de `docs/atributos-y-efectos.md`.
 
   equipo_arma.tipo_accion:
     obligatorio_si: subcategoria = arma
@@ -219,13 +229,13 @@ El bloque `requires` declara cuándo un tag es coherente sobre un personaje. Tie
 
 **Modificador NOT**: prefijá cualquier entrada con `"no:"` para invertir la condición. La forma es **string con prefijo literal** — sin objetos anidados, queryable con un `startswith("no:")` desde cualquier consumidor, obvia a la lectura humana.
 
-Para ver el bloque `requires` aplicado a un tag real, consultar `tags/perk/tirador_preciso.yaml`.
-
 `requires` es **documentación ejecutable, no validación de schema**. La API acepta personajes con tags incoherentes. La coherencia es responsabilidad del generador y del curador. Cualquier validador opcional puede consultar `requires`; el contrato duro no lo impone.
+
+**Exclusión deliberada — `perk` no usa `requires`.** Los perks son recompensas narrativas otorgadas al azar como sorpresa (típicamente vía hito en campo); no tienen pool por rango ni precondiciones de pertenencia. Cualquier perk puede aparecer sobre cualquier personaje. Reservar `requires` para categorías cuya coherencia depende del set de tags ya presente (típicamente skills avanzadas que asumen una base, o traits que asumen una condición previa).
 
 ### 4.5. Bloques específicos por categoría
 
-Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `aspecto`, `skill`, `equipo_arma`, `equipo_vestidura`, `subfaccion`. Sus campos internos son opcionales salvo los marcados `(+)` en §4.2.
+Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `skill`, `equipo_arma`, `equipo_vestidura`, `subfaccion`. Sus campos internos son opcionales salvo los marcados `(+)` en §4.2.
 
 El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml). Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `tags/`.
 
@@ -265,24 +275,38 @@ Los tags de la categoría `efecto.*` que se definen como archivos independientes
   efecto:                # Lista de instrucciones o modificadores de comportamiento
     - str                # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
 
-### 4.7. Aspectos
+### 4.7. Traits — identidad mecánicamente activa
 
-Los **aspectos** (`aspecto.*`) son tags identitarios de grano medio que aportan color, particularidad y trasfondo al personaje. A diferencia de los efectos simples (que suelen ser temporales o de corta duración), los aspectos representan frases complejas de identidad y comportamiento que pueden gatillar o aplicar múltiples efectos.
+Los **traits** (`trait.*`) son tags de identidad: rasgo de carácter, condición física o marca de comportamiento. Cada trait declara un campo `efecto` con uno o más modificadores sobre el vocabulario canónico (ver `docs/atributos-y-efectos.md`). Polaridad mixta: el catálogo admite positivos (`carismatico`, `veterano`), penalidades (`cobarde`, `hemorragia_lenta`) y combinaciones (`terco`: `+MORAL`/`-INICIATIVA`).
 
-Los aspectos más comunes y básicos del catálogo (como `aspecto.vanguardia` o `aspecto.cabron`) se usan como referencia, pero la categoría está diseñada para ser abierta y expandirse ante necesidades narrativas.
+La categoría es abierta y se expande ante necesidades narrativas. Los traits del catálogo (`tags/trait/*.yaml`) son la semilla canónica.
 
-#### Estructura de un Aspecto
-- Si el aspecto es **reactivo/temporal** (se gatilla ante un evento), define un bloque `trigger` con su correspondiente lista de `trigger-action` apuntando a un efecto externo en el catálogo.
-- Si el aspecto es **pasivo/permanente**, define directamente el bloque raíz `efecto` de forma inline como un mapa `{slug_efecto: [modificadores]}`.
+#### Estructura de un Trait
 
-Ejemplo de Aspecto Reactivo (`aspecto.cabron`):
+- Si el trait es **pasivo/permanente**, define el bloque raíz `efecto` (string o lista de strings).
+- Si el trait es **reactivo/temporal** (se gatilla ante un evento), define un bloque `trigger` con su correspondiente lista de `trigger-action` apuntando a un efecto externo del catálogo `efecto.*`.
+
+Ejemplo de Trait Pasivo (`trait.vanguardia`):
 ```yaml
 tag:
-  slug: cabron
-  nombre: "Cabrón"
-  categoria: aspecto
+  slug: vanguardia
+  nombre: "Vanguardia"
+  categoria: trait
   descripcion: >
-    De temperamento hosco y difícil, no tolera tonterías y reacciona de forma agresiva.
+    Personajes que siempre van al frente con confianza. El rasgo más valioso para un defensor.
+  efecto:
+    - "(+2) INICIATIVA"
+    - "(+1) MORAL"
+```
+
+Ejemplo de Trait Reactivo (con trigger):
+```yaml
+tag:
+  slug: ejemplo_reactivo
+  nombre: "Ejemplo reactivo"
+  categoria: trait
+  descripcion: >
+    Trait que se gatilla ante un evento concreto en partida.
   trigger:
     evento: chequeo_moral
     condicion: fallado
@@ -291,18 +315,7 @@ tag:
       - efecto.furioso
 ```
 
-Ejemplo de Aspecto Permanente (`aspecto.vanguardia`):
-```yaml
-tag:
-  slug: vanguardia
-  nombre: "Vanguardia"
-  categoria: aspecto
-  descripcion: >
-    Personajes que siempre van al frente con confianza. Es el aspecto más valioso para un defensor.
-  efecto:
-    - "(+2) INICIATIVA"
-    - "(+1) MORAL"
-```
+> **Nota histórica**: la categoría `aspecto.*` se eliminó. Su semántica (identidad con efecto declarado) se fusiona con `trait.*`. Los antiguos aspectos del catálogo se migraron como traits.
 
 ---
 
@@ -372,7 +385,7 @@ Los tags del mock y los tags creados en caliente desde la API o el motor de bata
 
 Implicaciones:
 
-- Cualquier tag puede crearse en caliente. Si un narrador agrega `aspecto.cabron` durante una batalla, el aspecto debe existir en el catálogo, o crearse con `origen: custom` antes de aplicarse.
+- Cualquier tag puede crearse en caliente. Si un narrador agrega `trait.cabron` durante una batalla, el trait debe existir en el catálogo, o crearse con `origen: custom` antes de aplicarse.
 - El motor no se preocupa por de dónde viene el tag, solo por qué dice.
 
 ---

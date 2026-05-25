@@ -1,0 +1,7 @@
+tag:
+  slug: gracioso
+  nombre: "Gracioso"
+  categoria: trait
+  descripcion: >
+    Suelta una broma en los peores momentos y descomprime al pelotón cuando más lo necesita.
+  efecto: "(-1) ESTRESS"

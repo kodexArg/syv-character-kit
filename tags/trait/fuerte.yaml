@@ -1,7 +1,7 @@
 tag:
-  slug: muy_fuerte
-  nombre: "Muy fuerte"
-  categoria: aspecto
+  slug: fuerte
+  nombre: "Fuerte"
+  categoria: trait
   descripcion: >
     Fuerza física bruta que destaca considerablemente sobre la media militar.
   efecto: "(+1) FISICO"

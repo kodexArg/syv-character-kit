@@ -1,5 +1,7 @@
 tag:
   slug: aguantador
-  nombre: Aguantador
+  nombre: "Aguantador"
   categoria: trait
-  descripcion: 'Rasgo de carácter: aguantador.'
+  descripcion: >
+    Resiste largas marchas y guardias sin acusar el desgaste antes que el resto.
+  efecto: "(+1) FATIGA"

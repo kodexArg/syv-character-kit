@@ -1,5 +1,7 @@
 tag:
   slug: arma_pesada_sin_dotacion
-  nombre: Arma pesada sin dotación
+  nombre: "Arma pesada sin dotación"
   categoria: trait
-  descripcion: 'Rasgo de carácter: arma pesada sin dotación.'
+  descripcion: >
+    Opera armamento pesado sin segundo asistente, cargando solo el peso y el servicio.
+  efecto: "(-1) MOVIMIENTO"

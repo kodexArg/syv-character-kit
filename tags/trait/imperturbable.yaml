@@ -1,5 +1,7 @@
 tag:
   slug: imperturbable
-  nombre: Imperturbable
+  nombre: "Imperturbable"
   categoria: trait
-  descripcion: 'Rasgo de carácter: imperturbable.'
+  descripcion: >
+    Mantiene la cara y la voz iguales en cualquier situación, incluso bajo fuego sostenido.
+  efecto: "(+1) MENTAL"

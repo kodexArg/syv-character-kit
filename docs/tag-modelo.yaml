@@ -17,7 +17,7 @@ tag:
                              #     El slug de personaje es una patente opaca [A-Z0-9]{8} —
                              #     ver hoja-modelo.md.
   nombre:        str         # (*)
-  categoria:     str         # (*)  rasgo | trait | perk | aspecto | skill | faccion | subfaccion | rango |
+  categoria:     str         # (*)  rasgo | trait | perk | skill | faccion | subfaccion | rango |
                              #      escuadra | mando | estado | salud | mental | equipo | rol |
                              #      lealtad | nemesis | <nueva>
   descripcion:   str         # (*)
@@ -48,7 +48,7 @@ tag:
   peso_narrativo: int        # 1..5
 
   trigger:                   # opcional. Define cuándo y qué efectos se activan ante eventos.
-                             # Si se define, el aspecto no usa el bloque raíz 'efecto'.
+                             # Si se define, el trait no usa el bloque raíz 'efecto'.
     evento:       str        # Evento disparador. Ej: "chequeo_moral", "daño_recibido", "bajo_fuego"
     condicion:    str        # Condición del evento. Ej: "fallado", "primera_vez"
     probabilidad: float      # opcional. Rango 0.0..1.0 (o string de porcentaje tipo "50%")
@@ -58,11 +58,7 @@ tag:
   perk:
     efecto_reglado: str
 
-  aspecto:
-    tags_activables:
-      - tag mental.*
-
-  efecto:                    # (+) requerido si categoria = efecto, o si es un aspecto pasivo/permanente.
+  efecto:                    # (+) requerido si categoria = efecto, o si es un trait pasivo/permanente.
                              #     String o lista de strings.
                              #     Variables permitidas: FISICO, TACTICO, MENTAL, INICIATIVA, MORAL, FATIGA, MOVIMIENTO, ESTRESS
                              #
@@ -74,7 +70,9 @@ tag:
                              #     - "(+1) MORAL"
 
   skill:
-    atributo_dominante: str  # fis | tac | men
+    atributo_dominante: str  # fis | tac | men — el atributo contra el que se tira
+                             # cuando el motor resuelve un chequeo asociado a esta skill.
+                             # Una skill NO modifica atributos; los chequea.
     rangos_naturales:
       - tag rango.*
     facciones_predominantes:

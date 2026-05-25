@@ -1,7 +1,7 @@
 tag:
   slug: devoto
   nombre: "Devoto"
-  categoria: aspecto
+  categoria: trait
   descripcion: >
     Ferviente seguidor de sus ideales, creencias o de una causa superior a sí mismo.
   efecto: "(+1) MORAL"
