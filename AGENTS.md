@@ -35,6 +35,13 @@ No se mantienen versiones múltiples de un mock. No hay `aguirre_v0.4.yaml` y `a
 
 ---
 
+## Decisiones de Diseño de Juego (GDDRs)
+
+El directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) contiene los **Game Design Decision Records (GDDRs)**. En este proyecto, "gddr" es exactamente lo que hace, ya que este es un kit para gestionar personajes del juego *Subordinación y Valor* (SyV). Al redactar un GDDR, no nos perdemos en la lógica de software o la API; lo utilizamos para definir cómo queremos que se utilicen las reglas y los archivos que hemos preparado (schemas, modelos, catálogos). Los GDDRs sirven como puente de diseño de juego, se referencian mutuamente con los archivos del proyecto e incluso pueden utilizar los mocks vigentes como ejemplos prácticos para ilustrar decisiones mecánicas o de diseño.
+
+---
+
+
 ## Convenciones de identificadores
 
 - **Slugs**: lowercase + underscore, sin acentos, sin guiones (`aguirre_walter`, `ejercito_rojo`, `lider_de_escuadra`). El separador uniforme es `_` para permitir composición en notación punto sin ambigüedad (`equipo.arma.pistola`, `lealtad.pj.aguirre_walter`).
