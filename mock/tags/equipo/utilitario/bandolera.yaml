@@ -3,4 +3,5 @@ tag:
   nombre: bandolera
   categoria: equipo
   descripcion: 'Equipo de tipo utilitario: bandolera.'
+  peso: 1
   subcategoria: utilitario

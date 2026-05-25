@@ -3,4 +3,5 @@ tag:
   nombre: cinto
   categoria: equipo
   descripcion: 'Equipo de tipo utilitario: cinto.'
+  peso: 1
   subcategoria: utilitario
