@@ -1,0 +1,91 @@
+# hoja-modelo.yaml — Personaje vacío con placeholders
+# Versión compatible: schema v0.4.1
+# Convención de placeholders:
+#   [variable ...]  → input directo del autor (nombre propio, edad, fecha, texto libre)
+#   [tags ...]      → slot reservado para una entidad del sistema de tags (categoría + valor)
+# Referencia narrativa de cada campo: docs/hoja-modelo.md
+# Template programático con tipos: docs/hoja-modelo.yml
+
+personaje:
+
+  # ── Identidad estable ──────────────────────────────────────────────────────
+  id: "[variable id]"
+  origen: "[variable origen]"
+  semilla: "[variable semilla]"
+
+  # ── Cabecera ───────────────────────────────────────────────────────────────
+  nombre: "[variable nombre]"
+  sobrenombre: "[variable sobrenombre]"
+  filiacion: "[variable filiacion]"
+
+  faccion: "[variable faccion]"
+
+  edad: "[variable edad]"
+  genero: "[variable genero]"
+  estado_salud: "[variable estado_salud]"
+
+  rol: "[variable rol]"
+
+  estado: "[variable estado]"
+  rango: "[variable rango]"
+  escuadra_id: "[variable escuadra_id]"
+  mando: "[variable mando]"
+
+  # ── Lealtades ─────────────────────────────────────────────────────────────
+  lealtades:
+    primaria: "[variable lealtad_primaria]"
+    secundarias:
+      - "[variable lealtad_secundaria]"
+    secretos:
+      - "[variable lealtad_secreta]"
+
+  # ── Atributos ─────────────────────────────────────────────────────────────
+  atributos:
+    fis: "[variable fis]"
+    tac: "[variable tac]"
+    men: "[variable men]"
+
+  # ── Estado vital ──────────────────────────────────────────────────────────
+  estado_vital:
+    fatiga_max: "[variable fatiga_max]"
+    fatiga_actual: "[variable fatiga_actual]"
+    moral_max: "[variable moral_max]"
+    moral_actual: "[variable moral_actual]"
+
+  # ── Tags ──────────────────────────────────────────────────────────────────
+  tags:
+    - categoria: "[tags categoria]"
+      valor: "[tags valor]"
+
+  # ── Vínculos ──────────────────────────────────────────────────────────────
+  vinculos:
+    - tipo: "[variable vinculo_tipo]"
+      ref_personaje_id: "[variable vinculo_ref_personaje_id]"
+      descripcion: "[variable vinculo_descripcion]"
+
+  # ── Prosa biográfica ──────────────────────────────────────────────────────
+  historia: "[variable historia]"
+
+  # ── Historial de hitos ────────────────────────────────────────────────────
+  historial:
+    - fecha: "[variable hito_fecha]"
+      tipo: "[variable hito_tipo]"
+      descripcion: "[variable hito_descripcion]"
+      ref_batalla: "[variable hito_ref_batalla]"
+      metadata: {}
+
+  # ── Snapshot de auditoría ─────────────────────────────────────────────────
+  tags_iniciales:
+    - categoria: "[tags categoria]"
+      valor: "[tags valor]"
+
+  # ── Metadatos ─────────────────────────────────────────────────────────────
+  metadatos:
+    creado_en: "[variable creado_en]"
+    canonizado_en: "[variable canonizado_en]"
+    ultima_actualizacion: "[variable ultima_actualizacion]"
+    modelo_prosa: "[variable modelo_prosa]"
+    es_canon: "[variable es_canon]"
+
+  # ── Escape hatch ──────────────────────────────────────────────────────────
+  extras: "[variable extras]"
