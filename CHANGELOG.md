@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+- group: prd-roadmap-agnosis
+  priority: high
+  commit: 612c23c
+  changes:
+    - feat(prd): §16 Roadmap y naturaleza del entregable — canonical phase gate (Hito 1 ACTIVE, Hito 2–3 BLOCKED)
+    - feat(prd): §16.1 naturaleza agnóstica — PRD devoid of lang/framework/stack, only schema + algo + tests
+    - feat(prd): §16.2–16.4 three milestones with explicit blocking comment on Hito 2 (Docker) and Hito 3 (squad system)
+    - feat(prd): §16.5 scope exclusion — no HTTP, no DB, no auth, no UI while Hito 2–3 blocked
+    - refactor(changelog): references in v0.3.0 and v0.4.0 "sección 16" updated to point §17 (Aspectos renumbered)
 - group: hoja-modelo-refactor-prd-canonize
   priority: high
   commit: c01b6aa
