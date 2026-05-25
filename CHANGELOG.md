@@ -1,6 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+- group: peso-field-equipo
+  priority: high
+  commit: dd0a45f
+  changes:
+    - feat(schema): add `peso` as conditional obligatory field (`+`) for `categoria=equipo` in tag-modelo.md §4.2; type int (0..50) kilograms; documented with hint that `peso` differs from `peso_narrativo` (sorter hint 1..5)
+    - feat(docs/tag-modelo.yaml): add `peso: 1` example to tag template skeleton
+    - feat(mock/tags/equipo): apply realistic WWII-era `peso` values to all 24 equipo tags (pistol 1kg, SMG 4kg, rifle 5kg, ametralladora 11kg, mapa/cuaderno 0kg, radio 5kg, vestiduras 2kg, etc.)
+- group: tag-requeridos-soft-protocol
+  priority: high
+  commit: 2ea3b9d
+  changes:
+    - feat(docs): new file `tag-requeridos-por-categoria.md` — soft-protocol index of all conditional obligatory fields `(+)` by categoria and subcategoria; cross-references `tag-modelo.md §4.2`; maintained by orchestrator on each new rule
 - group: tag-system-redesign
   priority: high
   commit: 245cf4a
