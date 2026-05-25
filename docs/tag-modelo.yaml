@@ -1,0 +1,54 @@
+tag:
+
+  # ── Campos comunes a todos los tags ───────────────────────────────────────
+  categoria: str
+  valor: str
+  slug: str
+  descripcion: str
+  origen: str
+
+  metadatos:
+    version_introducida: str
+    creado_en: str
+    ultima_actualizacion: str
+
+  # ── Específicos por categoría (incluir solo el bloque que aplica) ─────────
+
+  # categoria: rasgo
+
+  # categoria: trait
+
+  # categoria: perk
+  perk:
+    efecto_reglado: str
+
+  # categoria: aspecto
+  aspecto:
+    efecto: str
+    tags_activables:
+      - "[tags estado_temporal]"
+
+  # categoria: skill
+  skill:
+    atributo_dominante: str
+    rangos_naturales:
+      - "[variable rango_natural]"
+    facciones_predominantes:
+      - "[variable faccion_predominante]"
+    equipo_sugerido:
+      - "[tags equipo]"
+
+  # categoria: equipo.arma
+  equipo_arma:
+    calibre: str
+    tipo_accion: str
+    municion_tag_ref: "[tags equipo.utilitario]"
+    alcance_narrativo: str
+
+  # categoria: equipo.utilitario
+
+  # categoria: equipo.vestidura
+  equipo_vestidura:
+    faccion_asociada: str
+
+  # categoria: rol.* — pendiente OQ-tag-1

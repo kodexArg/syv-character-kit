@@ -1,35 +1,36 @@
-# hoja-modelo.yaml — Personaje vacío con placeholders
-# Versión compatible: schema v0.4.1
-# Convención de placeholders:
-#   [variable ...]  → input directo del autor (nombre propio, edad, fecha, texto libre)
-#   [tags ...]      → slot reservado para una entidad del sistema de tags (categoría + valor)
-# Referencia narrativa de cada campo: docs/hoja-modelo.md
-# Template programático con tipos: docs/hoja-modelo.yml
-
 personaje:
 
-  # ── Identidad estable ──────────────────────────────────────────────────────
-  id: "[variable id]"
-  origen: "[variable origen]"
-  semilla: "[variable semilla]"
+  # ── Identidad ─────────────────────────────────────────────────────────────
+  identidad:
+    slug: str               # generado al persistir (mock o DB); única clave de referencia
+    nombre: str
+    sobrenombre: str        # null si coincide con nombre
+    rol: str                # narrativo base; default "ciudadano"
+    genero: str
+    edad: int
 
-  # ── Cabecera ───────────────────────────────────────────────────────────────
-  nombre: "[variable nombre]"
-  sobrenombre: "[variable sobrenombre]"
-  filiacion: "[variable filiacion]"
+  # ── Facción ───────────────────────────────────────────────────────────────
+  faccion:
+    faccion: str            # "Confederación" | "Ejército Rojo" | otro
+    filiacion: str          # null si no aplica; derivable
+    escuadra: str           # slug de la escuadra; null si no asignado
+    rango: str              # null si civil/sin rango
+    mando: bool             # ¿tiene mando en la facción?
+    estado: str             # activo | disponible | kia | licencia
 
-  faccion: "[variable faccion]"
+  # ── Atributos ─────────────────────────────────────────────────────────────
+  atributos:
+    fis: int
+    tac: int
+    men: int
 
-  edad: "[variable edad]"
-  genero: "[variable genero]"
-  estado_salud: "[variable estado_salud]"
+  # ── Salud (agrupación de tags; fatiga se calcula en caliente) ─────────────
+  salud:
+    - "[variable salud_tag]"   # cansado | exhausto | agotado | herido | malherido | sangrando | enfermo | aturdido
 
-  rol: "[variable rol]"
-
-  estado: "[variable estado]"
-  rango: "[variable rango]"
-  escuadra_id: "[variable escuadra_id]"
-  mando: "[variable mando]"
+  # ── Mental (agrupación de tags; moral se calcula en caliente) ─────────────
+  mental:
+    - "[variable mental_tag]"  # pánico | confundido | desmoralizado | iracundo | traumatizado | conmocionado | berserker | sereno
 
   # ── Lealtades ─────────────────────────────────────────────────────────────
   lealtades:
@@ -39,32 +40,19 @@ personaje:
     secretos:
       - "[variable lealtad_secreta]"
 
-  # ── Atributos ─────────────────────────────────────────────────────────────
-  atributos:
-    fis: "[variable fis]"
-    tac: "[variable tac]"
-    men: "[variable men]"
-
-  # ── Estado vital ──────────────────────────────────────────────────────────
-  estado_vital:
-    fatiga_max: "[variable fatiga_max]"
-    fatiga_actual: "[variable fatiga_actual]"
-    moral_max: "[variable moral_max]"
-    moral_actual: "[variable moral_actual]"
-
-  # ── Tags ──────────────────────────────────────────────────────────────────
+  # ── Tags (el resto: rasgos, traits, perks, aspectos, skills, equipo, rol.*) ─
   tags:
-    - categoria: "[tags categoria]"
-      valor: "[tags valor]"
+    - categoria: str
+      valor: str
 
   # ── Vínculos ──────────────────────────────────────────────────────────────
   vinculos:
     - tipo: "[variable vinculo_tipo]"
-      ref_personaje_id: "[variable vinculo_ref_personaje_id]"
+      ref_personaje_slug: "[variable vinculo_ref_personaje_slug]"
       descripcion: "[variable vinculo_descripcion]"
 
   # ── Prosa biográfica ──────────────────────────────────────────────────────
-  historia: "[variable historia]"
+  historia: str             # 120-200 palabras; LLM en creación; congelada al persistir
 
   # ── Historial de hitos ────────────────────────────────────────────────────
   historial:
@@ -76,16 +64,14 @@ personaje:
 
   # ── Snapshot de auditoría ─────────────────────────────────────────────────
   tags_iniciales:
-    - categoria: "[tags categoria]"
-      valor: "[tags valor]"
+    - categoria: str
+      valor: str
 
   # ── Metadatos ─────────────────────────────────────────────────────────────
   metadatos:
-    creado_en: "[variable creado_en]"
-    canonizado_en: "[variable canonizado_en]"
-    ultima_actualizacion: "[variable ultima_actualizacion]"
-    modelo_prosa: "[variable modelo_prosa]"
-    es_canon: "[variable es_canon]"
+    creado_en: str
+    canonizado_en: str
+    ultima_actualizacion: str
 
-  # ── Escape hatch ──────────────────────────────────────────────────────────
-  extras: "[variable extras]"
+  # ── Escape hatch (estructura libre, cualquier llave) ──────────────────────
+  extras: object
