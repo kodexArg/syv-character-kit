@@ -3,7 +3,7 @@
 ## [Unreleased]
 - group: tag-system-redesign
   priority: high
-  commit: pending
+  commit: 245cf4a
   changes:
     - refactor(docs/tag-modelo): restructure from closed canon to universal mechanics + curated examples; move prosa explaining tag universality to §1; declare agnosis principle for renderers
     - feat(docs/tag-modelo): new system `requires` with `require_all` and `require_any` sub-blocks; NOT modifier as literal `"no:"` prefix in strings (no nested objects); complete example with `perk.tirador_preciso`
