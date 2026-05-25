@@ -188,114 +188,34 @@ Promedio de escuadra (composición 1+1+1+1+4+3): ≈ 6.5 de fatiga, ≈ 3.9 de m
 
 (El bloque `origen_geografico` fue eliminado. Si la procedencia importa narrativamente, se cuenta en `historia` o se añade como `rasgo` / `extras`.)
 
-### 7.5. Tags de `rasgo`
+### 7.5. Pools de tags por categoría
 
-El generador produce 1 tag de altura + 1 tag de complexión obligatorios, más 2-3 rasgos físicos sorteados de pool corto segmentado por facción:
+**Vocabulario**: el generador sortea de los catálogos curados en `mock/tags/{categoria}/`. Cada slug que aparece allí es candidato natural. Cuando el generador necesita algo fuera del catálogo, lo crea con `origen: emergente`.
 
-- **Confederación**: pools con rasgos que reflejan procedencia del interior — tez mate, rasgos rurales, marcas de trabajo físico en tierra seca. Ejemplos: `complexión atlética`, `manos callosas`, `mirada directa`.
-- **Ejército Rojo**: pools con rasgos de procedencia costera/industrial patagónica — tez curtida de puerto o de meseta, marcas de trabajo manual en frío. Ejemplos: `complexión delgada`, `manos ásperas`, `lentes de armazón fino`.
+Reglas algorítmicas de sorteo (lo único PRD-específico; el vocabulario vive en el catálogo):
 
-Sin tags de cicatriz en creación — las cicatrices son consecuencia narrativa y se agregan vía hito `agregar_tag {categoria: rasgo}` después de una herida o acción dramática. En mocks los rasgos son ricos y escritos a mano; en canonizados heredan y acumulan.
+- **`rasgo`**: 1 altura + 1 complexión obligatorios + 2-3 rasgos físicos del pool segmentado por facción (Confederación → interior rural; Ejército Rojo → costa/meseta industrial). Sin cicatrices en creación — entran vía hito.
+- **`rol.combate.*`**: exactamente 1 tag derivado del `rango`. `Lider de escuadra` y `Segundo al mando` → `lider` (`fza_aportada: 2`); resto → ninguno (`fza_aportada: 1`). El tag `rol.combate.heroe` (→ 3) **no se autogenera**; entra solo vía hito por acción extraordinaria.
+- **`rol.oficio.*`** / **`rol.jerarquia.*`**: derivados del `rango` + facción (`apuntador → rol.oficio.francotirador`, `Lider de escuadra → rol.jerarquia.sargento`, etc.).
+- **`skill`**: 1-3 según rango. Líder garantiza `comandancia`; apuntador garantiza `tiro_de_precision`; el resto sortea 0-2 del pool de su facción/rango. El skill prominente en Ejército Rojo influye en `sobrenombre` (ver 7.3).
+- **`trait`**: 1-2 traits. **80% coherentes** con rol/rango; **20% complicación** (efecto desfavorable en alguna circunstancia). Sin polaridad explícita en el catálogo. Quitar un trait vía hito requiere justificación narrativa.
+- **`perk`**: típicamente 1 perk. **80/20 soft**: ~80% del subconjunto natural del rango, ~20% libre para sabor. Líderes con más probabilidad; reclutas raramente.
+- **`aspecto`**: política deliberadamente rara. **70%**: 0 aspectos. **25%**: 1 aspecto sorteado con peso por rango. **5%**: 2 aspectos (personajes notables). Customs permitidos solo vía hito, **no auto-generables** — deben curarse en el catálogo antes de aplicarse.
+- **`equipo.arma`**: tabla determinística `rango × faccion`. Líderes Confederación: `rifle_militar` + `pistola`. Líderes Ejército Rojo: `smg` + `pistola`. Artilleros: `ametralladora`. Apuntadores: `rifle_militar`. Fusileros y reclutas: `rifle_militar` o `smg` según disponibilidad.
+- **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico en generados. En mocks: 3-5 narrativos.
+- **`equipo.vestidura`**: determinística por facción. Confederados → `uniforme_confederado`. Rojos integrados → `uniforme_rojo`. Rojos civiles recientes → `ropa_de_civil` o `camuflaje_basico`.
+- **`salud.*` y `mental.*`**: vacíos al generar. El motor downstream los aplica/remueve vía hitos `cambio_salud` / `cambio_mental` durante batalla.
+- **`lealtad.*`**: el generador emite `lealtad.faccion.{faccion_propia}` por default. `lealtad.escuadra.*` se agrega vía hito `asignacion_escuadra`. Las lealtades personales **no son tags** — viven en `aliados[]` (ver [`hoja-modelo.md §3.4`](docs/hoja-modelo.md)) y se pueblan en caliente o por curaduría.
 
-### 7.6. Tags de `rol` (mecánico)
+### 7.6. `historia` (LLM)
 
-El generador asigna exactamente 1 tag `categoria: rol` derivado del `rango` del personaje. Tabla de conversión:
+Prosa de 120–200 palabras. Prompt recibe: `faccion`, `rol`, `rango`, tags prominentes, `nombre`, `sobrenombre`, `edad`, `genero`. Tono militar austero, voz rioplatense, 2–3 párrafos. Cache por `hash(seed + inputs + version_modelo)`. Si se canoniza, se congela.
 
-| `rango` | tag `rol` generado | `fza_aportada` derivado |
-|---|---|---|
-| `Lider de escuadra` | `lider` | 2 |
-| `Segundo al mando` | `lider` | 2 |
-| `Apuntador` | `tirador` | 1 |
-| `Artillero` | `artillero` | 1 |
-| `Fusilero` | `fusilero` | 1 |
-| `Recluta` | `recluta` | 1 |
+### 7.7. `aliados[]`, `nemesis[]`, `historial[]`
 
-El tag `heroe` (→ `fza_aportada: 3`) no se genera en creación — es un tag que solo se agrega vía hito `agregar_tag` por acción extraordinaria reconocida narrativamente.
-
-### 7.7. Tags de `skill`
-
-Pool curado por facción y rango. El generador agrega 1-3 skills según rango:
-
-| `rango` | Skills garantizados | Skills adicionales (sorteo del pool facción) |
-|---|---|---|
-| `Lider de escuadra` | `Comandancia` | 1-2 del pool (ej. `Oratoria de muelle`, `Lectura de columna` para Ejército Rojo; `Lectura de terreno` para Confederación) |
-| `Segundo al mando` | — | 1-2 del pool (tácticos o de comunicación) |
-| `Apuntador` | `Francotirador` | 0-1 adicional |
-| `Artillero` | — | 1 del pool de artillería |
-| `Fusilero` | — | 0-1 del pool general |
-| `Recluta` | — | 0 (raramente 1 simple) |
-
-El tag `skill` más prominente en Ejército Rojo influye en la composición del `sobrenombre` (ver 7.3 y nota de derivación en 6.2).
-
-### 7.8. Tags de `trait`
-
-Pool curado abierto, sin polaridad fija. El generador agrega 1-2 traits:
-
-- **80% del peso**: traits coherentes con el rol y rango (ej. `Sangre fría` para líderes, `Voz grave` para oradores, `Mirada larga` para apuntadores).
-- **20% del peso**: "complicación" — trait con efecto mecánico desfavorable en alguna circunstancia (`Miope`, `Obstinado`, `Hemorragia lenta`, `Objetivo prioritario`). Esta distribución es análoga al 80/20 de perks: el personaje siempre tiene algún borde oscuro potencial.
-
-Los traits no se eliminan fácilmente — a diferencia del equipo, son parte de la identidad. Quitarlos vía hito `quitar_tag {categoria: trait}` requiere justificación narrativa explícita en `descripcion`.
-
-### 7.9. Tags de `perk`
-
-Pool canon (origen en `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md`). **Restricción 80/20 soft**: ~80% sobre el subconjunto natural del rango, ~20% libre para perks inesperados que den sabor. El generador agrega típicamente 1 perk (líderes con más probabilidad; reclutas raramente).
-
-Perks canon actuales de referencia (abierto, no exhaustivo):
-
-| Perk | Rango natural | Efecto resumido |
-|---|---|---|
-| `Voz de mando` | Líder / Segundo | MEN favorable en chequeo de mando colectivo |
-| `Recarga rápida` | Artillero / Apuntador | Recarga sin costo de acción |
-| `Cobertura instintiva` | Fusilero / Segundo | Se cubre automáticamente al primer disparo recibido |
-| `Sucesor de Ricardo` | Líder | MEN favorable para mando/iniciativa cuando no hay líder funcional |
-
-### 7.9.5. Tags de `aspecto`
-
-Pool semilla canon de 10 aspectos en `/meta/aspectos` (ver 10.x). **Política deliberada: los aspectos son raros.** No todo personaje generado tiene uno — debe haber un porqué narrativo. Distribución del generador:
-
-- **70%**: 0 aspectos. La mayoría de fusileros y reclutas no llevan aspecto.
-- **25%**: 1 aspecto. Sorteo del pool semilla con peso por rango (líderes ponderan a `cabrón`, `carismático`, `terco`; apuntadores ponderan a `ojo-de-halcón`; artilleros y veteranos a `muy-fuerte`, `veterano-cicatrizado`).
-- **5%**: 2 aspectos. Casos de personajes notables. El generador rara vez los emite; típicamente aparecen en mocks o en canonizados que acumulan aspectos vía hito.
-
-**Customs**: permitidos en mocks y canonizados (vía hito `agregar_aspecto`), pero **no auto-generables**. Cualquier aspecto fuera del pool semilla debe ser curado a mano y registrado en `/meta/aspectos` para que el motor downstream lo pueda interpretar.
-
-### 7.10. `lealtades`
-
-- **En generados**: `primaria` = nombre de la facción; `secundarias` = 0-2 entradas sorteadas; `secretos: []`.
-- **En mocks y canonizados**: ricas, escritas o agregadas vía hito.
-
-### 7.11. Tags de `equipo.*`
-
-Pool curado `rango × faccion` produce tags en lugar de objetos estructurados.
-
-| `rango` | Confederación (default) | Ejército Rojo (default) |
-|---|---|---|
-| `Lider de escuadra` | `rifle militar` + `pistola` | `SMG` + `pistola` |
-| `Segundo al mando` | `rifle militar` + `pistola` | `SMG` o `rifle militar` + `pistola` |
-| `Apuntador` | `rifle militar` (larga) | `rifle militar` (larga) |
-| `Artillero` | `ametralladora` | `ametralladora` |
-| `Fusilero` | `rifle militar` | `rifle militar` o `SMG` |
-| `Recluta` | `rifle militar` | Lo que haya disponible |
-
-- **`equipo.arma`**: un valor genérico del catálogo de 6 (`pistola`, `revolver`, `rifle`, `rifle militar`, `SMG`, `ametralladora`). El alcance ya no se incluye en el valor del tag.
-- **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico (`cargador`, `vendaje`, `cantimplora`). En mocks: hasta 4-5 narrativos.
-- **`equipo.vestidura`**: tabla determinística por facción. Todos los Confederados: `uniforme confederado`. Rojos integrados (líderes, veteranos): `uniforme rojo`. Rojos de origen civil reciente o andrajosos: `ropa de civil` o `camuflaje básico`. Catálogo canon: `uniforme confederado`, `uniforme rojo`, `ropa de civil`, `camuflaje básico`.
-
-### 7.12. `vinculos` y `historial`
-
-- **En generados dinámicamente**: ambos vacíos.
-- **En mocks**: inicializados con el contenido a mano.
-- **En canonizados**: heredan; el motor downstream los puebla vía evento.
-
-### 7.13. `historia` (LLM)
-
-Prosa de 120–200 palabras. Prompt recibe: `faccion`, `rol`, `rango`, skills/traits/perks principales, `nombre`, `sobrenombre`, `edad`, `genero`. Instrucción de tono militar austero, voz rioplatense, 2–3 párrafos.
-
-Cache por `hash(seed + inputs + version_modelo)`. Si se canoniza, se congela.
-
-### 7.14. Estado inicial de salud y mental
-
-En personajes recién generados ambos bloques arrancan vacíos: `salud: []` y `mental: []` (sin tags `salud.*` ni `mental.*` aplicados). El motor downstream va aplicando y removiendo estos tags vía hitos `cambio_salud` / `cambio_mental` según el curso de la batalla.
+- **Generados dinámicamente**: los tres vacíos (`[]`).
+- **Mocks**: inicializados a mano con prosa real.
+- **Canonizados**: heredan del estado inicial; el motor downstream los puebla vía hitos (`formacion_lealtad`, `identificacion_nemesis`, `agregar_tag`, etc.).
 
 ---
 
@@ -388,70 +308,11 @@ Ejemplos representativos:
 
 ## 9. Endpoints
 
-**Fuente de verdad: [`API.md`](API.md).** Los endpoints, sus parámetros, payloads y mapeo a casos de uso viven íntegramente en `API.md`. Cualquier discusión, propuesta o mención de rutas (HTTP, internas, `/meta/*`, etc.) debe revisar y/o actualizar ese archivo. Si una ruta no figura ahí, no existe en el contrato.
+**Fuente de verdad: [`API.md`](API.md).** Los endpoints, parámetros, payloads y mapeo a UC viven íntegramente ahí. Si una ruta no figura ahí, no existe en el contrato.
+
+**Catálogos `/meta/*`**: convención uniforme — `GET /meta/{categoria}` devuelve el catálogo curado de esa categoría de tag, sembrado desde `mock/tags/{categoria}/`. Para listar valores reales, consultar el directorio. Detalle en `API.md`.
 
 Las tensiones y open questions vinculadas a endpoints (gobernanza de `POST /event`, endpoint de escuadras, expansión `?expand=tags`, etc.) se mantienen en este PRD; el **contrato** vive en `API.md`.
-
-### 9.1. Catálogo canon `/meta/*` — 80 tags semilla
-
-Cada endpoint `/meta/*` devuelve esta **semilla canónica** más cualquier valor agregado por los mocks o personajes canonizados existentes. El catálogo es semilla, **no autoridad**: otros usuarios crearán tags personalizados que entran al catálogo emergente. La fragmentación semántica que esto introduce está documentada como tensión en 13.9.
-
-**`/meta/rasgos` — 10 rasgos físicos canon:**
-```
-alto, medio, bajo, delgado, atletico, corpulento,
-piel curtida, manos grandes, barba canosa, cicatriz facial
-```
-
-**`/meta/roles` — 10 roles canon (etiquetas mecánicas + funcionales de campo):**
-```
-lider, sargento, cabo, camarada, apuntador, artillero,
-infanteria, recargador, comisariado, veterano
-```
-
-**`/meta/skills` — 10 skills canon:**
-```
-Comandancia, Tiro de precisión, Manejo de ametralladora, Operación de radio,
-Primeros auxilios, Lectura de mapas, Lectura de terreno,
-Conocimiento de meseta, Oratoria, Comisariado
-```
-
-**`/meta/traits` — 10 traits canon (sin polaridad fija):**
-```
-Objetivo prioritario, Voz grave, Mirada larga, Obstinado,
-Pánico en abierto, Hemorragia lenta, Recluta novato, Templado bajo fuego,
-Lealtad obrera, Fatigado crónico
-```
-
-**`/meta/perks` — 10 perks canon del reglamento:**
-```
-Voz de mando, Puntería fría, Cobertura instintiva, Resistencia al dolor,
-Veterano de flanqueo, Sangre fría, Recarga rápida, Olfato del terreno,
-Tenaz, Disparo de oportunidad
-```
-
-**`/meta/equipo/armas` — 6 armas canon (genéricos):**
-```
-pistola, revolver, rifle, rifle militar, SMG, ametralladora
-```
-
-**`/meta/equipo/utilitarios` — 10 utilitarios canon:**
-```
-cargador, silbato, cuaderno, brújula, prismáticos,
-botiquín, radio, mapa, cuchillo, vendaje
-```
-
-**`/meta/equipo/vestiduras` — 4 vestiduras (cerrado por decisión del cliente):**
-```
-ropa de civil, uniforme rojo, uniforme confederado, camuflaje básico
-```
-
-**`/meta/aspectos` — 10 aspectos canon (nuevo):**
-```
-cabrón, ojo-de-halcón, muy-fuerte, cobarde, carismático,
-terco, veloz, veterano-cicatrizado, devoto, impredecible
-```
-
-**Total: 80 tags semilla** (6 armas + 10 utilitarios + 10 rasgos + 10 roles + 10 skills + 10 traits + 10 perks + 4 vestiduras + 10 aspectos). La categoría `aspecto` se promueve a ciudadana canon (ver sección 15).
 
 ---
 
