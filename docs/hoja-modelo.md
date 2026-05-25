@@ -1,28 +1,29 @@
-# Hoja Modelo — Referencia narrativa de campos
+# Hoja Modelo — Referencia del personaje
 
-> **Versión compatible**: schema v0.5.0 (refactor mayor — tags como ciudadanos universales
-> del modelo; colapso de bloques `faccion`, `salud`, `mental`, `vinculos`, `lealtades`,
-> `rasgos/traits/perks/etc` a la lista plana `tags[]` con notación punto).
-> **Propósito**: descripción campo por campo de la hoja de personaje. Para el template
-> programático, ver [`hoja-modelo.yaml`](hoja-modelo.yaml).
-> **Sistema de tags**: definición, categorías y catálogo en [`tag-modelo.md`](tag-modelo.md).
+> **Estado**: rolling release; este documento describe el vigente.
+> **Propósito**: definir la estructura de la hoja de personaje campo por campo.
+>
+> **Material de referencia**:
+> - [`hoja-modelo.yaml`](hoja-modelo.yaml) — template programático del personaje vacío.
+> - [`tag-modelo.md`](tag-modelo.md) — sistema de tags: definición, categorías, catálogo.
+> - [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml) — cinco personajes ejemplo en composición.
 
 ---
 
-## Estructura de la hoja
+## §0 — Estructura de la hoja
 
-```
-personaje:
-  identidad: {...}
-  atributos: {...}
-  tags: [...]               # lista plana de strings en notación punto
-  historia: str
-  historial: [...]
-  metadatos: {...}
-  extras: object | null
-```
+Seis bloques estructurados más la lista plana de tags:
 
-Solo seis bloques estructurados (más la lista de tags). La regla rectora: **todo lo que puede ser discreto y no es identidad/atributo/prosa/audit, es tag**. La justificación detallada de qué es tag y qué no en [`tag-modelo.md` §1](tag-modelo.md#1--qué-es-un-tag).
+  personaje:
+    identidad:    { slug, nombre, sobrenombre, rol, genero, edad }
+    atributos:    { fis, tac, men }
+    tags:         [...]      # lista plana de strings en notación punto
+    historia:     str        # prosa biográfica congelada
+    historial:    [...]      # eventos temporales (hitos)
+    metadatos:    { creado_en, canonizado_en, ultima_actualizacion }
+    extras:       object | null
+
+**Regla rectora**: todo lo que puede ser discreto y no es identidad, atributo, prosa o auditoría — es tag. La justificación detallada vive en [`tag-modelo.md` §1](tag-modelo.md).
 
 ---
 
@@ -30,129 +31,245 @@ Solo seis bloques estructurados (más la lista de tags). La regla rectora: **tod
 
 Quién es el personaje, fuera de su contexto operativo.
 
-**`slug`** — Identificador único. String estable asignado **en el momento de persistir** (mock o DB). Convención: lowercase + underscore, sin acentos. Formato canónico: `{apellido}_{nombre}` (ej. `aguirre_walter`). Generado del lado servidor en el guardado, evita race conditions. El slug también funciona como clave de referencia compuesta en tags relacionales (`lealtad.pj.{slug}`, `nemesis.pj.{slug}`). Ver [`tag-modelo.md` §4](tag-modelo.md#4--categorías-relacionales-lealtad-y-nemesis).
+### 1.1. `slug` — la patente del personaje
 
-**`nombre`** — Nombre real. String inmutable. Ej. `"Walter Aguirre"`.
+El `slug` es la **patente opaca** del personaje. No es su nombre. Es el identificador estable que el sistema usa para referenciarlo en cualquier vínculo (refs `lealtad.pj.{slug}`, `nemesis.pj.{slug}`, eventos del historial, ediciones por API).
 
-**`sobrenombre`** — Cómo se lo conoce operativamente. Derivable al servir desde `nombre`, tags `rango.*` y tags `rol.*` de mando si aplican. `null` cuando no hay distinción.
+  slug:
+    formato_protocolo: ^[A-Z0-9]{8}$
+    formato_db: ^[A-Za-z0-9_]+$           # más laxo; ver nota abajo
+    ejemplos: [K9F2H3M4, SLG3D7K2, NMC8H5P9]
+    generacion: Servidor genera al persistir (random + colisión-check).
+    custom: Admitido para mock data o curaduría manual; mismo regex y mismo check.
+    mutable: false
 
-**`rol`** — Identidad narrativa base, no posición operativa. String con default `"ciudadano"`. Puede contener un título narrativo (`"Sargento Confederado"`, `"Líder Revolucionario"`) o quedarse en `"ciudadano"` con la capa operativa expresada en tags `rol.*`. **No confundir con tags `rol.*`** (que viven en `tags[]`).
+**Por qué patente y no nombre**: dos personajes pueden llamarse igual; sus patentes no colisionan. Una refactorización narrativa (cambio de apellido por casamiento, alias revolucionario, etc.) no invalida refs existentes. Los renderers muestran `nombre`; los sistemas guardan `slug`.
 
-**`genero`** — Enum abierto: `"masculino"`, `"femenino"`, `"no_binario"`, `"otro"`.
+**Exclusión por protocolo, no por base de datos**. La base permite el regex laxo `^[A-Za-z0-9_]+$` sin límite estricto de tamaño — esto deja la puerta abierta a casos especiales (slugs sintéticos para personajes históricos, slugs de tag como `pistola` o `lanzamisiles`, slugs de facciones como `ejercito_rojo`). El protocolo del personaje **se restringe a sí mismo** a 8 caracteres `[A-Z0-9]` para evitar colisiones por escala y mantener URLs/refs predecibles. Los validadores rechazan slugs de personaje fuera del protocolo; la DB no.
 
-**`edad`** — Years al momento de creación. Integer.
+### 1.2. Resto del bloque
+
+  nombre:
+    tipo: string
+    ejemplo: "Walter Aguirre"
+    mutable: false                        # inmutable tras canonizar
+
+  sobrenombre:
+    tipo: string | null
+    derivacion: Derivable al servir desde nombre + tags rango.* + tags rol.* de mando.
+    nota: null cuando no hay distinción con el nombre real.
+
+  rol:
+    tipo: string
+    default: ciudadano
+    proposito: Identidad narrativa base (no posición operativa).
+    ejemplos: ["Sargento Confederado", "Líder Revolucionario", "Médico de campaña"]
+    aclaracion: NO confundir con tags rol.* — esos viven en tags[] y expresan la capa operativa.
+
+  genero:
+    tipo: string
+    enum_abierto: [masculino, femenino, no_binario, otro]
+
+  edad:
+    tipo: int
+    nota: Years al momento de creación. Mutable por decisión narrativa explícita, sin hito formal.
 
 ---
 
 ## §2 — Atributos
 
-Set de tres valores numéricos que definen la capacidad base. Determinísticos por rango en creación; mutables solo vía hito `triple_cero` o `mejora_atributo`. Rango 2-5 para `fis` y `tac`; hasta 7 para `men` en líderes.
+Tres valores numéricos que definen la capacidad base.
 
-- **`fis`** — resistencia, potencia bruta.
-- **`tac`** — precisión, coordinación, reflejos.
-- **`men`** — liderazgo, moral base, resistencia psicológica.
+  fis:
+    significado: Resistencia, potencia bruta.
+    rango: 2..5
 
-Son las **únicas magnitudes numéricas persistidas**. Toda otra capacidad derivada (fatiga máxima, moral máxima, capacidad de mando vigente, fza_aportada) se calcula en caliente con fórmulas fijas — no se persiste para evitar drift.
+  tac:
+    significado: Precisión, coordinación, reflejos.
+    rango: 2..5
+
+  men:
+    significado: Liderazgo, moral base, resistencia psicológica.
+    rango: 2..7                # hasta 7 en líderes
+
+**Determinísticos por rango en creación**. Mutables solo vía hito `triple_cero` o `mejora_atributo`. Son las **únicas magnitudes numéricas persistidas** — toda otra capacidad derivada (fatiga máxima, moral máxima, mando vigente, fza_aportada) se calcula en caliente con fórmulas fijas, no se persiste, para evitar drift.
 
 ---
 
 ## §3 — Tags
 
-Lista plana de strings en notación punto. Es la fuente de verdad para todo lo discreto del personaje. **Definición completa, categorías canon, sub-categorías, formato y reglas de catálogo viven en [`tag-modelo.md`](tag-modelo.md).**
+Lista plana de strings en notación punto. Es la fuente de verdad de todo lo discreto del personaje.
 
-Resumen de las categorías canon y dónde caen los datos del personaje:
+**La definición completa, las categorías canon, el formato y las reglas de catálogo viven en [`tag-modelo.md`](tag-modelo.md)**. Acá solo se resume el contrato con la hoja.
 
-| Tag | Qué representa |
-|---|---|
-| `faccion.*` | Pertenencia macro (Confederación, Ejército Rojo). |
-| `rango.*` | Designación operativa jerárquica (`rango.lider_de_escuadra`, `rango.apuntador`). |
-| `escuadra.*` | Asignación a escuadra concreta. |
-| `mando.capaz` | Presencia = capacidad de mando si cae el líder activo. |
-| `estado.*` | Disponibilidad operativa (`estado.activo`, `estado.disponible`, `estado.kia`, `estado.licencia`). Exactamente una. |
-| `salud.*` | Estado físico actual; acumulable. Reemplaza el enum `estado_salud` y los pools `fatiga_max/actual` de v0.4.x. |
-| `mental.*` | Estado anímico actual; acumulable. Reemplaza pools `moral_max/actual`. |
-| `rasgo.*` | Rasgos físicos observables. |
-| `trait.*` | Rasgos de carácter sin mecánica activa. |
-| `perk.*` | Ventajas regladas con efecto numérico. |
-| `aspecto.*` | Mini-tags identitarios con efecto mecánico en mini-frase. |
-| `skill.*` | Habilidades aprendidas o entrenadas. |
-| `equipo.arma.*` / `equipo.utilitario.*` / `equipo.vestidura.*` | Equipo cargado. Utilitarios son repetibles (tres `equipo.utilitario.cargador` = tres entidades físicas). |
-| `rol.oficio.*` / `rol.jerarquia.*` / `rol.narrativo.*` / `rol.mecanico.*` | Roles operativos. `rol.mecanico.lider` y `rol.mecanico.heroe` participan en la derivación de `fza_aportada`. |
-| `lealtad.faccion.*` / `lealtad.pj.*` / `lealtad.escuadra.*` | Lealtades reales y declarables. Solo las "que el personaje declararía si se le pregunta". Detalle de la sintaxis compuesta en [`tag-modelo.md` §4](tag-modelo.md#4--categorías-relacionales-lealtad-y-nemesis). |
-| `nemesis.pj.*` | Enemistad individual identificada en batalla; creada en caliente; habilita reglas downstream. |
+  forma: <categoria>[.<subcategoria>].<slug>
+  tipo:  list[str]              # multiset, no set — admite repetidos
+  default: []
 
-**Derivaciones desde tags** (motor al servir, no persistidas):
+### 3.1. Derivaciones desde tags
 
-- **`filiacion`** — string `"{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"`, derivado de los tags `rango.*` y `escuadra.*` (lookups en el catálogo). `null` si falta alguno.
-- **`fatiga_max` / `moral_max`** — formulas fijas sobre `atributos` (`fis + men`, `men`).
-- **`fza_aportada`** — `3` con `rol.mecanico.heroe`, `2` con `rol.mecanico.lider`, `1` sin ninguno.
+El motor calcula al servir, sin persistir, para evitar drift:
+
+  filiacion:
+    fuente: tags rango.* + escuadra.*
+    forma: "{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"
+    nota: null si falta alguno.
+
+  fatiga_max:
+    fuente: atributos.fis + atributos.men
+    tipo: int
+
+  moral_max:
+    fuente: atributos.men
+    tipo: int
+
+  fza_aportada:
+    fuente: tags rol.mecanico.*
+    valores: { rol.mecanico.heroe: 3, rol.mecanico.lider: 2, default: 1 }
+
+  aliados:
+    fuente: Proyección de tags lealtad.pj.*
+    contenido: Personajes a los que el portador ha jurado lealtad personal.
+
+  nemesis:
+    fuente: Proyección de tags nemesis.pj.*
+    contenido: Personajes identificados como rivales individuales.
 
 Cambios post-creación en `tags[]` se registran como hito `agregar_tag` / `quitar_tag` con metadata `{tag}`.
 
-### Extensibilidad total
+### 3.2. Slug de tag ≠ slug de personaje
 
-El sistema de tags no tiene catálogo cerrado. Las categorías listadas arriba (`faccion`, `rango`, `escuadra`, `skill`, `equipo.*`, `rol.*`, etc.) son el **andamiaje canon** que organiza los casos comunes y permite a clientes downstream apoyarse en una semántica conocida — pero **no son una jaula**. Cualquiera puede:
+Asimetría deliberada:
 
-- **Crear un tag nuevo** dentro de una categoría existente (`skill.lockpicking`, `equipo.utilitario.linterna_a_manivela`, `rasgo.tatuaje_de_ancla`).
-- **Crear una sub-categoría nueva** dentro de una familia (`equipo.montura.caballo_criollo`, `rol.administrativo.intendente`).
-- **Crear una categoría nueva entera** que no estaba prevista (`oficio_civil.herrero`, `vicio.fuma`, `mascota.perro_pastor`). El parser solo necesita el primer segmento `<categoria>` para enrutar.
+- **Slug de tag** (catálogo): legible, lowercase + underscore. Ejemplos: `pistola`, `tirador_preciso`, `ejercito_rojo`. Es la pieza humana de la dot notation. Ver [`tag-modelo.md` §2](tag-modelo.md).
+- **Slug de personaje** (`identidad.slug`): patente opaca `^[A-Z0-9]{8}$`. Ejemplo: `K9F2H3M4`. Ver §1.1.
 
-Estos tags se persisten exactamente igual que los canon — la única diferencia es su `origen` en el catálogo (`emergente` o `custom`). El motor downstream que no los reconozca los puede ignorar o renderizar como genéricos; el motor que sí los entienda los aplica con su semántica propia. El esquema **no rechaza tags por desconocidos**.
+Cuando un tag relacional referencia un personaje (ej. `lealtad.pj.K9F2H3M4`), el segmento final es la patente del personaje, no su nombre. Cuando un tag relacional referencia una entidad del catálogo (ej. `lealtad.faccion.ejercito_rojo`), el segmento final es el slug legible de la entidad. La distinción operativa: tags son metadato curado y se leen; personajes son entidades del juego y se identifican por patente.
 
-Esta libertad es deliberada y central al diseño. La gracia del sistema es que la mayoría de los personajes encajan en el andamiaje canon, pero los que necesitan algo único (un personaje con un dialecto raro, un cura con un cáliz, un mecánico con una llave inglesa con historia) pueden expresarlo sin pelearse con el schema. El costo asumido — fragmentación silenciosa entre `Francotirador` y `francotirador`, o entre `skill.medicina` y `medicina.curacion` — se mitiga con curaduría del catálogo, no con restricciones del schema.
+### 3.3. Extensibilidad
+
+El catálogo canon es andamiaje, no jaula. Cualquiera puede crear tag nuevo (`skill.lockpicking`), sub-categoría nueva (`equipo.montura.caballo_criollo`) o categoría nueva entera (`oficio_civil.herrero`) sin migración. El parser solo necesita el primer segmento para enrutar. Detalle en [`tag-modelo.md` §7](tag-modelo.md).
 
 ---
 
 ## §4 — Historia
 
-Prosa biográfica original. String de 120-200 palabras escrito por LLM en la creación del personaje en memoria volátil. Al persistir se congela: nunca muta tras el guardado. Castellano rioplatense, primera persona narrativa.
+Prosa biográfica original.
 
-**Nota sobre reproducibilidad**: la prosa es no-determinística por construcción. No existe semilla que la regenere idéntica — se persiste como artefacto, no como derivado. Por eso el campo `semilla` del schema anterior fue eliminado.
+  tipo: string
+  largo: 120-200 palabras
+  generacion: LLM al crear el personaje en memoria volátil.
+  idioma: Castellano rioplatense, primera persona narrativa.
+  inmutable_tras: Canonización (persistir). Se congela como artefacto.
+
+**No-determinismo asumido**: la prosa es no-reproducible aun con seed. No existe semilla que la regenere idéntica — se persiste como artefacto, no como derivado. Por eso el campo `semilla` del schema v0.4.x fue eliminado.
 
 ---
 
 ## §5 — Historial
 
-Array de hitos. Cada entrada: `fecha` (ISO-8601), `tipo` (string abierto), `descripcion` (prosa), `ref_batalla` (slug de batalla o `null`), `metadata` (object libre).
+Array de hitos. Cada entrada describe un evento temporal sobre el personaje canonizado.
 
-Tipos sugeridos: `triple_cero`, `ascenso`, `herida`, `recuperacion`, `agregar_tag`, `quitar_tag`, `traslado`, `condecoracion`, `mejora_atributo`, `cambio_rango`, `cambio_mando`, `cambio_estado`, `cambio_salud`, `cambio_mental`, `asignacion_escuadra`, `identificacion_nemesis`, `formacion_lealtad`, `ruptura_lealtad`. Personajes recién creados arrancan con `historial: []`.
+  fecha:       ISO-8601
+  tipo:        string         # abierto, ver tipos sugeridos
+  descripcion: string
+  ref_batalla: slug | null    # slug de batalla externa, opcional
+  metadata:    object         # libre
+
+**Tipos sugeridos**: `triple_cero`, `ascenso`, `herida`, `recuperacion`, `agregar_tag`, `quitar_tag`, `traslado`, `condecoracion`, `mejora_atributo`, `cambio_rango`, `cambio_mando`, `cambio_estado`, `cambio_salud`, `cambio_mental`, `asignacion_escuadra`, `identificacion_nemesis`, `formacion_lealtad`, `ruptura_lealtad`.
+
+El enum es **sugerido, no cerrado**. Tipos custom son legítimos; la mitigación es curaduría, no validación. Personajes recién creados arrancan con `historial: []`.
 
 ---
 
 ## §6 — Metadatos
 
-Campos de auditoría.
+Campos de auditoría. No mutables por hitos, solo por el motor.
 
-- **`creado_en`** — ISO-8601, creación en memoria volátil.
-- **`canonizado_en`** — ISO-8601 o `null`. Fecha en que se persistió.
-- **`ultima_actualizacion`** — ISO-8601; se actualiza con cada hito.
+  creado_en:           ISO-8601    # creación en memoria volátil
+  canonizado_en:       ISO-8601 | null   # fecha de persistir; null en efímeros
+  ultima_actualizacion: ISO-8601    # se actualiza con cada hito
 
-Eliminados respecto a v0.4.x: `modelo_prosa` y `es_canon` (este último derivable de `canonizado_en != null`).
+Eliminados respecto a v0.4.x: `modelo_prosa` (no relevante) y `es_canon` (derivable de `canonizado_en != null`).
 
 ---
 
 ## §7 — Extras
 
-Escape hatch. Object libre o `null`. **Soporta cualquier llave** y estructura anidada arbitraria. La API no inspecciona ni valida su contenido. Permite a clientes externos persistir metadatos propios sin romper el schema.
+Escape hatch.
+
+  tipo: object | null
+  reglas: La API no inspecciona ni valida su contenido.
+  proposito: Permite a clientes externos persistir metadatos propios sin romper el schema.
+
+Soporta cualquier llave y estructura anidada. Si un cliente necesita guardar algo que no encaja en tags ni en los bloques canon, va acá.
 
 ---
 
-## Cambios respecto a v0.4.1
+## §8 — Mutabilidad: qué cambia y cómo
 
-Refactor mayor — v0.5.0.
+  mutables_via_hito:
+    - atributos.{fis, tac, men}              # triple_cero | mejora_atributo
+    - tags[]                                  # agregar_tag | quitar_tag
+    - identidad.rol                           # ascenso | cambio_rol
+    - metadatos.ultima_actualizacion          # automático en cada hito
 
-| Antes | Ahora |
-|---|---|
-| `id` + `origen` + `semilla` | `identidad.slug` único, generado al persistir |
-| Bloque `faccion` (faccion/filiacion/escuadra/rango/mando/estado) | Tags `faccion.*`, `escuadra.*`, `rango.*`, `mando.capaz`, `estado.*`. `filiacion` derivada al servir. |
-| Campo `rol` aislado | En `identidad.rol` (narrativo base, default `"ciudadano"`). Roles operativos como tags `rol.oficio/jerarquia/narrativo/mecanico.*`. |
-| `estado_salud` enum y `estado_vital` (fatiga/moral numéricos) | Tags `salud.*` y `mental.*` acumulables. Pools máximos calculados en caliente. |
-| `lealtades: {primaria, secundarias, secretos}` | Tags `lealtad.faccion.*` / `lealtad.pj.*` / `lealtad.escuadra.*`. Secundarias/secretas: TBD aparte. |
-| `vinculos: [{tipo, ref, descripcion}]` | Eliminado. Refs operativas → tags `lealtad.*` / `nemesis.*`. Prosa del vínculo → `historia` o `historial`. |
-| `tags: [{categoria, valor}]` | Lista plana de strings en notación punto: `<categoria>[.<subcategoria>].<slug>`. |
-| (sin equivalente) | Categoría `nemesis`: enemistad creada en caliente. |
-| `metadatos.modelo_prosa` y `metadatos.es_canon` | Eliminados. |
-| Slugs con `-` | Slugs con `_` (uniforme: personajes, escuadras, facciones, tags). |
-| `vinculos[].ref_personaje_id` | `lealtad.pj.{slug}` / `nemesis.pj.{slug}`. |
+  mutables_sin_hito:
+    - identidad.edad                          # decisión narrativa
+    - identidad.sobrenombre                   # derivado al servir
 
-Los 22 mocks fueron migrados parcialmente en v0.5.0 (al modelo intermedio de bloques de tags). **Pendiente**: re-migración al modelo final de lista plana con notación punto + manejo de la prosa de `vinculos[].descripcion` (que actualmente todavía existe en los mocks).
+  inmutables:
+    - identidad.slug
+    - identidad.nombre
+    - identidad.genero
+    - historia
+    - metadatos.creado_en
+    - metadatos.canonizado_en
+
+  derivados_no_persistidos:
+    - filiacion, fatiga_max, moral_max, fza_aportada
+    - aliados, nemesis (contenedores)
+    - sobrenombre (cuando es derivable)
+
+---
+
+## §9 — Cambios respecto a v0.4.1
+
+Refactor mayor — v0.5.0 (rolling release a partir de ese punto).
+
+  identificador:
+    antes: id + origen + semilla
+    ahora: identidad.slug único — patente opaca [A-Z0-9]{8} generada al persistir.
+
+  bloque_faccion:
+    antes: faccion + filiacion + escuadra + rango + mando + estado (campos separados)
+    ahora: Tags faccion.*, escuadra.*, rango.*, mando.capaz, estado.*. Filiacion derivada al servir.
+
+  rol:
+    antes: Campo rol aislado.
+    ahora: identidad.rol como base narrativa (default "ciudadano"). Roles operativos como tags rol.{oficio,jerarquia,narrativo,mecanico}.*.
+
+  estado_vital:
+    antes: enum estado_salud + pools numéricos fatiga_max/actual, moral_max/actual.
+    ahora: Tags salud.* y mental.* acumulables. Pools máximos derivados al servir.
+
+  lealtades:
+    antes: { primaria, secundarias, secretos }
+    ahora: Tags lealtad.faccion.* / lealtad.pj.* / lealtad.escuadra.*. Lealtades secundarias/secretas: sistema aparte TBD.
+
+  vinculos:
+    antes: [{tipo, ref, descripcion}]
+    ahora: Eliminado. Refs operativas → tags lealtad.* / nemesis.*. Prosa del vínculo → historia o historial.
+
+  tags:
+    antes: [{categoria, valor}]
+    ahora: Lista plana de strings: <categoria>[.<subcategoria>].<slug>.
+
+  nemesis:
+    nuevo: Categoría agregada — enemistad creada en caliente.
+
+  slug:
+    antes: lowercase con guiones; ambiguo
+    ahora: Patente opaca [A-Z0-9]{8} para personaje. Tags conservan slug legible.
+
+**Mocks**: los 22 fixtures fueron migrados parcialmente en v0.5.0 (modelo intermedio de bloques de tags). **Pendiente**: re-migración al modelo final de lista plana en notación punto + adopción de patentes 8-char en `identidad.slug`.

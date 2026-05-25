@@ -83,111 +83,29 @@ La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV
 
 ## 6. Schema canónico del personaje
 
-**Fuente autoritativa**: este PRD describe el *contrato de producto*. La spec detallada del schema vive en /docs y es la fuente de verdad para implementadores y curadores:
+**Fuente autoritativa del schema**: la spec detallada vive en `/docs`. Este PRD no la duplica.
 
-- [`docs/hoja-modelo.md`](docs/hoja-modelo.md) — estructura de la hoja de personaje (identidad, atributos, tags, historia, historial, metadatos, extras).
+- [`docs/hoja-modelo.md`](docs/hoja-modelo.md) — estructura de la hoja campo por campo, derivaciones, mutabilidad, slug-protocolo.
 - [`docs/hoja-modelo.yaml`](docs/hoja-modelo.yaml) — template programático vacío.
-- [`docs/tag-modelo.md`](docs/tag-modelo.md) — sistema de tags: notación punto, categorías canon, relacionales (`lealtad`, `nemesis`), catálogo.
+- [`docs/tag-modelo.md`](docs/tag-modelo.md) — sistema de tags: notación punto, categorías, catálogo, `requires`, relacionales (`lealtad`, `nemesis`), extensibilidad.
 - [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml) — template de entrada de catálogo.
+- [`docs/tag-modelo-ejemplos.yaml`](docs/tag-modelo-ejemplos.yaml) — cinco personajes ejemplo en composición.
 
-### 6.1. Estructura de la hoja (resumen)
+### 6.1. Contrato de producto (lo que el PRD asegura)
 
-```
-personaje:
-  identidad: {slug, nombre, sobrenombre, rol, genero, edad}
-  atributos: {fis, tac, men}
-  tags: [...]                  # lista plana de strings en notación punto
-  historia: str                # prosa biográfica congelada
-  historial: [...]             # eventos temporales (hitos)
-  metadatos: {creado_en, canonizado_en, ultima_actualizacion}
-  extras: object | null        # escape hatch libre
-```
+Tres compromisos que este producto sostiene sobre el schema; los detalles de cómo se materializan están en los documentos de arriba.
 
-Solo seis bloques estructurados más la lista de tags. Regla rectora: **todo lo que puede ser discreto y no es identidad estable, atributo numérico, prosa o auditoría — es tag**.
+- **Lista plana de tags como modelo de primera clase.** Todo lo discreto del personaje vive en `tags[]` en notación punto. Lo que no es tag (identidad, atributos, prosa, auditoría, escape hatch) está fijado en [`hoja-modelo.md §0`](docs/hoja-modelo.md).
+- **Extensibilidad sin migración.** El sistema acepta tags, sub-categorías y categorías nuevas sin romper el contrato. Lo que la API garantiza y lo que NO promete: [`tag-modelo.md §7`](docs/tag-modelo.md).
+- **Coherencia declarativa, no validación.** El bloque `requires` (con prefijo `"no:"` para NOT) es documentación ejecutable consultable por validadores opcionales — no parte del contrato duro. La API acepta personajes con tags incoherentes. Detalle en [`tag-modelo.md §4.4`](docs/tag-modelo.md).
 
-### 6.2. Tags en notación punto
+### 6.2. Derivaciones del motor (no persistidas)
 
-Un tag se escribe como string único: `<categoria>[.<subcategoria>].<slug>`. Ejemplos:
+Recordatorio operativo — los campos que cualquier consumidor del API verá calculados al servir, no en la base: `filiacion`, `sobrenombre`, `fatiga_max`, `moral_max`, `fza_aportada`, `aliados`, `nemesis`. Fórmulas exactas y semántica en [`hoja-modelo.md §3.1`](docs/hoja-modelo.md).
 
-| Tag | Significado |
-|---|---|
-| `faccion.ejercito_rojo` | Pertenencia macro. |
-| `rango.lider_de_escuadra` | Designación operativa jerárquica. |
-| `escuadra.ricardo` | Asignación a escuadra concreta. |
-| `mando.capaz` | Capacidad de mando (presencia = `true`). |
-| `estado.activo` | Disponibilidad operativa (exactamente uno por personaje). |
-| `salud.herido` | Estado físico actual; acumulable. |
-| `mental.panico` | Estado anímico actual; acumulable. |
-| `rasgo.altura_media` | Rasgo físico observable. |
-| `trait.taciturno` | Rasgo de carácter sin mecánica. |
-| `perk.veterano` | Ventaja reglada con efecto numérico. |
-| `aspecto.cabron` | Mini-tag identitario con efecto en mini-frase. |
-| `skill.comandancia` | Habilidad aprendida. |
-| `equipo.arma.rifle_militar` | Arma cargada. |
-| `equipo.utilitario.cargador` | Objeto utilitario (repetible). |
-| `equipo.vestidura.uniforme_confederado` | Identidad visual. |
-| `rol.oficio.francotirador` | Oficio operativo de combate. |
-| `rol.jerarquia.sargento` | Título militar. |
-| `rol.mecanico.lider` | Rol mecánico (afecta `fza_aportada`). |
-| `lealtad.faccion.confederados` | Lealtad a una facción. |
-| `lealtad.pj.aguirre_walter` | Lealtad a otro personaje persistido. |
-| `nemesis.pj.iturra_delia` | Enemistad personal creada en batalla. |
+### 6.3. Slug del personaje — patente, no nombre
 
-Detalles completos de cada categoría — campos del catálogo, sub-categorías, patrones relacionales, OQs — en `docs/tag-modelo.md`.
-
-### 6.3. Derivaciones del motor (no persistidas)
-
-Calculadas en caliente al servir desde tags + atributos:
-
-- **`filiacion`** — string `"{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"` desde tags `rango.*` y `escuadra.*` (lookups en el catálogo).
-- **`sobrenombre`** — derivable desde `nombre`, `rango.*` y `rol.*` de mando si aplican; `null` si no hay distinción con el nombre real.
-- **`fatiga_max`** — `atributos.fis + atributos.men`.
-- **`moral_max`** — `atributos.men`.
-- **`fza_aportada`** — `3` con `rol.mecanico.heroe`, `2` con `rol.mecanico.lider`, `1` sin ninguno.
-- **`aliados`** — lista derivada de personajes a los que el portador ha jurado lealtad personal. Computada proyectando los tags `lealtad.pj.*`. Comienza vacía al crear el personaje y se puebla en caliente al agregarse el tag relacional.
-- **`nemesis`** — lista derivada de personajes identificados como rivales individuales. Computada proyectando los tags `nemesis.pj.*`. Mismo lifecycle que `aliados`: empieza vacía, se puebla en caliente. Un personaje puede tener un némesis del propio bando (accidente, traición personal); el sistema no lo prohíbe.
-
-### 6.4. Lo que NO es tag
-
-Recordatorio explícito:
-
-- **`identidad`** (slug, nombre, sobrenombre, rol narrativo base, género, edad) — datos nominales únicos, no enumerables.
-- **`atributos`** (fis, tac, men) — magnitudes numéricas continuas.
-- **`historia`** — prosa biográfica de 120-200 palabras.
-- **`historial`** — eventos temporales estructurados (no discretos).
-- **`metadatos`** — timestamps de auditoría.
-- **`extras`** — escape hatch para clientes externos.
-
-### 6.5. Notas de campo
-
-- **Repetibilidad**: `tags[]` es multiset. Tres `equipo.utilitario.cargador` son tres entidades físicas distintas.
-- **Refs compuestas**: las relacionales (`lealtad`, `nemesis`) usan prefijos `faccion.`, `pj.`, `escuadra.` dentro del slug para indicar a qué tipo de entidad apuntan.
-- **Indistinción mock/DB**: los tags cargados del catálogo mock y los creados en caliente desde la API o el motor son indistinguibles — no hay campo `origen` en el tag aplicado al personaje.
-- **Catálogo de tags**: cada tag canon tiene archivo en `mock/tags/{categoria}[/{subcategoria}]/{slug}.yaml`. Las categorías relacionales (`lealtad`, `nemesis`) no tienen entradas de catálogo — su semántica es del formato del tag, no del contenido.
-
-### 6.6. Extensibilidad total del sistema de tags
-
-**Principio rector**: el catálogo canon es andamiaje, no jaula. El sistema de tags ofrece una ordenación sugerida (`faccion`, `rango`, `escuadra`, `skill`, `equipo.*`, `rol.*`, etc.) que cubre los casos comunes y permite a clientes downstream apoyarse en semántica conocida — pero **no impone restricciones** sobre qué se puede crear.
-
-Tres ejes de extensibilidad, todos sin permiso ni migración:
-
-1. **Nuevos valores dentro de una categoría existente** — `skill.lockpicking`, `rasgo.tatuaje_de_ancla`, `aspecto.terco_como_mula`. El generador o el narrador los crea al vuelo; entran al catálogo con `origen: emergente` la primera vez que aparecen, o como `custom` si llegan desde un cliente externo.
-2. **Nuevas sub-categorías dentro de una familia** — `equipo.montura.caballo_criollo` agrega un nivel a `equipo.*`; `rol.administrativo.intendente` extiende `rol.*` más allá de las cuatro sub-jerarquías canon (`oficio`, `jerarquia`, `narrativo`, `mecanico`).
-3. **Categorías nuevas enteras** — `oficio_civil.herrero`, `vicio.fuma`, `mascota.perro_pastor`. El parser solo necesita el primer segmento del tag para enrutar; las categorías nuevas conviven con las canon sin colisionar.
-
-**Lo que el sistema garantiza:** un tag desconocido no rompe la hoja. El motor downstream que no lo reconozca lo puede ignorar o renderizarlo como genérico; el motor que sí lo entienda lo aplica con la semántica que su autor le dio. La API no rechaza personajes por tener tags fuera del canon.
-
-**Lo que el sistema NO promete:** que dos generadores distintos vayan a coincidir sobre cómo nombrar el mismo concepto. La fragmentación silenciosa (`Francotirador` vs `francotirador`, o `skill.medicina` vs `medicina.curacion`) es un costo asumido (ver tensión 12.7). La mitigación es **curaduría del catálogo**, no validación del schema.
-
-**Implicación para el cliente**: cualquier persona narrando una sesión, alimentando una batalla o creando un personaje a mano puede inventar el tag que su escena necesita. Si un personaje tiene un sombrero específico que importa para el lore, se crea `equipo.vestidura.sombrero_de_su_abuelo` y se aplica. Si esa idea cobra fuerza, alguien curará una entrada de catálogo para que otros la usen. Si no, queda como custom y muere con esa ficha. Ambos caminos son válidos.
-
-Esta libertad es deliberada y central al diseño del producto: la mayoría de los personajes encajan en el andamiaje canon, pero los que necesitan algo único pueden expresarlo sin pelearse con el schema. Es el mismo trade-off que se asume con `extras: object` para los casos extremos, pero a nivel de tags conserva la semántica de búsqueda y filtrado.
-
-### 6.7. Coherencia declarativa: el bloque `requires`
-
-Cada entrada de catálogo puede declarar un bloque opcional `requires` con dos listas combinables — `require_all` y `require_any` — que enumeran tags pre-requisito para que el tag sea coherente sobre un personaje. Cualquier entrada admite el prefijo literal `"no:"` para invertir la condición (ej. `"no:salud.herido"` significa "el personaje debe NO tener `salud.herido`").
-
-Esto es **documentación ejecutable**, no validación de schema. La API acepta personajes con combinaciones incoherentes; los generadores, validadores opcionales y curadores son quienes pueden consultar `requires` para decidir si aplicar, advertir o rechazar. La semántica precisa y un ejemplo completo viven en `docs/tag-modelo.md §4.3`.
+`identidad.slug` es una **patente opaca** `^[A-Z0-9]{8}$` generada al persistir (ej. `K9F2H3M4`). No es el nombre legible; ese vive en `identidad.nombre`. Las refs `lealtad.pj.{slug}` y `nemesis.pj.{slug}` apuntan a la patente. Reglas completas y motivación en [`hoja-modelo.md §1.1`](docs/hoja-modelo.md).
 
 ---
 
