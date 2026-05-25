@@ -4,5 +4,8 @@ tag:
   categoria: aspecto
   descripcion: >
     Personajes que siempre van al frente con confianza. Es el aspecto más valioso para un defensor.
-  efectos:
-    - efecto.vanguardia
+  efecto:
+    vanguardia:
+      - "(+2) defensa"
+      - "(+2) iniciativa"
+      - "(+2) aggro" # El aggro se utiliza para el sistema de elección de objetivos

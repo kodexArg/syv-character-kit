@@ -221,12 +221,12 @@ El template completo de cada bloque vive en [`tag-modelo.yaml`](tag-modelo.yaml)
 
 ### 4.6. Efectos y triggers
 
-Para modularizar el comportamiento mecánico de los tags y habilitar que un mismo tag aplique múltiples efectos discretos o responda a eventos en partida, se incorporan los bloques opcionales `trigger` (con su propiedad `trigger-action`) y `efectos` a nivel raíz del tag. Los efectos representan modificaciones o estados de juego estructurados.
+Para modularizar el comportamiento mecánico de los tags y habilitar que un mismo tag aplique múltiples efectos discretos o responda a eventos en partida, se incorporan los bloques opcionales `trigger` (con su propiedad `trigger-action`) y `efecto` (a nivel raíz del tag). Los efectos representan modificaciones o estados de juego estructurados.
 
 La estructura distingue entre dos comportamientos mecánicos:
 
-- **Efectos Gatillados (Con Trigger)**: Si el efecto se aplica de forma temporal o reactiva ante un evento en partida (ej. al fallar un chequeo moral o recibir daño), se define el bloque `trigger` en la raíz. En este caso, **no** se utiliza el campo `efectos` a nivel raíz; en su lugar, se usa la propiedad `trigger-action` dentro del bloque `trigger` para listar las referencias a los efectos gatillados.
-- **Efectos Pasivos (Sin Trigger)**: Si los efectos se aplican de forma permanente y constante mientras el personaje posea el tag, no se define el bloque `trigger`. En su lugar, se utiliza la lista de `efectos` a nivel raíz.
+- **Efectos Gatillados (Con Trigger y Reactivos)**: Si el efecto se aplica de forma temporal o reactiva ante un evento en partida (ej. al fallar un chequeo moral o recibir daño), se define el bloque `trigger` en la raíz. En este caso, se usa la propiedad `trigger-action` dentro del bloque `trigger` para listar las referencias a los efectos gatillados (los cuales se definen en archivos independientes en la categoría `efecto.*`).
+- **Efectos Pasivos/Permanentes (Sin Trigger)**: Si los efectos se aplican de forma permanente y constante mientras el personaje posea el tag, no se define el bloque `trigger`. En su lugar, el tag define su efecto de forma **inline** bajo la propiedad `efecto`, tomando la forma de un mapa `{slug_efecto: [instrucciones]}`. Esto elimina la necesidad de crear un archivo independiente en `mock/tags/efecto/`.
 
 Estructura del bloque `trigger`:
 
@@ -237,12 +237,13 @@ Estructura del bloque `trigger`:
     trigger-action:      # Lista de referencias a tags de la categoría efecto.*
       - tag efecto.*     # Ej: efecto.furioso
 
-Estructura de efectos permanentes/pasivos (a nivel raíz del tag):
+Estructura de efectos permanentes/pasivos inline (a nivel raíz del tag):
 
-  efectos:               # Lista de referencias a tags de la categoría efecto.*
-    - tag efecto.*       # Ej: efecto.vanguardia
+  efecto:                # Mapa del efecto inline
+    {slug_efecto}:       # Slug del efecto (usualmente el mismo del aspecto)
+      - str              # Lista de instrucciones. Ej: "(+2) iniciativa"
 
-Los tags de la categoría `efecto.*` (definidos en su propia sección del catálogo, bajo `mock/tags/efecto/{slug}.yaml`) detallan las instrucciones específicas del efecto utilizando el campo `efecto` a nivel de categoría:
+Los tags de la categoría `efecto.*` que se definen como archivos independientes (bajo `mock/tags/efecto/{slug}.yaml`) detallan sus instrucciones utilizando el campo `efecto` a nivel de categoría como una lista simple:
 
   efecto:                # Lista de instrucciones o modificadores de comportamiento
     - str                # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
@@ -254,8 +255,8 @@ Los **aspectos** (`aspecto.*`) son tags identitarios de grano medio que aportan 
 Los aspectos más comunes y básicos del catálogo (como `aspecto.vanguardia` o `aspecto.cabron`) se usan como referencia, pero la categoría está diseñada para ser abierta y expandirse ante necesidades narrativas.
 
 #### Estructura de un Aspecto
-- Si el aspecto es **reactivo/temporal** (se gatilla ante un evento), define un bloque `trigger` con su correspondiente lista de `trigger-action`.
-- Si el aspecto es **pasivo/permanente**, define directamente el bloque raíz `efectos`.
+- Si el aspecto es **reactivo/temporal** (se gatilla ante un evento), define un bloque `trigger` con su correspondiente lista de `trigger-action` apuntando a un efecto externo en el catálogo.
+- Si el aspecto es **pasivo/permanente**, define directamente el bloque raíz `efecto` de forma inline como un mapa `{slug_efecto: [modificadores]}`.
 
 Ejemplo de Aspecto Reactivo (`aspecto.cabron`):
 ```yaml
@@ -281,21 +282,11 @@ tag:
   categoria: aspecto
   descripcion: >
     Personajes que siempre van al frente con confianza. Es el aspecto más valioso para un defensor.
-  efectos:
-    - efecto.vanguardia
-```
-
-Y su correspondiente efecto asociado (`efecto.vanguardia`):
-```yaml
-tag:
-  slug: vanguardia
-  nombre: "Vanguardia"
-  categoria: efecto
-  descripcion: >
-    Efecto pasivo que otorga bonificaciones tácticas permanentes a la iniciativa y la defensa.
   efecto:
-    - "+20% a la iniciativa"
-    - "+10% a la defensa"
+    vanguardia:
+      - "(+2) defensa"
+      - "(+2) iniciativa"
+      - "(+2) aggro" # El aggro se utiliza para el sistema de elección de objetivos
 ```
 
 ---

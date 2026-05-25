@@ -47,17 +47,13 @@ tag:
 
   peso_narrativo: int        # 1..5
 
-  trigger:                   # opcional. Define cuándo y qué efectos se activan ante eventos
+  trigger:                   # opcional. Define cuándo y qué efectos se activan ante eventos.
+                             # Si se define, el aspecto no usa el bloque raíz 'efecto'.
     evento:       str        # Evento disparador. Ej: "chequeo_moral", "daño_recibido", "bajo_fuego"
     condicion:    str        # Condición del evento. Ej: "fallado", "primera_vez"
     probabilidad: float      # opcional. Rango 0.0..1.0 (o string de porcentaje tipo "50%")
     trigger-action:          # Lista de referencias a tags de la categoría efecto.* que se activan
       - tag efecto.*         # Ej: efecto.furioso
-
-  efectos:                   # (+) requerido si categoria = aspecto (solo si es pasivo/sin trigger).
-                             #     Lista de referencias a tags de la categoría efecto.* que se aplican
-                             #     de forma permanente/pasiva (los aspectos con trigger usan trigger-action).
-    - tag efecto.*           # Ej: efecto.vanguardia
 
   perk:
     efecto_reglado: str
@@ -66,10 +62,16 @@ tag:
     tags_activables:
       - tag mental.*
 
-  efecto:                    # (+) requerido si categoria = efecto.
-                             #     Lista de instrucciones o modificadores de comportamiento
-                             #     (Los efectos suelen ser temporales, a veces durando un solo turno).
-    - str                    # Ej: "marcar objetivo: cualquier enemigo", "-50% a todas sus tiradas"
+  efecto:                    # (+) requerido si categoria = efecto, o si es un aspecto pasivo/permanente.
+                             #
+                             # Estructura para categoria = efecto:
+                             #   - str
+                             #
+                             # Estructura para aspecto pasivo inline:
+                             #   vanguardia:
+                             #     - "(+2) defensa"
+                             #     - "(+2) iniciativa"
+                             #     - "(+2) aggro"
 
   skill:
     atributo_dominante: str  # fis | tac | men

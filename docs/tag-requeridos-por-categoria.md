@@ -22,7 +22,7 @@
 
 ## aspecto
 
-- `efectos` (a nivel raíz) o `trigger` (con su `trigger-action`) — requerido para asociar efectos al aspecto. Se usa `efectos` a nivel raíz para efectos pasivos/permanentes; se usa `trigger` con `trigger-action` si es reactivo/temporal.
+- `efecto` (a nivel raíz como mapa) o `trigger` (con su `trigger-action`) — requerido para asociar efectos al aspecto. Se usa `efecto` a nivel raíz (como mapa `{slug_efecto: [modificadores]}`) para efectos pasivos/permanentes; se usa `trigger` con `trigger-action` si es reactivo/temporal.
 
 ## rol
 
