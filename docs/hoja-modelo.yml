@@ -1,0 +1,89 @@
+# hoja-modelo.yml — Template canónico de personaje SyV
+# Versión compatible: schema v0.4.1
+# Uso: copiar este archivo y reemplazar cada placeholder por el valor real.
+# Referencia narrativa de cada campo: docs/hoja-modelo.md
+
+personaje:
+
+  # ── Identidad estable ──────────────────────────────────────────────────────
+  id: "<string>"                    # inmutable; formato mock.{faccion}.{nn}.{slug} o canon.{ulid}; null para efímeros
+  origen: "<string>"                # enum: "mock" | "generado" | "canonizado"
+  semilla: "<string>"               # seed que produjo la ficha; siempre presente
+
+  # ── Cabecera ───────────────────────────────────────────────────────────────
+  # 1) Identidad nominal
+  nombre: "<string>"                # inmutable; nombre real
+  sobrenombre: "<string>"           # derivado al servir; null si no hay nick distinto del nombre
+  filiacion: "<string>"             # derivado al servir; "{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"
+
+  # 2) Pertenencia macro
+  faccion: "<string>"               # enum abierto: "Confederación" | "Ejército Rojo"
+
+  # 3) Datos biológicos
+  edad: <integer>                   # inmutable en creación; 16-70 sugerido
+  genero: "<string>"                # enum abierto: "masculino" | "femenino" | "no_binario" | "otro"
+  estado_salud: "<string>"          # mutable; enum: "saludable" | "herido" | "baja"; default "saludable"
+
+  # 4) Narrativo
+  rol: "<string>"                   # string abierto; papel cultural/narrativo; inmutable salvo hito explícito
+
+  # 5) Operativo
+  estado: "<string>"                # mutable; enum: "activo" | "disponible" | "kia" | "licencia"; default "disponible"
+  rango: "<string>"                 # mutable vía hito cambio_rango; enum abierto jerárquico
+  escuadra_id: "<string>"           # mutable; null = sin asignar; no validado por la API
+  mando: <boolean>                  # mutable vía hito cambio_mando; capacidad de mando, no titularidad
+
+  # ── Lealtades ─────────────────────────────────────────────────────────────
+  lealtades:
+    primaria: "<string>"            # mutable vía hito ruptura_vinculo o manual
+    secundarias: []                 # array<string>; mutable
+    secretos: []                    # array<string>; mutable
+
+  # ── Atributos ─────────────────────────────────────────────────────────────
+  atributos:
+    fis: <integer>                  # rango 2-5; mutable vía triple_cero / mejora_atributo
+    tac: <integer>                  # rango 2-5; mutable vía triple_cero / mejora_atributo
+    men: <integer>                  # rango 2-7 (líderes); mutable vía triple_cero / mejora_atributo
+
+  # ── Estado vital ──────────────────────────────────────────────────────────
+  estado_vital:
+    fatiga_max: <integer>           # derivado al crear: atributos.fis + atributos.men; inmutable salvo cambio de atributo
+    fatiga_actual: <integer>        # mutable en juego; arranca = fatiga_max; invariante: 0 <= actual <= max
+    moral_max: <integer>            # derivado al crear: atributos.men; inmutable salvo cambio de atributo
+    moral_actual: <integer>         # mutable en juego; arranca = moral_max; invariante: 0 <= actual <= max
+
+  # ── Tags ──────────────────────────────────────────────────────────────────
+  tags:
+    - categoria: "<string>"         # categorías canon: rasgo | rol | skill | trait | perk | aspecto | equipo.arma | equipo.utilitario | equipo.vestidura
+      valor: "<string>"             # tag mínimo: 1-2 palabras; repetible (tres cargador = tres entidades)
+
+  # ── Vínculos ──────────────────────────────────────────────────────────────
+  vinculos:
+    - tipo: "<string>"              # sugerido: mentor | subordinado | hermano_de_armas | rival | deuda | enemigo_jurado | familia | romance
+      ref_personaje_id: "<string>"  # null si externo; no validado por la API
+      descripcion: "<string>"       # obligatoria; fallback cuando ref no resuelve
+
+  # ── Prosa biográfica ──────────────────────────────────────────────────────
+  historia: "<string>"              # 120-200 palabras; generada por LLM en creación efímera; congelada al canonizar
+
+  # ── Historial de hitos ────────────────────────────────────────────────────
+  historial:
+    - fecha: "<string>"             # ISO-8601
+      tipo: "<string>"              # sugerido: triple_cero | ascenso | herida | agregar_tag | quitar_tag | formacion_vinculo | cambio_estado_vital | ...
+      descripcion: "<string>"
+      ref_batalla: null             # string | null; id de batalla del motor downstream
+      metadata: {}                  # object libre; ej. {campo: "fatiga_actual", valor_anterior: 8, valor_nuevo: 5, motivo: "..."}
+
+  # ── Snapshot de auditoría ─────────────────────────────────────────────────
+  tags_iniciales: []                # array<{categoria, valor}>; snapshot completo de tags[] al crear; inmutable
+
+  # ── Metadatos ─────────────────────────────────────────────────────────────
+  metadatos:
+    creado_en: "<string>"           # ISO-8601
+    canonizado_en: null             # ISO-8601 | null (null para efímeros y mocks)
+    ultima_actualizacion: "<string>" # ISO-8601
+    modelo_prosa: null              # string | null; modelo LLM usado para historia
+    es_canon: <boolean>             # true para mocks y canonizados
+
+  # ── Escape hatch ──────────────────────────────────────────────────────────
+  extras: null                      # object | null; libre, no validado por la API

@@ -1,421 +1,111 @@
-# Hoja Modelo — SyV Character Sheet
+# Hoja Modelo — Referencia narrativa de campos
 
-> **Versión**: compatible con schema v0.4.1
-> **Propósito**: referencia visual completa de la hoja de personaje canónica, incluyendo
-> el bloque ESTADO_VITAL que introduce el tracking permanente de Fatiga y Moral.
-> Este archivo NO modifica el PRD — es documentación de presentación.
-
----
-
-## 1. Bloques de la hoja (orden canónico)
-
-La hoja replica fielmente el payload JSON/YAML definido en PRD §6. El orden de bloques
-corresponde al orden de presentación aprobado por el cliente (PRD §6.0).
-
-| # | Bloque | Origen en schema |
-|---|---|---|
-| 1 | CABECERA (identidad nominal, pertenencia, datos biológicos, operativo) | campos estructurados de cabecera |
-| 2 | ATRIBUTOS | `atributos.{fis, tac, men}` |
-| 3 | RASGOS | `tags[categoria=rasgo]` |
-| 4 | EQUIPO | `tags[categoria=equipo.*]` |
-| 5 | SKILLS | `tags[categoria=skill]` |
-| 6 | TRAITS | `tags[categoria=trait]` |
-| 7 | PERKS | `tags[categoria=perk]` |
-| 8 | ASPECTOS | `tags[categoria=aspecto]` |
-| 9 | **ESTADO VITAL** | campos derivados persistidos (ver §3) |
-| 10 | LEALTADES | `lealtades` |
-| 11 | VINCULOS | `vinculos[]` |
-| 12 | HISTORIAL | `historial[]` |
-| 13 | HISTORIA | `historia` |
-| 14 | METADATOS | `metadatos` |
+> **Versión compatible**: schema v0.4.1
+> **Propósito**: descripción campo por campo de la hoja de personaje canónica. Para el template
+> programático listo para copiar, ver [`docs/hoja-modelo.yml`](hoja-modelo.yml).
 
 ---
 
-## 2. Reglas de cálculo de Fatiga y Moral
+## Bloque 1 — Identidad estable
 
-### 2.1. Fatiga
+**`id`** — Identificador único del personaje. String inmutable asignado en creación. Para mocks sigue el patrón `mock.{faccion_slug}.{nn}.{apellido_slug}` (ej. `mock.confederacion.01.aguirre`); para canonizados usa `canon.{ulid}`; para efímeros es `null`. El motor de batalla usa este campo como clave de referencia en vínculos y reportes de hito.
 
-```
-fatiga_max  = atributos.fis + atributos.men
-fatiga_actual = fatiga_max  (al crear; muta en juego)
-```
+**`origen`** — Enum de tres valores: `"mock"` para los 22 fixtures inmutables, `"generado"` para efímeros sin persistencia, y `"canonizado"` para personajes persistidos por la API. Inmutable: no cambia si el personaje sube de estado.
 
-Promedio de escuadra esperado ≈ 6 (base: FIS 3 + MEN 3 para rangos bajos).
-Para líderes: FIS 3 + MEN 7 = 10.
-
-### 2.2. Moral
-
-```
-moral_max    = atributos.men
-moral_actual = moral_max   (al crear; muta en juego)
-```
-
-### 2.3. Naturaleza de los valores
-
-- **Derivados al crear**: `fatiga_max` y `moral_max` se computan una sola vez de los
-  atributos base y se persisten en la hoja. No se recalculan cada sesión salvo que
-  cambie el atributo base (via hito `triple_cero` o `mejora_atributo`; en ese caso el
-  narrador debe recalcular el tope manualmente y registrarlo como hito).
-- **Mutables en juego**: `fatiga_actual` y `moral_actual` cambian durante la partida y
-  se registran como hitos `cambio_estado_vital` (tipo abierto — ver OQ al pie).
-- **Expresión**: pares `actual / máx` (ej. `7 / 10`). No se usan casillas gráficas en
-  el schema de datos, pero la hoja ASCII los puede renderizar como pista opcional.
-
-### 2.4. Posición en la hoja
-
-El bloque ESTADO VITAL se ubica **después de ASPECTOS y antes de LEALTADES**. Justificación:
-ATRIBUTOS definen los topes (datos de creación); ESTADO VITAL los consume como derivados
-que evolucionan en juego, igual que las condiciones de combate. Colocarlo entre los bloques
-de identidad mecánica (skills/traits/perks/aspectos) y los bloques de relación social
-(lealtades/vínculos) refleja esa naturaleza intermedia.
+**`semilla`** — Seed que produjo la ficha. String inmutable presente en todos los modos. Permite a cualquier cliente reproducir el estado inicial del personaje (atributos, tags, prosa) para calcular diffs. Para mocks toma la forma `mock-fixed-{nn}`.
 
 ---
 
-## 3. Schema del bloque ESTADO_VITAL
+## Bloque 2 — Cabecera
 
-El bloque no agrega campos raíz al personaje (respeta open/close del PRD). Se serializa
-bajo la clave `estado_vital` al mismo nivel que `atributos`, como campo de primer nivel
-no-tag.
+**`nombre`** — Nombre real del personaje. String inmutable asignado en creación; no es el título operativo. Ej. `"Walter Aguirre"`.
 
-```yaml
-estado_vital:
-  fatiga_max:    integer   # DERIVADO al crear: atributos.fis + atributos.men (inmutable salvo cambio de atributo)
-  fatiga_actual: integer   # mutable; arranca igual a fatiga_max; decrece en juego
-  moral_max:     integer   # DERIVADO al crear: atributos.men (inmutable salvo cambio de atributo)
-  moral_actual:  integer   # mutable; arranca igual a moral_max; decrece en juego
-```
+**`sobrenombre`** — Cómo se lo conoce operativamente. Derivado al servir desde `nombre`, `rango` y tags de skill de mando; nunca se persiste. En Confederación: `"{rango narrativo} {nombre}"`. En Ejército Rojo: se construye desde la skill de comandancia más prominente (`Comandancia` → `"Comandante {nombre}"`). `null` cuando no hay distinción con el nombre real.
 
-**Invariantes:**
-- `0 <= fatiga_actual <= fatiga_max`
-- `0 <= moral_actual <= moral_max`
-- Si cambia `atributos.fis` o `atributos.men`, el narrador actualiza `fatiga_max`
-  (y `moral_max` si cambió `men`) vía hito dedicado y registra el delta en `historial[]`.
+**`filiacion`** — Derivado al servir; no persiste. Se compone como `"{rango} de la {escuadra.nombre} del {escuadra.cuerpo}"`. Si `escuadra_id` es `null`, se omite la cláusula de escuadra. El nombre del campo es provisorio (ver OQ en PRD §15.1).
 
-**Tipo de hito sugerido para mutaciones de ESTADO VITAL:**
+**`faccion`** — Pertenencia macro del personaje. Enum abierto; valores de MVP: `"Confederación"` y `"Ejército Rojo"`. Inmutable salvo hito explícito de cambio de bando.
 
-```yaml
-tipo: cambio_estado_vital
-metadata:
-  campo:         "fatiga_actual" | "moral_actual" | "fatiga_max" | "moral_max"
-  valor_anterior: integer
-  valor_nuevo:    integer
-  motivo:        string   # ej. "agotamiento tras 3 turnos sin cobertura"
-```
+**`edad`** — Años del personaje al momento de creación. Integer simple, sin mecánica de envejecimiento. Rango sugerido por rango operativo: reclutas 18-24, líderes 28-45.
+
+**`genero`** — Enum abierto: `"masculino"`, `"femenino"`, `"no_binario"`, `"otro"`. La distribución en creación es curada por facción.
+
+**`estado_salud`** — Condición física del personaje. Enum mutable: `"saludable"` (default en creación), `"herido"`, `"baja"`. Distinto de `estado` (asignación operativa).
+
+**`rol`** — Papel narrativo y cultural. String abierto; describe cómo lo nombra el lore, no su posición jerárquica. Ej. `"Sargento Confederado"`, `"Líder Revolucionario"`, `"Comisario"`. Desacoplado de `rango`: distintos `rol` pueden ejercer el mismo `rango`.
+
+**`estado`** — Dimensión de asignación/disponibilidad. Enum mutable: `"activo"` (asignado a escuadra y operativo), `"disponible"` (sin asignar; default en creación), `"kia"` (caído en combate), `"licencia"` (baja temporal).
+
+**`rango`** — Designación operativa de campo. String abierto jerárquico; el motor de batalla lo usa para decidir mando. Valores canon: `"Lider de escuadra"`, `"Segundo al mando"`, `"Apuntador"`, `"Artillero"`, `"Fusilero"`, `"Recluta"`. Mutable vía hito `cambio_rango`.
+
+**`escuadra_id`** — Referencia string a la entidad escuadra. `null` cuando el personaje no está asignado. La API no valida que el id exista. Mutable vía hito `asignacion_escuadra`.
+
+**`mando`** — Booleano que indica capacidad de mando, no titularidad activa. Si `true`, el personaje puede asumir liderazgo cuando el líder activo cae. La titularidad vigente se deriva: `mando == true AND es el de mayor rango de mando en su escuadra_id`. Default `true` para `Lider de escuadra` y `Segundo al mando`; `false` para el resto. Mutable vía hito `cambio_mando`.
 
 ---
 
-## 4. Hoja ASCII canónica — plantilla en blanco
+## Bloque 3 — Lealtades
 
-```
-+----------------------------------------------------------------------------+
-| SyV CHARACTER SHEET                                          schema v0.4.1 |
-| id: <id>                                                  origen: <origen> |
-+----------------------------------------------------------------------------+
-| NOMBRE         <nombre>                                                    |
-| SOBRENOMBRE    <sobrenombre>                                               |
-| FILIACION      <filiacion>                                                 |
-| FACCION        <faccion>                                                   |
-|                                                                            |
-| EDAD           <edad>                                                      |
-| GENERO         <genero>                                                    |
-| ESTADO SALUD   <estado_salud>                                              |
-|                                                                            |
-| ROL            <rol>                                                       |
-| ESTADO         <estado>                                                    |
-| RANGO          <rango>                                                     |
-| ESCUADRA       <escuadra.nombre>                    (<escuadra_id>)        |
-| MANDO          <si|no>                                                     |
-+----------------------------------------------------------------------------+
-| ATRIBUTOS                                                                  |
-|   FIS  #  [######]    TAC  #  [######]    MEN  #  [######]                |
-+----------------------------------------------------------------------------+
-| RASGOS                                                                     |
-|   <rasgo>, <rasgo>, <rasgo>, ...                                           |
-+----------------------------------------------------------------------------+
-| EQUIPO                                                                     |
-|   ARMAS        [<arma>]  [<arma>]                                          |
-|   UTILITARIOS  [<util>]  [<util>]  [<util>]                               |
-|   VESTIDURA    [<vestidura>]                                               |
-+----------------------------------------------------------------------------+
-| SKILLS                                                                     |
-|   [<skill>]  [<skill>]  [<skill>]                                          |
-+----------------------------------------------------------------------------+
-| TRAITS                                                                     |
-|   [<trait>]  [<trait>]                                                     |
-+----------------------------------------------------------------------------+
-| PERKS                                                                      |
-|   [<perk>]                                                                 |
-+----------------------------------------------------------------------------+
-| ASPECTOS                                                                   |
-|   [<aspecto>]                                                              |
-+----------------------------------------------------------------------------+
-| ESTADO VITAL                                                               |
-|   FATIGA   <fatiga_actual> / <fatiga_max>    (= FIS + MEN al crear)       |
-|   MORAL    <moral_actual>  / <moral_max>     (= MEN al crear)             |
-+----------------------------------------------------------------------------+
-| LEALTADES                                                                  |
-|   primaria   : <lealtad_primaria>                                          |
-|   secundarias: [<lealtad>, <lealtad>]                                      |
-|   secretos   : [<secreto>]                                                 |
-+----------------------------------------------------------------------------+
-| VINCULOS                                                                   |
-|   <tipo>  -> <ref_personaje_id>  (<descripcion_corta>)                    |
-+----------------------------------------------------------------------------+
-| HISTORIAL                                                                  |
-|   <fecha>  <tipo_hito>  <descripcion>                                      |
-+----------------------------------------------------------------------------+
-| HISTORIA                                                                   |
-|   <prosa 120-200 palabras>                                                 |
-+----------------------------------------------------------------------------+
-| METADATOS                                                                  |
-|   semilla: <semilla>    modelo_prosa: <modelo|null>    es_canon: <bool>   |
-|   creado_en: <ISO>      ultima_actualizacion: <ISO>                        |
-+----------------------------------------------------------------------------+
-```
+**`lealtades`** — Estructura anidada con tres sub-campos. `primaria` es string; la lealtad principal del personaje (ej. `"Confederación"`, `"Sargento Ricardo (post mortem)"`). `secundarias` es array de strings; lealtades adicionales en orden de importancia. `secretos` es array de strings; lealtades ocultas que el personaje no declara abiertamente. Los tres son mutables vía hito `ruptura_vinculo` o hito manual.
 
 ---
 
-## 5. Ejemplo rellenado — Lisandro Quiroga (mock.confederacion.03.quiroga)
+## Bloque 4 — Atributos
 
-Personaje seleccionado: **Apuntador Lisandro Quiroga** — Rango `Apuntador`.
-
-Atributos: FIS 3, TAC 5, MEN 5.
-
-**Cálculo del bloque ESTADO VITAL:**
-```
-fatiga_max    = FIS + MEN = 3 + 5 = 8
-fatiga_actual = 8   (recién creado / inicio de campaña)
-moral_max     = MEN = 5
-moral_actual  = 5   (recién creado / inicio de campaña)
-```
-
-```
-+----------------------------------------------------------------------------+
-| SyV CHARACTER SHEET                                          schema v0.4.1 |
-| id: mock.confederacion.03.quiroga                         origen: mock     |
-+----------------------------------------------------------------------------+
-| NOMBRE         Lisandro Quiroga                                            |
-| SOBRENOMBRE    Cabo Apuntador Lisandro Quiroga                             |
-| FILIACION      Apuntador de la Escuadra Ricardo                            |
-|                del Ejercito de la Confederacion Argentina                  |
-| FACCION        Confederacion                                               |
-|                                                                            |
-| EDAD           25                                                          |
-| GENERO         masculino                                                   |
-| ESTADO SALUD   saludable                                                   |
-|                                                                            |
-| ROL            Cabo Apuntador                                              |
-| ESTADO         activo                                                      |
-| RANGO          Apuntador                                                   |
-| ESCUADRA       Escuadra Ricardo                        (esq_conf_03)       |
-| MANDO          no                                                          |
-+----------------------------------------------------------------------------+
-| ATRIBUTOS                                                                  |
-|   FIS  3  [###..]    TAC  5  [#####]    MEN  5  [#####]                  |
-+----------------------------------------------------------------------------+
-| RASGOS                                                                     |
-|   altura alta, complexion delgada, pelo lacio, ojos atentos, habla escasa |
-+----------------------------------------------------------------------------+
-| EQUIPO                                                                     |
-|   ARMAS        [rifle militar]                                             |
-|   UTILITARIOS  [cargador]  [cargador]  [mapa]                             |
-|   VESTIDURA    [uniforme confederado]                                      |
-+----------------------------------------------------------------------------+
-| SKILLS                                                                     |
-|   [Tiro de precision]  [Lectura de mapas]                                  |
-+----------------------------------------------------------------------------+
-| TRAITS                                                                     |
-|   [Paciente]  [Punteria fria]                                              |
-+----------------------------------------------------------------------------+
-| PERKS                                                                      |
-|   [Olfato del terreno]                                                     |
-+----------------------------------------------------------------------------+
-| ASPECTOS                                                                   |
-|   (ninguno)                                                                |
-+----------------------------------------------------------------------------+
-| ESTADO VITAL                                                               |
-|   FATIGA    8 / 8    (FIS 3 + MEN 5)                                      |
-|   MORAL     5 / 5    (MEN 5)                                               |
-+----------------------------------------------------------------------------+
-| LEALTADES                                                                  |
-|   primaria   : Confederacion                                               |
-|   secundarias: [su escuadra, el oficio del agrimensor]                    |
-|   secretos   : []                                                          |
-+----------------------------------------------------------------------------+
-| VINCULOS                                                                   |
-|   hermano_de_armas -> mock.confederacion.01.aguirre                        |
-|                       (el Sargento le pide lectura del terreno antes de   |
-|                        cada despliegue)                                    |
-+----------------------------------------------------------------------------+
-| HISTORIAL                                                                  |
-|   2026-02-10  ascenso  Ascendido a Cabo tras eliminar a operador de radio  |
-|                        enemigo a 280m en llovizna.                         |
-+----------------------------------------------------------------------------+
-| HISTORIA                                                                   |
-|   Quiroga es de La Rioja, aunque su familia lleva dos generaciones en el  |
-|   Alto Valle. Estudio dos anos de agrimensura antes de que el servicio    |
-|   obligatorio lo interrumpiera. La formacion no fue al pedo: sabe leer    |
-|   mapas topograficos con naturalidad y entiende de curvas de nivel, de    |
-|   donde corre el agua y de donde sopla el viento en un valle encajonado.  |
-|   El frente patagonico lo recibio con niebla y barro. Quiroga aprendio    |
-|   rapido que el fusil de precision en baja visibilidad no es una ventaja  |
-|   sino una responsabilidad. Lo ascendieron a Cabo despues de dar de baja  |
-|   a un operador de radio enemigo a 280 metros, en llovizna, sin que nadie |
-|   supiera desde donde habia disparado.                                     |
-+----------------------------------------------------------------------------+
-| METADATOS                                                                  |
-|   semilla: mock-fixed-03    modelo_prosa: null    es_canon: true          |
-|   creado_en: 2026-05-24     ultima_actualizacion: 2026-02-10              |
-+----------------------------------------------------------------------------+
-```
-
-### 5.1. YAML con bloque estado_vital
-
-```yaml
-personaje:
-  id: mock.confederacion.03.quiroga
-  origen: mock
-  semilla: mock-fixed-03
-
-  nombre: Lisandro Quiroga
-  sobrenombre: Cabo Apuntador Lisandro Quiroga
-  filiacion: "Apuntador de la Escuadra Ricardo del Ejército de la Confederación Argentina"
-
-  faccion: Confederación
-  edad: 25
-  genero: masculino
-  estado_salud: saludable
-
-  rol: Cabo Apuntador
-  estado: activo
-  rango: Apuntador
-  escuadra_id: esq_conf_03
-  mando: false
-
-  atributos:
-    fis: 3
-    tac: 5
-    men: 5
-
-  estado_vital:
-    fatiga_max:    8    # fis(3) + men(5) — inmutable salvo cambio de atributo
-    fatiga_actual: 8    # mutable en juego
-    moral_max:     5    # men(5) — inmutable salvo cambio de atributo
-    moral_actual:  5    # mutable en juego
-
-  tags:
-    - { categoria: rasgo,             valor: "altura alta" }
-    - { categoria: rasgo,             valor: "complexion delgada" }
-    - { categoria: rasgo,             valor: "pelo lacio" }
-    - { categoria: rasgo,             valor: "ojos atentos" }
-    - { categoria: rasgo,             valor: "habla escasa" }
-    - { categoria: rol,               valor: "apuntador" }
-    - { categoria: skill,             valor: "Tiro de precisión" }
-    - { categoria: skill,             valor: "Lectura de mapas" }
-    - { categoria: trait,             valor: "Paciente" }
-    - { categoria: trait,             valor: "Puntería fría" }
-    - { categoria: perk,              valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma",     valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "cargador" }
-    - { categoria: "equipo.utilitario", valor: "mapa" }
-    - { categoria: "equipo.vestidura", valor: "uniforme confederado" }
-
-  lealtades:
-    primaria: Confederación
-    secundarias:
-      - su escuadra
-      - el oficio del agrimensor
-    secretos: []
-
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_id: mock.confederacion.01.aguirre
-      descripcion: "El Sargento le pide lectura del terreno antes de cada despliegue."
-
-  historia: |
-    Quiroga es de La Rioja, aunque su familia lleva dos generaciones en el Alto
-    Valle. Estudió dos años de agrimensura antes de que el servicio obligatorio
-    lo interrumpiera. [...texto completo en el mock...]
-
-  historial:
-    - fecha: "2026-02-10T08:00:00Z"
-      tipo: ascenso
-      descripcion: "Ascendido a Cabo tras eliminar a operador de radio enemigo a 280m en llovizna."
-      ref_batalla: null
-      metadata:
-        rango_anterior: Apuntador
-        rango_nuevo: Apuntador
-
-  tags_iniciales:
-    - { categoria: rasgo,               valor: "altura alta" }
-    - { categoria: rasgo,               valor: "complexion delgada" }
-    - { categoria: rasgo,               valor: "pelo lacio" }
-    - { categoria: rasgo,               valor: "ojos atentos" }
-    - { categoria: rasgo,               valor: "habla escasa" }
-    - { categoria: rol,                 valor: "apuntador" }
-    - { categoria: skill,               valor: "Tiro de precisión" }
-    - { categoria: skill,               valor: "Lectura de mapas" }
-    - { categoria: trait,               valor: "Paciente" }
-    - { categoria: trait,               valor: "Puntería fría" }
-    - { categoria: perk,                valor: "Olfato del terreno" }
-    - { categoria: "equipo.arma",       valor: "rifle militar" }
-    - { categoria: "equipo.utilitario", valor: "mapa" }
-    - { categoria: "equipo.vestidura",  valor: "uniforme confederado" }
-
-  metadatos:
-    creado_en: "2026-05-24T00:00:00Z"
-    canonizado_en: "2026-05-24T00:00:00Z"
-    ultima_actualizacion: "2026-02-10T08:00:00Z"
-    modelo_prosa: null
-    es_canon: true
-
-  extras: null
-```
+**`atributos`** — Set de tres valores numéricos que definen la capacidad base del personaje. Determinísticos por rango en creación (no se sortean); mutables post-creación solo vía hito `triple_cero` o `mejora_atributo`. Rango 2-5 para `fis` y `tac`; hasta 7 para `men` en líderes. `fis` (físico) determina resistencia y potencia bruta. `tac` (táctico) determina precisión y coordinación. `men` (mental) determina liderazgo, moral y resistencia psicológica.
 
 ---
 
-## 6. Tabla de referencia rápida — ESTADO VITAL por rango
+## Bloque 5 — Estado vital
 
-Derivada de la tabla de atributos del PRD §7.2.
+**`estado_vital`** — Bloque de seguimiento permanente de Fatiga y Moral. Se ubica después de ASPECTOS y antes de LEALTADES en la hoja. Campos derivados en creación y mutables en juego.
 
-| Rango | FIS | TAC | MEN | fatiga_max (FIS+MEN) | moral_max (MEN) |
-|---|---|---|---|---|---|
-| `Lider de escuadra` | 3 | 5 | 7 | **10** | **7** |
-| `Segundo al mando`  | 3 | 5 | 6 | **9**  | **6** |
-| `Apuntador`         | 3 | 5 | 5 | **8**  | **5** |
-| `Artillero`         | 3 | 4 | 3 | **6**  | **3** |
-| `Fusilero`          | 3 | 3 | 3 | **6**  | **3** |
-| `Recluta`           | 3 | 2 | 2 | **5**  | **2** |
+**`fatiga_max`** — Integer derivado al crear: `atributos.fis + atributos.men`. Se persiste en la hoja (no se recalcula al servir). Inmutable salvo cambio de atributo base; en ese caso el narrador recalcula y registra el delta como hito `cambio_estado_vital`. Invariante: `fatiga_actual <= fatiga_max`.
 
-Promedio de escuadra (composición 1+1+1+1+4+3): ≈ 6.5 de fatiga, ≈ 3.9 de moral.
+**`fatiga_actual`** — Integer mutable en juego. Arranca igual a `fatiga_max` en creación. Decrece por agotamiento en combate o escenario; puede recuperarse. Invariante: `0 <= fatiga_actual <= fatiga_max`. Los cambios se registran como hito `cambio_estado_vital`.
+
+**`moral_max`** — Integer derivado al crear: `atributos.men`. Se persiste. Inmutable salvo cambio de `men`. Invariante: `moral_actual <= moral_max`.
+
+**`moral_actual`** — Integer mutable en juego. Arranca igual a `moral_max` en creación. Refleja el estado anímico del personaje; decrece bajo presión, pérdida de aliados o situaciones traumáticas. Invariante: `0 <= moral_actual <= moral_max`. Los cambios se registran como hito `cambio_estado_vital`.
 
 ---
 
-## 7. Open Questions
+## Bloque 6 — Tags
 
-Las siguientes preguntas quedan abiertas — no deben resolverse en este documento sino
-en el PRD cuando el motor de batalla o el narrador tengan más contexto:
+**`tags`** — Lista plana de entidades `{categoria, valor}`. El corazón del schema: todo lo que puede ser tag, es tag. Categorías canon: `rasgo` (rasgos físicos), `rol` (mecánico), `skill` (habilidades), `trait` (carácter/condición sin mecánica activa), `perk` (ventaja activable del reglamento), `aspecto` (mini-tag con efecto mecánico en mini-frase), `equipo.arma`, `equipo.utilitario`, `equipo.vestidura`. Categorías abiertas: se aceptan valores fuera del canon. Los tags son repetibles: tres `cargador` son tres entidades físicas distintas. El `valor` de cada tag es mínimo: 1-2 palabras (3 cuando el nombre canónico lo requiere). Cambios post-creación se registran como hito `agregar_tag` / `quitar_tag`.
 
-1. **Umbrales de Fatiga**: ¿hay niveles que disparen penalidades automáticas
-   (ej. fatiga_actual ≤ 3 → tag `estado_temporal: fatigado`; fatiga_actual = 0 →
-   tag `estado_temporal: exhausto`)? El PRD ya registra `Fatigado crónico` como trait
-   canon y los aspectos `veterano-cicatrizado` y `devoto` hacen referencia a tags
-   `cansado` / `exhausto` (§10.1 y pool de aspectos), lo cual sugiere que el patrón
-   existe pero aún no está sistematizado. Candidato natural para una ola de
-   `estado_temporal` una vez que el motor de batalla lo requiera.
+---
 
-2. **Umbrales de Moral**: ¿moral_actual = 0 → `pánico` automático (análogo al aspecto
-   `cobarde`)? ¿O se deja al criterio del narrador? El pool de aspectos ya usa
-   `pánico` como tag activable (§10 `/meta/aspectos`), pero no hay regla canónica
-   de umbral definida en el PRD.
+## Bloque 7 — Vínculos
 
-3. **Recalibración de topes tras triple_cero**: cuando un hito `triple_cero` incrementa
-   `atributos.men`, ¿el narrador debe emitir además un hito `cambio_estado_vital`
-   para actualizar `fatiga_max` y `moral_max`? ¿O la API lo recalcula derivado al servir
-   (igual que `fza_aportada`)? Este PRD opta por persistir `fatiga_max` y `moral_max`
-   para que el motor de batalla los lea sin recalcular — pero eso requiere un hito
-   coordinado. Decisión pendiente de confirmación con el cliente.
+**`vinculos`** — Array de relaciones con otros personajes. Cada vínculo tiene `tipo` (string abierto; sugeridos: `mentor`, `subordinado`, `hermano_de_armas`, `rival`, `deuda`, `enemigo_jurado`, `familia`, `romance`), `ref_personaje_id` (id del otro personaje o `null` si es externo al corpus), y `descripcion` (string obligatorio; fallback cuando el id no resuelve). La API no valida que `ref_personaje_id` exista. Mutable vía hitos `formacion_vinculo` y `ruptura_vinculo`.
 
-4. **Tipo de hito canónico**: `cambio_estado_vital` es el nombre sugerido en §3 de
-   este documento. Falta incorporarlo a la tabla §9.5 del PRD si el cliente lo aprueba.
+---
+
+## Bloque 8 — Historia
+
+**`historia`** — Prosa biográfica original. String de 120-200 palabras generado por LLM en la creación del personaje efímero. Al canonizar se congela: nunca muta tras la canonización. Escrita en castellano rioplatense, primera persona narrativa. Es el único lugar donde vive la voz del personaje como descripción extendida.
+
+---
+
+## Bloque 9 — Historial
+
+**`historial`** — Array de hitos que registran la memoria viva del personaje canonizado. Cada entrada tiene: `fecha` (ISO-8601), `tipo` (string abierto con valores sugeridos), `descripcion` (prose del evento), `ref_batalla` (id de batalla del motor downstream o `null`), y `metadata` (object libre para datos estructurados del hito). Tipos sugeridos: `triple_cero`, `ascenso`, `herida`, `recuperacion`, `agregar_tag`, `quitar_tag`, `formacion_vinculo`, `ruptura_vinculo`, `traslado`, `condecoracion`, `mejora_atributo`, `cambio_rango`, `cambio_mando`, `cambio_estado`, `asignacion_escuadra`, `cambio_estado_vital`. Solo para canonizados; efímeros y mocks lo tienen vacío o como datos de auditoría.
+
+---
+
+## Bloque 10 — Tags iniciales
+
+**`tags_iniciales`** — Snapshot inmutable de `tags[]` tal como estaba al momento de creación. Array de `{categoria, valor}`. Permite a cualquier cliente calcular el diff entre el estado original y el vigente. Nunca muta.
+
+---
+
+## Bloque 11 — Metadatos
+
+**`metadatos`** — Conjunto de campos de auditoría y trazabilidad. `creado_en` (ISO-8601, fecha de creación efímera). `canonizado_en` (ISO-8601 o `null`; solo canonizados). `ultima_actualizacion` (ISO-8601; se actualiza con cada hito). `modelo_prosa` (string o `null`; modelo LLM que escribió `historia`). `es_canon` (boolean; `true` para mocks y canonizados).
+
+---
+
+## Bloque 12 — Extras
+
+**`extras`** — Escape hatch deliberado. Object libre o `null`. La API no inspecciona ni valida su contenido. Permite a clientes externos persistir metadatos propios sin romper el schema ni requerir un cambio de versión del PRD.
