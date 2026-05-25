@@ -28,7 +28,7 @@ personaje:
   - trait.voz_grave
   - trait.obstinado
   - trait.objetivo_prioritario
-  - perk.voz_de_mando
+  - trait.voz_de_mando
   - equipo.arma.smg
   - equipo.arma.pistola
   - equipo.utilitario.cargador

@@ -113,7 +113,7 @@ personajes:
       - trait.lealtad_obrera
       - trait.mirada_larga
       - trait.carismatico
-      - perk.voz_de_mando
+      - trait.voz_de_mando
       - skill.oratoria
       - skill.comisariado
       - skill.lectura_de_mapas
