@@ -6,99 +6,50 @@ personaje:
     rol: Fusilero de Primera
     genero: femenino
     edad: 23
-  faccion:
-    faccion: Confederación
-    filiacion: Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo corto
-    - categoria: rasgo
-      valor: cara curtida
-    - categoria: rasgo
-      valor: mirada directa
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Flanqueo
-    - categoria: skill
-      valor: Lectura de terreno
-    - categoria: trait
-      valor: Determinada
-    - categoria: trait
-      valor: Gatillo rápido
-    - categoria: perk
-      valor: Veterana de flanqueo
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: rodriguez_marcela
-      descripcion: Misma escuadra por azar de numeración.
-    - tipo: hermano_de_armas
-      ref_personaje_slug: olivares_tomas
-      descripcion: Mismo pelotón de asignación.
-  historia: |
-    Graciela Pereyra es de Rawson, Chubut — nació y creció en la Patagonia, así
-    que el frío no la sorprendió como a los norteños de la escuadra. Lo que la
-    sorprendió fue el ruido. En Rawson el viento hace su propio ruido constante;
-    el del combate es diferente, más concentrado y arbitrario. Su familia no
-    entiende del todo por qué pidió mantenerse en el frente patagónico cuando
-    le ofrecieron reasignación a logística. Ella explicó que era más útil en
-    línea, que tenía experiencia de terreno, que había razones tácticas.
-    Probablemente haya algo más, pero no lo dice y nadie le insiste. Con
-    Olivares y Rodríguez terminaron en el mismo pelotón de asignación y en la
-    misma escuadra por azar. No son amigos exactamente, pero se conocen lo
-    suficiente como para saber cuándo el otro está funcionando mal.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo corto
-    - categoria: rasgo
-      valor: cara curtida
-    - categoria: rasgo
-      valor: mirada directa
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Flanqueo
-    - categoria: skill
-      valor: Lectura de terreno
-    - categoria: trait
-      valor: Determinada
-    - categoria: trait
-      valor: Gatillo rápido
-    - categoria: perk
-      valor: Veterana de flanqueo
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: faccion.confederados
+  - faccion.confederados
+  - rango.fusilero
+  - escuadra.ricardo
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.atletico
+  - rasgo.pelo_corto
+  - rasgo.cara_curtida
+  - rasgo.mirada_directa
+  - rol.oficio.infanteria
+  - skill.flanqueo
+  - skill.lectura_de_terreno
+  - trait.determinada
+  - trait.gatillo_rapido
+  - perk.veterano_de_flanqueo
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.rodriguez_marcela
+  - lealtad.pj.olivares_tomas
+  historia: Graciela Pereyra es de Rawson, Chubut — nació y creció en la Patagonia, así que el frío no la sorprendió como a los norteños de la escuadra. Lo que la sorprendió fue el ruido. En Rawson el viento hace su propio ruido constante; el del combate es diferente, más concentrado y arbitrario. Su familia no entiende del todo por qué pidió mantenerse en el frente patagónico cuando le ofrecieron reasignación a logística. Ella explicó que era más útil en línea, que tenía experiencia de terreno, que había razones tácticas. Probablemente haya algo más, pero no lo dice y nadie le insiste. Con Olivares y Rodríguez terminaron en el mismo pelotón de asignación y en la misma escuadra por azar. No son amigos exactamente, pero se conocen lo suficiente como para saber cuándo el otro está funcionando mal.
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Misma escuadra por azar de numeración.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.rodriguez_marcela
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Mismo pelotón de asignación.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.olivares_tomas
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

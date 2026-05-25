@@ -1,0 +1,5 @@
+tag:
+  slug: paciente
+  nombre: Paciente
+  categoria: trait
+  descripcion: 'Rasgo de carácter: paciente.'

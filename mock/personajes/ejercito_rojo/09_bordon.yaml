@@ -6,105 +6,51 @@ personaje:
     rol: Voluntario — Recargador
     genero: masculino
     edad: 19
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Recluta de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Recluta
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: cara aniñada
-    - categoria: rasgo
-      valor: anteojos
-    - categoria: rasgo
-      valor: manos limpias
-    - categoria: rol
-      valor: recargador
-    - categoria: skill
-      valor: Manejo de ametralladora
-    - categoria: skill
-      valor: Doctrina
-    - categoria: trait
-      valor: Intelectual
-    - categoria: trait
-      valor: Novato asustado
-    - categoria: perk
-      valor: Disparo de oportunidad
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cuaderno
-    - categoria: equipo.vestidura
-      valor: ropa de civil
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
-  vinculos:
-    - tipo: subordinado
-      ref_personaje_slug: calfucura_ignacio
-      descripcion: Recargador asignado del ametrallador. Aprende sin que le expliquen.
-    - tipo: mentor
-      ref_personaje_slug: mansilla_ramon
-      descripcion: Le pidió a Mansilla aclaraciones doctrinarias una vez. La respuesta no le alcanzó.
-  historia: |
-    Luciano Bordón estudió dos años y medio de ingeniería industrial en la
-    Universidad Nacional del Sur antes de que la revolución cambiara la
-    composición del cuerpo docente, el plan de estudios y sus propias
-    convicciones, en ese orden. Leyó los panfletos, fue a dos reuniones, y al
-    tercer mes se presentó voluntario. Sus padres — contadores ambos — todavía
-    no entienden bien qué pasó. En el Ejército Rojo aprendió que las cosas que
-    entendía teóricamente sobre la guerra no sirven de nada cuando alguien te
-    está disparando de verdad. El cuerpo reacciona antes que el cálculo. La
-    contradicción antimaquinista del Ejército Rojo lo inquieta intelectualmente
-    más que a cualquier otro en la escuadra. Tuvo esa conversación con Mansilla
-    una vez. Mansilla le explicó que las contradicciones tácticas se resuelven
-    después de la victoria estratégica. Bordón anotó la respuesta y sigue sin
-    estar convencido.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: cara aniñada
-    - categoria: rasgo
-      valor: anteojos
-    - categoria: rasgo
-      valor: manos limpias
-    - categoria: rol
-      valor: recargador
-    - categoria: skill
-      valor: Manejo de ametralladora
-    - categoria: skill
-      valor: Doctrina
-    - categoria: trait
-      valor: Intelectual
-    - categoria: trait
-      valor: Novato asustado
-    - categoria: perk
-      valor: Disparo de oportunidad
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.utilitario
-      valor: cuaderno
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
+  - faccion.ejercito_rojo
+  - rango.recluta
+  - escuadra.mansilla
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.delgado
+  - rasgo.cara_aninada
+  - rasgo.anteojos
+  - rasgo.manos_limpias
+  - rol.oficio.recargador
+  - skill.manejo_de_ametralladora
+  - skill.doctrina
+  - trait.intelectual
+  - trait.recluta_novato
+  - perk.disparo_de_oportunidad
+  - equipo.arma.smg
+  - equipo.utilitario.cargador
+  - equipo.utilitario.cuaderno
+  - equipo.vestidura.ropa_de_civil
+  - lealtad.faccion.ejercito_rojo
+  - lealtad.pj.calfucura_ignacio
+  - lealtad.pj.mansilla_ramon
+  historia: Luciano Bordón estudió dos años y medio de ingeniería industrial en la Universidad Nacional del Sur antes de que la revolución cambiara la composición del cuerpo docente, el plan de estudios y sus propias convicciones, en ese orden. Leyó los panfletos, fue a dos reuniones, y al tercer mes se presentó voluntario. Sus padres — contadores ambos — todavía no entienden bien qué pasó. En el Ejército Rojo aprendió que las cosas que entendía teóricamente sobre la guerra no sirven de nada cuando alguien te está disparando de verdad. El cuerpo reacciona antes que el cálculo. La contradicción antimaquinista del Ejército Rojo lo inquieta intelectualmente más que a cualquier otro en la escuadra. Tuvo esa conversación con Mansilla una vez. Mansilla le explicó que las contradicciones tácticas se resuelven después de la victoria estratégica. Bordón anotó la respuesta y sigue sin estar convencido.
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Recargador asignado del ametrallador. Aprende sin que le expliquen.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: subordinado
+        ref: mock.pj.calfucura_ignacio
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Le pidió a Mansilla aclaraciones doctrinarias una vez. La respuesta no le alcanzó.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: mentor
+        ref: mock.pj.mansilla_ramon
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

@@ -6,108 +6,50 @@ personaje:
     rol: Fusilero de Primera
     genero: masculino
     edad: 26
-  faccion:
-    faccion: Confederación
-    filiacion: Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: barba descuidada
-    - categoria: rasgo
-      valor: pelo con canas
-    - categoria: rasgo
-      valor: postura torcida
-    - categoria: rasgo
-      valor: cicatriz en costado
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Primeros auxilios
-    - categoria: trait
-      valor: Veterano
-    - categoria: trait
-      valor: Hemorragia lenta
-    - categoria: perk
-      valor: Resistencia al dolor
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: vendaje
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: mentor
-      ref_personaje_slug: ramirez_esteban
-      descripcion: Recluta Ramírez le pregunta cuando no sabe. Acosta responde corto.
-  historia: |
-    Rubén Acosta es de Mendoza, aunque pasó años en el norte antes de que la
-    guerra lo enviara al sur. Tiene veintiséis años y ya lleva tres en servicio
-    activo — más que la mayoría de los fusileros de primera de su escuadra. El
-    frente del norte fue donde aprendió lo que significa sostener una posición:
-    no heroísmo, sino turnos de guardia, pies mojados y el ruido constante de
-    algo que puede ser viento o movimiento. En el frente norte recibió un impacto
-    de metralla que le fracturó una costilla y le dejó una cicatriz larga en el
-    costado derecho. El alta médica llegó antes de que la costilla terminara de
-    soldar bien. Acosta aprendió a operar con el dolor como ruido de fondo —
-    no lo ignora, lo clasifica junto con el frío y el hambre. En el frente
-    patagónico lo sorprendió el silencio que hace la niebla. Todavía no se
-    acostumbró del todo.
+  - faccion.confederados
+  - rango.fusilero
+  - escuadra.ricardo
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.atletico
+  - rasgo.barba_descuidada
+  - rasgo.pelo_con_canas
+  - rasgo.postura_torcida
+  - rasgo.cicatriz_en_costado
+  - rol.oficio.infanteria
+  - skill.fuego_sostenido
+  - skill.primeros_auxilios
+  - perk.veterano
+  - trait.hemorragia_lenta
+  - perk.resistencia_al_dolor
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.utilitario.vendaje
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.ramirez_esteban
+  historia: 'Rubén Acosta es de Mendoza, aunque pasó años en el norte antes de que la guerra lo enviara al sur. Tiene veintiséis años y ya lleva tres en servicio activo — más que la mayoría de los fusileros de primera de su escuadra. El frente del norte fue donde aprendió lo que significa sostener una posición: no heroísmo, sino turnos de guardia, pies mojados y el ruido constante de algo que puede ser viento o movimiento. En el frente norte recibió un impacto de metralla que le fracturó una costilla y le dejó una cicatriz larga en el costado derecho. El alta médica llegó antes de que la costilla terminara de soldar bien. Acosta aprendió a operar con el dolor como ruido de fondo — no lo ignora, lo clasifica junto con el frío y el hambre. En el frente patagónico lo sorprendió el silencio que hace la niebla. Todavía no se acostumbró del todo.'
   historial:
-    - fecha: '2024-08-15T00:00:00Z'
-      tipo: herida
-      descripcion: Impacto de metralla en costado derecho durante operación en frente norte.
-      ref_batalla: null
-      metadata:
-        gravedad: grave
-        cicatriz: cicatriz larga en costado derecho
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: barba descuidada
-    - categoria: rasgo
-      valor: pelo con canas
-    - categoria: rasgo
-      valor: postura torcida
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Primeros auxilios
-    - categoria: trait
-      valor: Veterano
-    - categoria: perk
-      valor: Resistencia al dolor
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: vendaje
-    - categoria: lealtad
-      valor: faccion.confederados
+  - fecha: '2024-08-15T00:00:00Z'
+    tipo: herida
+    descripcion: Impacto de metralla en costado derecho durante operación en frente norte.
+    ref_batalla: null
+    metadata:
+      gravedad: grave
+      cicatriz: cicatriz larga en costado derecho
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Recluta Ramírez le pregunta cuando no sabe. Acosta responde corto.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: mentor
+        ref: mock.pj.ramirez_esteban
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

@@ -6,98 +6,41 @@ personaje:
     rol: Tirador Vanguardia
     genero: masculino
     edad: 26
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Apuntador de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Apuntador
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 5
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: pelo lacio
-    - categoria: rasgo
-      valor: rasgos mapuche
-    - categoria: rasgo
-      valor: manos firmes
-    - categoria: rol
-      valor: apuntador
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Caza
-    - categoria: trait
-      valor: Paciente
-    - categoria: trait
-      valor: Obstinado
-    - categoria: perk
-      valor: Puntería fría
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: mansilla_ramon
-      descripcion: Mansilla decide qué blanco. Antinao decide cuándo.
-  historia: |
-    Héctor Antinao creció en la meseta, entre Roca y el Limay. Cazaba con su
-    padre desde los doce años: liebre, martineta, guanaco cuando la temporada
-    daba. No era cuestión de deporte sino de comer. A los veintidós cruzó a la
-    costa y terminó cargando bolsas en el puerto de Viedma por dos años. Ahí
-    conoció a los agitadores ferroviarios y, a través de ellos, al Ejército
-    Rojo. Nadie le enseñó a disparar en el ejército. Lo que le enseñaron fue a
-    no malgastar el tiro. En acción tiene fama de esperar más de lo que sus
-    compañeros consideran razonable antes de apretar el gatillo. A él le parece
-    simplemente la única forma sensata de proceder. El objetivo del operativo
-    no le genera ni repulsión ni entusiasmo. Si Mansilla lo pone en la mira,
-    Antinao va a hacer lo que sabe hacer.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: pelo lacio
-    - categoria: rasgo
-      valor: rasgos mapuche
-    - categoria: rasgo
-      valor: manos firmes
-    - categoria: rol
-      valor: apuntador
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Caza
-    - categoria: trait
-      valor: Paciente
-    - categoria: trait
-      valor: Obstinado
-    - categoria: perk
-      valor: Puntería fría
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
+  - faccion.ejercito_rojo
+  - rango.apuntador
+  - escuadra.mansilla
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.delgado
+  - rasgo.pelo_lacio
+  - rasgo.rasgos_mapuche
+  - rasgo.manos_firmes
+  - rol.oficio.apuntador
+  - skill.tiro_de_precision
+  - skill.caza
+  - trait.paciente
+  - trait.obstinado
+  - perk.punteria_fria
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_rojo
+  - lealtad.faccion.ejercito_rojo
+  - lealtad.pj.mansilla_ramon
+  historia: 'Héctor Antinao creció en la meseta, entre Roca y el Limay. Cazaba con su padre desde los doce años: liebre, martineta, guanaco cuando la temporada daba. No era cuestión de deporte sino de comer. A los veintidós cruzó a la costa y terminó cargando bolsas en el puerto de Viedma por dos años. Ahí conoció a los agitadores ferroviarios y, a través de ellos, al Ejército Rojo. Nadie le enseñó a disparar en el ejército. Lo que le enseñaron fue a no malgastar el tiro. En acción tiene fama de esperar más de lo que sus compañeros consideran razonable antes de apretar el gatillo. A él le parece simplemente la única forma sensata de proceder. El objetivo del operativo no le genera ni repulsión ni entusiasmo. Si Mansilla lo pone en la mira, Antinao va a hacer lo que sabe hacer.'
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Mansilla decide qué blanco. Antinao decide cuándo.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.mansilla_ramon
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

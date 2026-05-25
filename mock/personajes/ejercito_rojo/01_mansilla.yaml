@@ -6,142 +6,88 @@ personaje:
     rol: Líder Revolucionario
     genero: masculino
     edad: 34
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Lider de escuadra de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Lider de escuadra
-    mando: true
-    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 7
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura alta
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: pelo entrecano
-    - categoria: rasgo
-      valor: lentes
-    - categoria: rasgo
-      valor: voz grave
-    - categoria: rol
-      valor: lider
-    - categoria: skill
-      valor: Comisariado
-    - categoria: skill
-      valor: Oratoria
-    - categoria: skill
-      valor: Lectura de mapas
-    - categoria: trait
-      valor: Voz grave
-    - categoria: trait
-      valor: Obstinado
-    - categoria: trait
-      valor: Objetivo prioritario
-    - categoria: perk
-      valor: Voz de mando
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.arma
-      valor: pistola
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cuaderno
-    - categoria: equipo.utilitario
-      valor: brújula
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
-  vinculos:
-    - tipo: mentor
-      ref_personaje_slug: null
-      descripcion: |
-        Instructor del campo de Stroeder, que le enseñó a leer mapas cuando todavía redactaba comunicados sindicales.
-    - tipo: rival
-      ref_personaje_slug: aguirre_walter
-      descripcion: |
-        Sargento Aguirre. Mansilla anotó su nombre en el informe del Sector 12,15. No se conocen en persona; el rival es de papel y de mapa.
-    - tipo: subordinado
-      ref_personaje_slug: iturra_delia
-      descripcion: Segundo Camarada Iturra. La señaló como segunda en la formación de la escuadra.
-    - tipo: subordinado
-      ref_personaje_slug: antinao_hector
-      descripcion: Tirador Antinao. Su ojo elegido para el objetivo.
-  historia: |
-    Mansilla no disparó un arma en combate hasta los treinta y dos años. Era
-    redactor del boletín sindical de los metalúrgicos de Bahía Blanca, después
-    comisario político de la segunda región, después instructor de cuadros en
-    Stroeder. La revolución tiene usos para un hombre que sabe leer mapas y
-    convencer a otros de que la causa vale el riesgo. El campo de batalla no
-    estaba en su programa. Cuando llegó el informe del Sector 12,15, Mansilla
-    fue uno de los tres hombres que lo analizaron. Anotó: "respuesta táctica
-    competente del oficial azul". Después recomendó eliminarlo antes de la
-    siguiente operación. El alto mando lo comisionó para liderar la escuadra
-    de caza — no por tirador, sino porque conoce el informe y no carga rencor.
+  - faccion.ejercito_rojo
+  - rango.lider_de_escuadra
+  - escuadra.mansilla
+  - mando.capaz
+  - estado.activo
+  - rasgo.alto
+  - rasgo.delgado
+  - rasgo.pelo_entrecano
+  - rasgo.lentes
+  - rasgo.voz_grave
+  - rol.mecanico.lider
+  - skill.comisariado
+  - skill.oratoria
+  - skill.lectura_de_mapas
+  - trait.voz_grave
+  - trait.obstinado
+  - trait.objetivo_prioritario
+  - perk.voz_de_mando
+  - equipo.arma.smg
+  - equipo.arma.pistola
+  - equipo.utilitario.cargador
+  - equipo.utilitario.cuaderno
+  - equipo.utilitario.brujula
+  - equipo.vestidura.uniforme_rojo
+  - lealtad.faccion.ejercito_rojo
+  - lealtad.pj.mentor
+  - nemesis.pj.aguirre_walter
+  - lealtad.pj.iturra_delia
+  - lealtad.pj.antinao_hector
+  historia: 'Mansilla no disparó un arma en combate hasta los treinta y dos años. Era redactor del boletín sindical de los metalúrgicos de Bahía Blanca, después comisario político de la segunda región, después instructor de cuadros en Stroeder. La revolución tiene usos para un hombre que sabe leer mapas y convencer a otros de que la causa vale el riesgo. El campo de batalla no estaba en su programa. Cuando llegó el informe del Sector 12,15, Mansilla fue uno de los tres hombres que lo analizaron. Anotó: "respuesta táctica competente del oficial azul". Después recomendó eliminarlo antes de la siguiente operación. El alto mando lo comisionó para liderar la escuadra de caza — no por tirador, sino porque conoce el informe y no carga rencor.'
   historial:
-    - fecha: '2026-02-28T10:00:00Z'
-      tipo: traslado
-      descripcion: Comisionado de Stroeder al frente sur como líder de escuadra de caza.
-      ref_batalla: null
-      metadata:
-        motivo: decisión del alto mando tras análisis del Sector 12,15
-    - fecha: '2026-04-18T17:30:00Z'
-      tipo: formacion_vinculo
-      descripcion: Identifica formalmente al Sargento Aguirre como objetivo prioritario.
-      ref_batalla: null
-      metadata:
-        vinculo_creado:
-          tipo: rival
-          ref: mock.confederacion.01.aguirre
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura alta
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: pelo entrecano
-    - categoria: rasgo
-      valor: lentes
-    - categoria: rasgo
-      valor: voz grave
-    - categoria: rol
-      valor: lider
-    - categoria: skill
-      valor: Comisariado
-    - categoria: skill
-      valor: Oratoria
-    - categoria: skill
-      valor: Lectura de mapas
-    - categoria: trait
-      valor: Voz grave
-    - categoria: trait
-      valor: Obstinado
-    - categoria: perk
-      valor: Voz de mando
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.arma
-      valor: pistola
-    - categoria: equipo.utilitario
-      valor: cuaderno
-    - categoria: equipo.utilitario
-      valor: brújula
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
+  - fecha: '2026-02-28T10:00:00Z'
+    tipo: traslado
+    descripcion: Comisionado de Stroeder al frente sur como líder de escuadra de caza.
+    ref_batalla: null
+    metadata:
+      motivo: decisión del alto mando tras análisis del Sector 12,15
+  - fecha: '2026-04-18T17:30:00Z'
+    tipo: formacion_vinculo
+    descripcion: Identifica formalmente al Sargento Aguirre como objetivo prioritario.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: rival
+        ref: mock.confederacion.01.aguirre
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Instructor del campo de Stroeder, que le enseñó a leer mapas cuando todavía redactaba comunicados sindicales.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: mentor
+        ref: mock.pj.mentor
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Sargento Aguirre. Mansilla anotó su nombre en el informe del Sector 12,15. No se conocen en persona; el rival es de papel y de mapa.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: rival
+        ref: mock.nemesis.aguirre_walter
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Segundo Camarada Iturra. La señaló como segunda en la formación de la escuadra.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: subordinado
+        ref: mock.pj.iturra_delia
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Tirador Antinao. Su ojo elegido para el objetivo.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: subordinado
+        ref: mock.pj.antinao_hector
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

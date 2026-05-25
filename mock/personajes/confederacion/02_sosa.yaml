@@ -6,108 +6,53 @@ personaje:
     rol: Cabo Primero Confederado
     genero: masculino
     edad: 27
-  faccion:
-    faccion: Confederación
-    filiacion: Segundo al mando de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Segundo al mando
-    mando: true
-    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 6
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion robusta
-    - categoria: rasgo
-      valor: pelo rapado
-    - categoria: rasgo
-      valor: manos grandes
-    - categoria: rasgo
-      valor: habla parca
-    - categoria: rol
-      valor: lider
-    - categoria: skill
-      valor: Coordinación
-    - categoria: skill
-      valor: Operación de radio
-    - categoria: skill
-      valor: Inventario
-    - categoria: trait
-      valor: Confiable
-    - categoria: trait
-      valor: Obstinado
-    - categoria: perk
-      valor: Brazo derecho funcional
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: radio
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: aguirre_walter
-      descripcion: Sargento Aguirre lo eligió personalmente. Confianza recíproca, sin palabras.
-    - tipo: subordinado
-      ref_personaje_slug: lugones_patricia
-      descripcion: Recluta Lugones, recargador móvil. Sosa la mueve según la situación.
-  historia: |
-    Horacio Sosa es cordobés, del cinturón industrial. Antes del servicio trabajaba
-    turno noche en una planta de procesado de aceite — sin quejarse porque era lo
-    que había. Entró al servicio obligatorio sin expectativas y descubrió que tenía
-    talento para la organización bajo presión: nunca perdía la cuenta de cartuchos,
-    posiciones ni tiempos. Dos inviernos patagónicos lo curtieron. Sobrevivió a
-    ambos sin heridas graves y con la reputación de saber dónde está todo. Aguirre
-    lo eligió Cabo Primero de su nueva escuadra. No se conocían del Sector 12,15
-    — Sosa estaba en otro frente —, pero el expediente habla solo. Sosa aceptó sin
-    preguntar sobre el ascenso ni sobre cómo murió el sargento anterior. Eso
-    también es parte de por qué lo eligieron.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion robusta
-    - categoria: rasgo
-      valor: pelo rapado
-    - categoria: rasgo
-      valor: manos grandes
-    - categoria: rasgo
-      valor: habla parca
-    - categoria: rol
-      valor: lider
-    - categoria: skill
-      valor: Coordinación
-    - categoria: skill
-      valor: Operación de radio
-    - categoria: skill
-      valor: Inventario
-    - categoria: trait
-      valor: Confiable
-    - categoria: trait
-      valor: Obstinado
-    - categoria: perk
-      valor: Brazo derecho funcional
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: radio
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
+  - faccion.confederados
+  - rango.segundo_al_mando
+  - escuadra.ricardo
+  - mando.capaz
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.corpulento
+  - rasgo.pelo_rapado
+  - rasgo.manos_grandes
+  - rasgo.habla_parca
+  - rol.mecanico.lider
+  - skill.coordinacion
+  - skill.operacion_de_radio
+  - skill.inventario
+  - trait.confiable
+  - trait.obstinado
+  - perk.brazo_derecho_funcional
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.utilitario.radio
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.aguirre_walter
+  - lealtad.pj.lugones_patricia
+  historia: 'Horacio Sosa es cordobés, del cinturón industrial. Antes del servicio trabajaba turno noche en una planta de procesado de aceite — sin quejarse porque era lo que había. Entró al servicio obligatorio sin expectativas y descubrió que tenía talento para la organización bajo presión: nunca perdía la cuenta de cartuchos, posiciones ni tiempos. Dos inviernos patagónicos lo curtieron. Sobrevivió a ambos sin heridas graves y con la reputación de saber dónde está todo. Aguirre lo eligió Cabo Primero de su nueva escuadra. No se conocían del Sector 12,15 — Sosa estaba en otro frente —, pero el expediente habla solo. Sosa aceptó sin preguntar sobre el ascenso ni sobre cómo murió el sargento anterior. Eso también es parte de por qué lo eligieron.'
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Sargento Aguirre lo eligió personalmente. Confianza recíproca, sin palabras.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.aguirre_walter
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Recluta Lugones, recargador móvil. Sosa la mueve según la situación.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: subordinado
+        ref: mock.pj.lugones_patricia
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

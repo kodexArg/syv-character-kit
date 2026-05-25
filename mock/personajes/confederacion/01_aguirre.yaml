@@ -6,134 +6,76 @@ personaje:
     rol: Sargento Confederado
     genero: masculino
     edad: 28
-  faccion:
-    faccion: Confederación
-    filiacion: Lider de escuadra de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Lider de escuadra
-    mando: true
-    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 7
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo corto
-    - categoria: rasgo
-      valor: barba corta
-    - categoria: rasgo
-      valor: mirada lenta
-    - categoria: rasgo
-      valor: cicatriz en ceja
-    - categoria: rol
-      valor: lider
-    - categoria: rol
-      valor: sargento
-    - categoria: skill
-      valor: Comandancia
-    - categoria: skill
-      valor: Lectura de terreno
-    - categoria: trait
-      valor: Mirada larga
-    - categoria: trait
-      valor: Eco del peñasco
-    - categoria: perk
-      valor: Sucesor de Ricardo
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.arma
-      valor: pistola
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cuaderno
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: Sargento Ricardo (post mortem)
-  vinculos:
-    - tipo: mentor
-      ref_personaje_slug: null
-      descripcion: |
-        Sargento Ricardo, su mentor, caído en el Sector 12,15. Aguirre heredó el parche y el peso.
-    - tipo: subordinado
-      ref_personaje_slug: sosa_horacio
-      descripcion: Cabo Primero Sosa, su mano derecha. Lo eligió personalmente.
-    - tipo: subordinado
-      ref_personaje_slug: quiroga_lisandro
-      descripcion: Cabo Apuntador Quiroga, especialista del sector. Le confía la lectura del terreno.
-  historia: |
-    Walter Aguirre es de Neuquén, aunque hace tres años que no pisa la provincia.
-    Antes del servicio trabajaba con su padre en corte de madera en el alto valle —
-    sabe leer el terreno boscoso porque pasó la infancia entre árboles que matan
-    si no los respetás. Entró a la Confederación como conscripto, sobrevivió al
-    primer invierno en el frente sur, y terminó de soldado de primera antes de
-    que alguien notara que era más cuidadoso que la mayoría. El Sargento Ricardo
-    lo eligió Cabo Primero al mes. No con palabras: con tareas que necesitaban
-    hacerse bien, no rápido. En el Sector 12,15, cuando la radio se rompió y
-    Ricardo cayó, Walter organizó la columna y sacó a todos. Semanas después
-    llegó el parche. No lo festejó. La escuadra que le asignaron es nueva. Los
-    va a cuidar o los va a perder, y las dos cosas lo mantienen despierto.
+  - faccion.confederados
+  - rango.lider_de_escuadra
+  - escuadra.ricardo
+  - mando.capaz
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.atletico
+  - rasgo.pelo_corto
+  - rasgo.barba_corta
+  - rasgo.mirada_lenta
+  - rasgo.cicatriz_en_ceja
+  - rol.mecanico.lider
+  - rol.jerarquia.sargento
+  - skill.comandancia
+  - skill.lectura_de_terreno
+  - trait.mirada_larga
+  - trait.eco_del_penasco
+  - perk.sucesor_de_ricardo
+  - equipo.arma.rifle_militar
+  - equipo.arma.pistola
+  - equipo.utilitario.cargador
+  - equipo.utilitario.cuaderno
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.pj.sargento_ricardo_postmortem
+  - lealtad.pj.sosa_horacio
+  - lealtad.pj.quiroga_lisandro
+  historia: 'Walter Aguirre es de Neuquén, aunque hace tres años que no pisa la provincia. Antes del servicio trabajaba con su padre en corte de madera en el alto valle — sabe leer el terreno boscoso porque pasó la infancia entre árboles que matan si no los respetás. Entró a la Confederación como conscripto, sobrevivió al primer invierno en el frente sur, y terminó de soldado de primera antes de que alguien notara que era más cuidadoso que la mayoría. El Sargento Ricardo lo eligió Cabo Primero al mes. No con palabras: con tareas que necesitaban hacerse bien, no rápido. En el Sector 12,15, cuando la radio se rompió y Ricardo cayó, Walter organizó la columna y sacó a todos. Semanas después llegó el parche. No lo festejó. La escuadra que le asignaron es nueva. Los va a cuidar o los va a perder, y las dos cosas lo mantienen despierto.'
   historial:
-    - fecha: '2026-03-12T14:20:00Z'
-      tipo: baja_lider
-      descripcion: Sargento Ricardo cayó en el Sector 12,15. Aguirre organizó la retirada.
-      ref_batalla: batalla_sector_12_15
-      metadata:
-        nombre: Ricardo
-    - fecha: '2026-03-20T09:00:00Z'
-      tipo: ascenso
-      descripcion: Ascendido a Sargento tras la pérdida de Ricardo.
-      ref_batalla: null
-      metadata:
-        rango_anterior: Segundo al mando
-        rango_nuevo: Lider de escuadra
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo corto
-    - categoria: rasgo
-      valor: barba corta
-    - categoria: rasgo
-      valor: mirada lenta
-    - categoria: rol
-      valor: lider
-    - categoria: rol
-      valor: sargento
-    - categoria: skill
-      valor: Comandancia
-    - categoria: skill
-      valor: Lectura de terreno
-    - categoria: trait
-      valor: Mirada larga
-    - categoria: trait
-      valor: Eco del peñasco
-    - categoria: perk
-      valor: Sucesor de Ricardo
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.arma
-      valor: pistola
-    - categoria: equipo.utilitario
-      valor: cuaderno
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: Sargento Ricardo (post mortem)
+  - fecha: '2026-03-12T14:20:00Z'
+    tipo: baja_lider
+    descripcion: Sargento Ricardo cayó en el Sector 12,15. Aguirre organizó la retirada.
+    ref_batalla: batalla_sector_12_15
+    metadata:
+      nombre: Ricardo
+  - fecha: '2026-03-20T09:00:00Z'
+    tipo: ascenso
+    descripcion: Ascendido a Sargento tras la pérdida de Ricardo.
+    ref_batalla: null
+    metadata:
+      rango_anterior: Segundo al mando
+      rango_nuevo: Lider de escuadra
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Sargento Ricardo, su mentor, caído en el Sector 12,15. Aguirre heredó el parche y el peso.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: mentor
+        ref: mock.pj.sargento_ricardo_postmortem
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Cabo Primero Sosa, su mano derecha. Lo eligió personalmente.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: subordinado
+        ref: mock.pj.sosa_horacio
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Cabo Apuntador Quiroga, especialista del sector. Le confía la lectura del terreno.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: subordinado
+        ref: mock.pj.quiroga_lisandro
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

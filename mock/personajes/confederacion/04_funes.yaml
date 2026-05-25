@@ -6,106 +6,43 @@ personaje:
     rol: Artillero FAP Confederado
     genero: masculino
     edad: 26
-  faccion:
-    faccion: Confederación
-    filiacion: Artillero de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Artillero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 4
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura alta
-    - categoria: rasgo
-      valor: complexion corpulenta
-    - categoria: rasgo
-      valor: hombros anchos
-    - categoria: rasgo
-      valor: manos grandes
-    - categoria: rasgo
-      valor: mirada parca
-    - categoria: rol
-      valor: artillero
-    - categoria: skill
-      valor: Manejo de ametralladora
-    - categoria: skill
-      valor: Munición
-    - categoria: trait
-      valor: Metódico
-    - categoria: trait
-      valor: Parco
-    - categoria: perk
-      valor: Recarga rápida
-    - categoria: equipo.arma
-      valor: ametralladora
-    - categoria: equipo.utilitario
-      valor: cuchillo
-    - categoria: equipo.utilitario
-      valor: bandolera
-    - categoria: equipo.utilitario
-      valor: bandolera
-    - categoria: equipo.utilitario
-      valor: almanaque
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: mendez_ignacio
-      descripcion: Recluta Méndez es su recargador asignado. Funes le marca el ritmo del arma.
-  historia: |
-    Dardo Funes es de Resistencia, Chaco. Llegó al frente patagónico sin saber
-    que el frío del sur es otro tipo de frío — no el húmedo del nordeste, sino
-    uno seco que entra por las articulaciones. Le tomó un mes aclimatarse y otro
-    dejar de pensar en el clima como problema personal. Le asignaron el FAP
-    porque era el más corpulento del pelotón y nadie se preguntó si había mejores
-    criterios. Funes no protestó. Aprendió el arma por partes, sin saltarse pasos,
-    verificando dos veces. A los seis meses era el artillero más parco y confiable
-    de su compañía — el tipo que no desperdicia munición porque sabe cuánto cuesta
-    traerla al frente. Su única rareza: lleva un almanaque de bolsillo con el que
-    registra el clima diario. No lo usa para nada en particular. Dice que es por
-    costumbre.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura alta
-    - categoria: rasgo
-      valor: complexion corpulenta
-    - categoria: rasgo
-      valor: hombros anchos
-    - categoria: rasgo
-      valor: manos grandes
-    - categoria: rasgo
-      valor: mirada parca
-    - categoria: rol
-      valor: artillero
-    - categoria: skill
-      valor: Manejo de ametralladora
-    - categoria: skill
-      valor: Munición
-    - categoria: trait
-      valor: Metódico
-    - categoria: trait
-      valor: Parco
-    - categoria: perk
-      valor: Recarga rápida
-    - categoria: equipo.arma
-      valor: ametralladora
-    - categoria: equipo.utilitario
-      valor: cuchillo
-    - categoria: equipo.utilitario
-      valor: almanaque
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
+  - faccion.confederados
+  - rango.artillero
+  - escuadra.ricardo
+  - estado.activo
+  - rasgo.alto
+  - rasgo.corpulento
+  - rasgo.hombros_anchos
+  - rasgo.manos_grandes
+  - rasgo.mirada_parca
+  - rol.oficio.artillero
+  - skill.manejo_de_ametralladora
+  - skill.municion
+  - trait.metodico
+  - trait.parco
+  - perk.recarga_rapida
+  - equipo.arma.ametralladora
+  - equipo.utilitario.cuchillo
+  - equipo.utilitario.bandolera
+  - equipo.utilitario.almanaque
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.mendez_ignacio
+  historia: 'Dardo Funes es de Resistencia, Chaco. Llegó al frente patagónico sin saber que el frío del sur es otro tipo de frío — no el húmedo del nordeste, sino uno seco que entra por las articulaciones. Le tomó un mes aclimatarse y otro dejar de pensar en el clima como problema personal. Le asignaron el FAP porque era el más corpulento del pelotón y nadie se preguntó si había mejores criterios. Funes no protestó. Aprendió el arma por partes, sin saltarse pasos, verificando dos veces. A los seis meses era el artillero más parco y confiable de su compañía — el tipo que no desperdicia munición porque sabe cuánto cuesta traerla al frente. Su única rareza: lleva un almanaque de bolsillo con el que registra el clima diario. No lo usa para nada en particular. Dice que es por costumbre.'
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Recluta Méndez es su recargador asignado. Funes le marca el ritmo del arma.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.mendez_ignacio
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

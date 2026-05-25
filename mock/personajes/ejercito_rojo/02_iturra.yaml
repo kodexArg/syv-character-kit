@@ -6,114 +6,51 @@ personaje:
     rol: Cuadro Sindical Veterano
     genero: femenino
     edad: 38
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Segundo al mando de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Segundo al mando
-    mando: true
-    estado: activo
   atributos:
     fis: 3
     tac: 5
     men: 6
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo atado
-    - categoria: rasgo
-      valor: dedos cicatrizados
-    - categoria: rasgo
-      valor: voz grave
-    - categoria: rasgo
-      valor: cicatriz en mano
-    - categoria: rol
-      valor: lider
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Coordinación
-    - categoria: trait
-      valor: Sangre fría
-    - categoria: trait
-      valor: Sombra del líder
-    - categoria: perk
-      valor: Sangre fría
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: mansilla_ramon
-      descripcion: Mansilla la señaló como segunda. Aceptó sin preguntar.
-  historia: |
-    Delia Iturra tiene treinta y ocho años y dos dedos de la mano derecha soldados
-    entre sí por una quemadura de vapor en la usina ferroviaria de Carmen de
-    Patagones. Aprendió a disparar con esa mano igual, porque no había otra
-    opción cuando la patronal trajo los primeros rompehuelgas armados en el
-    verano del año cuatro. "Si te van a matar de todas formas, mejor que sea
-    por algo que valga", le dijo entonces a la compañera que le enseñó a cargar
-    el Mauser. Estuvo en cuatro acciones antes de este operativo. Nunca ocupó
-    un rol de mando formal hasta que Mansilla la señaló como segunda. La
-    venganza del Sector 12,15 le importa en la medida en que le importan todas
-    las muertes: como deuda colectiva, no como drama personal. Matar a un
-    oficial específico parece más ajuste de cuentas que operación táctica. Se
-    lo guardó para ella.
+  - faccion.ejercito_rojo
+  - rango.segundo_al_mando
+  - escuadra.mansilla
+  - mando.capaz
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.atletico
+  - rasgo.pelo_atado
+  - rasgo.dedos_cicatrizados
+  - rasgo.voz_grave
+  - rasgo.cicatriz_en_mano
+  - rol.mecanico.lider
+  - skill.tiro_de_precision
+  - skill.coordinacion
+  - trait.sangre_fria
+  - trait.sombra_del_lider
+  - perk.sangre_fria
+  - equipo.arma.rifle_militar
+  - equipo.arma.smg
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_rojo
+  - lealtad.faccion.ejercito_rojo
+  - lealtad.pj.mansilla_ramon
+  historia: 'Delia Iturra tiene treinta y ocho años y dos dedos de la mano derecha soldados entre sí por una quemadura de vapor en la usina ferroviaria de Carmen de Patagones. Aprendió a disparar con esa mano igual, porque no había otra opción cuando la patronal trajo los primeros rompehuelgas armados en el verano del año cuatro. "Si te van a matar de todas formas, mejor que sea por algo que valga", le dijo entonces a la compañera que le enseñó a cargar el Mauser. Estuvo en cuatro acciones antes de este operativo. Nunca ocupó un rol de mando formal hasta que Mansilla la señaló como segunda. La venganza del Sector 12,15 le importa en la medida en que le importan todas las muertes: como deuda colectiva, no como drama personal. Matar a un oficial específico parece más ajuste de cuentas que operación táctica. Se lo guardó para ella.'
   historial:
-    - fecha: '2024-12-15T00:00:00Z'
-      tipo: herida
-      descripcion: Quemadura de vapor en mano derecha durante represión patronal en la usina.
-      ref_batalla: null
-      metadata:
-        gravedad: grave
-        cicatriz: dos dedos soldados, mano derecha
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo atado
-    - categoria: rasgo
-      valor: dedos cicatrizados
-    - categoria: rasgo
-      valor: voz grave
-    - categoria: rol
-      valor: lider
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Coordinación
-    - categoria: trait
-      valor: Sangre fría
-    - categoria: trait
-      valor: Sombra del líder
-    - categoria: perk
-      valor: Sangre fría
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
+  - fecha: '2024-12-15T00:00:00Z'
+    tipo: herida
+    descripcion: Quemadura de vapor en mano derecha durante represión patronal en la usina.
+    ref_batalla: null
+    metadata:
+      gravedad: grave
+      cicatriz: dos dedos soldados, mano derecha
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Mansilla la señaló como segunda. Aceptó sin preguntar.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.mansilla_ramon
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

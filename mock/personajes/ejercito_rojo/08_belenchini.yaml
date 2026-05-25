@@ -6,106 +6,48 @@ personaje:
     rol: Miliciano Veterano
     genero: masculino
     edad: 39
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion robusta
-    - categoria: rasgo
-      valor: pelo con canas
-    - categoria: rasgo
-      valor: cicatriz facial
-    - categoria: rasgo
-      valor: mirada firme
-    - categoria: rasgo
-      valor: cicatriz facial
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Flanqueo
-    - categoria: trait
-      valor: Veterano
-    - categoria: trait
-      valor: Objetivo prioritario
-    - categoria: perk
-      valor: Veterano de flanqueo
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: carcamo_fermin
-      descripcion: Ambos bahienses. La ciudad los une más que la doctrina.
-  historia: |
-    Esteban Belenchini tiene treinta y nueve años y una quemadura en la mejilla
-    izquierda del tamaño de una palma que data del año uno de la revolución,
-    cuando la patronal de la siderúrgica mandó a quemar el local sindical con
-    gente adentro. Belenchini salió por una ventana lateral. Otros dos no
-    salieron. Desde entonces lleva una cicatriz que la gente mira sin querer
-    mirar y él ignora con práctica de años. Tres batallas antes de esta. No es
-    el más rápido ni el más preciso, pero sabe flanquear. Los flancos son donde
-    se gana, o donde te matan. Tiene tres hijos en Bahía Blanca. El mayor empezó
-    a trabajar en la misma siderúrgica el año pasado. Eso le produce una mezcla
-    de satisfacción y náuseas que no sabe cómo resolver. La revolución
-    supuestamente cambió las condiciones. Siguen siendo condiciones de mierda,
-    pero son las condiciones de ellos ahora.
+  - faccion.ejercito_rojo
+  - rango.fusilero
+  - escuadra.mansilla
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.corpulento
+  - rasgo.pelo_con_canas
+  - rasgo.cicatriz_facial
+  - rasgo.mirada_firme
+  - rol.oficio.infanteria
+  - skill.tiro_de_precision
+  - skill.flanqueo
+  - perk.veterano
+  - trait.objetivo_prioritario
+  - perk.veterano_de_flanqueo
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_rojo
+  - lealtad.faccion.ejercito_rojo
+  - lealtad.pj.carcamo_fermin
+  historia: Esteban Belenchini tiene treinta y nueve años y una quemadura en la mejilla izquierda del tamaño de una palma que data del año uno de la revolución, cuando la patronal de la siderúrgica mandó a quemar el local sindical con gente adentro. Belenchini salió por una ventana lateral. Otros dos no salieron. Desde entonces lleva una cicatriz que la gente mira sin querer mirar y él ignora con práctica de años. Tres batallas antes de esta. No es el más rápido ni el más preciso, pero sabe flanquear. Los flancos son donde se gana, o donde te matan. Tiene tres hijos en Bahía Blanca. El mayor empezó a trabajar en la misma siderúrgica el año pasado. Eso le produce una mezcla de satisfacción y náuseas que no sabe cómo resolver. La revolución supuestamente cambió las condiciones. Siguen siendo condiciones de mierda, pero son las condiciones de ellos ahora.
   historial:
-    - fecha: '2022-06-01T00:00:00Z'
-      tipo: herida
-      descripcion: Quemadura grave en mejilla izquierda durante el incendio del local sindical.
-      ref_batalla: null
-      metadata:
-        gravedad: grave
-        cicatriz: quemadura en mejilla izquierda
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion robusta
-    - categoria: rasgo
-      valor: pelo con canas
-    - categoria: rasgo
-      valor: cicatriz facial
-    - categoria: rasgo
-      valor: mirada firme
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Flanqueo
-    - categoria: trait
-      valor: Veterano
-    - categoria: trait
-      valor: Objetivo prioritario
-    - categoria: perk
-      valor: Veterano de flanqueo
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
+  - fecha: '2022-06-01T00:00:00Z'
+    tipo: herida
+    descripcion: Quemadura grave en mejilla izquierda durante el incendio del local sindical.
+    ref_batalla: null
+    metadata:
+      gravedad: grave
+      cicatriz: quemadura en mejilla izquierda
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Ambos bahienses. La ciudad los une más que la doctrina.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.carcamo_fermin
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

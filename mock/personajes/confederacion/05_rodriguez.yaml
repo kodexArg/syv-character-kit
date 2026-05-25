@@ -6,100 +6,50 @@ personaje:
     rol: Fusilero de Primera
     genero: femenino
     edad: 22
-  faccion:
-    faccion: Confederación
-    filiacion: Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: pelo atado
-    - categoria: rasgo
-      valor: discreto
-    - categoria: rasgo
-      valor: modales suaves
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Sastrería
-    - categoria: trait
-      valor: Discreta
-    - categoria: trait
-      valor: Pánico en abierto
-    - categoria: perk
-      valor: Cobertura instintiva
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: olivares_tomas
-      descripcion: Mismo pelotón de asignación. Se conocen lo suficiente para saber cuándo el otro funciona
-        mal.
-    - tipo: hermano_de_armas
-      ref_personaje_slug: pereyra_graciela
-      descripcion: Misma escuadra por azar de numeración. Cuidado mudo.
-  historia: |
-    Marcela Rodríguez es de Mar del Plata. Trabajaba de costurera en un taller
-    familiar — confección de uniformes, ironías del destino — antes de que la
-    conscripción la interrumpiera a los veintiún años. No había razón para que
-    la mandaran al frente patagónico en particular, pero así funcionan las
-    asignaciones: alguien necesita cuerpos en el sur y los cuerpos disponibles
-    viajan. El frío le costó. No el frío en sí, sino la ropa: nunca le quedó
-    bien el equipo estándar, y pasó semanas con botas que le apretaban hasta
-    que aprendió a conseguir el talle correcto por vías que el reglamento no
-    prevé. En combate es regular, sin más. Dispara cuando le dicen, se cubre
-    cuando hay cobertura, y trata de no pensar demasiado en lo que pasa a dos
-    metros. Hasta ahora le alcanzó.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: pelo atado
-    - categoria: rasgo
-      valor: discreto
-    - categoria: rasgo
-      valor: modales suaves
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Sastrería
-    - categoria: trait
-      valor: Discreta
-    - categoria: trait
-      valor: Pánico en abierto
-    - categoria: perk
-      valor: Cobertura instintiva
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: faccion.confederados
+  - faccion.confederados
+  - rango.fusilero
+  - escuadra.ricardo
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.delgado
+  - rasgo.pelo_atado
+  - rasgo.discreto
+  - rasgo.modales_suaves
+  - rol.oficio.infanteria
+  - skill.fuego_sostenido
+  - skill.sastreria
+  - trait.discreta
+  - trait.panico_en_abierto
+  - perk.cobertura_instintiva
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.olivares_tomas
+  - lealtad.pj.pereyra_graciela
+  historia: 'Marcela Rodríguez es de Mar del Plata. Trabajaba de costurera en un taller familiar — confección de uniformes, ironías del destino — antes de que la conscripción la interrumpiera a los veintiún años. No había razón para que la mandaran al frente patagónico en particular, pero así funcionan las asignaciones: alguien necesita cuerpos en el sur y los cuerpos disponibles viajan. El frío le costó. No el frío en sí, sino la ropa: nunca le quedó bien el equipo estándar, y pasó semanas con botas que le apretaban hasta que aprendió a conseguir el talle correcto por vías que el reglamento no prevé. En combate es regular, sin más. Dispara cuando le dicen, se cubre cuando hay cobertura, y trata de no pensar demasiado en lo que pasa a dos metros. Hasta ahora le alcanzó.'
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Mismo pelotón de asignación. Se conocen lo suficiente para saber cuándo el otro funciona mal.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.olivares_tomas
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Misma escuadra por azar de numeración. Cuidado mudo.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.pereyra_graciela
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

@@ -6,96 +6,49 @@ personaje:
     rol: Recluta — Recargador
     genero: masculino
     edad: 18
-  faccion:
-    faccion: Confederación
-    filiacion: Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Recluta
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo corto
-    - categoria: rasgo
-      valor: cara joven
-    - categoria: rasgo
-      valor: mirada inquisitiva
-    - categoria: rol
-      valor: recargador
-    - categoria: skill
-      valor: Recarga rápida
-    - categoria: trait
-      valor: Obediente
-    - categoria: trait
-      valor: Vacío de mando
-    - categoria: perk
-      valor: Disparo de oportunidad
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: mentor
-      ref_personaje_slug: acosta_ruben
-      descripcion: Le pregunta a Acosta cuando no sabe. Acosta responde corto.
-    - tipo: subordinado
-      ref_personaje_slug: aguirre_walter
-      descripcion: 'El Sargento lo notó al segundo día: obedece con la rapidez del que sabe que no sabe.'
-  historia: |
-    Esteban Ramírez es de Bahía Blanca, tiene dieciocho años, y antes del
-    servicio terminó el secundario con notas mediocres en todo excepto educación
-    física. Sus padres tienen un almacén en Villa Mitre que él ayudaba a atender
-    los fines de semana. Es el menor de tres hermanos; los otros dos ya
-    cumplieron el servicio y volvieron, lo que en teoría debería tranquilizarlo
-    y en la práctica no lo tranquiliza. La instrucción duró lo que dura siempre
-    y no fue suficiente para ninguna de las cosas que importan en el frente.
-    Ramírez lleva dos semanas en el sector y todavía hay ruidos que no identifica
-    correctamente. Walter lo notó al segundo día: Ramírez obedece órdenes con
-    la rapidez del que sabe que no sabe, que es el tipo de obediencia más útil
-    en un recluta. No es valor ni entrenamiento — es que todavía no aprendió
-    a dudar de las órdenes.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo corto
-    - categoria: rasgo
-      valor: cara joven
-    - categoria: rasgo
-      valor: mirada inquisitiva
-    - categoria: rol
-      valor: recargador
-    - categoria: skill
-      valor: Recarga rápida
-    - categoria: trait
-      valor: Obediente
-    - categoria: trait
-      valor: Vacío de mando
-    - categoria: perk
-      valor: Disparo de oportunidad
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: faccion.confederados
+  - faccion.confederados
+  - rango.recluta
+  - escuadra.ricardo
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.atletico
+  - rasgo.pelo_corto
+  - rasgo.cara_joven
+  - rasgo.mirada_inquisitiva
+  - rol.oficio.recargador
+  - perk.recarga_rapida
+  - trait.obediente
+  - trait.vacio_de_mando
+  - perk.disparo_de_oportunidad
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.acosta_ruben
+  - lealtad.pj.aguirre_walter
+  historia: 'Esteban Ramírez es de Bahía Blanca, tiene dieciocho años, y antes del servicio terminó el secundario con notas mediocres en todo excepto educación física. Sus padres tienen un almacén en Villa Mitre que él ayudaba a atender los fines de semana. Es el menor de tres hermanos; los otros dos ya cumplieron el servicio y volvieron, lo que en teoría debería tranquilizarlo y en la práctica no lo tranquiliza. La instrucción duró lo que dura siempre y no fue suficiente para ninguna de las cosas que importan en el frente. Ramírez lleva dos semanas en el sector y todavía hay ruidos que no identifica correctamente. Walter lo notó al segundo día: Ramírez obedece órdenes con la rapidez del que sabe que no sabe, que es el tipo de obediencia más útil en un recluta. No es valor ni entrenamiento — es que todavía no aprendió a dudar de las órdenes.'
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Le pregunta a Acosta cuando no sabe. Acosta responde corto.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: mentor
+        ref: mock.pj.acosta_ruben
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: 'El Sargento lo notó al segundo día: obedece con la rapidez del que sabe que no sabe.'
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: subordinado
+        ref: mock.pj.aguirre_walter
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

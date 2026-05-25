@@ -6,101 +6,42 @@ personaje:
     rol: Miliciano Veterano
     genero: masculino
     edad: 40
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion corpulenta
-    - categoria: rasgo
-      valor: espalda ancha
-    - categoria: rasgo
-      valor: manos grandes
-    - categoria: rasgo
-      valor: respiración pesada
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Carga
-    - categoria: trait
-      valor: Aguantador
-    - categoria: trait
-      valor: Peso muerto
-    - categoria: perk
-      valor: Resistencia al dolor
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cinto
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: paine_rosa
-      descripcion: Comparten turnos largos. Pocos verbos.
-  historia: |
-    Norberto Soriano tiene cuarenta años y dos hernias de disco que el médico
-    del sindicato le diagnosticó hace tres años. "No cargues más de veinte
-    kilos", le dijo. El FAP vacío pesa dieciocho. La mochila de campaña con
-    agua, raciones y parque pesa veintidós. Soriano lleva los dos porque es lo
-    que hay. Veinte años en las dársenas de Puerto Madryn cargando contenedores
-    de pescado congelado le dejaron la espalda, los pulmones afectados por el
-    amoníaco de las cámaras frigoríficas, y una convicción muy clara sobre
-    quién se queda con el dinero y quién pone el cuerpo. Cuando el Ejército
-    Rojo llegó al puerto con sus agitadores, Soriano ya tenía las mismas
-    conclusiones — solo le faltaba una estructura donde meterlas. No le cuesta
-    obedecer órdenes. La diferencia es que aquí las órdenes vienen de camaradas,
-    no de gerentes. O al menos eso le dijeron.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion corpulenta
-    - categoria: rasgo
-      valor: espalda ancha
-    - categoria: rasgo
-      valor: manos grandes
-    - categoria: rasgo
-      valor: respiración pesada
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Carga
-    - categoria: trait
-      valor: Aguantador
-    - categoria: trait
-      valor: Peso muerto
-    - categoria: perk
-      valor: Resistencia al dolor
-    - categoria: equipo.arma
-      valor: SMG
-    - categoria: equipo.utilitario
-      valor: cinto
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
+  - faccion.ejercito_rojo
+  - rango.fusilero
+  - escuadra.mansilla
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.corpulento
+  - rasgo.espalda_ancha
+  - rasgo.manos_grandes
+  - rasgo.respiracion_pesada
+  - rol.oficio.infanteria
+  - skill.fuego_sostenido
+  - skill.carga
+  - trait.aguantador
+  - trait.peso_muerto
+  - perk.resistencia_al_dolor
+  - equipo.arma.smg
+  - equipo.utilitario.cargador
+  - equipo.utilitario.cinto
+  - equipo.vestidura.uniforme_rojo
+  - lealtad.faccion.ejercito_rojo
+  - lealtad.pj.paine_rosa
+  historia: Norberto Soriano tiene cuarenta años y dos hernias de disco que el médico del sindicato le diagnosticó hace tres años. "No cargues más de veinte kilos", le dijo. El FAP vacío pesa dieciocho. La mochila de campaña con agua, raciones y parque pesa veintidós. Soriano lleva los dos porque es lo que hay. Veinte años en las dársenas de Puerto Madryn cargando contenedores de pescado congelado le dejaron la espalda, los pulmones afectados por el amoníaco de las cámaras frigoríficas, y una convicción muy clara sobre quién se queda con el dinero y quién pone el cuerpo. Cuando el Ejército Rojo llegó al puerto con sus agitadores, Soriano ya tenía las mismas conclusiones — solo le faltaba una estructura donde meterlas. No le cuesta obedecer órdenes. La diferencia es que aquí las órdenes vienen de camaradas, no de gerentes. O al menos eso le dijeron.
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Comparten turnos largos. Pocos verbos.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.paine_rosa
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

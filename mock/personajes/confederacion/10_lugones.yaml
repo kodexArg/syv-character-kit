@@ -6,97 +6,41 @@ personaje:
     rol: Recluta — Recargador móvil
     genero: femenino
     edad: 20
-  faccion:
-    faccion: Confederación
-    filiacion: Recluta de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Recluta
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 2
     men: 2
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura baja
-    - categoria: rasgo
-      valor: complexion robusta
-    - categoria: rasgo
-      valor: pelo recogido
-    - categoria: rasgo
-      valor: cara observadora
-    - categoria: rasgo
-      valor: habla breve
-    - categoria: rol
-      valor: recargador
-    - categoria: skill
-      valor: Movimiento
-    - categoria: skill
-      valor: Carga
-    - categoria: trait
-      valor: Observadora
-    - categoria: trait
-      valor: Peso muerto
-    - categoria: perk
-      valor: Escudo humano
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: mentor
-      ref_personaje_slug: sosa_horacio
-      descripcion: Sosa la mueve según la situación. Aprende mirándolo.
-  historia: |
-    Patricia Lugones es de Ushuaia, la ciudad más al sur del frente confederado.
-    Tiene veinte años y creció con el tipo de frío que hace que el frente
-    patagónico le resulte conocido en temperatura aunque no en nada más. Su
-    familia trabaja en el turismo — antes de la guerra, al menos. Antes de la
-    conscripción trabajó dos temporadas como guía de senderismo en el Parque
-    Nacional Tierra del Fuego. Conoce el terreno abrupto, el barro, la roca
-    mojada. En condiciones normales sería una ventaja; en el frente el terreno
-    es uno de los factores y no el más importante, y Lugones todavía está
-    aprendiendo a jerarquizar correctamente. La asignaron a recargador
-    secundario. No tiene apuntador fijo — es apoyo móvil que va donde la dotación
-    lo requiera. En la práctica Sosa o Walter la mueven según la situación, y
-    ella obedece sin chistar.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura baja
-    - categoria: rasgo
-      valor: complexion robusta
-    - categoria: rasgo
-      valor: pelo recogido
-    - categoria: rasgo
-      valor: cara observadora
-    - categoria: rasgo
-      valor: habla breve
-    - categoria: rol
-      valor: recargador
-    - categoria: skill
-      valor: Movimiento
-    - categoria: skill
-      valor: Carga
-    - categoria: trait
-      valor: Observadora
-    - categoria: trait
-      valor: Peso muerto
-    - categoria: perk
-      valor: Escudo humano
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: faccion.confederados
+  - faccion.confederados
+  - rango.recluta
+  - escuadra.ricardo
+  - estado.activo
+  - rasgo.bajo
+  - rasgo.corpulento
+  - rasgo.pelo_recogido
+  - rasgo.cara_observadora
+  - rasgo.habla_breve
+  - rol.oficio.recargador
+  - skill.movimiento
+  - skill.carga
+  - trait.observadora
+  - trait.peso_muerto
+  - perk.escudo_humano
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.sosa_horacio
+  historia: Patricia Lugones es de Ushuaia, la ciudad más al sur del frente confederado. Tiene veinte años y creció con el tipo de frío que hace que el frente patagónico le resulte conocido en temperatura aunque no en nada más. Su familia trabaja en el turismo — antes de la guerra, al menos. Antes de la conscripción trabajó dos temporadas como guía de senderismo en el Parque Nacional Tierra del Fuego. Conoce el terreno abrupto, el barro, la roca mojada. En condiciones normales sería una ventaja; en el frente el terreno es uno de los factores y no el más importante, y Lugones todavía está aprendiendo a jerarquizar correctamente. La asignaron a recargador secundario. No tiene apuntador fijo — es apoyo móvil que va donde la dotación lo requiera. En la práctica Sosa o Walter la mueven según la situación, y ella obedece sin chistar.
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Sosa la mueve según la situación. Aprende mirándolo.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: mentor
+        ref: mock.pj.sosa_horacio
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

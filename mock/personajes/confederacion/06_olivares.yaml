@@ -6,96 +6,49 @@ personaje:
     rol: Fusilero de Primera
     genero: masculino
     edad: 22
-  faccion:
-    faccion: Confederación
-    filiacion: Fusilero de la Escuadra Ricardo del Ejército de la Confederación Argentina
-    escuadra: esq_conf_03
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: anteojos
-    - categoria: rasgo
-      valor: pelo desordenado
-    - categoria: rasgo
-      valor: dicción cuidada
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Análisis táctico
-    - categoria: trait
-      valor: Sangre fría
-    - categoria: trait
-      valor: Obstinado
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme confederado
-    - categoria: lealtad
-      valor: faccion.confederados
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: rodriguez_marcela
-      descripcion: Mismo pelotón. Confianza tácita.
-    - tipo: hermano_de_armas
-      ref_personaje_slug: pereyra_graciela
-      descripcion: Compañera de asignación; los tres llegaron juntos al sur.
-  historia: |
-    Tomás Olivares es porteño, Caballito. Su madre es profesora de historia en
-    un secundario y su padre maneja un remis desde que Olivares tiene memoria.
-    Entró a filosofía porque le parecía la carrera más honesta para no saber
-    qué estudiar. El servicio obligatorio lo interrumpió en el segundo año. Lo
-    mandaron al sur con el mismo lote de conscriptos que a Rodríguez y Pereyra,
-    y los tres terminaron en la misma escuadra casi por azar. En la instrucción
-    fue mediocre en lo físico y sorprendentemente competente en lo táctico —
-    no por talento militar, sino porque le gustaba entender los sistemas antes
-    de operar en ellos. En el frente patagónico descubrió que el frío y el barro
-    son argumentos filosóficos que ningún texto anticipa bien. Lo menciona
-    ocasionalmente, sin ironía. Sus compañeros no saben si es gracioso o si
-    algo le falta.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion delgada
-    - categoria: rasgo
-      valor: anteojos
-    - categoria: rasgo
-      valor: pelo desordenado
-    - categoria: rasgo
-      valor: dicción cuidada
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Fuego sostenido
-    - categoria: skill
-      valor: Análisis táctico
-    - categoria: trait
-      valor: Sangre fría
-    - categoria: trait
-      valor: Obstinado
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: faccion.confederados
+  - faccion.confederados
+  - rango.fusilero
+  - escuadra.ricardo
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.delgado
+  - rasgo.anteojos
+  - rasgo.pelo_desordenado
+  - rasgo.diccion_cuidada
+  - rol.oficio.infanteria
+  - skill.fuego_sostenido
+  - skill.analisis_tactico
+  - trait.sangre_fria
+  - trait.obstinado
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_confederado
+  - lealtad.faccion.confederados
+  - lealtad.pj.rodriguez_marcela
+  - lealtad.pj.pereyra_graciela
+  historia: Tomás Olivares es porteño, Caballito. Su madre es profesora de historia en un secundario y su padre maneja un remis desde que Olivares tiene memoria. Entró a filosofía porque le parecía la carrera más honesta para no saber qué estudiar. El servicio obligatorio lo interrumpió en el segundo año. Lo mandaron al sur con el mismo lote de conscriptos que a Rodríguez y Pereyra, y los tres terminaron en la misma escuadra casi por azar. En la instrucción fue mediocre en lo físico y sorprendentemente competente en lo táctico — no por talento militar, sino porque le gustaba entender los sistemas antes de operar en ellos. En el frente patagónico descubrió que el frío y el barro son argumentos filosóficos que ningún texto anticipa bien. Lo menciona ocasionalmente, sin ironía. Sus compañeros no saben si es gracioso o si algo le falta.
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Mismo pelotón. Confianza tácita.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.rodriguez_marcela
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Compañera de asignación; los tres llegaron juntos al sur.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.pereyra_graciela
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

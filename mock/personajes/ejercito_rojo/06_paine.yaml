@@ -6,97 +6,41 @@ personaje:
     rol: Miliciana Veterana
     genero: femenino
     edad: 30
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura baja
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo trenzado
-    - categoria: rasgo
-      valor: cara curtida
-    - categoria: rasgo
-      valor: habla pausada
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Conocimiento de meseta
-    - categoria: trait
-      valor: Reservada
-    - categoria: trait
-      valor: Pánico en abierto
-    - categoria: perk
-      valor: Tenaz
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: ropa de civil
-    - categoria: lealtad
-      valor: su comunidad mapuche
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: soriano_norberto
-      descripcion: Comparten turnos largos. Conversaciones cortas, silencios largos.
-  historia: |
-    Rosa Painé tiene treinta años y viene de una comunidad mapuche al norte del
-    lago Musters. No llegó al Ejército Rojo por el sindicato sino por el camino
-    más largo: vio lo que la Confederación hizo a las tierras comunitarias de
-    su zona cuando necesitaba espacio para sus líneas de comunicación, y
-    decidió que el bando que se oponía a la Confederación era el suyo, al menos
-    por ahora. La contradicción del Ejército Rojo con la maquinaria la siente
-    más aguda que la mayoría. El Ejército dice ser antimaquinista pero usa
-    fusiles, radio, camiones. Painé lo menciona de vez en cuando. La respuesta
-    habitual es que las armas son una necesidad táctica transitoria. Ella
-    asiente sin estar del todo convencida. En combate aprendió que el terreno
-    abierto la pone nerviosa. Lo sabe. Lo trabaja. Hasta ahora no le ha costado
-    la vida.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura baja
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo trenzado
-    - categoria: rasgo
-      valor: cara curtida
-    - categoria: rasgo
-      valor: habla pausada
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Conocimiento de meseta
-    - categoria: trait
-      valor: Reservada
-    - categoria: trait
-      valor: Pánico en abierto
-    - categoria: perk
-      valor: Tenaz
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: su comunidad mapuche
+  - faccion.ejercito_rojo
+  - rango.fusilero
+  - escuadra.mansilla
+  - estado.activo
+  - rasgo.bajo
+  - rasgo.atletico
+  - rasgo.pelo_trenzado
+  - rasgo.cara_curtida
+  - rasgo.habla_pausada
+  - rol.oficio.infanteria
+  - skill.tiro_de_precision
+  - skill.conocimiento_de_meseta
+  - trait.reservada
+  - trait.panico_en_abierto
+  - perk.tenaz
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.ropa_de_civil
+  - lealtad.faccion.comunidad_mapuche
+  - lealtad.pj.soriano_norberto
+  historia: 'Rosa Painé tiene treinta años y viene de una comunidad mapuche al norte del lago Musters. No llegó al Ejército Rojo por el sindicato sino por el camino más largo: vio lo que la Confederación hizo a las tierras comunitarias de su zona cuando necesitaba espacio para sus líneas de comunicación, y decidió que el bando que se oponía a la Confederación era el suyo, al menos por ahora. La contradicción del Ejército Rojo con la maquinaria la siente más aguda que la mayoría. El Ejército dice ser antimaquinista pero usa fusiles, radio, camiones. Painé lo menciona de vez en cuando. La respuesta habitual es que las armas son una necesidad táctica transitoria. Ella asiente sin estar del todo convencida. En combate aprendió que el terreno abierto la pone nerviosa. Lo sabe. Lo trabaja. Hasta ahora no le ha costado la vida.'
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Comparten turnos largos. Conversaciones cortas, silencios largos.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.soriano_norberto
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

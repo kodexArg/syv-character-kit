@@ -6,97 +6,41 @@ personaje:
     rol: Miliciano Veterano
     genero: masculino
     edad: 32
-  faccion:
-    faccion: Ejército Rojo
-    filiacion: Fusilero de la Escuadra Mardones del Ejército Revolucionario del Pueblo
-    escuadra: esq_rojo_07
-    rango: Fusilero
-    mando: false
-    estado: activo
   atributos:
     fis: 3
     tac: 3
     men: 3
-  salud: []
-  mental: []
   tags:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo entrecano
-    - categoria: rasgo
-      valor: ojeras
-    - categoria: rasgo
-      valor: habla seca
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Resistencia
-    - categoria: trait
-      valor: Pragmático
-    - categoria: trait
-      valor: Gatillo rápido
-    - categoria: perk
-      valor: Cobertura instintiva
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.utilitario
-      valor: cargador
-    - categoria: equipo.vestidura
-      valor: uniforme rojo
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
-  vinculos:
-    - tipo: hermano_de_armas
-      ref_personaje_slug: belenchini_esteban
-      descripcion: Ambos de Bahía Blanca. Hijos de la misma ciudad, oficios distintos.
-  historia: |
-    Fermín Cárcamo era garrafero de playa en el ferrocarril del sur. Treinta y
-    dos años, divorciado, dos hijos en Bahía Blanca que ve cuando la rotación
-    lo permite, que es rara vez. Se unió al Ejército Rojo cuando el sindicato
-    ferroviario declaró la adhesión a la revolución y el capataz de su turno
-    amenazó con despedir a quien firmara. Cárcamo firmó igual, no por heroísmo
-    sino porque le pareció que correspondía. Tres años de milicia le enseñaron
-    que la guerra no es como la describen ni el boletín sindical ni el alto
-    mando. Es más sucia, más aburrida y más rápida cuando finalmente ocurre
-    algo. El operativo de caza no lo entusiasma. Matar a un oficial específico
-    por nombre y apellido le parece más propio de un ajuste que de una guerra.
-    Pero Mansilla da las órdenes y Cárcamo las cumple. Tiene hijos que esperan
-    que vuelva.
-  historial: []
-  tags_iniciales:
-    - categoria: rasgo
-      valor: altura media
-    - categoria: rasgo
-      valor: complexion atletica
-    - categoria: rasgo
-      valor: pelo entrecano
-    - categoria: rasgo
-      valor: ojeras
-    - categoria: rasgo
-      valor: habla seca
-    - categoria: rol
-      valor: infanteria
-    - categoria: skill
-      valor: Tiro de precisión
-    - categoria: skill
-      valor: Resistencia
-    - categoria: trait
-      valor: Pragmático
-    - categoria: trait
-      valor: Gatillo rápido
-    - categoria: perk
-      valor: Cobertura instintiva
-    - categoria: equipo.arma
-      valor: rifle militar
-    - categoria: lealtad
-      valor: faccion.ejercito_rojo
+  - faccion.ejercito_rojo
+  - rango.fusilero
+  - escuadra.mansilla
+  - estado.activo
+  - rasgo.altura_media
+  - rasgo.atletico
+  - rasgo.pelo_entrecano
+  - rasgo.ojeras
+  - rasgo.habla_seca
+  - rol.oficio.infanteria
+  - skill.tiro_de_precision
+  - skill.resistencia
+  - trait.pragmatico
+  - trait.gatillo_rapido
+  - perk.cobertura_instintiva
+  - equipo.arma.rifle_militar
+  - equipo.utilitario.cargador
+  - equipo.vestidura.uniforme_rojo
+  - lealtad.faccion.ejercito_rojo
+  - lealtad.pj.belenchini_esteban
+  historia: Fermín Cárcamo era garrafero de playa en el ferrocarril del sur. Treinta y dos años, divorciado, dos hijos en Bahía Blanca que ve cuando la rotación lo permite, que es rara vez. Se unió al Ejército Rojo cuando el sindicato ferroviario declaró la adhesión a la revolución y el capataz de su turno amenazó con despedir a quien firmara. Cárcamo firmó igual, no por heroísmo sino porque le pareció que correspondía. Tres años de milicia le enseñaron que la guerra no es como la describen ni el boletín sindical ni el alto mando. Es más sucia, más aburrida y más rápida cuando finalmente ocurre algo. El operativo de caza no lo entusiasma. Matar a un oficial específico por nombre y apellido le parece más propio de un ajuste que de una guerra. Pero Mansilla da las órdenes y Cárcamo las cumple. Tiene hijos que esperan que vuelva.
+  historial:
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_vinculo
+    descripcion: Ambos de Bahía Blanca. Hijos de la misma ciudad, oficios distintos.
+    ref_batalla: null
+    metadata:
+      vinculo_creado:
+        tipo: hermano_de_armas
+        ref: mock.pj.belenchini_esteban
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'
