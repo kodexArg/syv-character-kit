@@ -33,26 +33,46 @@ personaje:
   - equipo.utilitario.radio
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
-  - lealtad.pj.aguirre_walter
-  - lealtad.pj.lugones_patricia
+  - lealtad.escuadra.ricardo
   historia: 'Horacio Sosa es cordobés, del cinturón industrial. Antes del servicio trabajaba turno noche en una planta de procesado de aceite — sin quejarse porque era lo que había. Entró al servicio obligatorio sin expectativas y descubrió que tenía talento para la organización bajo presión: nunca perdía la cuenta de cartuchos, posiciones ni tiempos. Dos inviernos patagónicos lo curtieron. Sobrevivió a ambos sin heridas graves y con la reputación de saber dónde está todo. Aguirre lo eligió Cabo Primero de su nueva escuadra. No se conocían del Sector 12,15 — Sosa estaba en otro frente —, pero el expediente habla solo. Sosa aceptó sin preguntar sobre el ascenso ni sobre cómo murió el sargento anterior. Eso también es parte de por qué lo eligieron.'
   historial:
-  - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Sargento Aguirre lo eligió personalmente. Confianza recíproca, sin palabras.
+  - fecha: '2026-04-10T00:00:00Z'
+    tipo: asignacion_escuadra
+    descripcion: Asignado como Cabo Primero a la escuadra nueva de Aguirre.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.aguirre_walter
+      escuadra: ricardo
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Recluta Lugones, recargador móvil. Sosa la mueve según la situación.
+    tipo: formacion_lealtad
+    descripcion: Aguirre lo eligió personalmente. Aceptó sin preguntar.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: subordinado
-        ref: mock.pj.lugones_patricia
+      ref: aguirre_walter
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_lealtad
+    descripcion: Lugones es la recargadora móvil que él decide dónde poner.
+    ref_batalla: null
+    metadata:
+      ref: lugones_patricia
+  aliados:
+  - ref: aguirre_walter
+    descripcion: >
+      El Sargento lo eligió sin entrevistarlo y sin explicar. Sosa retribuye con
+      la única forma que conoce: cuentas exactas, posición clara, ninguna
+      pregunta innecesaria sobre el Sector 12,15.
+    desde: '2026-04-10'
+  - ref: lugones_patricia
+    descripcion: >
+      La recargadora móvil de la escuadra. Sosa la mueve según la situación y
+      ella obedece sin chistar. Le enseña mirándola, no hablándole — es el
+      sistema que conoce.
+    desde: '2026-04-15'
+  - ref: funes_dardo
+    descripcion: >
+      El artillero. Sosa le pasa el ritmo de munición por radio y Funes confirma
+      sin agregar nada. Dos parcos que se entienden por dotaciones de cargador.
+    desde: '2026-04-15'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

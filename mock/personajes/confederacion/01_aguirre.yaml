@@ -34,48 +34,61 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.utilitario.cuaderno
   - equipo.vestidura.uniforme_confederado
-  - lealtad.pj.sargento_ricardo_postmortem
-  - lealtad.pj.sosa_horacio
-  - lealtad.pj.quiroga_lisandro
+  - lealtad.faccion.confederados
+  - lealtad.escuadra.ricardo
   historia: 'Walter Aguirre es de Neuquén, aunque hace tres años que no pisa la provincia. Antes del servicio trabajaba con su padre en corte de madera en el alto valle — sabe leer el terreno boscoso porque pasó la infancia entre árboles que matan si no los respetás. Entró a la Confederación como conscripto, sobrevivió al primer invierno en el frente sur, y terminó de soldado de primera antes de que alguien notara que era más cuidadoso que la mayoría. El Sargento Ricardo lo eligió Cabo Primero al mes. No con palabras: con tareas que necesitaban hacerse bien, no rápido. En el Sector 12,15, cuando la radio se rompió y Ricardo cayó, Walter organizó la columna y sacó a todos. Semanas después llegó el parche. No lo festejó. La escuadra que le asignaron es nueva. Los va a cuidar o los va a perder, y las dos cosas lo mantienen despierto.'
   historial:
   - fecha: '2026-03-12T14:20:00Z'
-    tipo: baja_lider
+    tipo: cambio_mando
     descripcion: Sargento Ricardo cayó en el Sector 12,15. Aguirre organizó la retirada.
     ref_batalla: batalla_sector_12_15
     metadata:
-      nombre: Ricardo
+      lider_caido: ricardo_sargento_postmortem
   - fecha: '2026-03-20T09:00:00Z'
     tipo: ascenso
     descripcion: Ascendido a Sargento tras la pérdida de Ricardo.
     ref_batalla: null
     metadata:
-      rango_anterior: Segundo al mando
-      rango_nuevo: Lider de escuadra
+      rango_anterior: segundo_al_mando
+      rango_nuevo: lider_de_escuadra
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Sargento Ricardo, su mentor, caído en el Sector 12,15. Aguirre heredó el parche y el peso.
+    tipo: formacion_lealtad
+    descripcion: Hereda el parche y el peso del Sargento Ricardo, su mentor caído.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: mentor
-        ref: mock.pj.sargento_ricardo_postmortem
+      ref: ricardo_sargento_postmortem
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Cabo Primero Sosa, su mano derecha. Lo eligió personalmente.
+    tipo: formacion_lealtad
+    descripcion: Eligió a Sosa como Cabo Primero al armar la escuadra nueva.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: subordinado
-        ref: mock.pj.sosa_horacio
+      ref: sosa_horacio
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Cabo Apuntador Quiroga, especialista del sector. Le confía la lectura del terreno.
+    tipo: formacion_lealtad
+    descripcion: Le confía a Quiroga la lectura del terreno antes de cada despliegue.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: subordinado
-        ref: mock.pj.quiroga_lisandro
+      ref: quiroga_lisandro
+  aliados:
+  - ref: ricardo_sargento_postmortem
+    descripcion: >
+      El Sargento Ricardo lo formó con tareas, no con palabras. Cuando cayó en el
+      Sector 12,15, Walter heredó el parche sin festejarlo. Lleva el cuaderno de
+      Ricardo en el bolsillo de pecho — costumbre, no superstición.
+    desde: '2025-08-01'
+  - ref: sosa_horacio
+    descripcion: >
+      Lo eligió Cabo Primero por expediente, sin conocerlo del Sector 12,15. A las
+      dos semanas confirmó la elección: Sosa no le pregunta cómo murió Ricardo y
+      eso le alcanza. Confianza recíproca sin palabras.
+    desde: '2026-04-10'
+  - ref: quiroga_lisandro
+    descripcion: >
+      El apuntador del sector. Aguirre le pide lectura del terreno antes de cada
+      despliegue y Quiroga le devuelve frases cortas que valen. No son amigos —
+      son dos tipos que se respetan el oficio.
+    desde: '2026-04-10'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

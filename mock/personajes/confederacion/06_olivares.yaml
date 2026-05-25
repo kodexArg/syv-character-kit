@@ -29,26 +29,35 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
-  - lealtad.pj.rodriguez_marcela
-  - lealtad.pj.pereyra_graciela
+  - lealtad.escuadra.ricardo
   historia: Tomás Olivares es porteño, Caballito. Su madre es profesora de historia en un secundario y su padre maneja un remis desde que Olivares tiene memoria. Entró a filosofía porque le parecía la carrera más honesta para no saber qué estudiar. El servicio obligatorio lo interrumpió en el segundo año. Lo mandaron al sur con el mismo lote de conscriptos que a Rodríguez y Pereyra, y los tres terminaron en la misma escuadra casi por azar. En la instrucción fue mediocre en lo físico y sorprendentemente competente en lo táctico — no por talento militar, sino porque le gustaba entender los sistemas antes de operar en ellos. En el frente patagónico descubrió que el frío y el barro son argumentos filosóficos que ningún texto anticipa bien. Lo menciona ocasionalmente, sin ironía. Sus compañeros no saben si es gracioso o si algo le falta.
   historial:
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Mismo pelotón. Confianza tácita.
+    tipo: formacion_lealtad
+    descripcion: Mismo pelotón desde el embarque con Rodríguez. Confianza tácita.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.rodriguez_marcela
+      ref: rodriguez_marcela
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Compañera de asignación; los tres llegaron juntos al sur.
+    tipo: formacion_lealtad
+    descripcion: Pereyra llegó con ellos. Los tres terminaron en la misma escuadra.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.pereyra_graciela
+      ref: pereyra_graciela
+  aliados:
+  - ref: rodriguez_marcela
+    descripcion: >
+      Llegaron juntos del embarque y terminaron en la misma posición. Marcela le
+      acomoda el uniforme sin avisar; él le devuelve análisis del terreno cuando
+      ella se queda mirando. Acuerdo tácito de cuidados parejos.
+    desde: '2026-02-01'
+  - ref: pereyra_graciela
+    descripcion: >
+      Tercer vértice del triángulo que se armó en el embarque. Graciela conoce
+      el terreno y Olivares conoce los sistemas — entre los dos compensan lo
+      que ninguno tiene completo. Conversaciones breves, casi nunca personales.
+    desde: '2026-02-01'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

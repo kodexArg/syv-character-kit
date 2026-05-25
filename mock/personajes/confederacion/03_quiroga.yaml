@@ -31,7 +31,7 @@ personaje:
   - equipo.utilitario.mapa
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
-  - lealtad.pj.aguirre_walter
+  - lealtad.escuadra.ricardo
   historia: 'Quiroga es de La Rioja, aunque su familia lleva dos generaciones en el Alto Valle. Estudió dos años de agrimensura antes de que el servicio obligatorio lo interrumpiera. La formación no fue al pedo: sabe leer mapas topográficos con naturalidad y entiende de curvas de nivel, de dónde corre el agua y de dónde sopla el viento en un valle encajonado. El frente patagónico lo recibió con niebla y barro. Quiroga aprendió rápido que el fusil de precisión en baja visibilidad no es una ventaja sino una responsabilidad: un disparo errado en niebla avisa al enemigo sin producir resultado. Lo ascendieron a Cabo después de dar de baja a un operador de radio enemigo a 280 metros, en llovizna, sin que nadie supiera desde dónde había disparado. El parte no entró en detalles. Quiroga tampoco.'
   historial:
   - fecha: '2026-02-10T08:00:00Z'
@@ -39,16 +39,37 @@ personaje:
     descripcion: Ascendido a Cabo tras eliminar a operador de radio enemigo a 280m en llovizna.
     ref_batalla: null
     metadata:
-      rango_anterior: Apuntador
-      rango_nuevo: Apuntador
+      rango_anterior: apuntador
+      rango_nuevo: apuntador
+  - fecha: '2026-04-22T11:00:00Z'
+    tipo: identificacion_nemesis
+    descripcion: >
+      Cruce de tiradores en niebla cerca del filo del valle. Quiroga vio el
+      destello de mira de otro apuntador a unos trescientos metros — no acertó
+      ninguno de los dos. Quedaron como referencia recíproca.
+    ref_batalla: null
+    metadata:
+      ref: antinao_hector
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: El Sargento le pide lectura del terreno antes de cada despliegue.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.aguirre_walter
+      ref: aguirre_walter
+  aliados:
+  - ref: aguirre_walter
+    descripcion: >
+      El Sargento le pide lectura del terreno antes de cada despliegue. Quiroga
+      le devuelve frases cortas que valen. Confianza por oficio, no por afecto.
+    desde: '2026-04-10'
+  nemesis:
+  - ref: antinao_hector
+    descripcion: >
+      Otro apuntador, del lado rojo. Se cruzaron en niebla en el filo del valle —
+      Quiroga vio el destello de mira y entendió que del otro lado había alguien
+      que esperaba igual que él. Ninguno acertó. Desde entonces Quiroga revisa
+      cada loma antes de moverse.
+    desde: '2026-04-22'
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

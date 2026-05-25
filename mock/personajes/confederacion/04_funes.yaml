@@ -32,17 +32,43 @@ personaje:
   - equipo.utilitario.almanaque
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
-  - lealtad.pj.mendez_ignacio
+  - lealtad.escuadra.ricardo
   historia: 'Dardo Funes es de Resistencia, Chaco. Llegó al frente patagónico sin saber que el frío del sur es otro tipo de frío — no el húmedo del nordeste, sino uno seco que entra por las articulaciones. Le tomó un mes aclimatarse y otro dejar de pensar en el clima como problema personal. Le asignaron el FAP porque era el más corpulento del pelotón y nadie se preguntó si había mejores criterios. Funes no protestó. Aprendió el arma por partes, sin saltarse pasos, verificando dos veces. A los seis meses era el artillero más parco y confiable de su compañía — el tipo que no desperdicia munición porque sabe cuánto cuesta traerla al frente. Su única rareza: lleva un almanaque de bolsillo con el que registra el clima diario. No lo usa para nada en particular. Dice que es por costumbre.'
   historial:
-  - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Recluta Méndez es su recargador asignado. Funes le marca el ritmo del arma.
+  - fecha: '2026-04-30T15:00:00Z'
+    tipo: identificacion_nemesis
+    descripcion: >
+      Intercambio de fuego prolongado contra un FAP enemigo en el filo del
+      cañadón. Funes anotó el ritmo de ráfagas del otro y lo guardó en el
+      almanaque. Sabe identificarlo de oído.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.mendez_ignacio
+      ref: calfucura_ignacio
+  - fecha: '2026-05-24T00:00:00Z'
+    tipo: formacion_lealtad
+    descripcion: Méndez es su recargador asignado. Funes le marca el ritmo del arma.
+    ref_batalla: null
+    metadata:
+      ref: mendez_ignacio
+  aliados:
+  - ref: mendez_ignacio
+    descripcion: >
+      El recargador asignado. Funes le marca el ritmo del arma sin explicarle
+      teoría — el chaqueño aprendió que se aprende mirando. A los dos meses
+      Méndez ya anticipa la próxima cinta antes de que Funes la pida.
+    desde: '2026-04-15'
+  - ref: sosa_horacio
+    descripcion: >
+      El Cabo Primero le pasa el conteo de munición por radio. Dos parcos que se
+      entienden por dotaciones de cargador y nada más.
+    desde: '2026-04-15'
+  nemesis:
+  - ref: calfucura_ignacio
+    descripcion: >
+      El otro artillero, el FAP rojo del filo del cañadón. Funes lo identifica
+      por el ritmo de las ráfagas — el otro encasquilla cada cuarenta o cincuenta
+      tiros y desencasquilla rápido. Lo anotó en el almanaque sin comentarlo.
+    desde: '2026-04-30'
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

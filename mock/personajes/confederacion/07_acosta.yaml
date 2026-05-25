@@ -32,7 +32,7 @@ personaje:
   - equipo.utilitario.vendaje
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
-  - lealtad.pj.ramirez_esteban
+  - lealtad.escuadra.ricardo
   historia: 'Rubén Acosta es de Mendoza, aunque pasó años en el norte antes de que la guerra lo enviara al sur. Tiene veintiséis años y ya lleva tres en servicio activo — más que la mayoría de los fusileros de primera de su escuadra. El frente del norte fue donde aprendió lo que significa sostener una posición: no heroísmo, sino turnos de guardia, pies mojados y el ruido constante de algo que puede ser viento o movimiento. En el frente norte recibió un impacto de metralla que le fracturó una costilla y le dejó una cicatriz larga en el costado derecho. El alta médica llegó antes de que la costilla terminara de soldar bien. Acosta aprendió a operar con el dolor como ruido de fondo — no lo ignora, lo clasifica junto con el frío y el hambre. En el frente patagónico lo sorprendió el silencio que hace la niebla. Todavía no se acostumbró del todo.'
   historial:
   - fecha: '2024-08-15T00:00:00Z'
@@ -42,14 +42,36 @@ personaje:
     metadata:
       gravedad: grave
       cicatriz: cicatriz larga en costado derecho
+  - fecha: '2024-08-15T18:00:00Z'
+    tipo: identificacion_nemesis
+    descripcion: >
+      La metralla vino de un flanqueador rojo que cruzó el río Negro al amanecer.
+      Acosta lo vio de lejos antes de caer — corpulento, cicatriz en la cara.
+      Lo retuvo.
+    ref_batalla: null
+    metadata:
+      ref: belenchini_esteban
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: Recluta Ramírez le pregunta cuando no sabe. Acosta responde corto.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: mentor
-        ref: mock.pj.ramirez_esteban
+      ref: ramirez_esteban
+  aliados:
+  - ref: ramirez_esteban
+    descripcion: >
+      El recluta bahiense que pregunta cuando no sabe. Acosta responde corto y
+      sin paternalismo, que es como aprendió él mismo en el norte. Sin proponérselo
+      le pasa el oficio entre frases secas.
+    desde: '2026-04-15'
+  nemesis:
+  - ref: belenchini_esteban
+    descripcion: >
+      El flanqueador rojo del frente norte. Acosta lo vio de lejos antes de
+      caer por la metralla — corpulento, cicatriz en la cara, paso largo. Dos
+      años después llegó la noticia de que lo trasladaron al sur. Acosta no
+      busca venganza; busca no estar de espaldas a ese tipo otra vez.
+    desde: '2024-08-15'
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

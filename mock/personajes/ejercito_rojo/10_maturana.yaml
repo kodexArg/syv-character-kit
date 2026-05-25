@@ -30,17 +30,24 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.ropa_de_civil
   - lealtad.faccion.ejercito_rojo
-  - lealtad.pj.bordagaray_sebastian
+  - lealtad.escuadra.mansilla
   historia: 'Claudio Maturana pasó cuatro años trabajando en estancias al sur del Chubut — esquila, marcación, alambrado. Los estancieros de esa zona no distinguían mucho entre un peón y una herramienta. Maturana tampoco los distinguía a ellos de ningún patrón que hubiera conocido antes. Cuando un agitador rojo llegó a la zona prometiendo cambiar eso, Maturana preguntó cuánto pagaban y cuánto había que caminar. Creció en la meseta y conoce la niebla patagónica mejor que la mayoría: sabe leer el viento, distinguir siluetas en la llovizna, moverse sin orientarse por referencias visuales claras. Eso le da utilidad en condiciones que paralizan a gente con más entrenamiento formal. No tiene opinión firme sobre el operativo de caza. No conoce bien el contexto del Sector 12,15. Sigue a Mansilla porque Mansilla parece saber lo que hace. Si resulta que no sabe, Maturana va a notar el problema probablemente antes que el resto.'
   historial:
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Llegaron los dos tarde a la formación final. Se hicieron compañía sin proponérselo.
+    tipo: formacion_lealtad
+    descripcion: Llegaron los dos tarde a la formación final con Bordagaray. Se hicieron compañía sin proponérselo.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.bordagaray_sebastian
+      ref: bordagaray_sebastian
+  aliados:
+  - ref: bordagaray_sebastian
+    descripcion: >
+      Llegaron tarde a la misma formación. Maturana viene de las estancias del
+      Chubut; Bordagaray del taller mecánico bahiense. Se hicieron compañía sin
+      proponérselo, comparten ración cuando el reparto sale desparejo. No
+      conversan política — ninguno la conoce bien.
+    desde: '2026-04-05'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

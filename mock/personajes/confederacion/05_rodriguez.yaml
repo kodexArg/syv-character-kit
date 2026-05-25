@@ -30,26 +30,35 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
-  - lealtad.pj.olivares_tomas
-  - lealtad.pj.pereyra_graciela
+  - lealtad.escuadra.ricardo
   historia: 'Marcela Rodríguez es de Mar del Plata. Trabajaba de costurera en un taller familiar — confección de uniformes, ironías del destino — antes de que la conscripción la interrumpiera a los veintiún años. No había razón para que la mandaran al frente patagónico en particular, pero así funcionan las asignaciones: alguien necesita cuerpos en el sur y los cuerpos disponibles viajan. El frío le costó. No el frío en sí, sino la ropa: nunca le quedó bien el equipo estándar, y pasó semanas con botas que le apretaban hasta que aprendió a conseguir el talle correcto por vías que el reglamento no prevé. En combate es regular, sin más. Dispara cuando le dicen, se cubre cuando hay cobertura, y trata de no pensar demasiado en lo que pasa a dos metros. Hasta ahora le alcanzó.'
   historial:
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Mismo pelotón de asignación. Se conocen lo suficiente para saber cuándo el otro funciona mal.
+    tipo: formacion_lealtad
+    descripcion: Mismo pelotón de asignación con Olivares. Se conocen lo suficiente.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.olivares_tomas
+      ref: olivares_tomas
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Misma escuadra por azar de numeración. Cuidado mudo.
+    tipo: formacion_lealtad
+    descripcion: Misma escuadra que Pereyra por azar de numeración. Cuidado mudo.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.pereyra_graciela
+      ref: pereyra_graciela
+  aliados:
+  - ref: olivares_tomas
+    descripcion: >
+      Mismo pelotón de asignación desde el embarque. Se conocen lo suficiente
+      como para saber cuándo el otro está funcionando mal. Marcela le ajusta el
+      uniforme cuando lo ve mal puesto — costumbre de costurera, no afecto.
+    desde: '2026-02-01'
+  - ref: pereyra_graciela
+    descripcion: >
+      La patagónica de la escuadra. Por azar de numeración terminaron en la
+      misma posición. Marcela aprendió a confiar en sus lecturas de viento;
+      Graciela aprendió a esperar la cobertura que Marcela siempre encuentra.
+    desde: '2026-02-01'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

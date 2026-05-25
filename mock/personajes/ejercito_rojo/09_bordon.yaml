@@ -31,26 +31,36 @@ personaje:
   - equipo.utilitario.cuaderno
   - equipo.vestidura.ropa_de_civil
   - lealtad.faccion.ejercito_rojo
-  - lealtad.pj.calfucura_ignacio
-  - lealtad.pj.mansilla_ramon
+  - lealtad.escuadra.mansilla
   historia: Luciano Bordón estudió dos años y medio de ingeniería industrial en la Universidad Nacional del Sur antes de que la revolución cambiara la composición del cuerpo docente, el plan de estudios y sus propias convicciones, en ese orden. Leyó los panfletos, fue a dos reuniones, y al tercer mes se presentó voluntario. Sus padres — contadores ambos — todavía no entienden bien qué pasó. En el Ejército Rojo aprendió que las cosas que entendía teóricamente sobre la guerra no sirven de nada cuando alguien te está disparando de verdad. El cuerpo reacciona antes que el cálculo. La contradicción antimaquinista del Ejército Rojo lo inquieta intelectualmente más que a cualquier otro en la escuadra. Tuvo esa conversación con Mansilla una vez. Mansilla le explicó que las contradicciones tácticas se resuelven después de la victoria estratégica. Bordón anotó la respuesta y sigue sin estar convencido.
   historial:
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: Recargador asignado del ametrallador. Aprende sin que le expliquen.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: subordinado
-        ref: mock.pj.calfucura_ignacio
+      ref: calfucura_ignacio
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: Le pidió a Mansilla aclaraciones doctrinarias una vez. La respuesta no le alcanzó.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: mentor
-        ref: mock.pj.mansilla_ramon
+      ref: mansilla_ramon
+  aliados:
+  - ref: calfucura_ignacio
+    descripcion: >
+      El ametrallador siderúrgico. Bordón le carga el FAP y aprende mirándolo
+      desencasquillar sin mirar. Calfucurá nunca le explica; Bordón nunca pregunta.
+      Es la pedagogía más eficaz que conoció después de tres semestres de ingeniería.
+    desde: '2026-03-20'
+  - ref: mansilla_ramon
+    descripcion: >
+      El Camarada Puntero. Bordón le pidió aclaraciones doctrinarias sobre la
+      contradicción antimaquinista. Mansilla le contestó con paciencia táctica
+      que la victoria estratégica viene primero. Bordón anotó la respuesta;
+      sigue sin estar convencido, pero obedece.
+    desde: '2026-03-15'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

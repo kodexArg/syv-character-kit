@@ -30,26 +30,37 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
-  - lealtad.pj.mansilla_ramon
-  - lealtad.pj.maturana_claudio
+  - lealtad.escuadra.mansilla
   historia: 'El abuelo de Sebastián Bordagaray llegó del País Vasco en 1923 y terminó en los frigoríficos de Bahía Blanca. El padre fue metalúrgico. Sebastián fue la primera generación de la familia que tuvo posibilidad de no trabajar con las manos, y eligió las manos igual — taller mecánico en el barrio Noroeste, tres años, hasta que la revolución cambió lo que valía la pena hacer con el tiempo. No es el más hábil ni el más rápido. Tiene buena constitución y una disposición a meterse donde nadie quiere meterse que Mansilla notó en los primeros días de entrenamiento. "Ese va adelante cuando los demás van atrás", le comentó a Iturra. Iturra dijo que eso también podía matarlo. Mansilla dijo que ya lo sabía. Lo que Bordagaray no le dijo a nadie es que el operativo de caza lo inquieta de un modo que no puede articular. No es el peligro — es la especificidad: ir a matar a alguien en particular.'
   historial:
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: Mansilla notó su disposición a meterse adelante. Iturra dijo que eso podía matarlo.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: subordinado
-        ref: mock.pj.mansilla_ramon
+      ref: mansilla_ramon
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
-    descripcion: Llegaron tarde a la formación. Se hicieron compañía sin proponérselo.
+    tipo: formacion_lealtad
+    descripcion: Llegaron tarde a la formación con Maturana. Se hicieron compañía sin proponérselo.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.maturana_claudio
+      ref: maturana_claudio
+  aliados:
+  - ref: mansilla_ramon
+    descripcion: >
+      El Camarada Puntero lo identificó como el que va adelante cuando los
+      demás retroceden. Bordagaray retribuye con esa misma disposición sin
+      preguntarse si es virtud o problema. Lo que no le dice: el operativo de
+      caza lo inquieta — no el peligro, la especificidad.
+    desde: '2026-03-20'
+  - ref: maturana_claudio
+    descripcion: >
+      El peón de estancia. Llegaron tarde los dos a la formación final y desde
+      entonces se hacen compañía sin proponérselo. Bordagaray repara lo que
+      Maturana rompe sin avisar; Maturana lee el viento y Bordagaray no
+      pregunta cómo.
+    desde: '2026-04-05'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

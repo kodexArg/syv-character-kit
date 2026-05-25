@@ -30,17 +30,23 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
-  - lealtad.pj.belenchini_esteban
+  - lealtad.escuadra.mansilla
   historia: Fermín Cárcamo era garrafero de playa en el ferrocarril del sur. Treinta y dos años, divorciado, dos hijos en Bahía Blanca que ve cuando la rotación lo permite, que es rara vez. Se unió al Ejército Rojo cuando el sindicato ferroviario declaró la adhesión a la revolución y el capataz de su turno amenazó con despedir a quien firmara. Cárcamo firmó igual, no por heroísmo sino porque le pareció que correspondía. Tres años de milicia le enseñaron que la guerra no es como la describen ni el boletín sindical ni el alto mando. Es más sucia, más aburrida y más rápida cuando finalmente ocurre algo. El operativo de caza no lo entusiasma. Matar a un oficial específico por nombre y apellido le parece más propio de un ajuste que de una guerra. Pero Mansilla da las órdenes y Cárcamo las cumple. Tiene hijos que esperan que vuelva.
   historial:
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: Ambos de Bahía Blanca. Hijos de la misma ciudad, oficios distintos.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.belenchini_esteban
+      ref: belenchini_esteban
+  aliados:
+  - ref: belenchini_esteban
+    descripcion: >
+      El otro bahiense. Comparten origen y poco más — Cárcamo viene del
+      ferrocarril, Belenchini de la siderúrgica. La ciudad los une más que la
+      doctrina. Conversan sobre los hijos cuando hay turno largo, no antes.
+    desde: '2026-03-20'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

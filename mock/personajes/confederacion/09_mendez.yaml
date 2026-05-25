@@ -29,17 +29,29 @@ personaje:
   - equipo.utilitario.bandolera
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
-  - lealtad.pj.funes_dardo
+  - lealtad.escuadra.ricardo
   historia: 'Ignacio Méndez tiene diecinueve años y es de San Rafael, Mendoza. Trabajaba en la viña familiar — cosecha, poda, los trabajos que dicta el calendario agrícola — antes de que la conscripción lo sacara del ciclo. Su padre lo acompañó hasta el punto de embarque sin decir mucho, que es como hacen las cosas en San Rafael. En la instrucción fue regular en todo y destacó en resistencia física — el trabajo en la viña le dio una base muscular que los ejercicios solo refinaron. Su TAC es baja porque todavía no interiorizó el timing del combate: sabe usar el arma, pero la usa un segundo tarde bajo presión. Lo asignaron a recargador del artillero Funes porque alguien en logística vio la nota de resistencia física y lo marcó para carga pesada. Méndez no protestó porque no sabe bien qué implica el rol todavía. Lo está aprendiendo.'
   historial:
+  - fecha: '2026-04-15T00:00:00Z'
+    tipo: asignacion_escuadra
+    descripcion: Asignado como recargador del artillero Funes.
+    ref_batalla: null
+    metadata:
+      escuadra: ricardo
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: Recargador asignado del artillero Funes.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: subordinado
-        ref: mock.pj.funes_dardo
+      ref: funes_dardo
+  aliados:
+  - ref: funes_dardo
+    descripcion: >
+      El artillero al que le carga el FAP. Funes no le explica nada — Méndez
+      aprende mirándolo cargar dos veces, verificando dos veces. A las pocas
+      semanas anticipa la próxima cinta antes de que Funes la pida.
+    desde: '2026-04-15'
+  nemesis: []
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'

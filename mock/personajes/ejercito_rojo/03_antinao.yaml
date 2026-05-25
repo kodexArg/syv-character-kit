@@ -30,17 +30,38 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
-  - lealtad.pj.mansilla_ramon
+  - lealtad.escuadra.mansilla
   historia: 'Héctor Antinao creció en la meseta, entre Roca y el Limay. Cazaba con su padre desde los doce años: liebre, martineta, guanaco cuando la temporada daba. No era cuestión de deporte sino de comer. A los veintidós cruzó a la costa y terminó cargando bolsas en el puerto de Viedma por dos años. Ahí conoció a los agitadores ferroviarios y, a través de ellos, al Ejército Rojo. Nadie le enseñó a disparar en el ejército. Lo que le enseñaron fue a no malgastar el tiro. En acción tiene fama de esperar más de lo que sus compañeros consideran razonable antes de apretar el gatillo. A él le parece simplemente la única forma sensata de proceder. El objetivo del operativo no le genera ni repulsión ni entusiasmo. Si Mansilla lo pone en la mira, Antinao va a hacer lo que sabe hacer.'
   historial:
+  - fecha: '2026-04-22T11:00:00Z'
+    tipo: identificacion_nemesis
+    descripcion: >
+      Cruce de tiradores en niebla cerca del filo del valle. Antinao vio el
+      destello de un apuntador confederado a unos trescientos metros y entendió
+      que el otro lo había visto a él. Ninguno acertó. Lo guardó.
+    ref_batalla: null
+    metadata:
+      ref: quiroga_lisandro
   - fecha: '2026-05-24T00:00:00Z'
-    tipo: formacion_vinculo
+    tipo: formacion_lealtad
     descripcion: Mansilla decide qué blanco. Antinao decide cuándo.
     ref_batalla: null
     metadata:
-      vinculo_creado:
-        tipo: hermano_de_armas
-        ref: mock.pj.mansilla_ramon
+      ref: mansilla_ramon
+  aliados:
+  - ref: mansilla_ramon
+    descripcion: >
+      El Camarada Puntero le indica el blanco; Antinao elige el momento. División
+      del trabajo que no necesitan hablar. El cazador de meseta acepta que el
+      hombre del cuaderno sepa qué cabeza vale el riesgo del operativo.
+    desde: '2026-03-15'
+  nemesis:
+  - ref: quiroga_lisandro
+    descripcion: >
+      El apuntador azul del filo del valle. Antinao lo vio en niebla y supo que
+      el otro lo había visto. No es venganza — es respeto profesional con
+      consecuencia: el que se mueva primero la próxima vez, pierde.
+    desde: '2026-04-22'
   metadatos:
     creado_en: '2026-05-24T00:00:00Z'
     canonizado_en: '2026-05-24T00:00:00Z'
