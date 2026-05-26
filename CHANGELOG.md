@@ -1,6 +1,30 @@
 # Changelog
 
 ## [Unreleased]
+- group: escuadras-schema-motor-gddr02
+  priority: high
+  commit: 0267178
+  changes:
+    - feat(docs): add escuadra-modelo.{md,yaml} — SSOT for squad schema (fields, derivados, invariantes)
+    - feat(docs/gddr/02): introduce battle engine motor-batalla for squad-vs-squad combat (resolves TBD-04)
+    - feat(mock/escuadras): materialize 2 squad fixtures — confederacion (cazadores_de_ricardo) and ejercito_rojo (columna_mansilla)
+    - feat(catalog/tags/escuadra): migrate squad tags to new catalog structure
+    - feat(scripts): add generar_grafo_obsidian.py and validar_escuadras.py utility scripts
+    - refactor(mocks): align 22 personajes to updated escuadra schema
+    - docs(cross-doc): propagate escuadra references across MODEL/PRD/AGENTS/user-stories/hoja-modelo/tag-modelo/gddr-01
+    - chore(gitignore): add .agents/ .obsidian/ skills-lock.json (harness ignore); advances TBD-20
+- group: tbd-14-faccion-subfaccion-asymmetry
+  priority: high
+  commit: bc27a29
+  changes:
+    - docs(model/§4.1): document deliberate asymmetry — faccion as first-class entity (closed-curated, schema-level FK, /meta/factions endpoint) vs subfaccion as tag_catalogo category (open-emergent, no schema FK, membership via subfaccion.faccion_padre in catalog)
+    - docs(tag-modelo.md/§3): align asymmetry notation and examples to MODEL definition
+    - docs(cross-doc): update references across codebase; mocks already consistent — no changes required
+- group: tbd-10-fields-dot-paths
+  priority: normal
+  commit: 0e62c99
+  changes:
+    - docs(api): clarify fields= parameter accepts CSV of dot-path notation for internal tag representation (distinct from sub-category slash notation)
 - group: tbd-batch-05-02-03-escuadras
   priority: high
   commit: 5935a7a
