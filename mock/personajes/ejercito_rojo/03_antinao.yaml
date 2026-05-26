@@ -8,8 +8,8 @@ personaje:
     edad: 26
   atributos:
     fis: 3
-    tac: 5
-    men: 5
+    tac: 4
+    men: 4
   tags:
   - faccion.ejercito_rojo
   - subfaccion.ejercito_revolucionario_del_pueblo

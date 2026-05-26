@@ -9,7 +9,7 @@ personaje:
   atributos:
     fis: 3
     tac: 5
-    men: 7
+    men: 6
   tags:
   - faccion.ejercito_rojo
   - rango.lider_de_escuadra
