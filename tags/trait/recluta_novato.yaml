@@ -1,0 +1,13 @@
+tag:
+  slug: recluta_novato
+  nombre: "Recluta novato"
+  categoria: trait
+  descripcion: >
+    Incorporado sin instrucción suficiente; el combate real todavía le resulta
+    ajeno y aterrador. Los reflejos no están formados, las órdenes llegan tarde
+    y el primer disparo propio siempre lo sorprende.
+  origen: emergente
+  efecto:
+    - "(-1) TACTICO"
+    - "(-1) ESTRESS"
+    - "(-1) INICIATIVA"

@@ -1,0 +1,9 @@
+tag:
+  slug: manos_grandes
+  nombre: "Manos grandes"
+  categoria: rasgo
+  descripcion: >
+    Manos de palma ancha y dedos largos, propias de trabajo físico sostenido.
+    Dan una impresión de fuerza y destreza manual que el resto de la tropa percibe
+    antes de que el hombre abra la boca.
+  origen: emergente

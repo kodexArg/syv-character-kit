@@ -1,0 +1,13 @@
+tag:
+  slug: templado_bajo_fuego
+  nombre: "Templado bajo fuego"
+  categoria: trait
+  descripcion: >
+    El ruido, el humo y el caos no lo desestabilizan. Bajo fuego sostenido mantiene
+    la cabeza fría, toma decisiones con más calma que la mayoría y sirve de ancla
+    para quienes están a su lado. La presión le afina el juicio en lugar de nublarlo.
+  origen: emergente
+  efecto:
+    - "(+1) MENTAL"
+    - "(+1) MORAL"
+    - "(+1) ESTRESS"

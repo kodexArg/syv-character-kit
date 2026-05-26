@@ -1,0 +1,14 @@
+tag:
+  slug: panico_en_abierto
+  nombre: "Pánico en abierto"
+  categoria: trait
+  descripcion: >
+    En espacios descubiertos bajo fuego, la mente del personaje colapsa: no puede
+    sostener ninguna orden de avance. Se arroja al suelo, se paraliza o corre sin
+    dirección hasta encontrar cobertura. Inútil en maniobras de campo abierto.
+  origen: emergente
+  trigger:
+    evento: bajo_fuego
+    condicion: sin_cobertura
+    trigger-action:
+      - efecto.panico
