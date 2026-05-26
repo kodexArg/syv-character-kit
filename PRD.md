@@ -158,7 +158,7 @@ Reglas algorítmicas de sorteo (lo único PRD-específico; el vocabulario vive e
 - **`rasgo`**: 1 altura + 1 complexión obligatorios + 2-3 rasgos físicos del pool segmentado por facción (Confederación → interior rural; Ejército Rojo → costa/meseta industrial). Sin cicatrices en creación — entran vía hito.
 - **`rol.combate.*`**: exactamente 1 tag derivado del `rango`. `Lider de escuadra` y `Segundo al mando` → `lider` (`fza_aportada: 2`); resto → ninguno (`fza_aportada: 1`). El tag `rol.combate.heroe` (→ 3) **no se autogenera**; entra solo vía hito por acción extraordinaria.
 - **`rol.oficio.*`** / **`rol.jerarquia.*`**: derivados del `rango` + facción (`apuntador → rol.oficio.francotirador`, `Lider de escuadra → rol.jerarquia.sargento`, etc.).
-- **`skill`**: 1-3 según rango. Líder garantiza `comandancia`; apuntador garantiza `tiro_de_precision`; el resto sortea 0-2 del pool de su facción/rango. El skill prominente en Ejército Rojo influye en `sobrenombre` (ver 7.3).
+- **`skill`**: 1-3 según rango. Líder garantiza `comandancia`; apuntador garantiza `precision`; el resto sortea 0-2 del pool de su facción/rango. El skill prominente en Ejército Rojo influye en `sobrenombre` (ver 7.3).
 - **`trait`**: 1-2 traits. **80% coherentes** con rol/rango; **20% complicación** (efecto desfavorable en alguna circunstancia). Sin polaridad explícita en el catálogo. Quitar un trait vía hito requiere justificación narrativa.
 - **`perk`**: típicamente 1 perk. **80/20 soft**: ~80% del subconjunto natural del rango, ~20% libre para sabor. Líderes con más probabilidad; reclutas raramente.
 - **`trait`**: 1-2 traits según rango, mezcla de polaridad. Pool curado por facción. Traits emergentes vía hito; customs permitidos pero deben curarse en el catálogo antes de aplicarse. (La categoría `aspecto` fue absorbida por `trait` — todo trait declara `efecto` o `trigger`.)
@@ -249,13 +249,13 @@ Ejemplos representativos:
 
 | Situación narrativa | `tipo` | `metadata` ejemplo |
 |---|---|---|
-| Personaje aprende una habilidad de su mentor | `agregar_tag` | `{ categoria: "skill", valor: "Lectura de columna" }` |
-| Herida grave en combate deja secuela | `agregar_tag` | `{ categoria: "trait", valor: "Hemorragia lenta" }` + hito `herida` coordinado |
-| Captura enemiga. Le requisaron el arma | `quitar_tag` | `{ categoria: "equipo.arma", valor: "rifle militar" }` |
+| Personaje aprende una habilidad de su mentor | `agregar_tag` | `{ categoria: "skill", valor: "terreno" }` |
+| Herida grave en combate deja secuela | `agregar_tag` | `{ categoria: "trait", valor: "hemorragia_lenta" }` + hito `herida` coordinado |
+| Captura enemiga. Le requisaron el arma | `quitar_tag` | `{ categoria: "equipo.arma", valor: "rifle_militar" }` |
 | Captura y recuperación de armamento enemigo | `agregar_tag` | `{ categoria: "equipo.arma", valor: "pistola" }` |
-| Hazaña reconocida por el alto mando | `agregar_tag` | `{ categoria: "perk", valor: "Cobertura instintiva" }` |
+| Hazaña reconocida por el alto mando | `agregar_tag` | `{ categoria: "perk", valor: "cobertura" }` |
 | Consigue tres cargadores tras asaltar una posición | `agregar_tag` (×3) | `{ categoria: "equipo.utilitario", valor: "cargador" }` — tres hitos independientes o un único hito con `metadata.cantidad: 3` si la implementación lo admite |
-| Recupera visión normal tras tratamiento | `quitar_tag` | `{ categoria: "trait", valor: "Miope" }` — requiere justificación narrativa en `descripcion` |
+| Cobardía documentada en campo — el mando le retira confianza | `quitar_tag` | `{ categoria: "trait", valor: "confiable" }` + `agregar_tag` `{ categoria: "trait", valor: "cobarde" }` — requiere justificación narrativa en `descripcion` |
 
 **Trayectoria de tags y auditoría.** El estado vigente de `tags[]` se modifica vía hitos `agregar_tag` y `quitar_tag` en el `historial`. La trayectoria completa de tags de un personaje se puede reconstruir hacia adelante reproduciendo el historial, o hacia atrás aplicando los hitos en reversa contra el estado vigente. El schema no expone un snapshot inmutable del estado inicial — la decisión de mantener el schema mínimo prima sobre la queryabilidad directa de "cómo nació el personaje".
 
@@ -325,7 +325,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 - 2 facciones jugables: Confederación y Ejército Rojo, con sus subfacciones (`pelicanos`, `ejercito_revolucionario_del_pueblo`).
 - 8 rangos operativos canon con tabla determinística de atributos (`militante`, `recluta`, `fusilero`, `apuntador`, `artillero`, `francotirador`, `segundo_al_mando`, `lider_de_escuadra`). `ciudadano` como rama no-combatiente.
-- Pools canon de `skill`, `trait`, `perk` (este último con metadato `rangos_naturales`).
+- Pools curados de `skill`, `trait`, `perk` en `tags/`.
 - Tablas curadas de nombres, edades, géneros, equipo por facción.
 - Generación efímera con seed reproducible.
 - 22 mocks regenerados al schema en iteración separada.
@@ -416,7 +416,7 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ### 13.6. Traits sin polaridad explícita → el motor downstream interpreta
 
-**Decisión.** Los tags `trait` no tienen polaridad fija. La categoría agrupa positivos (`Sangre fría`), neutros (`Voz grave`) y penalidades (`Obstinado`, `Miope`, `Objetivo prioritario`).
+**Decisión.** Los tags `trait` no tienen polaridad fija. La categoría agrupa positivos (`imperturbable`, `veloz`), neutros (`impredecible`) y penalidades (`cobarde`, `fatigado`).
 
 **Costo.** Un cliente que necesite filtrar "solo penalidades" tiene que consultar `/meta/traits/{valor}.polaridad` (si existe) o tratar a todos los traits como neutros y aplicar reglas downstream.
 
@@ -436,13 +436,13 @@ Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{ran
 
 ### 13.9. Catálogo `/meta/*` como semilla, no como autoridad
 
-**Decisión.** El catálogo canon de 70 tags semilla (sección 9.1) es vocabulario sugerido, no enum cerrado. La excepción es `equipo.vestidura`, cerrado en 4 valores por decisión del cliente.
+**Decisión.** El catálogo curado MVP es vocabulario sugerido, no enum cerrado. Cubre los casos comunes; otros valores se aceptan como customs. La excepción es `equipo.vestidura`, cerrado en 4 valores por decisión del cliente.
 
 **Costo.** Convive con la fragmentación documentada en 13.2 y 13.7: distintos usuarios pueden crear sinónimos del mismo concepto (`Tiro de precisión` canon vs `Francotirador` custom), y el catálogo emergente termina mezclando registros canónicos con customs no normalizados.
 
 **Por qué se acepta.** El usuario explicitó: "completamos lo estándar, los casos más normales solamente; otros usuarios crearán tags personalizados". Forzar enum cerrado en `skill`/`trait`/`perk`/`equipo.{arma,utilitario}` paralizaría la creatividad narrativa, que es exactamente el diferencial del producto.
 
-**Mitigación.** El catálogo semilla cubre los casos comunes del MVP — un cliente sano resuelve >80% de los personajes contra la semilla. Los `/meta/*` pueden marcar entradas con `origen: "canon" | "emergente"` para que el cliente discrimine. La normalización de case (OQ #11) y el mecanismo de alias (OQ #10) atacan el síntoma cuando lleguen a v1.
+**Mitigación.** El catálogo curado MVP cubre los casos comunes — un cliente sano resuelve >80% de los personajes contra él. Los `/meta/*` pueden marcar entradas con `origen: "canon" | "emergente"` para que el cliente discrimine. La normalización de case (OQ #11) y el mecanismo de alias (OQ #10) atacan el síntoma cuando lleguen a v1.
 
 ### 13.8. Denormalización opt-in de efectos de tags → dos fuentes de verdad potenciales
 
