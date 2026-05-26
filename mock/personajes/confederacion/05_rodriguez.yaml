@@ -12,6 +12,7 @@ personaje:
     men: 3
   tags:
   - faccion.confederados
+  - subfaccion.pelicanos
   - rango.fusilero
   - escuadra.ricardo
   - estado.activo
@@ -29,6 +30,7 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
+  - lealtad.subfaccion.pelicanos
   - lealtad.escuadra.ricardo
   historia: 'Marcela Rodríguez es de Mar del Plata. Trabajaba de costurera en un taller familiar — confección de uniformes, ironías del destino — antes de que la conscripción la interrumpiera a los veintiún años. No había razón para que la mandaran al frente patagónico en particular, pero así funcionan las asignaciones: alguien necesita cuerpos en el sur y los cuerpos disponibles viajan. El frío le costó. No el frío en sí, sino la ropa: nunca le quedó bien el equipo estándar, y pasó semanas con botas que le apretaban hasta que aprendió a conseguir el talle correcto por vías que el reglamento no prevé. En combate es regular, sin más. Dispara cuando le dicen, se cubre cuando hay cobertura, y trata de no pensar demasiado en lo que pasa a dos metros. Hasta ahora le alcanzó.'
   historial:

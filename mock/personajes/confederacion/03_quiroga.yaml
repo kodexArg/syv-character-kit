@@ -12,6 +12,7 @@ personaje:
     men: 5
   tags:
   - faccion.confederados
+  - subfaccion.pelicanos
   - rango.apuntador
   - escuadra.ricardo
   - estado.activo
@@ -31,6 +32,7 @@ personaje:
   - equipo.utilitario.mapa
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
+  - lealtad.subfaccion.pelicanos
   - lealtad.escuadra.ricardo
   historia: 'Quiroga es de La Rioja, aunque su familia lleva dos generaciones en el Alto Valle. Estudió dos años de agrimensura antes de que el servicio obligatorio lo interrumpiera. La formación no fue al pedo: sabe leer mapas topográficos con naturalidad y entiende de curvas de nivel, de dónde corre el agua y de dónde sopla el viento en un valle encajonado. El frente patagónico lo recibió con niebla y barro. Quiroga aprendió rápido que el fusil de precisión en baja visibilidad no es una ventaja sino una responsabilidad: un disparo errado en niebla avisa al enemigo sin producir resultado. Lo ascendieron a Cabo después de dar de baja a un operador de radio enemigo a 280 metros, en llovizna, sin que nadie supiera desde dónde había disparado. El parte no entró en detalles. Quiroga tampoco.'
   historial:
