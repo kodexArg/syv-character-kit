@@ -38,7 +38,7 @@ Mapea: UC-01..04, UC-06, UC-16, UC-19, UC-20, UC-22.
 
 ### `GET /character/{slug}`
 
-Devuelve la ficha vigente del personaje con `identidad.slug` exacto. 404 si no existe. Acepta `fields=` para podar.
+Devuelve la ficha vigente del personaje con `identidad.slug` exacto. 404 si no existe. Acepta `fields=` para podar. Incluye los campos derivados (`filiacion`, `fatiga_max`, `moral_max`, `fza_aportada`) definidos en [`MODEL.md §1`](MODEL.md).
 
 Mapea: UC-05, UC-15, UC-16.
 

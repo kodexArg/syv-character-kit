@@ -48,6 +48,8 @@ Resource principal. Servido por `GET /character/{slug}`, mutado por `POST /chara
 - `moral_max` = `men`.
 - `fza_aportada` — desde `rol.combate.*` (`heroe: 3`, `lider: 2`, default `1`).
 
+Aparecen en la response de `GET /character` y `GET /character/{slug}` junto con los campos persistidos. Se recomputan en cada lectura — el cliente no los muta.
+
 ### 1.1. `hito` (embebido en `personaje.historial[]`)
 
 | Campo | Tipo | Notas |
