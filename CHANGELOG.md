@@ -1,6 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+- group: open-questions-notion-migration
+  priority: high
+  commit: 436e3a3
+  changes:
+    - feat(docs): migrar 29 entradas de open-questions.md (T-01..T-10, OQ-01..OQ-14 sin OQ-12, N-01..N-04) a sub-página Notion del proyecto syv-character-kit
+    - chore: eliminar docs/open-questions.md del repositorio
+    - docs(AGENTS.md): actualizar referencias a open-questions.md por 'página Notion del proyecto' (línea 14)
+    - docs(PRD.md): reemplazar tabla de artefactos fila open-questions.md con enlace a página Notion; actualizar citas T-01/T-05/OQ-06 a texto plano
+    - docs(MODEL.md): actualizar referencias T-04/N-01/OQ-06 a texto plano (sin link)
+    - docs(tag-modelo.md): actualizar citas T-02/T-07/OQ-01/T-04 en header §8 a formato texto plano
+    - chore(obsidian): inicializar .obsidian/ con configuración de vault local (14 archivos; community plugins y workspace)
+    - feat(skills): agregar skills/manejo_tags_proyecto.md como referencia interna de manejo de tags
 - group: oq12-patentes-opacas-fixtures
   priority: high
   commit: 613d8b4
