@@ -1,14 +1,24 @@
+---
+title: "API — syv-character-kit"
+tags:
+  - syv/api
+aliases:
+  - API
+  - API.md
+---
+
 # API — syv-character-kit
 
-> **Fuente de verdad del contrato HTTP.** Cualquier mención a rutas en `PRD.md`, `docs/*`, mocks o código se resuelve contra este archivo. Si una ruta no figura acá, no existe en el contrato.
->
-> Convenciones de payload: ver [`docs/hoja-modelo.md`](docs/hoja-modelo.md) y [`docs/tag-modelo.md`](docs/tag-modelo.md). Idioma: castellano rioplatense.
+> [!info] Fuente de Verdad del Contrato HTTP
+> Cualquier mención a rutas en [[PRD|PRD.md]], `docs/*`, mocks o código se resuelve contra este archivo. Si una ruta no figura acá, no existe en el contrato.
+> 
+> Convenciones de payload: ver [[hoja-modelo|docs/hoja-modelo.md]] y [[tag-modelo|docs/tag-modelo.md]]. Idioma: castellano rioplatense.
 
 ---
 
 ## Convención `GET /meta/{categoria}` — catálogo de tag
 
-Cualquier `GET /meta/{categoria}` devuelve el catálogo canon de esa categoría de tag. La estructura de cada entrada es la definida en [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml). La lista de categorías curadas (`skill`, `trait`, `perk`, `rasgo`, `equipo.arma`, `equipo.utilitario`, `equipo.vestidura`, `rol.*`, etc.) vive en [`docs/tag-modelo.md §3`](docs/tag-modelo.md).
+Cualquier `GET /meta/{categoria}` devuelve el catálogo canon de esa categoría de tag. La estructura de cada entrada es la definida en [docs/tag-modelo.yaml](docs/tag-modelo.yaml). La lista de categorías curadas (`skill`, `trait`, `perk`, `rasgo`, `equipo.arma`, `equipo.utilitario`, `equipo.vestidura`, `rol.*`, etc.) vive en [[tag-modelo#§3 — Categorías de referencia|docs/tag-modelo.md §3]].
 
 Categorías nuevas se exponen automáticamente bajo `/meta/{categoria}` el día que existen — no requieren entry en este archivo. Para sub-categorías: `GET /meta/equipo/arma`, `GET /meta/rol/oficio`, etc.
 
@@ -19,8 +29,8 @@ Mapea: UC-09.
 **Casos que NO siguen la convención** (porque el payload difiere o agregan datos derivados):
 
 - `GET /meta/factions` — facciones con descriptor de lore corto.
-- `GET /meta/rangos` — rangos con tabla determinística de stats, `mando` default y rol cultural por facción. Tabla canónica en [`gddr/01-flujo-obligatorio-creacion.md §3`](gddr/01-flujo-obligatorio-creacion.md).
-- `GET /meta/hito_types` — enum sugerido de tipos de hito (catálogo abierto; lista en [`docs/hoja-modelo.md §5`](docs/hoja-modelo.md)).
+- `GET /meta/rangos` — rangos con tabla determinística de stats, `mando` default y rol cultural por facción. Tabla canónica en [[01-flujo-obligatorio-creacion#Fase 3 — Atributos|gddr/01-flujo-obligatorio-creacion.md §3]].
+- `GET /meta/hito_types` — enum sugerido de tipos de hito (catálogo abierto; lista en [[hoja-modelo#§5 — Historial|docs/hoja-modelo.md §5]]).
 
 ---
 
@@ -39,7 +49,7 @@ Mapea: UC-01..04, UC-06, UC-16, UC-19, UC-20, UC-22.
 
 ### `GET /character/{slug}`
 
-Devuelve la ficha vigente del personaje con `identidad.slug` exacto. 404 si no existe. Acepta `fields=` (dot-paths CSV, ej. `fields=identidad.slug,identidad.nombre,atributos.fis`) para podar. Incluye los campos derivados (`filiacion`, `fatiga_max`, `moral_max`, `fza_aportada`) definidos en [`MODEL.md §1`](MODEL.md).
+Devuelve la ficha vigente del personaje con `identidad.slug` exacto. 404 si no existe. Acepta `fields=` (dot-paths CSV, ej. `fields=identidad.slug,identidad.nombre,atributos.fis`) para podar. Incluye los campos derivados (`filiacion`, `fatiga_max`, `moral_max`, `fza_aportada`) definidos en [[MODEL#1. personaje|MODEL.md §1]].
 
 Mapea: UC-05, UC-15, UC-16.
 
@@ -51,7 +61,7 @@ Mapea: UC-17.
 
 ### `POST /character/{slug}/event`
 
-Registra un hito. Body: una entrada de `historial[]` (estructura en [`docs/hoja-modelo.md §5`](docs/hoja-modelo.md)). Apendea, aplica efecto sobre campos vigentes, actualiza `metadatos.ultima_actualizacion`, devuelve ficha actualizada. 409 sobre mocks; 404 sobre efímeros.
+Registra un hito. Body: una entrada de `historial[]` (estructura en [[hoja-modelo#§5 — Historial|docs/hoja-modelo.md §5]]). Apendea, aplica efecto sobre campos vigentes, actualiza `metadatos.ultima_actualizacion`, devuelve ficha actualizada. 409 sobre mocks; 404 sobre efímeros.
 
 Mapea: UC-10..14, UC-18.
 
@@ -87,7 +97,7 @@ Mapea: UC-25.
 ### `POST /escuadras/{slug}/miembro`
 Añade un personaje como miembro de la escuadra.
 - Body: `{ "ref": "PATENTE", "pos": int, "puntos": int }`.
-- Efecto colateral: Añade la patente, posición (`pos`), costo en puntos (`puntos`), rango y nombre a la lista `miembros[]` de la escuadra, añade los tags `escuadra.{slug}` y `lealtad.escuadra.{slug}` a la hoja del personaje, y registra un hito `asignacion_escuadra` tanto en el `historial[]` del personaje como en el `historial[]` de la escuadra.
+- Efecto colateral: Añade la patente, posición (`pos`), costo en puntos (`puntos`), rango y nombre a la lista `miembros[]` de la escuadra, añade los tags `escuadra.{slug}` and `lealtad.escuadra.{slug}` a la hoja del personaje, y registra un hito `asignacion_escuadra` tanto en el `historial[]` del personaje como en el `historial[]` de la escuadra.
 
 Mapea: UC-26.
 
@@ -119,4 +129,4 @@ Mapea: UC-27.
 | POST | `/escuadras/{slug}/miembro` | 26 |
 | DELETE | `/escuadras/{slug}/miembro/{char_slug}` | 27 |
 
-Catálogo completo de UCs en [`docs/user-stories.md`](docs/user-stories.md).
+Catálogo completo de UCs en [[user-stories|docs/user-stories.md]].

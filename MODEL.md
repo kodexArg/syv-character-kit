@@ -1,12 +1,22 @@
+---
+title: "MODEL — syv-character-kit"
+tags:
+  - syv/model
+aliases:
+  - MODEL
+  - MODEL.md
+---
+
 # MODEL — syv-character-kit
 
-> **Contrato de persistencia.** Lista de entidades, campos, tipos y constraints que cualquier base de datos (relacional, documental, KV) debe poder representar para servir [`API.md`](API.md) sin pérdida.
->
-> Sub-producto de `API.md`: si una operación HTTP devuelve un campo, este documento lo tipifica. Si una operación lo muta, este documento marca la regla. **Sincronía absoluta con `API.md`.**
->
+> [!info] Contrato de Persistencia
+> Lista de entidades, campos, tipos y constraints que cualquier base de datos (relacional, documental, KV) debe poder representar para servir [[API|API.md]] sin pérdida.
+> 
+> Sub-producto de [[API|API.md]]: si una operación HTTP devuelve un campo, este documento lo tipifica. Si una operación lo muta, este documento marca la regla. **Sincronía absoluta con [[API|API.md]].**
+> 
 > No prescribe stack. Mismo idioma que el resto del kit: snake_case_castellano, voseo sobrio, tags en notación punto.
->
-> Detalle narrativo del schema en [`docs/hoja-modelo.md`](docs/hoja-modelo.md) y [`docs/tag-modelo.md`](docs/tag-modelo.md). Este documento es la versión esqueleto para implementadores de persistencia.
+> 
+> Detalle narrativo del schema en [[hoja-modelo|docs/hoja-modelo.md]] y [[tag-modelo|docs/tag-modelo.md]]. Este documento es la versión esqueleto para implementadores de persistencia.
 
 ---
 
@@ -48,14 +58,14 @@ Resource principal. Servido por `GET /character/{slug}`, mutado por `POST /chara
 - `moral_max` = `men`.
 - `fza_aportada` — desde `rol.combate.*` (`heroe: 3`, `lider: 2`, default `1`).
 
-Aparecen en la response de `GET /character` y `GET /character/{slug}` junto con los campos persistidos. Se recomputan en cada lectura — el cliente no los muta.
+Aparecen en la response de `GET /character` and `GET /character/{slug}` junto con los campos persistidos. Se recomputan en cada lectura — el cliente no los muta.
 
 ### 1.1. `hito` (embebido en `personaje.historial[]`)
 
 | Campo | Tipo | Notas |
 |---|---|---|
 | `fecha` | `str` ISO-8601 | |
-| `tipo` | `str` | Enum abierto. Catálogo sugerido en [`hoja-modelo.md §5`](docs/hoja-modelo.md). |
+| `tipo` | `str` | Enum abierto. Catálogo sugerido en [[hoja-modelo#§5 — Historial|docs/hoja-modelo.md §5]]. |
 | `descripcion` | `str` | Obligatorio. |
 | `ref_batalla` | `str \| null` | Slug de batalla externa. |
 | `metadata` | `object` | Libre. Convención común: `{ atributo, delta, valor_anterior, valor_nuevo }` para triple-0/mejora; `{ categoria, valor }` para agregar/quitar tag. |
@@ -82,8 +92,8 @@ Catálogo de tags curados. Servido por `GET /meta/{categoria}`. Sembrado desde `
 | `subcategoria` | `str \| null` | si `categoria ∈ {equipo, rol}` | Segmento intermedio. |
 | `descripcion` | `str` | sí | 1–3 frases. |
 | `origen` | `str` | no (default `emergente`) | Enum: `canon \| emergente \| custom`. |
-| `efecto` | `str \| list<str> \| null` | si `categoria = trait` y sin `trigger`; o si `categoria = efecto` | Modificadores sobre vocabulario canónico ([`atributos-y-efectos.md`](docs/atributos-y-efectos.md)). |
-| `trigger` | `object \| null` | no | `{ evento, condicion, probabilidad?, trigger-action[] }`. Ver [`tag-modelo.md §4.6`](docs/tag-modelo.md). |
+| `efecto` | `str \| list<str> \| null` | si `categoria = trait` y sin `trigger`; o si `categoria = efecto` | Modificadores sobre vocabulario canónico ([[atributos-y-efectos|docs/atributos-y-efectos.md]]). |
+| `trigger` | `object \| null` | no | `{ evento, condicion, probabilidad?, trigger-action[] }`. Ver [[tag-modelo#4.6. Efectos y triggers|tag-modelo.md §4.6]]. |
 | `requires` | `object \| null` | no | `{ require_all[], require_any[] }`. Prefijo `"no:"` para NOT. Documentación ejecutable, no validación. |
 | `excluye` | `list<str> \| null` | no | Tags incompatibles. |
 | `peso` | `int` (0..50) | si `categoria = equipo` | Unidad: kg. |
@@ -91,7 +101,7 @@ Catálogo de tags curados. Servido por `GET /meta/{categoria}`. Sembrado desde `
 | `tags_relacionados` | `list<str>` | no | Informativo. |
 | `metadatos` | `object` | no | `{ version_introducida, creado_en, ultima_actualizacion }`. |
 
-**Bloques específicos por categoría** (opcionales salvo `(+)` arriba): `equipo_arma`, `equipo_vestidura`, `subfaccion`, `skill`, `perk`. Esquema completo en [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml).
+**Bloques específicos por categoría** (opcionales salvo `(+)` arriba): `equipo_arma`, `equipo_vestidura`, `subfaccion`, `skill`, `perk`. Esquema completo en [docs/tag-modelo.yaml](docs/tag-modelo.yaml).
 
 **PK** sugerida: `(categoria, subcategoria, slug)` o el tag completo en notación punto como string.
 
@@ -123,7 +133,7 @@ Resource principal de agrupación táctica. Servido por `GET /escuadras/{slug}`,
 - `fatiga_promedio` — Promedio entero (redondeado hacia abajo) de la `fatiga_max` de todos los miembros activos.
 - `movimiento_tactico` — `min(MOVIMIENTO)` de los miembros activos.
 - `puntos_totales` — Suma de `puntos` de todos los miembros (activos e inactivos).
-- `lider_vigente` — Patente del personaje actualmente al mando.
+- `lider_vigente` — Patente del personaje currently al mando.
 - `estado_escuadra` — `operativa | decapitada | desmembrada | retirada`.
 - `cumple_template` — `bool`. Indica si cumple con las restricciones estructurales de su `tipo`.
 - `errores_validacion[]` — `list<str>`. Listado de infracciones estructurales si `cumple_template` es falso.
@@ -164,7 +174,7 @@ Servido por `GET /meta/factions`. Sembrado desde `tags/faccion/*.yaml`. Conjunto
 
 ### 4.1. Relación `faccion` ↔ `subfaccion` (asimetría deliberada)
 
-`faccion` y `subfaccion` **no son simétricas**, y la diferencia es de diseño:
+`faccion` and `subfaccion` **no son simétricas**, y la diferencia es de diseño:
 
 | Aspecto | `faccion` | `subfaccion` |
 |---|---|---|
@@ -173,7 +183,7 @@ Servido por `GET /meta/factions`. Sembrado desde `tags/faccion/*.yaml`. Conjunto
 | Endpoint | `GET /meta/factions` (dedicado). | `GET /meta/subfaccion` (genérico `/meta/{categoria}`). |
 | FK desde otras entidades | `escuadra.identidad.faccion`; tabla de rangos. | Ninguna. Solo aparece en `personaje.tags[]`. |
 | Forma como membresía sobre personaje | Tag `faccion.{slug}` + `lealtad.faccion.{slug}`. | Tag `subfaccion.{slug}` + `lealtad.subfaccion.{slug}`. |
-| Padre | — | `subfaccion.faccion_padre: faccion.{slug}` (campo del tag, ver `docs/tag-modelo.md §4.2`). |
+| Padre | — | `subfaccion.faccion_padre: faccion.{slug}` (campo del tag, ver [[tag-modelo#4.2. Campos obligatorios condicionales — los (+)|docs/tag-modelo.md §4.2]]). |
 
 **Por qué la asimetría es correcta**: `faccion` ancla la geometría operativa del juego (escuadras pertenecen a una facción; los rangos canónicos están definidos por facción; las batallas tienen bandos). Necesita identidad estable y endpoint dedicado. `subfaccion` agrupa narrativamente — un tercio, una célula, un sindicato armado — y el catálogo crece por curaduría a demanda. Forzarla a entidad primera clase infla el modelo sin beneficio; degradar `faccion` a tag rompe las FK existentes.
 
@@ -187,8 +197,8 @@ Servido por `GET /meta/factions`. Sembrado desde `tags/faccion/*.yaml`. Conjunto
 
 - **Mocks son inmutables.** El backend marca los 22 personajes de `mock/personajes/**` como read-only. `POST /character/{slug}/event` → 409.
 - **Efímeros no se persisten.** `GET /character` sin canonizar nunca toca la base.
-- **Canonización es idempotente solo si hay `seed`.** Con seed presente, la tupla `(seed, faccion, rango)` actúa como llave única y reintentos no crean duplicados. Sin seed, cada `POST /canonize` genera un personaje nuevo (no hay idempotencia posible — el sorteo es ciego).
-- **`historial[]` es append-only.** No hay reverso de hito en v1 (ver [`PRD.md §8`](PRD.md) — "Fuera de este PRD").
+- **Canonización es idempotente solo si hay `seed`.** Con seed presente, la tupla `(seed, faccion, rango)` actúa como llave única y reintentos no crean duplicados. Con seed ausente, cada `POST /canonize` genera un personaje nuevo (no hay idempotencia posible — el sorteo es ciego).
+- **`historial[]` es append-only.** No hay reverso de hito en v1 (ver [[PRD#8. Alcance|PRD.md §8]] — "Fuera de este PRD").
 - **Tags fuera de catálogo se aceptan.** Cualquier valor en `personaje.tags[]` que no exista en `tag_catalogo` es legal — se persiste tal cual. Curaduría se hace por proceso, no por constraint.
 - **Referencias en `aliados[]`/`nemesis[]` no son FK.** Se aceptan refs colgadas (ver T-04).
 - **Idioma de los datos**: castellano rioplatense. Tags en lowercase + underscore, sin acentos.

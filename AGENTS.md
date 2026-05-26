@@ -1,6 +1,15 @@
+---
+title: "AGENTS — Guía Editorial y de Agentes de IA"
+tags:
+  - syv/editorial
+aliases:
+  - AGENTS
+  - AGENTS.md
+---
+
 # AGENTS.md — syv-character-kit
 
-Política editorial y convenciones de trabajo del proyecto. Para entender QUÉ es el producto, leer [`PRD.md`](PRD.md). Para el schema, leer [`docs/hoja-modelo.md`](docs/hoja-modelo.md) y [`docs/tag-modelo.md`](docs/tag-modelo.md).
+Política editorial y convenciones de trabajo del proyecto. Para entender QUÉ es el producto, leer [[PRD|PRD.md]]. Para el schema, leer [[hoja-modelo|docs/hoja-modelo.md]] y [[tag-modelo|docs/tag-modelo.md]].
 
 ---
 
@@ -31,13 +40,13 @@ Mismo principio que el PRD: rolling release, sin versionado ni changelog. Todos 
 
 Los 22 fixtures de personajes y los archivos de catálogo de tags son **datos**, no documentación. Se versionan vía git como cualquier otro código. Cuando el schema cambia, los mocks se migran (idealmente con un script Python en el commit que aplica el cambio) y el commit cuenta la historia.
 
-No se mantienen versiones múltiples de un mock. No hay `aguirre_v0.4.yaml` y `aguirre_v0.5.yaml` — hay `01_aguirre.yaml` y refleja el schema vigente.
+No se mantienen versiones múltiples de un mock. No hay `aguirre_v0.4.yaml` and `aguirre_v0.5.yaml` — hay `01_aguirre.yaml` y refleja el schema vigente.
 
 ---
 
 ## Decisiones de Diseño de Juego (GDDRs)
 
-El directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) contiene los **Game Design Decision Records (GDDRs)**. En este proyecto, "gddr" es exactamente lo que hace, ya que este es un kit para gestionar personajes del juego *Subordinación y Valor* (SyV). Al redactar un GDDR, no nos perdemos en la lógica de software o la API; lo utilizamos para definir cómo queremos que se utilicen las reglas y los archivos que hemos preparado (schemas, modelos, catálogos). Los GDDRs sirven como puente de diseño de juego, se referencian mutuamente con los archivos del proyecto e incluso pueden utilizar los mocks vigentes como ejemplos prácticos para ilustrar decisiones mecánicas o de diseño.
+El directorio [gddr/](gddr/) contiene los **Game Design Decision Records (GDDRs)**. En este proyecto, "gddr" es exactamente lo que hace, ya que este es un kit para gestionar personajes del juego *Subordinación y Valor* (SyV). Al redactar un GDDR, no nos perdemos en la lógica de software o la API; lo utilizamos para definir cómo queremos que se utilicen las reglas y los archivos que hemos preparado (schemas, modelos, catálogos). Los GDDRs sirven como puente de diseño de juego, se referencian mutuamente con los archivos del proyecto e incluso pueden utilizar los mocks vigentes como ejemplos prácticos para ilustrar decisiones mecánicas o de diseño.
 
 ---
 
@@ -46,10 +55,10 @@ El directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) contiene los **
 El kit **no fija** un sistema de resolución de azar. El motor de batalla, las herramientas downstream o una mesa concreta pueden adoptar el que prefieran (dados, cartas, tirada digital, lo que sea). Para que las fichas, tags y modificadores sean reutilizables entre sistemas, toda magnitud se expresa con una de **tres formas portables** según el tipo:
 
 - **Probabilidades de evento**: porcentaje. `40% de fallar el chequeo`, `5% de paniquear bajo fuego cruzado`. Nunca `tirada con desventaja` u otra expresión atada a un sistema concreto.
-- **Modificadores sobre atributos o stats calculadas**: delta entero sobre la escala canónica de la variable. `(+1) MENTAL`, `(-1) INICIATIVA`, `(+2) FATIGA`. Las variables y sus escalas viven en [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md). Estas son las "monedas" canónicas del kit; el motor downstream las mapea a su sistema.
+- **Modificadores sobre atributos o stats calculadas**: delta entero sobre la escala canónica de la variable. `(+1) MENTAL`, `(-1) INICIATIVA`, `(+2) FATIGA`. Las variables y sus escalas viven en [[atributos-y-efectos|docs/atributos-y-efectos.md]]. Estas son las "monedas" canónicas del kit; el motor downstream las mapea a su sistema.
 - **Modificadores sobre tasas o magnitudes continuas**: porcentaje sobre la magnitud. `-100% MOVIMIENTO` (inmóvil), `+50% defensa por cobertura media`. Útil cuando el efecto escala con el valor base.
 
-**Atributos base** en escala `2..7` (entero, más es mejor): `fis`, `tac`, `men`. Topes y reglas de creación en [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md). La interpretación canónica sugerida es "decenas de porcentaje de éxito en chequeo roll-under" — referencia para diseño, no contrato.
+**Atributos base** en escala `2..7` (entero, más es mejor): `fis`, `tac`, `men`. Topes y reglas de creación en [[01-flujo-obligatorio-creacion|gddr/01-flujo-obligatorio-creacion.md]]. La interpretación canónica sugerida es "decenas de porcentaje de éxito en chequeo roll-under" — referencia para diseño, no contrato.
 
 **Coexistencia con sistemas de referencia**: las GDDRs y documentos auxiliares pueden ilustrar mecánicas con un sistema concreto (p. ej. `3d10o1` — tres dados de diez, observando el dado objetivo, mediana) **como ejemplo didáctico**. El contrato del kit son las tres formas portables de arriba; el ejemplo en dados es ilustrativo, no normativo.
 
@@ -59,8 +68,8 @@ El kit **no fija** un sistema de resolución de azar. El motor de batalla, las h
 
 ## Convenciones de identificadores
 
-- **Slugs**: lowercase + underscore, sin acentos, sin guiones (`ejercito_rojo`, `lider_de_escuadra`, `mansilla`). El separador uniforme es `_` para permitir composición en notación punto sin ambigüedad (`equipo.arma.pistola`, `lealtad.escuadra.columna_mansilla`). Excepción: el `identidad.slug` del personaje es **patente opaca** `^[A-Z0-9]{8}$` (ej. `K9F2H3M4`), no slug legible — ver [`docs/hoja-modelo.md §1.1`](docs/hoja-modelo.md).
-- **Tags**: notación punto `<categoria>[.<subcategoria>].<slug>`. Ver `docs/tag-modelo.md §2`.
+- **Slugs**: lowercase + underscore, sin acentos, sin guiones (`ejercito_rojo`, `lider_de_escuadra`, `mansilla`). El separador uniforme es `_` para permitir composición en notación punto sin ambigüedad (`equipo.arma.pistola`, `lealtad.escuadra.columna_mansilla`). Excepción: el `identidad.slug` del personaje es **patente opaca** `^[A-Z0-9]{8}$` (ej. `K9F2H3M4`), no slug legible — ver [[hoja-modelo#1.1. slug — la patente del personaje|docs/hoja-modelo.md §1.1]].
+- **Tags**: notación punto `<categoria>[.<subcategoria>].<slug>`. Ver [[tag-modelo#§2 — Identificadores y Anatomía de un Tag|docs/tag-modelo.md §2]].
 - **Campos estructurales en YAML**: `snake_case_castellano` (`escuadra`, `atributos`, `mando`).
 - **Idioma**: castellano rioplatense, voseo sobrio. Sin emojis salvo pedido explícito del usuario.
 
@@ -68,10 +77,10 @@ El kit **no fija** un sistema de resolución de azar. El motor de batalla, las h
 
 ## Trabajo con Claude / agentes de IA
 
-- Antes de cambiar el schema, asegurarse de que **todos** los archivos bajo `/docs/` (más `PRD.md`, `API.md`, `MODEL.md`) queden consistentes entre sí. Sincronía estricta entre `API.md` y `MODEL.md`.
+- Antes de cambiar el schema, asegurarse de que **todos** los archivos bajo `/docs/` (más `PRD.md`, [[API|API.md]], [[MODEL|MODEL.md]]) queden consistentes entre sí. Sincronía estricta entre [[API|API.md]] y [[MODEL|MODEL.md]].
 - Después de cambios al schema, evaluar si los 22 mocks necesitan migración. Si sí, escribir el script Python en el mismo turno y aplicarlo.
-- El PRD se actualiza al final, cuando los docs del schema ya están estables. El PRD enlaza a `/docs/` y a `API.md`/`MODEL.md` para los detalles; no los duplica.
+- El PRD se actualiza al final, cuando los docs del schema ya están estables. El PRD enlaza a `/docs/` y a [[API|API.md]]/[[MODEL|MODEL.md]] para los detalles; no los duplica.
 - No agregar entradas de changelog. No agregar líneas "Versión: X". Si el modelo cambia, reescribir las secciones afectadas en lenguaje atemporal.
 - Los cambios destructivos sobre `mock/personajes/` se hacen solo cuando el usuario lo autoriza explícitamente — la prosa de `historia` e `historial[].descripcion` es contenido editorial irreplazable.
 - **Lore canon**: la documentación del universo *Subordinación y Valor* vive en `/Dev/SyV/syv/src/content/docs/` — **única fuente válida** (estructura: `0_proyecto/`, `1_trasfondo/`, `2_atlas/`, `3_personajes/`, `4_diegesis/`, `5_aventuras/`, `6_media/`). Esta ruta es de **solo lectura** ya que corresponde a otro repositorio; cualquier modificación o escritura **requiere confirmación explícitamente del usuario**. Antes de inventar terminología (geografía, facciones, vocabulario, personajes), verificar contra esta fuente para mantener fidelidad. Otros directorios del ecosistema SyV (`/Dev/SyV/syv-obsidian/`, `/Dev/SyV/syv-battle-game-system/`) **no son canónicos para este kit**. Las decisiones de mecánica, atributos por rango, equipamiento y motor de batalla son **soberanía del kit** — se documentan acá sin remitirse a otro repo.
-- **Manejo de Tags y Obsidian**: Ante cualquier tarea que involucre creación, edición o procesamiento de tags, o configuración de visualizaciones de grafos en Obsidian, el agente debe leer el skill [manejo_tags_proyecto.md](file:///Dev/SyV/syv-character-kit/skills/manejo_tags_proyecto.md) con la herramienta `view_file` (marcando `IsSkillFile` como `true`) e implementar sus directrices.
+- **Manejo de Tags y Obsidian**: Ante cualquier tarea que involucre creación, edición o procesamiento de tags, o configuración de visualizaciones de grafos en Obsidian, el agente debe leer el skill [[manejo_tags_proyecto|skills/manejo_tags_proyecto.md]] (marcando `IsSkillFile` como `true`) e implementar sus directrices.
