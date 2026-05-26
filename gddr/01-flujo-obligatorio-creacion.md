@@ -41,14 +41,14 @@ Cada personaje arranca con **exactamente un** tag `rango.*`. Catálogo canon en 
 
 | Rango               | Peso |
 |---------------------|-----:|
-| `recluta`           |  20% |
-| `fusilero`          |  40% |
-| `apuntador`         |  12% |
-| `artillero`         |  12% |
-| `francotirador`     |   5% |
+| `recluta`           |  30% |
+| `fusilero`          |  20% |
+| `apuntador`         |  10% |
+| `artillero`         |  10% |
+| `francotirador`     |   2% |
 | `segundo_al_mando`  |   7% |
 | `lider_de_escuadra` |   3% |
-| `militante`         |   1% |
+| `militante`         |  18% |
 
 Suma 100%. La curva refleja escasez operativa.
 
@@ -153,19 +153,19 @@ No se genera en este paso. El servidor asigna patente `^[A-Z0-9]{8}$` al persist
 | Rango               | `fis` | `tac` | `men` | Total |
 |---------------------|------:|------:|------:|------:|
 | `ciudadano`         |   2   |   2   |   2   |  6    |
-| `militante`         |   3   |   2   |   3   |  8    |
-| `recluta`           |   3   |   2   |   2   |  7    |
+| `militante`         |   2   |   2   |   3   |  7    |
+| `recluta`           |   3   |   2   |   3   |  8    |
 | `fusilero`          |   3   |   3   |   3   |  9    |
-| `apuntador`         |   3   |   5   |   4   | 12    |
-| `artillero`         |   5   |   3   |   3   | 11    |
-| `francotirador`     |   3   |   6   |   3   | 12    |
+| `apuntador`         |   3   |   4   |   4   | 11    |
+| `artillero`         |   4   |   4   |   3   | 11    |
+| `francotirador`     |   4   |   5   |   3   | 12    |
 | `segundo_al_mando`  |   3   |   4   |   5   | 12    |
-| `lider_de_escuadra` |   3   |   4   |   7   | 14    |
+| `lider_de_escuadra` |   3   |   5   |   6   | 14    |
 
 Topes absolutos:
-- `fis 5` → solo `artillero`.
-- `tac 6` → solo `francotirador`.
-- `men 7` → solo `lider_de_escuadra`.
+- `fis 5`
+- `tac 6`
+- `men 7`
 
 ### 3.1. Inmutabilidad práctica
 
