@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+- group: tbd-batch-05-02-03-escuadras
+  priority: high
+  commit: 5935a7a
+  changes:
+    - fix(api.md): add clarification that sub-categories use slash notation (`/meta/equipo/arma`) not dot notation; dot notation is reserved for internal tag representation
+    - fix(mock/personajes/confederacion/01_aguirre.yaml): rename fixture from "Walter Aguirre" to "Héctor Aguirre" (collision avoidance with canon vault character); slug WA3K9F2H retained; updates name, sobrenombre, historia, and aliado reference
+    - feat(api.md): add section Escuadras with new endpoints `GET /escuadras`, `GET /escuadras/{slug}`, `POST /escuadras`, `POST /escuadras/{slug}/miembro`, `DELETE /escuadras/{slug}/miembro/{char_slug}` mapping UCs 24–27
 - group: open-questions-notion-migration
   priority: high
   commit: 436e3a3
