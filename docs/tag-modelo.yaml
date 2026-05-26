@@ -17,9 +17,11 @@ tag:
                              #     El slug de personaje es una patente opaca [A-Z0-9]{8} —
                              #     ver hoja-modelo.md.
   nombre:        str         # (*)
-  categoria:     str         # (*)  rasgo | trait | perk | skill | faccion | subfaccion | rango |
-                             #      escuadra | mando | estado | salud | mental | equipo | rol |
-                             #      lealtad | nemesis | <nueva>
+  categoria:     str         # (*)  rasgo | trait | perk | skill | efecto | faccion | subfaccion |
+                             #      rango | escuadra | mando | estado | salud | mental | equipo |
+                             #      rol | lealtad | <nueva>
+                             #      'nemesis' NO es categoría — los nemesis personales viven en
+                             #      personaje.nemesis[]. Ver hoja-modelo.md §3.4.
   descripcion:   str         # (*)
   peso:          int         # (+) requerido si categoria = equipo. Kilos. Rango 0..50.
                              #     No confundir con peso_narrativo (hint 1..5).
@@ -92,9 +94,11 @@ tag:
   subfaccion:
     faccion_padre: tag faccion.*  # (*) facción a la que pertenece
 
-# Categorías relacionales (lealtad, nemesis) NO tienen archivo de catálogo.
+# La categoría relacional 'lealtad' NO tiene archivo de catálogo.
 # Su semántica vive en el formato del tag:
-#   lealtad.faccion.{slug}  |  lealtad.subfaccion.{slug}  |  lealtad.pj.{slug}  |  lealtad.escuadra.{slug}
-#   nemesis.pj.{slug}
-# Las refs resuelven contra los catálogos de personajes, facciones y subfacciones.
-# Los contenedores derivados "aliados" y "nemesis" se computan al servir (ver tag-modelo.md §5).
+#   lealtad.faccion.{slug}  |  lealtad.subfaccion.{slug}  |  lealtad.escuadra.{slug}
+# Las refs resuelven contra los catálogos de facciones, subfacciones y escuadras.
+#
+# Los VÍNCULOS PERSONALES (a otro personaje) NO son tags. Viven en las colecciones
+# persistidas personaje.aliados[] y personaje.nemesis[], cada entrada con
+# { ref: <patente 8-char>, descripcion: str, desde?: ISO-8601 }. Ver hoja-modelo.md §3.4.

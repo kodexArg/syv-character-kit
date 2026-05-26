@@ -15,10 +15,20 @@ Este PRD ordena el trabajo de documentar **cinco entregables**:
 1. **Protocolo y reglas de construcción de personaje.** Schema, mutabilidad, derivaciones, sistema de tags.
 2. **Generador procedural con elementos estocásticos.** Algoritmo determinístico por rango + sampler de identidad + prosa LLM.
 3. **Contrato de API CRUD.** Endpoints, payloads, formas dinámicas; agnóstico al runtime.
-4. **Estructura MOCK inicial.** Dos escuadras casi simétricas (Confederación y Ejército Rojo), 11 personajes cada una, que sirven de plantilla viva para futuros ejércitos.
+4. **Estructura MOCK inicial.** Dos escuadras casi simétricas (Confederación Argentina y Ejército Rojo), 11 personajes cada una, que sirven de plantilla viva para futuros ejércitos.
 5. **Reglas del motor de batalla y encuentros — alcance squad vs squad.** Sistema balanceado, comprensible, **replicable en papel**, escrito como protocolos.
 
 Lo que se entrega es la documentación que permite construir todo lo anterior. La aplicación es responsabilidad de otro proyecto.
+
+### 1.1. Contexto del universo SyV
+
+El kit existe dentro del universo de *Subordinación y Valor*. Contexto mínimo necesario para que las decisiones de schema y motor de batalla mantengan fidelidad al lore — detalle completo en las fuentes canónicas al pie:
+
+- **Año 2178.** La guerra arrastra dieciocho años. El frente es la **Zanja de Alsina**, una franja de tierra arrasada que cruza el Valle de la Patagonia. Niebla helada, comunicaciones rotas, ningún bando logra ruptura.
+- **Confederación Argentina (azul).** Estado centralizado con base en **Ciudad Dársena**. Ejército Confederado: escuadras regulares de once, lideradas por un Sargento, cadena de mando formal.
+- **Ejército Rojo (rojo).** Conglomerado de milicias obreras y portuarias nacidas de la revolución fabril de **Bahía Blanca**. Sin uniformes estandarizados. Cada célula obedece a un **Camarada Puntero** elegido por convicción política más que por rango.
+- **Anatema Mecánico.** Prohibición universal de tecnología avanzada. Ambos bandos lo cumplen — la Confederación por decreto (Inquisición y Exorcistas), el Ejército Rojo por doctrina. **El kit asume el Anatema:** no hay drones, no hay computación en campo, no hay armamento "smart". Las armas son mecánicas; la coordinación es voz, gesto y banderín.
+- **Tres facciones secundarias** existen en el lore (Pueblos del Pantano, Salvajes, Poseídos) pero **están fuera del MVP** del kit.
 
 ---
 
@@ -83,11 +93,13 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 ## 5. Mocks — dos escuadras canon
 
-22 personajes, distribuidos en dos escuadras simétricas. Composición de cada escuadra: 1 + 1 + 1 + 1 + 4 + 3 (líder, segundo, apuntador, artillero, 4 fusileros, 3 reclutas). Fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
+22 personajes, distribuidos en dos escuadras simétricas. Composición de cada escuadra: 1 + 1 + 1 + 1 + 4 + 3 (líder, segundo, apuntador, artillero, 4 fusileros, 3 reclutas). FZA total de escuadra completa: 2+2+2+2+(4×1)+(3×1) = **15** (ver [reglamento canon](../syv-battle-game-system/reglamento/02_hoja_personaje.md)). Fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
 
-### 5.1. Escuadra Confederación (11)
+> **Columna `fixture_id`**: identificador del archivo en `mock/personajes/`, NO `personaje.identidad.slug`. El slug del personaje es una patente opaca `[A-Z0-9]{8}` que se asigna al persistir. La migración final de los mocks a patentes 8-char está pendiente ([OQ-12](docs/open-questions.md)).
 
-| # | `slug` (legado) | Rango | Nombre canon |
+### 5.1. Escuadra Confederación Argentina (11)
+
+| # | `fixture_id` | Rango | Nombre canon |
 |---|---|---|---|
 | 01 | `mock.confederacion.01.aguirre` | `lider_de_escuadra` | Sargento Walter Aguirre |
 | 02 | `mock.confederacion.02.sosa` | `segundo_al_mando` | Cabo Primero Sosa |
@@ -103,7 +115,7 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 ### 5.2. Escuadra Ejército Rojo (11)
 
-| # | `slug` (legado) | Rango | Nombre canon |
+| # | `fixture_id` | Rango | Nombre canon |
 |---|---|---|---|
 | 12 | `mock.ejercito_rojo.01.mansilla` | `lider_de_escuadra` | Camarada Puntero Ramón Mansilla |
 | 13 | `mock.ejercito_rojo.02.iturra` | `segundo_al_mando` | Segundo Camarada Iturra |
@@ -204,8 +216,9 @@ Convenciones de trabajo, identificadores, idioma, expresión de azar en porcenta
 
 *Fuentes canónicas externas referenciadas (no copiadas):*
 
-- `/Dev/syv-battle-game-system/reglamento/02_hoja_personaje.md` — esquema y matriz de stats por rango.
-- `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md` — pools de perks y complicaciones.
-- `/Dev/syv-battle-game-system/lore/universo.md` — descriptores de facción para contexto del LLM.
-- `/Dev/syv-battle-game-system/personajes/` — 22 fichas canon base que alimentan los mocks.
-- `https://github.com/kodexArg/syv-game-system/blob/main/arquitectura/esquemas/personaje.schema.json` — schema público de referencia.
+- [`/Dev/SyV/syv-battle-game-system/reglamento/`](../syv-battle-game-system/reglamento/) — reglamento del motor de batalla (hoja-personaje canon, atributos, perks, dados, loop de combate, entropía, finales).
+- [`/Dev/SyV/syv-battle-game-system/lore/universo.md`](../syv-battle-game-system/lore/universo.md) — síntesis MVP del universo: año 2178, Zanja de Alsina, las dos facciones jugables y las tres facciones secundarias.
+- [`/Dev/SyV/syv-battle-game-system/personajes/`](../syv-battle-game-system/personajes/) — fichas canon base que alimentan los mocks.
+- [`/Dev/SyV/syv-obsidian/docs/`](../syv-obsidian/docs/) — Obsidian vault completo del universo SyV (trasfondo, atlas, personajes principales, codex del Anatema Mecánico).
+- [`/Dev/SyV/syv/`](../syv/) — sitio público de lore (Astro).
+- `https://github.com/kodexArg/syv-game-system` — repo público del game system.

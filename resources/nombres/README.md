@@ -1,6 +1,6 @@
 # resources/nombres/
 
-Pool curado de nombres para el generador de identidad (ver [`gddr/01-flujo-obligatorio-creacion.md`](../../gddr/01-flujo-obligatorio-creacion.md) §1.3).
+Pool curado de nombres para el generador de identidad (ver [`gddr/01-flujo-obligatorio-creacion.md`](../../gddr/01-flujo-obligatorio-creacion.md) §2.3 — Fase 2, Nombre).
 
 ## Archivos
 

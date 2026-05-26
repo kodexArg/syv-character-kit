@@ -377,7 +377,7 @@ Los vínculos personales (a otro personaje) **no se expresan como tags**. Viven 
   tag de un nivel:           tags/{categoria}/{slug}.yaml
   tag con sub-categoría:     tags/{categoria}/{subcategoria}/{slug}.yaml
 
-Las categorías relacionales (`lealtad`, `nemesis`) **no tienen entradas en el catálogo**. Su semántica es del formato del tag, no del contenido. Las refs `pj.{slug}` y `faccion.{slug}` resuelven contra los catálogos de personajes y facciones.
+La categoría relacional `lealtad` **no tiene entradas en el catálogo**. Su semántica es del formato del tag, no del contenido. Las refs `faccion.{slug}`, `subfaccion.{slug}` y `escuadra.{slug}` resuelven contra los catálogos respectivos. Los vínculos personales (a otro personaje) no son tags — ver §5.1.
 
 ### 6.2. Indistinción mock/DB
 
@@ -401,7 +401,7 @@ El catálogo canon es **andamiaje, no jaula**. Tres ejes de extensibilidad sin p
 **Garantía**: un tag desconocido no rompe la hoja.
 **No promesa**: que dos generadores coincidan sobre cómo nombrar el mismo concepto.
 
-La fragmentación se mitiga con curaduría, no con validación. Ver PRD §6.6 y tensión 13.7.
+La fragmentación se mitiga con curaduría, no con validación. Ver tensiones [T-02](open-questions.md) y [T-07](open-questions.md).
 
 Para ver extensibilidad en uso real, consultar [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml) — los personajes 2 (chamán) y 4 (pandillero) usan tags `origen: custom` para roles narrativos que no existían antes.
 
@@ -409,17 +409,17 @@ Para ver extensibilidad en uso real, consultar [`tag-modelo-ejemplos.yaml`](tag-
 
 ## §8 — Open Questions
 
-### OQ-tag-2 — `slug` derivado vs persistido en el catálogo
-
-**Resuelta**: `slug` es campo obligatorio del archivo. Ambigüedad cero, redundancia segura.
+> Pendientes específicos del sistema de tags. Open questions de producto en [`open-questions.md`](open-questions.md).
 
 ### OQ-tag-3 — Catálogo de personajes históricos
 
-Personajes referenciados por `lealtad.pj.X` pero no presentes en el roster activo (ej. el Sargento Ricardo) caen al patrón de slug sintético (`lealtad.pj.sargento_ricardo_postmortem`). Pregunta abierta: ¿conviene crear un catálogo separado `mock/personajes_historicos/` para entradas mínimas (slug + nombre + breve nota)?
+Personajes referenciados por `aliados[].ref` o `nemesis[].ref` pero ausentes del roster activo (mentores caídos citados en vínculos, figuras del pasado). ¿Conviene crear un catálogo separado `mock/personajes_historicos/` con entradas mínimas (patente sintética + nombre + breve nota) o tolerar refs colgadas?
 
 - Costo: más curaduría.
 - Beneficio: refs estables, queryables, y prosa contextual disponible.
 
+Relacionado: [OQ-01](open-questions.md) y la tensión [T-04](open-questions.md) (sin validación de refs).
+
 ### OQ-tag-4 — `excluye` vs `no:` en `require_all`
 
-¿`excluye` agrega valor real sobre `require_all` con prefijo `no:`? Una lectura: `excluye` es más legible al declarar incompatibilidades desde el lado correcto, pero redundante con `no:`. Pendiente decidir si mantener ambos o consolidar en `no:` exclusivo.
+¿`excluye` agrega valor real sobre `require_all` con prefijo `no:`? `excluye` es más legible al declarar incompatibilidades desde el lado correcto, pero redundante con `no:`. Pendiente decidir si mantener ambos o consolidar en `no:` exclusivo.

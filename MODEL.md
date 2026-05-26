@@ -128,8 +128,8 @@ Composición vigente se reconstruye via inverted index sobre `personaje.tags[]` 
 
 - **Mocks son inmutables.** El backend marca los 22 personajes de `mock/personajes/**` como read-only. `POST /character/{slug}/event` → 409.
 - **Efímeros no se persisten.** `GET /character` sin canonizar nunca toca la base.
-- **Canonización es idempotente** por `(seed, faccion, rango)`. Hash de esa tupla actúa como llave única.
-- **`historial[]` es append-only.** No hay reverso de hito en v1 (ver [PRD §4](PRD.md)).
+- **Canonización es idempotente solo si hay `seed`.** Con seed presente, la tupla `(seed, faccion, rango)` actúa como llave única y reintentos no crean duplicados. Sin seed, cada `POST /canonize` genera un personaje nuevo (no hay idempotencia posible — el sorteo es ciego).
+- **`historial[]` es append-only.** No hay reverso de hito en v1 (ver [`PRD.md §8`](PRD.md) — "Fuera de este PRD").
 - **Tags fuera de catálogo se aceptan.** Cualquier valor en `personaje.tags[]` que no exista en `tag_catalogo` es legal — se persiste tal cual. Curaduría se hace por proceso, no por constraint.
 - **Referencias en `aliados[]`/`nemesis[]` no son FK.** Se aceptan refs colgadas (ver [T-04](docs/open-questions.md)).
 - **Idioma de los datos**: castellano rioplatense. Tags en lowercase + underscore, sin acentos.

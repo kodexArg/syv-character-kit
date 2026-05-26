@@ -17,7 +17,7 @@ Mapea: UC-09.
 **Casos que NO siguen la convención** (porque el payload difiere o agregan datos derivados):
 
 - `GET /meta/factions` — facciones con descriptor de lore corto.
-- `GET /meta/rangos` — rangos con tabla de stats, `mando` default, `estado` default, rol cultural por facción (ver PRD §7.2).
+- `GET /meta/rangos` — rangos con tabla determinística de stats, `mando` default y rol cultural por facción. Tabla canónica en [`gddr/01-flujo-obligatorio-creacion.md §3`](gddr/01-flujo-obligatorio-creacion.md).
 - `GET /meta/hito_types` — enum sugerido de tipos de hito (catálogo abierto; lista en [`docs/hoja-modelo.md §5`](docs/hoja-modelo.md)).
 - `GET /meta/escuadras/{slug}` — composición de escuadra por query inverso al tag `escuadra.{slug}`. **Fuera de v1 estricto**, sujeto a necesidad.
 

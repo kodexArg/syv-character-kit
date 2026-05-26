@@ -21,9 +21,9 @@ Política editorial y convenciones de trabajo del proyecto. Para entender QUÉ e
 
 ## Política de los docs del schema (`/docs/`)
 
-Mismo principio que el PRD: rolling release, sin versionado ni changelog. Los archivos `docs/hoja-modelo.md`, `docs/hoja-modelo.yaml`, `docs/tag-modelo.md`, `docs/tag-modelo.yaml` describen el estado vigente. Cualquier cambio se aplica como reescritura del párrafo o sección afectados; no se anota "antes era X".
+Mismo principio que el PRD: rolling release, sin versionado ni changelog. Todos los archivos bajo `docs/` (`hoja-modelo.{md,yaml}`, `tag-modelo.{md,yaml}`, `tag-modelo-ejemplos.yaml`, `tag-requeridos-por-categoria.md`, `atributos-y-efectos.md`, `user-stories.md`, `open-questions.md`, y cualquier doc nuevo) describen el estado vigente. Cualquier cambio se aplica como reescritura del párrafo o sección afectados; no se anota "antes era X".
 
-**Excepción tolerable**: una sub-sección final tipo "Open Questions" o "Pendientes" puede vivir en `tag-modelo.md` para enmarcar trabajo futuro. No es historia — es backlog.
+**Excepción tolerable**: open questions activas y backlog explícito viven en [`docs/open-questions.md`](docs/open-questions.md). Las que son específicas del sistema de tags pueden quedar en `tag-modelo.md §8`. No es historia — es backlog.
 
 ---
 
@@ -41,22 +41,25 @@ El directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) contiene los **
 
 ---
 
-## Aleatoriedad: agnóstica al sistema, expresada en porcentajes
+## Aleatoriedad: agnóstica al sistema, expresada en formato portable
 
-El kit **no fija** un sistema de resolución de azar. El motor de batalla, las herramientas downstream o una mesa concreta pueden adoptar el que prefieran (dados, cartas, tirada digital, lo que sea). Para que las fichas, tags y modificadores sean reutilizables entre sistemas, toda probabilidad, ventaja, penalización o bonificación se expresa como **valor porcentual**.
+El kit **no fija** un sistema de resolución de azar. El motor de batalla, las herramientas downstream o una mesa concreta pueden adoptar el que prefieran (dados, cartas, tirada digital, lo que sea). Para que las fichas, tags y modificadores sean reutilizables entre sistemas, toda magnitud se expresa con una de **tres formas portables** según el tipo:
 
-- **Probabilidades y modificadores siempre en %**: `-20% a la puntería`, `+50% a la defensa por cobertura media`, `+10% de iniciativa por entrenamiento`. Nunca en unidades específicas de un sistema concreto (no `+2 al d20`, no `-1d6 al daño`).
-- **Atributos en escala 0–9** (entero, más es mejor): `fis`, `tac`, `men`, `pun`, etc. La interpretación canónica sugerida es **decenas de porcentaje**: `3` ≈ 30–39%, `7` ≈ 70–79%. Esta lectura es solo referencia para diseño y balance; el sistema de resolución concreto decide cómo mapearla a su mecánica.
-- **Coexistencia con sistemas de referencia**: las GDDRs o documentos auxiliares pueden ilustrar mecánicas con un sistema concreto (p. ej. `3d6o1` — tres dados de seis, observando el dado objetivo que suele ser la mediana) **solo como ejemplo didáctico**. El contrato del kit sigue siendo el porcentaje; el ejemplo en dados es ilustrativo, no normativo.
-- **Aspectos** (tags con efecto mecánico) declaran sus modificadores como porcentajes, no como reglas atadas a un sistema. Un aspecto `cobertura_media` aporta `+50% defensa`, no "tirada con ventaja".
+- **Probabilidades de evento**: porcentaje. `40% de fallar el chequeo`, `5% de paniquear bajo fuego cruzado`. Nunca `tirada con desventaja` u otra expresión atada a un sistema concreto.
+- **Modificadores sobre atributos o stats calculadas**: delta entero sobre la escala canónica de la variable. `(+1) MENTAL`, `(-1) INICIATIVA`, `(+2) FATIGA`. Las variables y sus escalas viven en [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md). Estas son las "monedas" canónicas del kit; el motor downstream las mapea a su sistema.
+- **Modificadores sobre tasas o magnitudes continuas**: porcentaje sobre la magnitud. `-100% MOVIMIENTO` (inmóvil), `+50% defensa por cobertura media`. Útil cuando el efecto escala con el valor base.
 
-**Por qué.** SyV es un universo, no un sistema. Atar el schema a una mecánica concreta amputa la portabilidad. El porcentaje es lingua franca: cualquier sistema sabe convertirlo a su moneda local.
+**Atributos base** en escala `2..7` (entero, más es mejor): `fis`, `tac`, `men`. Topes y reglas de creación en [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md). La interpretación canónica sugerida es "decenas de porcentaje de éxito en chequeo roll-under" — referencia para diseño, no contrato.
+
+**Coexistencia con sistemas de referencia**: las GDDRs y documentos auxiliares pueden ilustrar mecánicas con un sistema concreto (p. ej. `3d10o1` — tres dados de diez, observando el dado objetivo, mediana) **como ejemplo didáctico**. El contrato del kit son las tres formas portables de arriba; el ejemplo en dados es ilustrativo, no normativo.
+
+**Por qué.** SyV es un universo, no un sistema. Atar el schema a una mecánica concreta amputa la portabilidad. El delta sobre escala canónica y el porcentaje sobre tasa son lingua franca: cualquier sistema sabe convertirlas a su moneda local.
 
 ---
 
 ## Convenciones de identificadores
 
-- **Slugs**: lowercase + underscore, sin acentos, sin guiones (`aguirre_walter`, `ejercito_rojo`, `lider_de_escuadra`). El separador uniforme es `_` para permitir composición en notación punto sin ambigüedad (`equipo.arma.pistola`, `lealtad.pj.aguirre_walter`).
+- **Slugs**: lowercase + underscore, sin acentos, sin guiones (`ejercito_rojo`, `lider_de_escuadra`, `mansilla`). El separador uniforme es `_` para permitir composición en notación punto sin ambigüedad (`equipo.arma.pistola`, `lealtad.escuadra.mansilla`). Excepción: el `identidad.slug` del personaje es **patente opaca** `^[A-Z0-9]{8}$` (ej. `K9F2H3M4`), no slug legible — ver [`docs/hoja-modelo.md §1.1`](docs/hoja-modelo.md).
 - **Tags**: notación punto `<categoria>[.<subcategoria>].<slug>`. Ver `docs/tag-modelo.md §2`.
 - **Campos estructurales en YAML**: `snake_case_castellano` (`escuadra`, `atributos`, `mando`).
 - **Idioma**: castellano rioplatense, voseo sobrio. Sin emojis salvo pedido explícito del usuario.
@@ -65,8 +68,9 @@ El kit **no fija** un sistema de resolución de azar. El motor de batalla, las h
 
 ## Trabajo con Claude / agentes de IA
 
-- Antes de cambiar el schema, asegurarse de que los 4 archivos de `/docs/` queden consistentes entre sí.
+- Antes de cambiar el schema, asegurarse de que **todos** los archivos bajo `/docs/` (más `PRD.md`, `API.md`, `MODEL.md`) queden consistentes entre sí. Sincronía estricta entre `API.md` y `MODEL.md`.
 - Después de cambios al schema, evaluar si los 22 mocks necesitan migración. Si sí, escribir el script Python en el mismo turno y aplicarlo.
-- El PRD se actualiza al final, cuando los docs del schema ya están estables. El PRD copia conceptos clave y enlaza a `/docs/` para los detalles. Evitar duplicación; preferir links.
+- El PRD se actualiza al final, cuando los docs del schema ya están estables. El PRD enlaza a `/docs/` y a `API.md`/`MODEL.md` para los detalles; no los duplica.
 - No agregar entradas de changelog. No agregar líneas "Versión: X". Si el modelo cambia, reescribir las secciones afectadas en lenguaje atemporal.
 - Los cambios destructivos sobre `mock/personajes/` se hacen solo cuando el usuario lo autoriza explícitamente — la prosa de `historia` e `historial[].descripcion` es contenido editorial irreplazable.
+- **Lore canon**: el universo SyV vive en `/Dev/SyV/syv-obsidian/` y `/Dev/SyV/syv-battle-game-system/`. Antes de inventar terminología (rangos, armas, geografía, facciones, vocabulario táctico), verificar contra esas fuentes para mantener fidelidad.

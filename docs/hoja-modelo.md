@@ -12,18 +12,20 @@
 
 ## §0 — Estructura de la hoja
 
-Seis bloques estructurados más la lista plana de tags:
+Seis bloques estructurales + dos colecciones persistidas + la lista plana de tags:
 
   personaje:
     identidad:    { slug, nombre, sobrenombre, rol, genero, edad }
     atributos:    { fis, tac, men }
     tags:         [...]      # lista plana de strings en notación punto
     historia:     str        # prosa biográfica congelada
-    historial:    [...]      # eventos temporales (hitos)
+    historial:    [...]      # hitos temporales
+    aliados:      [...]      # vínculos personales (ref + prosa)
+    nemesis:      [...]      # enemistades personales (ref + prosa)
     metadatos:    { creado_en, canonizado_en, ultima_actualizacion }
     extras:       object | null
 
-**Regla rectora**: todo lo que puede ser discreto y no es identidad, atributo, prosa o auditoría — es tag. La justificación detallada vive en [`tag-modelo.md` §1](tag-modelo.md).
+**Regla rectora**: todo lo que puede ser discreto y no es identidad, atributo, prosa, auditoría o vínculo personal con prosa — es tag. La justificación detallada vive en [`tag-modelo.md` §1](tag-modelo.md). `aliados[]` y `nemesis[]` son colecciones (no tags) porque llevan prosa por entrada — ver §3.4.
 
 ---
 
@@ -33,7 +35,7 @@ Quién es el personaje, fuera de su contexto operativo.
 
 ### 1.1. `slug` — la patente del personaje
 
-El `slug` es la **patente opaca** del personaje. No es su nombre. Es el identificador estable que el sistema usa para referenciarlo en cualquier vínculo (refs `lealtad.pj.{slug}`, `nemesis.pj.{slug}`, eventos del historial, ediciones por API).
+El `slug` es la **patente opaca** del personaje. No es su nombre. Es el identificador estable que el sistema usa para referenciarlo en cualquier vínculo: entradas de `aliados[].ref` y `nemesis[].ref` (ver §3.4), eventos del historial, ediciones por API.
 
   slug:
     formato_protocolo: ^[A-Z0-9]{8}$
@@ -138,7 +140,7 @@ Asimetría deliberada:
 - **Slug de tag** (catálogo): legible, lowercase + underscore. Ejemplos: `pistola`, `precision`, `ejercito_rojo`. Es la pieza humana de la dot notation. Ver [`tag-modelo.md` §2](tag-modelo.md).
 - **Slug de personaje** (`identidad.slug`): patente opaca `^[A-Z0-9]{8}$`. Ejemplo: `K9F2H3M4`. Ver §1.1.
 
-Cuando un tag relacional referencia un personaje (ej. `lealtad.pj.K9F2H3M4`), el segmento final es la patente del personaje, no su nombre. Cuando un tag relacional referencia una entidad del catálogo (ej. `lealtad.faccion.ejercito_rojo`), el segmento final es el slug legible de la entidad. La distinción operativa: tags son metadato curado y se leen; personajes son entidades del juego y se identifican por patente.
+Cuando un tag relacional referencia una entidad del catálogo (ej. `lealtad.faccion.ejercito_rojo`, `lealtad.escuadra.mansilla`), el segmento final es el slug legible de la entidad. Cuando un vínculo apunta a otro personaje, **no se usa tag** — se usa una entrada en `aliados[]` o `nemesis[]` con `ref: K9F2H3M4` (la patente). La distinción operativa: tags son metadato curado y se leen sin prosa; los vínculos personales llevan descripción narrativa y por eso son colecciones, no tags. Ver §3.4.
 
 ### 3.4. Aliados y némesis — colecciones persistidas
 
@@ -165,9 +167,9 @@ Vínculos dirigidos a otros personajes. **No son derivados de tags** — son col
 
 **Lifecycle**: ambas colecciones empiezan vacías. Se pueblan en caliente durante batalla o narrativa, vía hito `formacion_lealtad` (aliado) / `identificacion_nemesis` (némesis), o por curaduría directa.
 
-**Por qué persistidas y no derivadas**: la relación lleva prosa (descripción del vínculo). Un tag `lealtad.pj.X` solo puede afirmar el vínculo, no contarlo. Las colecciones llevan la textura narrativa que el motor downstream necesita.
+**Por qué colecciones y no tags**: la relación lleva prosa (descripción del vínculo). Un tag solo puede afirmar la relación, no contarla. Las colecciones llevan la textura narrativa que el motor downstream necesita.
 
-**Relación con tags `lealtad.*`**: las lealtades a facciones, subfacciones y escuadras siguen siendo tags (`lealtad.faccion.*`, `lealtad.subfaccion.*`, `lealtad.escuadra.*`) porque son membresías declarativas sin necesidad de prosa. Las lealtades personales (`lealtad.pj.*`) y enemistades personales (`nemesis.pj.*`) **dejan de ser tags** y viven en estas colecciones.
+**Relación con tags `lealtad.*`**: las lealtades a facciones, subfacciones y escuadras son tags (`lealtad.faccion.*`, `lealtad.subfaccion.*`, `lealtad.escuadra.*`) porque son membresías declarativas sin necesidad de prosa. Los vínculos personales (a otro personaje, aliado o enemistad) **no son tags** — viven exclusivamente en `aliados[]` y `nemesis[]` con descripción obligatoria.
 
 ### 3.3. Extensibilidad
 
@@ -185,7 +187,7 @@ Prosa biográfica original.
   idioma: Castellano rioplatense, primera persona narrativa.
   inmutable_tras: Canonización (persistir). Se congela como artefacto.
 
-**No-determinismo asumido**: la prosa es no-reproducible aun con seed. No existe semilla que la regenere idéntica — se persiste como artefacto, no como derivado. Por eso el campo `semilla` del schema v0.4.x fue eliminado.
+**No-determinismo asumido**: la prosa es no-reproducible aun con seed. No existe semilla que la regenere idéntica — se persiste como artefacto, no como derivado. El schema no expone un campo `semilla` sobre la hoja por esta razón.
 
 ---
 
@@ -213,7 +215,7 @@ Campos de auditoría. No mutables por hitos, solo por el motor.
   canonizado_en:       ISO-8601 | null   # fecha de persistir; null en efímeros
   ultima_actualizacion: ISO-8601    # se actualiza con cada hito
 
-Eliminados respecto a v0.4.x: `modelo_prosa` (no relevante) y `es_canon` (derivable de `canonizado_en != null`).
+`es_canon` se deriva de `canonizado_en != null` — no se persiste. El modelo generativo de la prosa no se rastrea en metadatos (la prosa es artefacto opaco una vez congelada).
 
 ---
 
@@ -254,45 +256,3 @@ Soporta cualquier llave y estructura anidada. Si un cliente necesita guardar alg
     - aliados, nemesis (contenedores)
     - sobrenombre (cuando es derivable)
 
----
-
-## §9 — Cambios respecto a v0.4.1
-
-Refactor mayor — v0.5.0 (rolling release a partir de ese punto).
-
-  identificador:
-    antes: id + origen + semilla
-    ahora: identidad.slug único — patente opaca [A-Z0-9]{8} generada al persistir.
-
-  bloque_faccion:
-    antes: faccion + filiacion + escuadra + rango + mando + estado (campos separados)
-    ahora: Tags faccion.*, subfaccion.*, escuadra.*, rango.*, mando.capaz, estado.*. Filiacion derivada al servir.
-
-  rol:
-    antes: Campo rol aislado.
-    ahora: identidad.rol como base narrativa (default "ciudadano"). Roles operativos como tags rol.{oficio,jerarquia,narrativo,mecanico}.*.
-
-  estado_vital:
-    antes: enum estado_salud + pools numéricos fatiga_max/actual, moral_max/actual.
-    ahora: Tags salud.* y mental.* acumulables. Pools máximos derivados al servir.
-
-  lealtades:
-    antes: { primaria, secundarias, secretos }
-    ahora: Tags lealtad.faccion.* / lealtad.subfaccion.* / lealtad.pj.* / lealtad.escuadra.*. Lealtades secundarias/secretas: sistema aparte TBD.
-
-  vinculos:
-    antes: [{tipo, ref, descripcion}]
-    ahora: Eliminado. Refs operativas → tags lealtad.* / nemesis.*. Prosa del vínculo → historia o historial.
-
-  tags:
-    antes: [{categoria, valor}]
-    ahora: Lista plana de strings: <categoria>[.<subcategoria>].<slug>.
-
-  nemesis:
-    nuevo: Categoría agregada — enemistad creada en caliente.
-
-  slug:
-    antes: lowercase con guiones; ambiguo
-    ahora: Patente opaca [A-Z0-9]{8} para personaje. Tags conservan slug legible.
-
-**Mocks**: los 22 fixtures fueron migrados parcialmente en v0.5.0 (modelo intermedio de bloques de tags). **Pendiente**: re-migración al modelo final de lista plana en notación punto + adopción de patentes 8-char en `identidad.slug`.

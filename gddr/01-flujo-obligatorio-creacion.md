@@ -9,7 +9,7 @@ Establecer la secuencia exacta de pasos necesarios para construir un personaje e
 ## Orden de fases
 
 ```
-Fase 1: Afiliación      → Rango, Facción, Subfacción
+Fase 1: Afiliación      → Rango, Facción, Subfacción, Escuadra
 Fase 2: Identidad       → Nombre, Sobrenombre, Edad, Género, …
 Fase 3: Atributos       → fis, tac, men (derivados de Fase 1)
 Fase 4: Resto           → tags adicionales, historia, historial, metadatos
@@ -63,16 +63,27 @@ Cada personaje arranca con **exactamente un** tag `faccion.*`. Catálogo canon e
 
 **Sorteo (fallback)**: uniforme 50/50 por defecto. Override por contexto de campaña.
 
-### 1.3. Subfacción (escuadra)
+### 1.3. Subfacción
 
-Cada personaje arranca con **exactamente un** tag `escuadra.*`. Catálogo canon en [`tags/escuadra/`](../tags/escuadra/):
+Cada personaje arranca con **exactamente un** tag `subfaccion.*`. Catálogo canon en [`tags/subfaccion/`](../tags/subfaccion/):
+
+- `pelicanos` *(Confederación)*
+- `ejercito_revolucionario_del_pueblo` *(Ejército Rojo)*
+
+**Sorteo (fallback)**: uniforme entre las subfacciones **compatibles con la facción** de §1.2. El catálogo de cada subfacción declara su `subfaccion.faccion_padre` (ver [`tag-modelo.md §4.2`](../docs/tag-modelo.md)).
+
+### 1.4. Escuadra
+
+Cada personaje activo arranca con **exactamente un** tag `escuadra.*`. Catálogo canon en [`tags/escuadra/`](../tags/escuadra/):
 
 - `mansilla` *(Ejército Rojo)*
-- `ricardo` *(Confederados)*
+- `ricardo` *(Confederación)*
 
-**Sorteo (fallback)**: uniforme entre las escuadras **compatibles con la facción** de §1.2.
+**Sorteo (fallback)**: uniforme entre las escuadras compatibles con la facción/subfacción de §1.2–§1.3.
 
-### 1.4. Reglas que esta fase puede imponer
+> Subfacción ≠ escuadra. La subfacción es organización política/militar a la que pertenece (`tags/subfaccion/`); la escuadra es la unidad táctica concreta (`tags/escuadra/`). Un mismo personaje porta ambos tags.
+
+### 1.5. Reglas que esta fase puede imponer
 
 Esta fase puede **restringir Género y Edad** de Fase 2 vía la tabla de reglas (ver §Reglas). Ejemplos típicos:
 
@@ -137,7 +148,7 @@ No se genera en este paso. El servidor asigna patente `^[A-Z0-9]{8}$` al persist
 
 ## Fase 3 — Atributos
 
-**Cero aleatoriedad**. Lookup determinista sobre el tag `rango.*` de Fase 1 (ver [GDDR-03](03-determinismo-atributos-por-rango.md)):
+**Cero aleatoriedad**. Lookup determinista sobre el tag `rango.*` de Fase 1:
 
 | Rango               | `fis` | `tac` | `men` | Total |
 |---------------------|------:|------:|------:|------:|
