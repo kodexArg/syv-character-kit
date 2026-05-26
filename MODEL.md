@@ -22,7 +22,7 @@ Resource principal. Servido por `GET /character/{slug}`, mutado por `POST /chara
 
 | Campo | Tipo | Mutable | Notas |
 |---|---|---|---|
-| `identidad.slug` | `str` `^[A-Z0-9]{8}$` | inmutable | PK. Asignada por el servidor al canonizar. `null` en efímeros. |
+| `identidad.slug` | `str` `^[A-Z0-9]{8}$` \| `null` | set una vez | PK. `null` en efímeros. Asignada por el servidor al canonizar. |
 | `identidad.nombre` | `str` | inmutable | Legible. No único. |
 | `identidad.sobrenombre` | `str \| null` | mutable (sin hito) | Derivable; `null` si no aplica. |
 | `identidad.rol` | `str` | mutable vía hito `ascenso`/`cambio_rol` | Default `"ciudadano"`. Narrativo, no operativo. |
