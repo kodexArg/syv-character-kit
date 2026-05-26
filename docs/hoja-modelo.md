@@ -16,9 +16,9 @@ aliases:
 > - **Propósito**: definir la estructura de la hoja de personaje campo por campo.
 > 
 > **Material de referencia**:
-> - [[hoja-modelo.yaml]] — template programático del personaje vacío.
+> - [hoja-modelo.yaml](hoja-modelo.yaml) — template programático del personaje vacío.
 > - [[tag-modelo|tag-modelo.md]] — sistema de tags: definición, categorías, catálogo.
-> - [[tag-modelo-ejemplos.yaml]] — cinco personajes ejemplo en composición.
+> - [tag-modelo-ejemplos.yaml](tag-modelo-ejemplos.yaml) — cinco personajes ejemplo en composición.
 
 ---
 

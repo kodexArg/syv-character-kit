@@ -1,10 +1,18 @@
+---
+title: "PRD — syv-character-kit"
+tags:
+  - syv/prd
+aliases:
+  - PRD
+  - Requerimientos
+---
+
 # PRD — syv-character-kit
 
-> **El producto es documentación, no una aplicación.** Este kit entrega la especificación completa necesaria para que cualquier equipo construya un sistema de personajes y combate de escuadras del universo *Subordinación y Valor* (SyV) — sin imponer lenguaje, framework, infraestructura ni stack.
->
-> Sólo se admiten scripts mínimos como apoyo a la documentación (ej. samplers de referencia), **todos sujetos a futura eliminación**. No hay servidor, no hay UI, no hay base de datos en este repo. Hay archivos: schemas, catálogos, protocolos, mocks y reglas.
->
-> Idioma: castellano rioplatense, voseo sobrio. Tags en notación punto. Payloads YAML en `snake_case_castellano`.
+> [!info] Visión General
+> - **El producto es documentación, no una aplicación.** Este kit entrega la especificación completa necesaria para que cualquier equipo construya un sistema de personajes y combate de escuadras del universo *Subordinación y Valor* (SyV) — sin imponer lenguaje, framework, infraestructura ni stack.
+> - **Scripts mínimos**: Sólo se admiten scripts mínimos como apoyo a la documentación (ej. samplers de referencia), **todos sujetos a futura eliminación**. No hay servidor, no hay UI, no hay base de datos en este repo. Hay archivos: schemas, catálogos, protocolos, mocks y reglas.
+> - **Convenciones**: Idioma: castellano rioplatense, voseo sobrio. Tags en notación punto. Payloads YAML en `snake_case_castellano`.
 
 ---
 
@@ -27,7 +35,7 @@ El kit existe dentro del universo de *Subordinación y Valor*. Contexto mínimo 
 - **Año 2178.** La guerra arrastra dieciocho años. El frente es la **Zanja de Alsina**, una franja de tierra arrasada que cruza el Valle de la Patagonia. Niebla helada, comunicaciones rotas, ningún bando logra ruptura.
 - **Confederación Argentina (azul).** Estado centralizado con base en **Ciudad Dársena**. Ejército Confederado: escuadras regulares de once, lideradas por un Sargento, cadena de mando formal.
 - **Ejército Rojo (rojo).** Conglomerado de milicias obreras y portuarias nacidas de la revolución fabril de **Bahía Blanca**. Sin uniformes estandarizados. Cada célula obedece a un **Camarada Puntero** elegido por convicción política más que por rango.
-- **Anatema Mecánico.** Prohibición universal de tecnología avanzada. Ambos bandos lo cumplen — la Confederación por decreto (Inquisición y Exorcistas), el Ejército Rojo por doctrina. **El kit asume el Anatema:** no hay drones, no hay computación en campo, no hay armamento "smart". Las armas son mecánicas; la coordinación es voz, gesto y banderín.
+- **Anatema Mecánico.** Prohibición universal de tecnología avanzada. Ambos bandos lo cumplen — la Confederación por decreto (Inquisición y Exorcistas), el Ejército Rojo por doctrina. **El kit asume el Anatema:** no hay drones, no hay computación en campo, no hay armamento \"smart\". Las armas son mecánicas; la coordinación es voz, gesto y banderín.
 - **Tres facciones secundarias** existen en el lore (Pueblos del Pantano, Salvajes, Poseídos) pero **están fuera del MVP** del kit.
 
 ---
@@ -36,23 +44,23 @@ El kit existe dentro del universo de *Subordinación y Valor*. Contexto mínimo 
 
 | Archivo | Propósito | Estado |
 |---|---|---|
-| [`PRD.md`](PRD.md) | Este documento. Visión y mapa. | vigente |
-| [`API.md`](API.md) | Contrato HTTP. Fuente de verdad de endpoints. | vigente |
-| [`MODEL.md`](MODEL.md) | Contrato de persistencia. Entidades, tipos, constraints. | vigente |
-| [`AGENTS.md`](AGENTS.md) | Política editorial y convenciones. | vigente |
-| [`docs/hoja-modelo.md`](docs/hoja-modelo.md) | Schema del personaje campo por campo. | vigente |
-| [`docs/hoja-modelo.yaml`](docs/hoja-modelo.yaml) | Template programático vacío. | vigente |
-| [`docs/escuadra-modelo.md`](docs/escuadra-modelo.md) | Schema de la escuadra y sus agregaciones tácticas. | vigente |
-| [`docs/escuadra-modelo.yaml`](docs/escuadra-modelo.yaml) | Template programático de la escuadra. | vigente |
-| [`docs/tag-modelo.md`](docs/tag-modelo.md) | Sistema de tags: notación, categorías, catálogo. | vigente |
-| [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml) | Template de entrada de catálogo. | vigente |
-| [`docs/tag-modelo-ejemplos.yaml`](docs/tag-modelo-ejemplos.yaml) | Cinco personajes ejemplo compuestos. | vigente |
-| [`docs/tag-requeridos-por-categoria.md`](docs/tag-requeridos-por-categoria.md) | Índice rápido de campos `(+)` por categoría. | vigente |
-| [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md) | Vocabulario canónico de atributos y stats calculadas. | vigente |
-| [`docs/user-stories.md`](docs/user-stories.md) | Catálogo de UCs ↔ endpoints. | vigente |
+| [PRD.md](PRD.md) | Este documento. Visión y mapa. | vigente |
+| [API.md](API.md) | Contrato HTTP. Fuente de verdad de endpoints. | vigente |
+| [MODEL.md](MODEL.md) | Contrato de persistencia. Entidades, tipos, constraints. | vigente |
+| [AGENTS.md](AGENTS.md) | Política editorial y convenciones. | vigente |
+| [docs/hoja-modelo.md](docs/hoja-modelo.md) | Schema del personaje campo por campo. | vigente |
+| [docs/hoja-modelo.yaml](docs/hoja-modelo.yaml) | Template programático vacío. | vigente |
+| [docs/escuadra-modelo.md](docs/escuadra-modelo.md) | Schema de la escuadra y sus agregaciones tácticas. | vigente |
+| [docs/escuadra-modelo.yaml](docs/escuadra-modelo.yaml) | Template programático de la escuadra. | vigente |
+| [docs/tag-modelo.md](docs/tag-modelo.md) | Sistema de tags: notación, categorías, catálogo. | vigente |
+| [docs/tag-modelo.yaml](docs/tag-modelo.yaml) | Template de entrada de catálogo. | vigente |
+| [docs/tag-modelo-ejemplos.yaml](docs/tag-modelo-ejemplos.yaml) | Cinco personajes ejemplo compuestos. | vigente |
+| [docs/tag-requeridos-por-categoria.md](docs/tag-requeridos-por-categoria.md) | Índice rápido de campos `(+)` por categoría. | vigente |
+| [docs/atributos-y-efectos.md](docs/atributos-y-efectos.md) | Vocabulario canónico de atributos y stats calculadas. | vigente |
+| [docs/user-stories.md](docs/user-stories.md) | Catálogo de UCs ↔ endpoints. | vigente |
 | Página Notion del proyecto | Tensiones asumidas (T-), OQs (OQ-), notas de arquitectura (N-). | página Notion del proyecto |
-| [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md) | Orden canónico de creación de personaje. | vigente (Fase 4 pendiente) |
-| `gddr/02-motor-batalla.md` | Reglas de combate squad vs squad. | **pendiente** |
+| [gddr/01-flujo-obligatorio-creacion.md](gddr/01-flujo-obligatorio-creacion.md) | Orden canónico de creación de personaje. | vigente (Fase 4 pendiente) |
+| [gddr/02-motor-batalla.md](gddr/02-motor-batalla.md) | Reglas de combate squad vs squad. | **pendiente** |
 | [`mock/personajes/`](mock/personajes/) | 22 fixtures canon (dos escuadras). | parcial (ver §5) |
 | [`mock/escuadras/`](mock/escuadras/) | Fixtures de escuadras (dos escuadras canon). | vigente |
 | [`tags/`](tags/) | Catálogo curado, sembrado por categoría. | vigente |
@@ -67,30 +75,30 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 - **El PRD es contrato; el repo es la documentación.** Este documento define forma y alcance. Cómo se implemente, dónde corra, qué stack use — fuera de scope.
 - **SOLID y open/close.** El schema extiende sin romper. Nuevos perks, tipos de hito, categorías de tag, facciones — sin migraciones, sin breaking changes.
-- **Tags como modelo de primera clase.** *Lo que puede ser tag, es tag.* Rasgos, skills, traits, perks, equipo, lealtades a facciones/escuadras. La frontera con los campos estructurales (`identidad`, `atributos`, `aliados`, `nemesis`, `historial`, `historia`, `metadatos`) está fijada en [`docs/hoja-modelo.md`](docs/hoja-modelo.md) y [`docs/tag-modelo.md`](docs/tag-modelo.md).
+- **Tags como modelo de primera clase.** *Lo que puede ser tag, es tag.* Rasgos, skills, traits, perks, equipo, lealtades a facciones/escuadras. La frontera con los campos estructurales (`identidad`, `atributos`, `aliados`, `nemesis`, `historial`, `historia`, `metadatos`) está fijada en [[hoja-modelo|docs/hoja-modelo.md]] y [[tag-modelo|docs/tag-modelo.md]].
 - **Customs libres + enums abiertos.** El producto acepta tags, sub-categorías y tipos de hito fuera del canon. El motor downstream interpreta. Tensión documentada en T-01.
-- **Stats determinísticos por rango; identidad sorteada.** En creación, `{fis, tac, men}` se derivan de una tabla fija ([GDDR-01 §3](gddr/01-flujo-obligatorio-creacion.md)). Cero aleatoriedad en stats. Nombre, género, edad, rasgos, skills/traits/perks, equipo e historia sí se sortean.
-- **Memoria viva como naturaleza del canonizado.** Un canonizado existe en el tiempo: nace, pelea, cambia. La ficha vigente no es la original. Mutaciones vía hitos en `historial[]`.
+- **Stats determinísticos por rango; identidad sorteada.** En creación, `{fis, tac, men}` se derivan de una tabla fija ([[01-flujo-obligatorio-creacion#Fase 3 — Atributos|GDDR-01 §3]]). Cero aleatoriedad en stats. Nombre, género, edad, rasgos, skills/traits/perks, equipo e historia sí se sortean.
+- **Memoria viva como naturaleza del canonizado.** Un canonizado existe in el tiempo: nace, pelea, cambia. La ficha vigente no es la original. Mutaciones vía hitos en `historial[]`.
 - **Reproducibilidad por seed para efímeros.** `(seed, faccion, rango)` produce el mismo personaje. Los canonizados pierden esta propiedad tras el primer hito (T-05).
 - **LLM solo para prosa, solo una vez.** El modelo generativo escribe `historia` en la creación. Al canonizar, se congela.
 - **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables; los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
 - **Agnosis al renderer.** El schema describe *qué* tiene un personaje, no *cómo* se muestra. Las categorías de tag son metadato semántico, no instrucción de presentación.
-- **Agnosis al sistema de azar.** Todas las probabilidades y modificadores se expresan en **porcentaje** sobre atributos en escala 0–9. Cualquier sistema de resolución (dados, cartas, digital) puede mapearlo a su moneda local. Ver [`AGENTS.md`](AGENTS.md) §"Aleatoriedad".
+- **Agnosis al sistema de azar.** Todas las probabilidades y modificadores se expresan en **porcentaje** sobre atributos en escala 0–9. Cualquier sistema de resolución (dados, cartas, digital) puede mapearlo a su moneda local. Ver [[AGENTS|AGENTS.md]] §"Aleatoriedad".
 - **GDDR como puente de diseño.** El diseño de juego precede al software. Las decisiones de mecánicas y uso de recursos viven en [`gddr/`](gddr/) y se referencian con los schemas/catálogos.
 
 ---
 
 ## 4. Schema y reglas
 
-**Forma de la hoja**: seis bloques estructurales (`identidad`, `atributos`, `historia`, `historial`, `aliados`, `nemesis`, `metadatos`, `extras`) más la lista plana `tags[]`. Definición autoritativa: [`docs/hoja-modelo.md`](docs/hoja-modelo.md).
+**Forma de la hoja**: seis bloques estructurales (`identidad`, `atributos`, `historia`, `historial`, `aliados`, `nemesis`, `metadatos`, `extras`) más la lista plana `tags[]`. Definición autoritativa: [[hoja-modelo|docs/hoja-modelo.md]].
 
-**Sistema de tags**: notación punto `<categoria>[.<subcategoria>].<slug>`, multiset, catálogo extensible, `requires` como documentación ejecutable. Definición autoritativa: [`docs/tag-modelo.md`](docs/tag-modelo.md).
+**Sistema de tags**: notación punto `<categoria>[.<subcategoria>].<slug>`, multiset, catálogo extensible, `requires` como documentación ejecutable. Definición autoritativa: [[tag-modelo|docs/tag-modelo.md]].
 
-**Mutabilidad**: el estado vigente del canonizado cambia vía hitos en `historial[]`. Tabla de campos mutables / inmutables / derivados en [`docs/hoja-modelo.md §8`](docs/hoja-modelo.md). Catálogo sugerido de `tipo` de hito en [`docs/hoja-modelo.md §5`](docs/hoja-modelo.md). Los hitos `agregar_tag` / `quitar_tag` son el mecanismo central de evolución.
+**Mutabilidad**: el estado vigente del personaje cambia vía hitos en `historial[]`. Tabla de campos mutables / inmutables / derivados en [[hoja-modelo#§8 — Mutabilidad: qué cambia y cómo|docs/hoja-modelo.md §8]]. Catálogo sugerido de `tipo` de hito en [[hoja-modelo#§5 — Historial|docs/hoja-modelo.md §5]]. Los hitos `agregar_tag` / `quitar_tag` son el mecanismo central de evolución.
 
-**Atributos y stats calculadas**: vocabulario canónico (`FISICO`, `TACTICO`, `MENTAL`, `INICIATIVA`, `MORAL`, `FATIGA`, `MOVIMIENTO`, `ESTRESS`) y su semántica de combate en [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md). Los efectos de los tags se declaran contra este vocabulario.
+**Atributos y stats calculadas**: vocabulario canónico (`FISICO`, `TACTICO`, `MENTAL`, `INICIATIVA`, `MORAL`, `FATIGA`, `MOVIMIENTO`, `ESTRESS`) y su semántica de combate en [[atributos-y-efectos|docs/atributos-y-efectos.md]]. Los efectos de los tags se declaran contra este vocabulario.
 
-**Generador procedural**: flujo obligatorio de creación, fases, sorteos ponderados, tabla determinística por rango en [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md).
+**Generador procedural**: flujo obligatorio de creación, fases, sorteos ponderados, tabla determinística por rango en [[01-flujo-obligatorio-creacion|gddr/01-flujo-obligatorio-creacion.md]].
 
 ---
 
@@ -98,7 +106,8 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 22 personajes, distribuidos en dos escuadras simétricas. Composición de cada escuadra: 1 + 1 + 1 + 1 + 4 + 3 (líder, segundo, apuntador, artillero, 4 fusileros, 3 reclutas). FZA total de escuadra completa: 2+2+2+2+(4×1)+(3×1) = **15** (derivado de `rol.combate.*` — ver §4). Fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
 
-> **Columna `fixture_id`**: identificador del archivo en `mock/personajes/`, NO `personaje.identidad.slug`. El slug del personaje es una patente opaca `[A-Z0-9]{8}` que se asigna al persistir. Los fixtures ya fueron migrados a este formato.
+> [!note] Identificadores de Fixtures
+> La columna `fixture_id` representa el identificador del archivo en `mock/personajes/`, NO el `personaje.identidad.slug`. El slug del personaje es una patente opaca `[A-Z0-9]{8}` que se asigna al persistir. Los fixtures ya fueron migrados a este formato.
 
 ### 5.1. Escuadra Confederación Argentina (11)
 
@@ -129,7 +138,7 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 | 18 | `mock.ejercito_rojo.07.soriano` | `fusilero` | Miliciano Veterano Soriano |
 | 19 | `mock.ejercito_rojo.08.belenchini` | `fusilero` | Miliciano Veterano Belenchini |
 | 20 | `mock.ejercito_rojo.09.bordon` | `recluta` | Voluntario Bordón |
-| 21 | `mock.ejercito_rojo.10.maturana` | `recluta` | Voluntario Maturana |
+| 21 | `mock.ejercito_rojo.maturana` | `recluta` | Voluntario Maturana |
 | 22 | `mock.ejercito_rojo.11.bordagaray` | `recluta` | Voluntario Bordagaray |
 
 **Inmutabilidad.** Los 22 mocks no aceptan hitos vía API (`POST /character/{slug}/event` → 409). Su evolución, si la hay, ocurre por reescritura del fixture.
@@ -138,25 +147,25 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 ## 6. API y casos de uso
 
-**Endpoints**: definidos en [`API.md`](API.md). Si una ruta no figura ahí, no existe en el contrato. La convención `GET /meta/{categoria}` expone catálogos curados sin requerir edición del contrato cuando aparecen categorías nuevas — la dinámica del catálogo de tags se traslada al endpoint.
+**Endpoints**: definidos en [[API|API.md]]. Si una ruta no figura ahí, no existe en el contrato. La convención `GET /meta/{categoria}` expone catálogos curados sin requerir edición del contrato cuando aparecen categorías nuevas — la dinámica del catálogo de tags se traslada al endpoint.
 
-**Casos de uso**: catálogo de UCs (UC-01..UC-23) y mapping inverso a endpoints en [`docs/user-stories.md`](docs/user-stories.md).
+**Casos de uso**: catálogo de UCs (UC-01..UC-23) y mapping inverso a endpoints en [[user-stories|docs/user-stories.md]].
 
-**Modelo de persistencia**: entidades y constraints en [`MODEL.md`](MODEL.md). Sincronía estricta con `API.md`.
+**Modelo de persistencia**: entidades y constraints en [[MODEL|MODEL.md]]. Sincronía estricta con [[API|API.md]].
 
 ---
 
 ## 7. Motor de batalla — squad vs squad
 
-**Entregable pendiente.** Sin documento todavía. Cuando se redacte, vivirá en `gddr/02-motor-batalla.md` y deberá:
+**Entregable pendiente.** Sin documento todavía. Cuando se redacte, vivirá en [[02-motor-batalla|gddr/02-motor-batalla.md]] y deberá:
 
 - Definir el ciclo de turno (iniciativa → orden → resolución → desgaste).
-- Especificar cómo se aplican los efectos declarados en los tags ([`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md)) durante el combate.
+- Especificar cómo se aplican los efectos declarados en los tags ([[atributos-y-efectos|docs/atributos-y-efectos.md]]) durante el combate.
 - Modelar la escuadra como unidad táctica: composición, `fza_aportada` agregada, moral de grupo, movimiento al ritmo del más lento.
 - Establecer las condiciones de victoria/derrota de un encuentro squad vs squad.
 - Ser **replicable en papel**: las reglas se escriben como protocolos secuenciales, no como pseudocódigo. Cualquier persona con la documentación debe poder arbitrar una batalla sin software.
 
-Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución descritas en [`docs/atributos-y-efectos.md §2`](docs/atributos-y-efectos.md) son el punto de partida.
+Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución descritas en [[atributos-y-efectos#2. Estadísticas Calculadas (Dinámicas en caliente)|docs/atributos-y-efectos.md §2]] son el punto de partida.
 
 ---
 
@@ -167,12 +176,12 @@ Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución de
 - Schema completo de la hoja de personaje.
 - Sistema de tags categorizado con catálogo curado y extensible.
 - Vocabulario canónico de atributos y stats calculadas.
-- Flujo obligatorio de creación (GDDR-01, Fases 1–3).
+- Flujo obligatorio de creación ([[01-flujo-obligatorio-creacion|GDDR-01]], Fases 1–3).
 - 2 facciones jugables con sus subfacciones (`pelicanos`, `ejercito_revolucionario_del_pueblo`).
 - 8 rangos operativos canon más `ciudadano`.
 - 22 mocks (dos escuadras simétricas) migrados a patentes opacas de 8-char y lista plana de tags.
-- Contrato de API HTTP (`API.md`).
-- Contrato de persistencia (`MODEL.md`).
+- Contrato de API HTTP ([[API|API.md]]).
+- Contrato de persistencia ([[MODEL|MODEL.md]]).
 - Catálogos `/meta/*` dinámicos por categoría de tag.
 - Schema completo e implementación mock de la entidad `escuadra` (OQ-06).
 
@@ -210,7 +219,7 @@ Consolidado en la página Notion del proyecto. Tres secciones:
 
 ## 10. Política editorial
 
-Convenciones de trabajo, identificadores, idioma, expresión de azar en porcentajes, rolling release y trato a los mocks: [`AGENTS.md`](AGENTS.md).
+Convenciones de trabajo, identificadores, idioma, expresión de azar en porcentajes, rolling release y trato a los mocks: [[AGENTS|AGENTS.md]].
 
 ---
 

@@ -16,8 +16,8 @@ aliases:
 > - **Propósito**: definir qué es un tag, cómo se escribe, qué puede expresar y cómo se relaciona con la hoja de personaje. La estructura de la hoja completa vive en [[hoja-modelo|hoja-modelo.md]].
 > 
 > **Material de referencia**:
-> - [[tag-modelo.yaml]] — template completo del archivo de catálogo de un tag.
-> - [[tag-modelo-ejemplos.yaml]] — cinco personajes que muestran cómo los tags componen una hoja real.
+> - [tag-modelo.yaml](tag-modelo.yaml) — template completo del archivo de catálogo de un tag.
+> - [tag-modelo-ejemplos.yaml](tag-modelo-ejemplos.yaml) — cinco personajes que muestran cómo los tags componen una hoja real.
 > - `tags/**/*.yaml` — catálogo canon sembrado; consultar para ver tags reales por categoría.
 
 ---
@@ -67,7 +67,7 @@ Un tag se escribe como un **string único** con la forma `<categoria>[.<subcateg
 
 **Resolución contra el catálogo**: el parser troza el tag por `.` y mapea segmentos a directorios. `equipo.arma.pistola` resuelve a `tags/equipo/arma/pistola.yaml`. Ver §6.
 
-Para ver tags concretos en uso compuesto sobre personajes, consultar [[tag-modelo-ejemplos.yaml]].
+Para ver tags concretos en uso compuesto sobre personajes, consultar [tag-modelo-ejemplos.yaml](tag-modelo-ejemplos.yaml).
 
 ---
 
@@ -133,7 +133,7 @@ El motor acepta tags fuera del canon. Marcalos con `origen: custom`. La coherenc
 
 Cada tag canon o emergente tiene una entrada en el catálogo. La filosofía es **mostrativa, no obligatoria**: cuatro campos son siempre requeridos. Todo lo demás es opcional y se declara solo si suma información real.
 
-El template completo con todos los campos posibles vive en [[tag-modelo.yaml]], usando dos marcas:
+El template completo con todos los campos posibles vive en [tag-modelo.yaml](tag-modelo.yaml), usando dos marcas:
 
 - `(*)` — campo obligatorio siempre.
 - `(+)` — campo obligatorio cuando la categoría o subcategoría lo demanda.
@@ -244,7 +244,7 @@ require_any:
 
 Cada familia de tag declara bloques propios para atributos exclusivos: `perk`, `skill`, `equipo_arma`, `equipo_vestidura`, `subfaccion`. Sus campos internos son opcionales salvo los marcados `(+)` en §4.2.
 
-El template completo de cada bloque vive en [[tag-modelo.yaml]]. Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `tags/`.
+El template completo de cada bloque vive en [tag-modelo.yaml](tag-modelo.yaml). Para ejemplos canon ya curados, consultar los archivos correspondientes bajo `tags/`.
 
 **Los tipos de tag aún no introducidos** (montura, vicio, mascota, etc.) no llevan template anticipado. Se documentan el día que aparece el primer caso real.
 
@@ -424,7 +424,7 @@ El catálogo canon es **andamiaje, no jaula**. Tres ejes de extensibilidad sin p
 
 La fragmentación se mitiga con curaduría, no con validación. Ver tensiones T-02 y T-07.
 
-Para ver extensibilidad en uso real, consultar [[tag-modelo-ejemplos.yaml]] — los personajes 2 (chamán) y 4 (pandillero) usan tags `origen: custom` para roles narrativos que no existían antes.
+Para ver extensibilidad en uso real, consultar [tag-modelo-ejemplos.yaml](tag-modelo-ejemplos.yaml) — los personajes 2 (chamán) y 4 (pandillero) usan tags `origen: custom` para roles narrativos que no existían antes.
 
 ---
 

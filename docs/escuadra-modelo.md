@@ -19,7 +19,7 @@ aliases:
 
 ## §1 — Propósito de la Entidad
 
-La **Escuadra** (`escuadra`) es la unidad táctica fundamental en *Subordinación y Valor*. Agrupa a un conjunto de combatientes ([[hoja-modelo|hojas de personaje]]) bajo una sola identidad operativa. Sirve para registrar la hoja de vida de la unidad mediante un historial de hitos, y para controlar y verificar la composición reglamentaria de las escuadras en base a plantillas de validación y un balance en puntos de reclutamiento (ver [[escuadra-modelo.yaml]]).
+La **Escuadra** (`escuadra`) es la unidad táctica fundamental en *Subordinación y Valor*. Agrupa a un conjunto de combatientes ([[hoja-modelo|hojas de personaje]]) bajo una sola identidad operativa. Sirve para registrar la hoja de vida de la unidad mediante un historial de hitos, y para controlar y verificar la composición reglamentaria de las escuadras en base a plantillas de validación y un balance en puntos de reclutamiento (ver [escuadra-modelo.yaml](escuadra-modelo.yaml)).
 
 ---
 
