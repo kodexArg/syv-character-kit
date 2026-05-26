@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+- group: docs-reconciliacion-slugs-ejemplo
+  priority: normal
+  commit: aea151b
+  changes:
+    - docs(tag-modelo-ejemplos.yaml): reconcile 8 example slug references to curated MVP catalog — resistencia_al_dolor→tenaz, lectura_de_terreno→terreno, conocimiento_de_meseta→meseta, lectura_de_mapas→cartografia, punteria_fria→cobertura, recarga_rapida→recarga, cobertura_instintiva removed (duplicate with cobertura), tiro_de_precision→precision
+    - docs(tag-modelo.md): update slug format example from tirador_preciso to precision (line 46)
+    - docs(tag-modelo.yaml): update slug format example from tirador_preciso to precision (line 16)
+    - docs(hoja-modelo.md): update slug format example from tirador_preciso to precision (line 138)
 - group: homologacion-mocks-catálogo-mvp
   priority: high
   commit: fb4a6a2
