@@ -95,7 +95,7 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 22 personajes, distribuidos en dos escuadras simétricas. Composición de cada escuadra: 1 + 1 + 1 + 1 + 4 + 3 (líder, segundo, apuntador, artillero, 4 fusileros, 3 reclutas). FZA total de escuadra completa: 2+2+2+2+(4×1)+(3×1) = **15** (derivado de `rol.combate.*` — ver §4). Fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
 
-> **Columna `fixture_id`**: identificador del archivo en `mock/personajes/`, NO `personaje.identidad.slug`. El slug del personaje es una patente opaca `[A-Z0-9]{8}` que se asigna al persistir. La migración final de los mocks a patentes 8-char está pendiente ([OQ-12](docs/open-questions.md)).
+> **Columna `fixture_id`**: identificador del archivo en `mock/personajes/`, NO `personaje.identidad.slug`. El slug del personaje es una patente opaca `[A-Z0-9]{8}` que se asigna al persistir. Los fixtures ya fueron migrados a este formato.
 
 ### 5.1. Escuadra Confederación Argentina (11)
 
@@ -130,8 +130,6 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 | 22 | `mock.ejercito_rojo.11.bordagaray` | `recluta` | Voluntario Bordagaray |
 
 **Inmutabilidad.** Los 22 mocks no aceptan hitos vía API (`POST /character/{slug}/event` → 409). Su evolución, si la hay, ocurre por reescritura del fixture.
-
-**Pendiente** ([OQ-12](docs/open-questions.md)): migración final de los fixtures al modelo de lista plana de tags + patentes 8-char en `identidad.slug`.
 
 ---
 
@@ -169,7 +167,7 @@ Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución de
 - Flujo obligatorio de creación (GDDR-01, Fases 1–3).
 - 2 facciones jugables con sus subfacciones (`pelicanos`, `ejercito_revolucionario_del_pueblo`).
 - 8 rangos operativos canon más `ciudadano`.
-- 22 mocks (dos escuadras simétricas).
+- 22 mocks (dos escuadras simétricas) migrados a patentes opacas de 8-char y lista plana de tags.
 - Contrato de API HTTP (`API.md`).
 - Contrato de persistencia (`MODEL.md`).
 - Catálogos `/meta/*` dinámicos por categoría de tag.
@@ -178,7 +176,6 @@ Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución de
 
 - GDDR-01 Fase 4 (tags adicionales, prosa, historial, metadatos en el flujo de creación).
 - GDDR-02: motor de batalla squad vs squad.
-- Migración final de los 22 mocks al modelo vigente ([OQ-12](docs/open-questions.md)).
 - Schema completo de la entidad `escuadra` ([OQ-06](docs/open-questions.md)).
 
 ### Fuera de este PRD

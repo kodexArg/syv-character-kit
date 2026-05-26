@@ -121,9 +121,6 @@ Si el catálogo retira un slug, los personajes que lo tienen no se actualizan. S
 
 `notas: list<{tag_ref, texto}>` permitiría persistir contexto narrativo atado a un tag específico sin contaminar el slug. Relacionado con T-10.
 
-### OQ-12 — Migración final de los 22 mocks al modelo de lista plana
-
-Bloqueada por la decisión sobre la prosa de `vinculos[].descripcion` (mover a `historia`, a entradas de `historial` con tipo `formacion_vinculo`, o descartar).
 
 ### OQ-13 — `excluye` vs `no:` en `require_all`
 
