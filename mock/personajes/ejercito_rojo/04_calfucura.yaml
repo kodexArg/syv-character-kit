@@ -7,7 +7,7 @@ personaje:
     genero: masculino
     edad: 34
   atributos:
-    fis: 3
+    fis: 4
     tac: 4
     men: 3
   tags:

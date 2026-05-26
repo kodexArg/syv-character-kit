@@ -9,7 +9,7 @@ personaje:
   atributos:
     fis: 3
     tac: 2
-    men: 2
+    men: 3
   tags:
   - faccion.confederados
   - subfaccion.pelicanos

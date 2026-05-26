@@ -8,8 +8,8 @@ personaje:
     edad: 38
   atributos:
     fis: 3
-    tac: 5
-    men: 6
+    tac: 4
+    men: 5
   tags:
   - faccion.ejercito_rojo
   - rango.segundo_al_mando
