@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: bordon_luciano
+    slug: LB7C8N2P
     nombre: Luciano Bordón
     sobrenombre: Voluntario Luciano Bordón
     rol: Voluntario — Recargador
@@ -40,21 +40,21 @@ personaje:
     descripcion: Recargador asignado del ametrallador. Aprende sin que le expliquen.
     ref_batalla: null
     metadata:
-      ref: calfucura_ignacio
+      ref: IC6P1R3X
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Le pidió a Mansilla aclaraciones doctrinarias una vez. La respuesta no le alcanzó.
     ref_batalla: null
     metadata:
-      ref: mansilla_ramon
+      ref: RM5F3C8T
   aliados:
-  - ref: calfucura_ignacio
+  - ref: IC6P1R3X
     descripcion: >
       El ametrallador siderúrgico. Bordón le carga el FAP y aprende mirándolo
       desencasquillar sin mirar. Calfucurá nunca le explica; Bordón nunca pregunta.
       Es la pedagogía más eficaz que conoció después de tres semestres de ingeniería.
     desde: '2026-03-20'
-  - ref: mansilla_ramon
+  - ref: RM5F3C8T
     descripcion: >
       El Camarada Puntero. Bordón le pidió aclaraciones doctrinarias sobre la
       contradicción antimaquinista. Mansilla le contestó con paciencia táctica

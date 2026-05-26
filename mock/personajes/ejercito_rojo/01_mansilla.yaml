@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: mansilla_ramon
+    slug: RM5F3C8T
     nombre: Ramón Mansilla
     sobrenombre: Camarada Puntero Ramón Mansilla
     rol: Líder Revolucionario
@@ -55,48 +55,48 @@ personaje:
       no se conocen en persona.
     ref_batalla: null
     metadata:
-      ref: aguirre_walter
+      ref: WA3K9F2H
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Instructor metalúrgico de Bahía Blanca, su mentor en lectura de mapas.
     ref_batalla: null
     metadata:
-      ref: mentor_metalurgico_bahia_blanca
+      ref: MM4B9L1X
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Iturra señalada como segunda en la formación de la escuadra.
     ref_batalla: null
     metadata:
-      ref: iturra_delia
+      ref: DI4K9M2P
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Antinao elegido como tirador de vanguardia para el objetivo.
     ref_batalla: null
     metadata:
-      ref: antinao_hector
+      ref: HA2D7N6B
   aliados:
-  - ref: mentor_metalurgico_bahia_blanca
+  - ref: MM4B9L1X
     descripcion: >
       El instructor que le enseñó a leer mapas cuando todavía redactaba
       comunicados sindicales en la imprenta del gremio. Mansilla guarda su
       cuaderno de anotaciones — letra apretada, márgenes con cálculos de
       escala. No volvió a verlo desde Stroeder.
     desde: '2024-03-01'
-  - ref: iturra_delia
+  - ref: DI4K9M2P
     descripcion: >
       La señaló como segunda al armar la escuadra. La conocía solo por expediente
       — cuatro acciones limpias, dos dedos quemados en la represión de la usina.
       Mansilla confía en gente que no necesita explicaciones. Iturra es de esa
       clase.
     desde: '2026-03-15'
-  - ref: antinao_hector
+  - ref: HA2D7N6B
     descripcion: >
       El tirador. Mansilla decide qué blanco; Antinao decide cuándo. División
       de trabajo aceptada por ambos sin conversarla. Mansilla anotó en su
       cuaderno: "no malgasta un tiro".
     desde: '2026-03-15'
   nemesis:
-  - ref: aguirre_walter
+  - ref: WA3K9F2H
     descripcion: >
       El Sargento azul del Sector 12,15. Mansilla anotó su nombre en el informe
       y recomendó eliminarlo antes de la siguiente operación. No se conocen en

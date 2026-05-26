@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: paine_rosa
+    slug: RP3N2K7M
     nombre: Rosa Painé
     sobrenombre: Miliciana Veterana Rosa Painé
     rol: Miliciana Veterana
@@ -41,9 +41,9 @@ personaje:
     descripcion: Comparte turnos largos con Soriano. Conversaciones cortas, silencios largos.
     ref_batalla: null
     metadata:
-      ref: soriano_norberto
+      ref: NS9B4D5F
   aliados:
-  - ref: soriano_norberto
+  - ref: NS9B4D5F
     descripcion: >
       El portuario de Madryn. Comparten turnos largos y la misma forma de no
       llenar el silencio. Painé respeta su forma de cargar peso a pesar de las

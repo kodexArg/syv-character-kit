@@ -1,0 +1,51 @@
+personaje:
+  identidad:
+    slug: RS0P2M7N
+    nombre: Ricardo Sargento
+    sobrenombre: El Sargento Ricardo
+    rol: Sargento Caído — Confederación
+    genero: masculino
+    edad: 41
+  atributos:
+    fis: 4
+    tac: 6
+    men: 5
+  tags:
+  - faccion.confederados
+  - rango.lider_de_escuadra
+  - escuadra.ricardo
+  - mando.capaz
+  - estado.muerto_en_combate
+  - rasgo.complexion_robusta
+  - rasgo.pelo_cano
+  - rasgo.manos_callosas
+  - rol.combate.lider
+  - rol.jerarquia.sargento
+  - skill.comandancia
+  - skill.terreno
+  - trait.imperturbable
+  - perk.estoico
+  - subfaccion.pelicanos
+  - npc.postmortem
+  historia: 'Ricardo no dejó autobiografía. Lo que quedó de él son las tareas que
+    asignó, las decisiones que tomó en silencio y el cuaderno que le pasó a Aguirre
+    antes del Sector 12,15. Entró a la Confederación diez años antes de que Aguirre
+    naciera como soldado — salió como Sargento porque los hombres que él formaba
+    sobrevivían más que los de los otros. No era carisma ni disciplina de manual:
+    era la costumbre de asignar trabajo difícil a quien podía hacerlo y no explicar
+    por qué. Murió en el Sector 12,15 durante una acción de flanqueo. Aguirre
+    organizó la retirada. Ricardo ya no estaba cuando el parche llegó, pero el
+    parche era para su escuadra.'
+  historial:
+  - fecha: '2026-03-12T14:20:00Z'
+    tipo: baja_en_combate
+    descripcion: Caído en el Sector 12,15 durante acción de flanqueo. Aguirre tomó el mando.
+    ref_batalla: batalla_sector_12_15
+    metadata: {}
+  aliados: []
+  nemesis: []
+  metadatos:
+    creado_en: '2026-05-26T00:00:00Z'
+    canonizado_en: '2026-05-26T00:00:00Z'
+    ultima_actualizacion: '2026-05-26T00:00:00Z'
+  extras: null

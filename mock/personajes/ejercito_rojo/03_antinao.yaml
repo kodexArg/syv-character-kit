@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: antinao_hector
+    slug: HA2D7N6B
     nombre: Héctor Antinao
     sobrenombre: Tirador Vanguardia Héctor Antinao
     rol: Tirador Vanguardia
@@ -43,22 +43,22 @@ personaje:
       que el otro lo había visto a él. Ninguno acertó. Lo guardó.
     ref_batalla: null
     metadata:
-      ref: quiroga_lisandro
+      ref: LQ5C8D3R
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Mansilla decide qué blanco. Antinao decide cuándo.
     ref_batalla: null
     metadata:
-      ref: mansilla_ramon
+      ref: RM5F3C8T
   aliados:
-  - ref: mansilla_ramon
+  - ref: RM5F3C8T
     descripcion: >
       El Camarada Puntero le indica el blanco; Antinao elige el momento. División
       del trabajo que no necesitan hablar. El cazador de meseta acepta que el
       hombre del cuaderno sepa qué cabeza vale el riesgo del operativo.
     desde: '2026-03-15'
   nemesis:
-  - ref: quiroga_lisandro
+  - ref: LQ5C8D3R
     descripcion: >
       El apuntador azul del filo del valle. Antinao lo vio en niebla y supo que
       el otro lo había visto. No es venganza — es respeto profesional con

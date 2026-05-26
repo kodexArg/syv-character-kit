@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: sosa_horacio
+    slug: HS7M4N1P
     nombre: Horacio Sosa
     sobrenombre: Cabo Primero Horacio Sosa
     rol: Cabo Primero Confederado
@@ -49,27 +49,27 @@ personaje:
     descripcion: Aguirre lo eligió personalmente. Aceptó sin preguntar.
     ref_batalla: null
     metadata:
-      ref: aguirre_walter
+      ref: WA3K9F2H
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Lugones es la recargadora móvil que él decide dónde poner.
     ref_batalla: null
     metadata:
-      ref: lugones_patricia
+      ref: PL3X2B9K
   aliados:
-  - ref: aguirre_walter
+  - ref: WA3K9F2H
     descripcion: >
       El Sargento lo eligió sin entrevistarlo y sin explicar. Sosa retribuye con
       la única forma que conoce: cuentas exactas, posición clara, ninguna
       pregunta innecesaria sobre el Sector 12,15.
     desde: '2026-04-10'
-  - ref: lugones_patricia
+  - ref: PL3X2B9K
     descripcion: >
       La recargadora móvil de la escuadra. Sosa la mueve según la situación y
       ella obedece sin chistar. Le enseña mirándola, no hablándole — es el
       sistema que conoce.
     desde: '2026-04-15'
-  - ref: funes_dardo
+  - ref: DF2T6G9X
     descripcion: >
       El artillero. Sosa le pasa el ritmo de munición por radio y Funes confirma
       sin agregar nada. Dos parcos que se entienden por dotaciones de cargador.

@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: rodriguez_marcela
+    slug: MR4B1K7S
     nombre: Marcela Rodríguez
     sobrenombre: Soldado de Primera Marcela Rodríguez
     rol: Fusilero de Primera
@@ -39,21 +39,21 @@ personaje:
     descripcion: Mismo pelotón de asignación con Olivares. Se conocen lo suficiente.
     ref_batalla: null
     metadata:
-      ref: olivares_tomas
+      ref: TO8P5H2N
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Misma escuadra que Pereyra por azar de numeración. Cuidado mudo.
     ref_batalla: null
     metadata:
-      ref: pereyra_graciela
+      ref: GP9D7K4C
   aliados:
-  - ref: olivares_tomas
+  - ref: TO8P5H2N
     descripcion: >
       Mismo pelotón de asignación desde el embarque. Se conocen lo suficiente
       como para saber cuándo el otro está funcionando mal. Marcela le ajusta el
       uniforme cuando lo ve mal puesto — costumbre de costurera, no afecto.
     desde: '2026-02-01'
-  - ref: pereyra_graciela
+  - ref: GP9D7K4C
     descripcion: >
       La patagónica de la escuadra. Por azar de numeración terminaron en la
       misma posición. Marcela aprendió a confiar en sus lecturas de viento;

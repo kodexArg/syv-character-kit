@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: calfucura_ignacio
+    slug: IC6P1R3X
     nombre: Ignacio Calfucurá
     sobrenombre: Ametrallador Ignacio Calfucurá
     rol: Ametrallador FAP
@@ -45,22 +45,22 @@ personaje:
       probablemente con almanaque y cinta etiquetada. Lo retuvo.
     ref_batalla: null
     metadata:
-      ref: funes_dardo
+      ref: DF2T6G9X
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Bordón le carga el arma. Calfucurá no le explica nada.
     ref_batalla: null
     metadata:
-      ref: bordon_luciano
+      ref: LB7C8N2P
   aliados:
-  - ref: bordon_luciano
+  - ref: LB7C8N2P
     descripcion: >
       El recargador estudiante. Calfucurá no le explica nada porque no sabe
       explicar — el oficio se aprende mirando. Bordón anota igual en su cuaderno,
       cosa que al ametrallador le parece innecesaria pero inofensiva.
     desde: '2026-03-20'
   nemesis:
-  - ref: funes_dardo
+  - ref: DF2T6G9X
     descripcion: >
       El otro FAP, del lado azul. Calfucurá lo escuchó disparar limpio, sin
       encasquillar, parejo en humedad alta. Lo identifica de oído. No es odio —

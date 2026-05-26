@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: mendez_ignacio
+    slug: IM1R8T5L
     nombre: Ignacio Méndez
     sobrenombre: Recluta Ignacio Méndez
     rol: Recluta — Recargador
@@ -46,9 +46,9 @@ personaje:
     descripcion: Recargador asignado del artillero Funes.
     ref_batalla: null
     metadata:
-      ref: funes_dardo
+      ref: DF2T6G9X
   aliados:
-  - ref: funes_dardo
+  - ref: DF2T6G9X
     descripcion: >
       El artillero al que le carga el FAP. Funes no le explica nada — Méndez
       aprende mirándolo cargar dos veces, verificando dos veces. A las pocas

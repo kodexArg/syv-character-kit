@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: acosta_ruben
+    slug: RA6N3F1M
     nombre: Rubén Acosta
     sobrenombre: Soldado de Primera Rubén Acosta
     rol: Fusilero de Primera
@@ -52,22 +52,22 @@ personaje:
       Lo retuvo.
     ref_batalla: null
     metadata:
-      ref: belenchini_esteban
+      ref: EB1M6T3R
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Recluta Ramírez le pregunta cuando no sabe. Acosta responde corto.
     ref_batalla: null
     metadata:
-      ref: ramirez_esteban
+      ref: ER7H6N4D
   aliados:
-  - ref: ramirez_esteban
+  - ref: ER7H6N4D
     descripcion: >
       El recluta bahiense que pregunta cuando no sabe. Acosta responde corto y
       sin paternalismo, que es como aprendió él mismo en el norte. Sin proponérselo
       le pasa el oficio entre frases secas.
     desde: '2026-04-15'
   nemesis:
-  - ref: belenchini_esteban
+  - ref: EB1M6T3R
     descripcion: >
       El flanqueador rojo del frente norte. Acosta lo vio de lejos antes de
       caer por la metralla — corpulento, cicatriz en la cara, paso largo. Dos

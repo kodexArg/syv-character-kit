@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: carcamo_fermin
+    slug: FC8T5H1N
     nombre: Fermín Cárcamo
     sobrenombre: Miliciano Veterano Fermín Cárcamo
     rol: Miliciano Veterano
@@ -40,9 +40,9 @@ personaje:
     descripcion: Ambos de Bahía Blanca. Hijos de la misma ciudad, oficios distintos.
     ref_batalla: null
     metadata:
-      ref: belenchini_esteban
+      ref: EB1M6T3R
   aliados:
-  - ref: belenchini_esteban
+  - ref: EB1M6T3R
     descripcion: >
       El otro bahiense. Comparten origen y poco más — Cárcamo viene del
       ferrocarril, Belenchini de la siderúrgica. La ciudad los une más que la

@@ -1,0 +1,51 @@
+personaje:
+  identidad:
+    slug: MM4B9L1X
+    nombre: Héctor Villagra
+    sobrenombre: El Instructor
+    rol: Instructor Sindical — Retirado
+    genero: masculino
+    edad: 58
+  atributos:
+    fis: 2
+    tac: 3
+    men: 7
+  tags:
+  - faccion.ejercito_rojo
+  - rango.sin_rango_activo
+  - mando.consultor
+  - estado.retirado
+  - rasgo.complexion_menuda
+  - rasgo.pelo_blanco
+  - rasgo.anteojos
+  - rasgo.manos_de_imprenta
+  - rol.soporte.instructor
+  - skill.cartografia
+  - skill.lectura_de_mapas
+  - skill.oratoria
+  - trait.meticuloso
+  - subfaccion.sindicato_metalurgico_bahia_blanca
+  - npc.mentor
+  historia: 'Villagra pasó veinte años en la imprenta del sindicato de metalúrgicos
+    de Bahía Blanca antes de que alguien le pusiera un mapa en las manos y le pidiera
+    que explicara la escala. Tenía cuarenta años. En tres meses enseñó a leer
+    cartografía a cuarenta y dos cuadros del movimiento — letra apretada, márgenes
+    con cálculos, la misma paciencia que usaba para corregir pruebas de imprenta.
+    Mansilla fue uno de sus alumnos, el más aplicado y el más obstinado. Villagra
+    le enseñó que un mapa dice más sobre quién lo dibujó que sobre el terreno.
+    Mansilla anotó esa frase al frente de su cuaderno. Desde Stroeder, Villagra
+    no tuvo noticias del comisario político. El cuaderno de anotaciones que le
+    dejó sigue en uso.'
+  historial:
+  - fecha: '2024-03-01T00:00:00Z'
+    tipo: formacion_cuadros
+    descripcion: Instruyó a Mansilla en lectura de mapas y cartografía táctica en Bahía Blanca.
+    ref_batalla: null
+    metadata: {}
+  aliados: []
+  nemesis: []
+  metadatos:
+    creado_en: '2026-05-26T00:00:00Z'
+    canonizado_en: '2026-05-26T00:00:00Z'
+    ultima_actualizacion: '2026-05-26T00:00:00Z'
+  extras: null

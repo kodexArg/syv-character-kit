@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: quiroga_lisandro
+    slug: LQ5C8D3R
     nombre: Lisandro Quiroga
     sobrenombre: Cabo Apuntador Lisandro Quiroga
     rol: Cabo Apuntador
@@ -51,21 +51,21 @@ personaje:
       ninguno de los dos. Quedaron como referencia recíproca.
     ref_batalla: null
     metadata:
-      ref: antinao_hector
+      ref: HA2D7N6B
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: El Sargento le pide lectura del terreno antes de cada despliegue.
     ref_batalla: null
     metadata:
-      ref: aguirre_walter
+      ref: WA3K9F2H
   aliados:
-  - ref: aguirre_walter
+  - ref: WA3K9F2H
     descripcion: >
       El Sargento le pide lectura del terreno antes de cada despliegue. Quiroga
       le devuelve frases cortas que valen. Confianza por oficio, no por afecto.
     desde: '2026-04-10'
   nemesis:
-  - ref: antinao_hector
+  - ref: HA2D7N6B
     descripcion: >
       Otro apuntador, del lado rojo. Se cruzaron en niebla en el filo del valle —
       Quiroga vio el destello de mira y entendió que del otro lado había alguien

@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: soriano_norberto
+    slug: NS9B4D5F
     nombre: Norberto Soriano
     sobrenombre: Miliciano Veterano Norberto Soriano
     rol: Miliciano Veterano
@@ -40,9 +40,9 @@ personaje:
     descripcion: Comparte turnos largos con Painé. Pocos verbos.
     ref_batalla: null
     metadata:
-      ref: paine_rosa
+      ref: RP3N2K7M
   aliados:
-  - ref: paine_rosa
+  - ref: RP3N2K7M
     descripcion: >
       La mapuche del lago Musters. Soriano confía en su lectura del terreno
       abierto a pesar de que ella diga que el abierto la pone nerviosa — o

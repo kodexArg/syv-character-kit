@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: olivares_tomas
+    slug: TO8P5H2N
     nombre: Tomás Olivares
     sobrenombre: Soldado de Primera Tomás Olivares
     rol: Fusilero de Primera
@@ -39,21 +39,21 @@ personaje:
     descripcion: Mismo pelotón desde el embarque con Rodríguez. Confianza tácita.
     ref_batalla: null
     metadata:
-      ref: rodriguez_marcela
+      ref: MR4B1K7S
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Pereyra llegó con ellos. Los tres terminaron en la misma escuadra.
     ref_batalla: null
     metadata:
-      ref: pereyra_graciela
+      ref: GP9D7K4C
   aliados:
-  - ref: rodriguez_marcela
+  - ref: MR4B1K7S
     descripcion: >
       Llegaron juntos del embarque y terminaron en la misma posición. Marcela le
       acomoda el uniforme sin avisar; él le devuelve análisis del terreno cuando
       ella se queda mirando. Acuerdo tácito de cuidados parejos.
     desde: '2026-02-01'
-  - ref: pereyra_graciela
+  - ref: GP9D7K4C
     descripcion: >
       Tercer vértice del triángulo que se armó en el embarque. Graciela conoce
       el terreno y Olivares conoce los sistemas — entre los dos compensan lo

@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: aguirre_walter
+    slug: WA3K9F2H
     nombre: Walter Aguirre
     sobrenombre: Sargento Walter Aguirre
     rol: Sargento Confederado
@@ -45,7 +45,7 @@ personaje:
     descripcion: Sargento Ricardo cayó en el Sector 12,15. Aguirre organizó la retirada.
     ref_batalla: batalla_sector_12_15
     metadata:
-      lider_caido: ricardo_sargento_postmortem
+      lider_caido: RS0P2M7N
   - fecha: '2026-03-20T09:00:00Z'
     tipo: ascenso
     descripcion: Ascendido a Sargento tras la pérdida de Ricardo.
@@ -58,33 +58,33 @@ personaje:
     descripcion: Hereda el parche y el peso del Sargento Ricardo, su mentor caído.
     ref_batalla: null
     metadata:
-      ref: ricardo_sargento_postmortem
+      ref: RS0P2M7N
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Eligió a Sosa como Cabo Primero al armar la escuadra nueva.
     ref_batalla: null
     metadata:
-      ref: sosa_horacio
+      ref: HS7M4N1P
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Le confía a Quiroga la lectura del terreno antes de cada despliegue.
     ref_batalla: null
     metadata:
-      ref: quiroga_lisandro
+      ref: LQ5C8D3R
   aliados:
-  - ref: ricardo_sargento_postmortem
+  - ref: RS0P2M7N
     descripcion: >
       El Sargento Ricardo lo formó con tareas, no con palabras. Cuando cayó en el
       Sector 12,15, Walter heredó el parche sin festejarlo. Lleva el cuaderno de
       Ricardo en el bolsillo de pecho — costumbre, no superstición.
     desde: '2025-08-01'
-  - ref: sosa_horacio
+  - ref: HS7M4N1P
     descripcion: >
       Lo eligió Cabo Primero por expediente, sin conocerlo del Sector 12,15. A las
       dos semanas confirmó la elección: Sosa no le pregunta cómo murió Ricardo y
       eso le alcanza. Confianza recíproca sin palabras.
     desde: '2026-04-10'
-  - ref: quiroga_lisandro
+  - ref: LQ5C8D3R
     descripcion: >
       El apuntador del sector. Aguirre le pide lectura del terreno antes de cada
       despliegue y Quiroga le devuelve frases cortas que valen. No son amigos —

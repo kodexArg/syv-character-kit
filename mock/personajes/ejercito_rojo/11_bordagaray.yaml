@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: bordagaray_sebastian
+    slug: SB6H1D8T
     nombre: Sebastián Bordagaray
     sobrenombre: Voluntario Sebastián Bordagaray
     rol: Voluntario — Recargador
@@ -39,22 +39,22 @@ personaje:
     descripcion: Mansilla notó su disposición a meterse adelante. Iturra dijo que eso podía matarlo.
     ref_batalla: null
     metadata:
-      ref: mansilla_ramon
+      ref: RM5F3C8T
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Llegaron tarde a la formación con Maturana. Se hicieron compañía sin proponérselo.
     ref_batalla: null
     metadata:
-      ref: maturana_claudio
+      ref: CM4X3F9K
   aliados:
-  - ref: mansilla_ramon
+  - ref: RM5F3C8T
     descripcion: >
       El Camarada Puntero lo identificó como el que va adelante cuando los
       demás retroceden. Bordagaray retribuye con esa misma disposición sin
       preguntarse si es virtud o problema. Lo que no le dice: el operativo de
       caza lo inquieta — no el peligro, la especificidad.
     desde: '2026-03-20'
-  - ref: maturana_claudio
+  - ref: CM4X3F9K
     descripcion: >
       El peón de estancia. Llegaron tarde los dos a la formación final y desde
       entonces se hacen compañía sin proponérselo. Bordagaray repara lo que

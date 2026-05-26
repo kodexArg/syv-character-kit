@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: belenchini_esteban
+    slug: EB1M6T3R
     nombre: Esteban Belenchini
     sobrenombre: Miliciano Veterano Esteban Belenchini
     rol: Miliciano Veterano
@@ -50,22 +50,22 @@ personaje:
       Mendoza por el acento que escuchó al gritar. Lo retuvo porque sobrevivió.
     ref_batalla: null
     metadata:
-      ref: acosta_ruben
+      ref: RA6N3F1M
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Ambos bahienses. La ciudad los une más que la doctrina.
     ref_batalla: null
     metadata:
-      ref: carcamo_fermin
+      ref: FC8T5H1N
   aliados:
-  - ref: carcamo_fermin
+  - ref: FC8T5H1N
     descripcion: >
       El ferroviario de Bahía Blanca. Belenchini viene de la siderúrgica;
       Cárcamo del puerto sur. La ciudad les ahorra explicaciones — saben de los
       mismos barrios y los mismos hijos esperando.
     desde: '2026-03-20'
   nemesis:
-  - ref: acosta_ruben
+  - ref: RA6N3F1M
     descripcion: >
       El fusilero mendocino del frente norte. Belenchini lo vio caer por su
       metralla pero después supo que había sobrevivido. La cicatriz que le dejó

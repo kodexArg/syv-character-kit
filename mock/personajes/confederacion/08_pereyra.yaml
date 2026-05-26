@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: pereyra_graciela
+    slug: GP9D7K4C
     nombre: Graciela Pereyra
     sobrenombre: Soldado de Primera Graciela Pereyra
     rol: Fusilero de Primera
@@ -40,21 +40,21 @@ personaje:
     descripcion: Misma escuadra que Rodríguez por azar de numeración.
     ref_batalla: null
     metadata:
-      ref: rodriguez_marcela
+      ref: MR4B1K7S
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Mismo pelotón de asignación con Olivares.
     ref_batalla: null
     metadata:
-      ref: olivares_tomas
+      ref: TO8P5H2N
   aliados:
-  - ref: rodriguez_marcela
+  - ref: MR4B1K7S
     descripcion: >
       Vinieron del mismo embarque. Marcela le cubre el flanco izquierdo cuando
       Pereyra avanza al derecho — un acuerdo que nunca conversaron pero ejecutan
       igual desde el primer despliegue.
     desde: '2026-02-01'
-  - ref: olivares_tomas
+  - ref: TO8P5H2N
     descripcion: >
       El porteño raro que ve los sistemas. Pereyra confía en sus lecturas
       tácticas, aunque las acompañe siempre alguna observación de filosofía que

@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: iturra_delia
+    slug: DI4K9M2P
     nombre: Delia Iturra
     sobrenombre: Segundo Camarada Delia Iturra
     rol: Cuadro Sindical Veterano
@@ -49,9 +49,9 @@ personaje:
     descripcion: Mansilla la señaló como segunda. Aceptó sin preguntar.
     ref_batalla: null
     metadata:
-      ref: mansilla_ramon
+      ref: RM5F3C8T
   aliados:
-  - ref: mansilla_ramon
+  - ref: RM5F3C8T
     descripcion: >
       El Camarada Puntero la eligió por expediente, sin entrevista. Iturra
       retribuye con disciplina y silencio sobre la mano que ya no cierra del

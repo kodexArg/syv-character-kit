@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: ramirez_esteban
+    slug: ER7H6N4D
     nombre: Esteban Ramírez
     sobrenombre: Recluta Esteban Ramírez
     rol: Recluta — Recargador
@@ -37,21 +37,21 @@ personaje:
     descripcion: Le pregunta a Acosta cuando no sabe. Acosta responde corto.
     ref_batalla: null
     metadata:
-      ref: acosta_ruben
+      ref: RA6N3F1M
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: 'El Sargento lo notó al segundo día: obedece con la rapidez del que sabe que no sabe.'
     ref_batalla: null
     metadata:
-      ref: aguirre_walter
+      ref: WA3K9F2H
   aliados:
-  - ref: acosta_ruben
+  - ref: RA6N3F1M
     descripcion: >
       El veterano del norte. Ramírez le pregunta cuando no sabe — sin pudor,
       porque a los dieciocho todavía no aprendió a fingir que sabe. Acosta le
       responde corto y se vuelve a la cobertura. Ese intercambio le basta.
     desde: '2026-05-10'
-  - ref: aguirre_walter
+  - ref: WA3K9F2H
     descripcion: >
       El Sargento. Ramírez le obedece con la rapidez del que sabe que no sabe.
       Walter lo notó el segundo día y desde entonces le pone tareas chicas,

@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: funes_dardo
+    slug: DF2T6G9X
     nombre: Dardo Funes
     sobrenombre: Soldado de Primera Dardo Funes
     rol: Artillero FAP Confederado
@@ -44,27 +44,27 @@ personaje:
       almanaque. Sabe identificarlo de oído.
     ref_batalla: null
     metadata:
-      ref: calfucura_ignacio
+      ref: IC6P1R3X
   - fecha: '2026-05-24T00:00:00Z'
     tipo: formacion_lealtad
     descripcion: Méndez es su recargador asignado. Funes le marca el ritmo del arma.
     ref_batalla: null
     metadata:
-      ref: mendez_ignacio
+      ref: IM1R8T5L
   aliados:
-  - ref: mendez_ignacio
+  - ref: IM1R8T5L
     descripcion: >
       El recargador asignado. Funes le marca el ritmo del arma sin explicarle
       teoría — el chaqueño aprendió que se aprende mirando. A los dos meses
       Méndez ya anticipa la próxima cinta antes de que Funes la pida.
     desde: '2026-04-15'
-  - ref: sosa_horacio
+  - ref: HS7M4N1P
     descripcion: >
       El Cabo Primero le pasa el conteo de munición por radio. Dos parcos que se
       entienden por dotaciones de cargador y nada más.
     desde: '2026-04-15'
   nemesis:
-  - ref: calfucura_ignacio
+  - ref: IC6P1R3X
     descripcion: >
       El otro artillero, el FAP rojo del filo del cañadón. Funes lo identifica
       por el ritmo de las ráfagas — el otro encasquilla cada cuarenta o cincuenta

@@ -1,6 +1,6 @@
 personaje:
   identidad:
-    slug: lugones_patricia
+    slug: PL3X2B9K
     nombre: Patricia Lugones
     sobrenombre: Recluta Patricia Lugones
     rol: Recluta — Recargador móvil
@@ -39,9 +39,9 @@ personaje:
     descripcion: Sosa la mueve según la situación. Aprende mirándolo.
     ref_batalla: null
     metadata:
-      ref: sosa_horacio
+      ref: HS7M4N1P
   aliados:
-  - ref: sosa_horacio
+  - ref: HS7M4N1P
     descripcion: >
       El Cabo Primero la mueve según la situación. Lugones aprende mirándolo
       coordinar: cuántos cargadores quedan en cada posición, dónde aparece la
