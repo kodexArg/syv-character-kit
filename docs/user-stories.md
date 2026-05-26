@@ -1,8 +1,17 @@
+---
+title: "User Stories — syv-character-kit"
+tags:
+  - syv/docs/use-cases
+aliases:
+  - user-stories
+  - Historias de Usuario
+---
+
 # User Stories — syv-character-kit
 
-> Catálogo de casos de uso del kit. Cada UC se mapea al endpoint que lo satisface en [`API.md`](../API.md). Si una historia no se puede satisfacer con un endpoint vigente, es señal de drift entre este archivo y `API.md`.
->
-> Convención: el "actor" es siempre un consumidor de la API, no un usuario humano final — el kit no tiene UI propia.
+> [!info] Contexto y Casos de Uso
+> - **Casos de Uso**: Catálogo de casos de uso del kit. Cada UC se mapea al endpoint que lo satisface en [[API|API.md]]. Si una historia no se puede satisfacer con un endpoint vigente, es señal de drift entre este archivo y [[API|API.md]].
+> - **Convención**: El "actor" es siempre un consumidor de la API, no un usuario humano final — el kit no tiene UI propia.
 
 ---
 
@@ -53,7 +62,7 @@
 
 ## 3. Operaciones por endpoint
 
-Vista inversa: para cada endpoint, qué UCs satisface. Sincroniza 1:1 con la tabla plana de [`API.md`](../API.md).
+Vista inversa: para cada endpoint, qué UCs satisface. Sincroniza 1:1 con la tabla plana de [[API|API.md]].
 
 | Método | Path | UCs |
 |---|---|---|
@@ -84,3 +93,4 @@ Comportamientos que el cliente debe asumir al invocar.
 - **Filtros `?tag=` admiten repetición** para AND lógico (`?tag=A&tag=B`). OR no está soportado en v1; el cliente lo resuelve con N calls + unión.
 - **Hitos custom son legales.** El `tipo` de hito es enum abierto; el motor downstream interpreta los desconocidos como no-op sobre campos vigentes.
 - **Vínculos personales (`aliados[]`, `nemesis[]`) no se filtran**. No hay `?tag=` para ellos — viven en colecciones, no en `tags[]`.
+
