@@ -88,11 +88,11 @@ Tres valores numéricos que definen la capacidad base.
 
   tac:
     significado: Precisión, coordinación, reflejos.
-    rango: 2..6                # hasta 6 en francotirador (especialista de tope)
+    rango: 2..6                # tope absoluto 6; creación máx 5; 6 solo vía hito
 
   men:
     significado: Liderazgo, moral base, resistencia psicológica.
-    rango: 2..7                # hasta 7 en líder de escuadra
+    rango: 2..7                # tope absoluto 7; creación máx 6; 7 solo vía hito
 
 **Determinísticos por rango en creación**. Mutables solo vía hito `triple_cero` o `mejora_atributo`. Son las **únicas magnitudes numéricas persistidas** — toda otra capacidad derivada (fatiga máxima, moral máxima, mando vigente, fza_aportada) se calcula en caliente con fórmulas fijas, no se persiste, para evitar drift.
 
