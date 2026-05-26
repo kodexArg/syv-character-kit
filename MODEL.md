@@ -64,7 +64,7 @@ Aparecen en la response de `GET /character` y `GET /character/{slug}` junto con 
 
 | Campo | Tipo | Notas |
 |---|---|---|
-| `ref` | `str` `^[A-Z0-9]{8}$` | Patente de otro `personaje`. Sin FK enforcement (ver [T-04](docs/open-questions.md)). |
+| `ref` | `str` `^[A-Z0-9]{8}$` | Patente de otro `personaje`. Sin FK enforcement (ver T-04). |
 | `descripcion` | `str` | Obligatorio. 1–3 frases sobre el vínculo. |
 | `desde` | `str` ISO-8601 \| `null` | Opcional. |
 
@@ -95,13 +95,13 @@ Catálogo de tags curados. Servido por `GET /meta/{categoria}`. Sembrado desde `
 
 **PK** sugerida: `(categoria, subcategoria, slug)` o el tag completo en notación punto como string.
 
-**Índice operativo**: inverted index `tag_full → set<personaje.slug>` reconstruido desde `personaje.tags[]` (ver [N-01](docs/open-questions.md)).
+**Índice operativo**: inverted index `tag_full → set<personaje.slug>` reconstruido desde `personaje.tags[]` (ver N-01).
 
 ---
 
 ## 3. `escuadra`
 
-Entidad implícita. Schema pendiente (ver [OQ-06](docs/open-questions.md)). Forma mínima asumida hasta entonces:
+Entidad implícita. Schema pendiente (ver OQ-06). Forma mínima asumida hasta entonces:
 
 | Campo | Tipo | Notas |
 |---|---|---|
@@ -133,5 +133,5 @@ Composición vigente se reconstruye via inverted index sobre `personaje.tags[]` 
 - **Canonización es idempotente solo si hay `seed`.** Con seed presente, la tupla `(seed, faccion, rango)` actúa como llave única y reintentos no crean duplicados. Sin seed, cada `POST /canonize` genera un personaje nuevo (no hay idempotencia posible — el sorteo es ciego).
 - **`historial[]` es append-only.** No hay reverso de hito en v1 (ver [`PRD.md §8`](PRD.md) — "Fuera de este PRD").
 - **Tags fuera de catálogo se aceptan.** Cualquier valor en `personaje.tags[]` que no exista en `tag_catalogo` es legal — se persiste tal cual. Curaduría se hace por proceso, no por constraint.
-- **Referencias en `aliados[]`/`nemesis[]` no son FK.** Se aceptan refs colgadas (ver [T-04](docs/open-questions.md)).
+- **Referencias en `aliados[]`/`nemesis[]` no son FK.** Se aceptan refs colgadas (ver T-04).
 - **Idioma de los datos**: castellano rioplatense. Tags en lowercase + underscore, sin acentos.

@@ -401,7 +401,7 @@ El catálogo canon es **andamiaje, no jaula**. Tres ejes de extensibilidad sin p
 **Garantía**: un tag desconocido no rompe la hoja.
 **No promesa**: que dos generadores coincidan sobre cómo nombrar el mismo concepto.
 
-La fragmentación se mitiga con curaduría, no con validación. Ver tensiones [T-02](open-questions.md) y [T-07](open-questions.md).
+La fragmentación se mitiga con curaduría, no con validación. Ver tensiones T-02 y T-07.
 
 Para ver extensibilidad en uso real, consultar [`tag-modelo-ejemplos.yaml`](tag-modelo-ejemplos.yaml) — los personajes 2 (chamán) y 4 (pandillero) usan tags `origen: custom` para roles narrativos que no existían antes.
 
@@ -409,7 +409,7 @@ Para ver extensibilidad en uso real, consultar [`tag-modelo-ejemplos.yaml`](tag-
 
 ## §8 — Open Questions
 
-> Pendientes específicos del sistema de tags. Open questions de producto en [`open-questions.md`](open-questions.md).
+> Pendientes específicos del sistema de tags. Open questions de producto en la página Notion del proyecto.
 
 ### OQ-tag-3 — Catálogo de personajes históricos
 
@@ -418,7 +418,7 @@ Personajes referenciados por `aliados[].ref` o `nemesis[].ref` pero ausentes del
 - Costo: más curaduría.
 - Beneficio: refs estables, queryables, y prosa contextual disponible.
 
-Relacionado: [OQ-01](open-questions.md) y la tensión [T-04](open-questions.md) (sin validación de refs).
+Relacionado: OQ-01 y la tensión T-04 (sin validación de refs).
 
 ### OQ-tag-4 — `excluye` vs `no:` en `require_all`
 

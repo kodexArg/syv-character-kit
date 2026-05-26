@@ -48,7 +48,7 @@ El kit existe dentro del universo de *Subordinación y Valor*. Contexto mínimo 
 | [`docs/tag-requeridos-por-categoria.md`](docs/tag-requeridos-por-categoria.md) | Índice rápido de campos `(+)` por categoría. | vigente |
 | [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md) | Vocabulario canónico de atributos y stats calculadas. | vigente |
 | [`docs/user-stories.md`](docs/user-stories.md) | Catálogo de UCs ↔ endpoints. | vigente |
-| [`docs/open-questions.md`](docs/open-questions.md) | Tensiones asumidas, OQs, notas de arquitectura. | vigente |
+| Página Notion del proyecto | Tensiones asumidas (T-), OQs (OQ-), notas de arquitectura (N-). | página Notion del proyecto |
 | [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md) | Orden canónico de creación de personaje. | vigente (Fase 4 pendiente) |
 | `gddr/02-motor-batalla.md` | Reglas de combate squad vs squad. | **pendiente** |
 | [`mock/personajes/`](mock/personajes/) | 22 fixtures canon (dos escuadras). | parcial (ver §5) |
@@ -65,10 +65,10 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 - **El PRD es contrato; el repo es la documentación.** Este documento define forma y alcance. Cómo se implemente, dónde corra, qué stack use — fuera de scope.
 - **SOLID y open/close.** El schema extiende sin romper. Nuevos perks, tipos de hito, categorías de tag, facciones — sin migraciones, sin breaking changes.
 - **Tags como modelo de primera clase.** *Lo que puede ser tag, es tag.* Rasgos, skills, traits, perks, equipo, lealtades a facciones/escuadras. La frontera con los campos estructurales (`identidad`, `atributos`, `aliados`, `nemesis`, `historial`, `historia`, `metadatos`) está fijada en [`docs/hoja-modelo.md`](docs/hoja-modelo.md) y [`docs/tag-modelo.md`](docs/tag-modelo.md).
-- **Customs libres + enums abiertos.** El producto acepta tags, sub-categorías y tipos de hito fuera del canon. El motor downstream interpreta. Tensión documentada en [T-01](docs/open-questions.md).
+- **Customs libres + enums abiertos.** El producto acepta tags, sub-categorías y tipos de hito fuera del canon. El motor downstream interpreta. Tensión documentada en T-01.
 - **Stats determinísticos por rango; identidad sorteada.** En creación, `{fis, tac, men}` se derivan de una tabla fija ([GDDR-01 §3](gddr/01-flujo-obligatorio-creacion.md)). Cero aleatoriedad en stats. Nombre, género, edad, rasgos, skills/traits/perks, equipo e historia sí se sortean.
 - **Memoria viva como naturaleza del canonizado.** Un canonizado existe en el tiempo: nace, pelea, cambia. La ficha vigente no es la original. Mutaciones vía hitos en `historial[]`.
-- **Reproducibilidad por seed para efímeros.** `(seed, faccion, rango)` produce el mismo personaje. Los canonizados pierden esta propiedad tras el primer hito ([T-05](docs/open-questions.md)).
+- **Reproducibilidad por seed para efímeros.** `(seed, faccion, rango)` produce el mismo personaje. Los canonizados pierden esta propiedad tras el primer hito (T-05).
 - **LLM solo para prosa, solo una vez.** El modelo generativo escribe `historia` en la creación. Al canonizar, se congela.
 - **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables; los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
 - **Agnosis al renderer.** El schema describe *qué* tiene un personaje, no *cómo* se muestra. Las categorías de tag son metadato semántico, no instrucción de presentación.
@@ -176,7 +176,7 @@ Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución de
 
 - GDDR-01 Fase 4 (tags adicionales, prosa, historial, metadatos en el flujo de creación).
 - GDDR-02: motor de batalla squad vs squad.
-- Schema completo de la entidad `escuadra` ([OQ-06](docs/open-questions.md)).
+- Schema completo de la entidad `escuadra` (OQ-06).
 
 ### Fuera de este PRD
 
@@ -197,7 +197,7 @@ Cuando alguno de estos elementos se vuelva relevante, irá a un PRD separado.
 
 ## 9. Tensiones, open questions y arquitectura
 
-Consolidado en [`docs/open-questions.md`](docs/open-questions.md). Tres secciones:
+Consolidado en la página Notion del proyecto. Tres secciones:
 
 - **Tensiones asumidas** (T-01..T-10) — decisiones con costo conocido.
 - **Open questions** (OQ-01..OQ-14) — sin decisión todavía.

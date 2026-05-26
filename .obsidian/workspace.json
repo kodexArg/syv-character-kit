@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "76900c2596601e6d",
+    "type": "split",
+    "children": [
+      {
+        "id": "b0049260e4db01db",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "586702fc860703b7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "skills/manejo_tags_proyecto.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "manejo_tags_proyecto"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e7795342f812ade9",
+    "type": "split",
+    "children": [
+      {
+        "id": "f593efbcaac8792e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ef8231121d7665bb",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "b6a19db69535fdd6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "c0ea703cf8f713ab",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "cd372d8741bf32dc",
+    "type": "split",
+    "children": [
+      {
+        "id": "b44e3dac2a0d57f4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8ef401e52a715f9b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "PRD.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for PRD"
+            }
+          },
+          {
+            "id": "af744db3a2f04a35",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "PRD.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from PRD"
+            }
+          },
+          {
+            "id": "ea950515dd432e58",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "9e8ec6e4c8a50b3d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "3f213b2709daef4d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "PRD.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of PRD"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "586702fc860703b7",
+  "lastOpenFiles": [
+    "PRD.md.tmp.650808.d041f88c4a6c",
+    "PRD.md.tmp.650808.79d5fbcff5c4",
+    "docs/tag-modelo.md.tmp.650808.f451541be5c8",
+    "docs/tag-modelo.md.tmp.650808.c84e5d544309",
+    "docs/tag-modelo.md.tmp.650808.aa01b58d2197",
+    "docs/tag-modelo.md.tmp.650808.c7362dc820c2",
+    "docs/tag-modelo.md.tmp.650808.91b53c0ae314",
+    "MODEL.md.tmp.650808.c3f95f5aa5f0",
+    "MODEL.md.tmp.650808.0e1c0bc6ad85",
+    "MODEL.md.tmp.650808.1bf7bb073b55",
+    "AGENTS.md.tmp.650808.7ba116a01fd3",
+    "gddr/01-flujo-obligatorio-creacion.md",
+    "skills/manejo_tags_proyecto.md",
+    "docs/user-stories.md",
+    "docs/tag-requeridos-por-categoria.md",
+    "docs/open-questions.md",
+    "docs/hoja-modelo.md",
+    "docs/atributos-y-efectos.md",
+    "PRD.md",
+    "resources/nombres/README.md",
+    "docs/tag-modelo.md"
+  ]
+}
