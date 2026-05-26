@@ -84,7 +84,7 @@ Tres valores numéricos que definen la capacidad base.
 
   fis:
     significado: Resistencia, potencia bruta.
-    rango: 2..5
+    rango: 2..5                # tope absoluto 5; creación máx 4; 5 solo vía hito
 
   tac:
     significado: Precisión, coordinación, reflejos.
