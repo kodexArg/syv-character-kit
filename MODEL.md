@@ -122,7 +122,26 @@ Composición vigente se reconstruye via inverted index sobre `personaje.tags[]` 
 | `nombre` | `str` | Legible. |
 | `descripcion` | `str` | Descriptor de lore corto. |
 
-`subfaccion` sigue el mismo modelo, con campo adicional `faccion_padre: str`. Vive en `tag_catalogo` bajo `categoria = subfaccion`.
+Servido por `GET /meta/factions`. Sembrado desde `tags/faccion/*.yaml`. Conjunto **cerrado-curado**: pocas facciones (2-3 hoy: `confederados`, `ejercito_rojo`), todas canon, referenciadas por la tabla de rangos y por la escuadra (§3).
+
+### 4.1. Relación `faccion` ↔ `subfaccion` (asimetría deliberada)
+
+`faccion` y `subfaccion` **no son simétricas**, y la diferencia es de diseño. Esta sección reemplaza la línea histórica "subfaccion sigue el mismo modelo" — no lo sigue.
+
+| Aspecto | `faccion` | `subfaccion` |
+|---|---|---|
+| Naturaleza | Entidad de primera clase (esta §4). | Categoría de `tag_catalogo` (§2). |
+| Cardinalidad | Cerrado-curado (2-3 hoy). | Abierto-emergente (cualquier grupo táctico, sindicato, célula). |
+| Endpoint | `GET /meta/factions` (dedicado). | `GET /meta/subfaccion` (genérico `/meta/{categoria}`). |
+| FK desde otras entidades | `escuadra.faccion_padre`; tabla de rangos. | Ninguna. Solo aparece en `personaje.tags[]`. |
+| Forma como membresía sobre personaje | Tag `faccion.{slug}` + `lealtad.faccion.{slug}`. | Tag `subfaccion.{slug}` + `lealtad.subfaccion.{slug}`. |
+| Pertenencia al padre | — | `subfaccion.faccion_padre: faccion.{slug}` (campo del tag, ver `docs/tag-modelo.md §4.2`). |
+
+**Por qué la asimetría es correcta**: `faccion` ancla la geometría operativa del juego (escuadras pertenecen a una facción, los rangos canónicos están definidos por facción, las batallas tienen bandos). Necesita identidad estable y endpoint dedicado. `subfaccion` agrupa narrativamente — un tercio, una célula, un sindicato armado — y el catálogo crece por curaduría a demanda. Forzarla a entidad de primera clase infla el modelo sin beneficio; degradar `faccion` a tag rompería las FK existentes.
+
+**Dualidad entidad+tag**: tanto `faccion` como `escuadra` son entidades persistidas **y** existen además como namespace de tag (`faccion.confederados`, `escuadra.{slug}`) para expresar membresía declarativa sobre `personaje.tags[]`. El slug del tag coincide con el PK de la entidad. Esta dualidad es el patrón canónico del kit cuando una entidad es referenciable como membresía narrativa sobre el personaje.
+
+**Pertenencia subfaccion → faccion**: vive en el catálogo (`subfaccion.faccion_padre`), no en la hoja del personaje. La hoja taggea ambas independientemente (`faccion.ejercito_rojo` + `subfaccion.ejercito_revolucionario_del_pueblo`); la coherencia entre las dos la sostiene la curaduría, no una constraint de schema (invariante "tags fuera de catálogo se aceptan", §5).
 
 ---
 
