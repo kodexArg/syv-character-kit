@@ -13,6 +13,15 @@
     - feat(mock/personajes): enrich 3 patagónicos confederados (aguirre, pereyra, lugones) with subfaccion.pelicanos; enrich 7 red army rojos with subfaccion.ejercito_revolucionario_del_pueblo (mansilla, iturra, carcamo, soriano, belenchini, bordon, bordagaray)
     - feat(mock/personajes): add 1 coherent perk to leaders/snipers without prior perk (estoico for líderes, cobertura for apuntadores); maintain recruits perk-free by heuristic
     - chore: 22 YAMLs parse OK; 111 unique tag refs all resolve; no schema breaks; bloque identidad/atributos/historia/historial/aliados/nemesis/metadatos/extras untouched
+- group: prd-reconciliacion-catálogo-mvp
+  priority: normal
+  commit: 88b5b5e
+  changes:
+    - docs(prd/§7.5): apuntador skill reference `tiro_de_precision` → `precision` (aligned to curated catalog)
+    - docs(prd/§8.5): milestone example slugs updated (`Lectura de columna`→`terreno`, `Cobertura instintiva`→`cobertura`, `rifle militar`→`rifle_militar`, `Miope`→`cobarde`/`confiable`); example narrative modified to reflect trait coherence
+    - docs(prd/§13.6): trait polarity examples updated from obsolete names (`Sangre fría`/`Voz grave`/`Obstinado`/`Miope`/`Objetivo prioritario`) to curated catalog (`imperturbable`/`veloz`/`impredecible`/`cobarde`/`fatigado`); design argument unchanged
+    - docs(prd/§13.9): "catálogo canon de 70 tags semilla (sección 9.1)" → "catálogo curado MVP"; removed dangling reference to non-existent section 9.1
+    - docs(prd/§11 Dentro de v1): "Pools canon ... metadato `rangos_naturales`" → "Pools curados de skill/trait/perk en `tags/`" (metadato not declared, only catalog structure mentioned)
 - group: peso-field-equipo
   priority: high
   commit: dd0a45f
