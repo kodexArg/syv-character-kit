@@ -19,7 +19,7 @@ personaje:
   - rasgo.altura_media
   - rasgo.delgado
   - rasgo.pelo_largo
-  - trait.discreta
+  - trait.discreto
   - rasgo.modales_suaves
   - rol.oficio.infanteria
   - skill.resistencia

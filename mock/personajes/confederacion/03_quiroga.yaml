@@ -41,7 +41,7 @@ personaje:
     descripcion: Ascendido a Cabo tras eliminar a operador de radio enemigo a 280m en llovizna.
     ref_batalla: null
     metadata:
-      rango_anterior: apuntador
+      rango_anterior: fusilero
       rango_nuevo: apuntador
   - fecha: '2026-04-22T11:00:00Z'
     tipo: identificacion_nemesis

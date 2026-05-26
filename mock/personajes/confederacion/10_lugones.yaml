@@ -23,7 +23,7 @@ personaje:
   - rol.oficio.recargador
   - skill.movimiento
   - skill.carga
-  - trait.discreta
+  - trait.discreto
   - trait.fatigado
   - subfaccion.pelicanos
   - equipo.arma.rifle_militar

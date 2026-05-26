@@ -23,7 +23,7 @@ personaje:
   - rol.oficio.recargador
   - skill.ametralladora
   - skill.doctrina
-  - trait.discreta
+  - trait.discreto
   - trait.cobarde
   - subfaccion.ejercito_revolucionario_del_pueblo
   - equipo.arma.smg
