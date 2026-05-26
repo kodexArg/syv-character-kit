@@ -1,8 +1,8 @@
 personaje:
   identidad:
     slug: WA3K9F2H
-    nombre: Walter Aguirre
-    sobrenombre: Sargento Walter Aguirre
+    nombre: Héctor Aguirre
+    sobrenombre: Sargento Héctor Aguirre
     rol: Sargento Confederado
     genero: masculino
     edad: 28
@@ -38,7 +38,7 @@ personaje:
   - lealtad.faccion.confederados
   - lealtad.subfaccion.pelicanos
   - lealtad.escuadra.ricardo
-  historia: 'Walter Aguirre es de Neuquén, aunque hace tres años que no pisa la provincia. Antes del servicio trabajaba con su padre en corte de madera en el alto valle — sabe leer el terreno boscoso porque pasó la infancia entre árboles que matan si no los respetás. Entró a la Confederación como conscripto, sobrevivió al primer invierno en el frente sur, y terminó de soldado de primera antes de que alguien notara que era más cuidadoso que la mayoría. El Sargento Ricardo lo eligió Cabo Primero al mes. No con palabras: con tareas que necesitaban hacerse bien, no rápido. En el Sector 12,15, cuando la radio se rompió y Ricardo cayó, Walter organizó la columna y sacó a todos. Semanas después llegó el parche. No lo festejó. La escuadra que le asignaron es nueva. Los va a cuidar o los va a perder, y las dos cosas lo mantienen despierto.'
+  historia: 'Héctor Aguirre es de Neuquén, aunque hace tres años que no pisa la provincia. Antes del servicio trabajaba con su padre en corte de madera en el alto valle — sabe leer el terreno boscoso porque pasó la infancia entre árboles que matan si no los respetás. Entró a la Confederación como conscripto, sobrevivió al primer invierno en el frente sur, y terminó de soldado de primera antes de que alguien notara que era más cuidadoso que la mayoría. El Sargento Ricardo lo eligió Cabo Primero al mes. No con palabras: con tareas que necesitaban hacerse bien, no rápido. En el Sector 12,15, cuando la radio se rompió y Ricardo cayó, Héctor organizó la columna y sacó a todos. Semanas después llegó el parche. No lo festejó. La escuadra que le asignaron es nueva. Los va a cuidar o los va a perder, y las dos cosas lo mantienen despierto.'
   historial:
   - fecha: '2026-03-12T14:20:00Z'
     tipo: cambio_mando
@@ -75,7 +75,7 @@ personaje:
   - ref: RS0P2M7N
     descripcion: >
       El Sargento Ricardo lo formó con tareas, no con palabras. Cuando cayó en el
-      Sector 12,15, Walter heredó el parche sin festejarlo. Lleva el cuaderno de
+      Sector 12,15, Héctor heredó el parche sin festejarlo. Lleva el cuaderno de
       Ricardo en el bolsillo de pecho — costumbre, no superstición.
     desde: '2025-08-01'
   - ref: HS7M4N1P
