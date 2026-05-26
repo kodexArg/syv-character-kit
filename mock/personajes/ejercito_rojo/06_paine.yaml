@@ -24,7 +24,7 @@ personaje:
   - rol.oficio.infanteria
   - skill.precision
   - skill.meseta
-  - trait.discreta
+  - trait.discreto
   - trait.cobarde
   - rasgo.rasgos_mapuche
   - perk.tenaz

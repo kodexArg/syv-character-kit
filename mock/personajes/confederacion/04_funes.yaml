@@ -24,7 +24,7 @@ personaje:
   - skill.ametralladora
   - skill.municion
   - trait.confiable
-  - trait.discreta
+  - trait.discreto
   - perk.recarga
   - equipo.arma.ametralladora
   - equipo.utilitario.cuchillo

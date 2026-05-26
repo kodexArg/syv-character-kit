@@ -23,7 +23,7 @@ personaje:
   - rol.oficio.recargador
   - skill.mecanica
   - skill.carga
-  - trait.determinada
+  - trait.determinado
   - trait.hemorragia_lenta
   - subfaccion.ejercito_revolucionario_del_pueblo
   - equipo.arma.smg

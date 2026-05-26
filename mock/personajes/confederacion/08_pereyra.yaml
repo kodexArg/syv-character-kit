@@ -23,7 +23,7 @@ personaje:
   - rol.oficio.infanteria
   - skill.flanqueo
   - skill.terreno
-  - trait.determinada
+  - trait.determinado
   - trait.gatillo_rapido
   - subfaccion.pelicanos
   - perk.cobertura
