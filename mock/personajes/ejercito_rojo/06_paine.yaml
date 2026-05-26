@@ -21,15 +21,16 @@ personaje:
   - rasgo.cara_curtida
   - rasgo.habla_parca
   - rol.oficio.infanteria
-  - skill.tiro_de_precision
-  - skill.conocimiento_de_meseta
-  - trait.reservada
-  - trait.panico_en_abierto
+  - skill.precision
+  - skill.meseta
+  - trait.discreta
+  - trait.cobarde
+  - rasgo.rasgos_mapuche
   - perk.tenaz
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.vestidura.ropa_de_civil
-  - lealtad.faccion.comunidad_mapuche
+  - lealtad.faccion.ejercito_rojo
   - lealtad.escuadra.mansilla
   historia: 'Rosa Painé tiene treinta años y viene de una comunidad mapuche al norte del lago Musters. No llegó al Ejército Rojo por el sindicato sino por el camino más largo: vio lo que la Confederación hizo a las tierras comunitarias de su zona cuando necesitaba espacio para sus líneas de comunicación, y decidió que el bando que se oponía a la Confederación era el suyo, al menos por ahora. La contradicción del Ejército Rojo con la maquinaria la siente más aguda que la mayoría. El Ejército dice ser antimaquinista pero usa fusiles, radio, camiones. Painé lo menciona de vez en cuando. La respuesta habitual es que las armas son una necesidad táctica transitoria. Ella asiente sin estar del todo convencida. En combate aprendió que el terreno abierto la pone nerviosa. Lo sabe. Lo trabaja. Hasta ahora no le ha costado la vida.'
   historial:

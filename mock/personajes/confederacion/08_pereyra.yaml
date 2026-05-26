@@ -22,10 +22,11 @@ personaje:
   - rasgo.mirada_firme
   - rol.oficio.infanteria
   - skill.flanqueo
-  - skill.lectura_de_terreno
+  - skill.terreno
   - trait.determinada
   - trait.gatillo_rapido
-  - perk.veterano_de_flanqueo
+  - subfaccion.pelicanos
+  - perk.cobertura
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado

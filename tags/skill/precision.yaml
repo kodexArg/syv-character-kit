@@ -1,6 +1,8 @@
 tag:
-  slug: tiro_de_precision
-  nombre: "Tiro de precisión"
+  slug: precision
+  nombre: "Precisión"
   categoria: skill
   descripcion: >
     Habilidad técnica para disparar armas de largo alcance maximizando la probabilidad de impacto.
+  skill:
+    atributo_dominante: tac

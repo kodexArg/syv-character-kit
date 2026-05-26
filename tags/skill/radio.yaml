@@ -1,6 +1,8 @@
 tag:
-  slug: operacion_de_radio
-  nombre: "Operación de radio"
+  slug: radio
+  nombre: "Radio"
   categoria: skill
   descripcion: >
     Uso y codificación de equipos de comunicación para mantener la coordinación con el alto mando.
+  skill:
+    atributo_dominante: men

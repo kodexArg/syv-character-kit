@@ -22,11 +22,12 @@ personaje:
   - rasgo.cicatriz_corporal
   - rasgo.voz_grave
   - rol.combate.lider
-  - skill.tiro_de_precision
+  - skill.precision
   - skill.coordinacion
-  - trait.sangre_fria
-  - trait.sombra_del_lider
-  - perk.sangre_fria
+  - trait.imperturbable
+  - trait.confiable
+  - perk.estoico
+  - subfaccion.ejercito_revolucionario_del_pueblo
   - equipo.arma.rifle_militar
   - equipo.arma.smg
   - equipo.utilitario.cargador

@@ -21,11 +21,10 @@ personaje:
   - rasgo.rostro_androgino
   - rasgo.habla_parca
   - rol.oficio.recargador
-  - skill.movimiento_sigiloso
-  - skill.lectura_del_viento
-  - trait.pragmatico
-  - trait.vacio_de_mando
-  - perk.olfato_del_terreno
+  - skill.sigilo
+  - skill.terreno
+  - trait.confiable
+  - trait.cobarde
   - equipo.arma.smg
   - equipo.utilitario.cargador
   - equipo.vestidura.ropa_de_civil

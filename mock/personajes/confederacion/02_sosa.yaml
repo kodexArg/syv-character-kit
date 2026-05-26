@@ -23,11 +23,11 @@ personaje:
   - rasgo.habla_parca
   - rol.combate.lider
   - skill.coordinacion
-  - skill.operacion_de_radio
+  - skill.radio
   - skill.inventario
   - trait.confiable
-  - trait.obstinado
-  - perk.brazo_derecho_funcional
+  - trait.terco
+  - perk.tenaz
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.utilitario.radio

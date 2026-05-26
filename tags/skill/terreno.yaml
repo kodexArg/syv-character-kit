@@ -1,6 +1,8 @@
 tag:
-  slug: lectura_de_terreno
-  nombre: "Lectura de terreno"
+  slug: terreno
+  nombre: "Terreno"
   categoria: skill
   descripcion: >
     Habilidad para leer las ventajas tácticas de cobertura y flanqueo que ofrece el entorno físico.
+  skill:
+    atributo_dominante: tac

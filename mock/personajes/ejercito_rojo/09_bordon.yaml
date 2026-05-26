@@ -21,11 +21,11 @@ personaje:
   - rasgo.anteojos
   - rasgo.manos_limpias
   - rol.oficio.recargador
-  - skill.manejo_de_ametralladora
+  - skill.ametralladora
   - skill.doctrina
-  - trait.intelectual
-  - trait.recluta_novato
-  - perk.disparo_de_oportunidad
+  - trait.discreta
+  - trait.cobarde
+  - subfaccion.ejercito_revolucionario_del_pueblo
   - equipo.arma.smg
   - equipo.utilitario.cargador
   - equipo.utilitario.cuaderno

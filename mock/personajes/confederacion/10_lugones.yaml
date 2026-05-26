@@ -23,9 +23,9 @@ personaje:
   - rol.oficio.recargador
   - skill.movimiento
   - skill.carga
-  - trait.observadora
-  - trait.peso_muerto
-  - perk.escudo_humano
+  - trait.discreta
+  - trait.fatigado
+  - subfaccion.pelicanos
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado

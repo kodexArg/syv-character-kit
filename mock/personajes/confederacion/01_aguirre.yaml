@@ -25,10 +25,11 @@ personaje:
   - rol.combate.lider
   - rol.jerarquia.sargento
   - skill.comandancia
-  - skill.lectura_de_terreno
-  - trait.mirada_larga
-  - trait.eco_del_penasco
-  - perk.sucesor_de_ricardo
+  - skill.terreno
+  - trait.imperturbable
+  - trait.vanguardia
+  - perk.estoico
+  - subfaccion.pelicanos
   - equipo.arma.rifle_militar
   - equipo.arma.pistola
   - equipo.utilitario.cargador

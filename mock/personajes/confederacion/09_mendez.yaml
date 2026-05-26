@@ -21,9 +21,10 @@ personaje:
   - rasgo.manos_curtidas
   - rasgo.postura_torcida
   - rol.oficio.recargador
-  - skill.manejo_de_ametralladora
+  - skill.ametralladora
+  - trait.cobarde
+  - trait.aguantador
   - perk.tenaz
-  - trait.recluta_novato
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.utilitario.bandolera
