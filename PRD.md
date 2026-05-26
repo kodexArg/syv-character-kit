@@ -1,617 +1,211 @@
 # PRD — syv-character-kit
 
-> **Documento vivo, rolling release.** Define el contrato de producto de la API generadora de personajes del universo *Subordinación y Valor* (SyV). No contiene decisiones de arquitectura, almacenamiento ni stack — solo el QUÉ. **El estado vigente es el único oficial**: no hay versiones, ni changelog, ni compatibilidad con el pasado. Para política editorial, ver [`AGENTS.md`](AGENTS.md).
+> **El producto es documentación, no una aplicación.** Este kit entrega la especificación completa necesaria para que cualquier equipo construya un sistema de personajes y combate de escuadras del universo *Subordinación y Valor* (SyV) — sin imponer lenguaje, framework, infraestructura ni stack.
 >
-> **Idioma**: castellano rioplatense, voseo sobrio.
-> **Convención de identificadores en payloads YAML**: `snake_case_castellano` para campos estructurales; los tags se escriben en **notación punto** (`<categoria>[.<subcategoria>].<slug>`) con slugs en lowercase + underscore, sin acentos.
-> **Fuente autoritativa del schema**: [`docs/hoja-modelo.md`](docs/hoja-modelo.md) (estructura del personaje) y [`docs/tag-modelo.md`](docs/tag-modelo.md) (sistema de tags). Este PRD describe el contrato de producto; los detalles del schema viven en /docs.
+> Sólo se admiten scripts mínimos como apoyo a la documentación (ej. samplers de referencia), **todos sujetos a futura eliminación**. No hay servidor, no hay UI, no hay base de datos en este repo. Hay archivos: schemas, catálogos, protocolos, mocks y reglas.
+>
+> Idioma: castellano rioplatense, voseo sobrio. Tags en notación punto. Payloads YAML en `snake_case_castellano`.
 
 ---
 
-## 1. Visión del producto
+## 1. Propósito
 
-`syv-character-kit` es una API HTTP que entrega fichas de personaje canónicas del universo SyV bajo demanda. Cada llamada produce un personaje listo para ser consumido por el motor de batalla, por herramientas de narrativa o por interfaces de exploración del universo.
+Este PRD ordena el trabajo de documentar **cinco entregables**:
 
-Los personajes existen en tres modos:
+1. **Protocolo y reglas de construcción de personaje.** Schema, mutabilidad, derivaciones, sistema de tags.
+2. **Generador procedural con elementos estocásticos.** Algoritmo determinístico por rango + sampler de identidad + prosa LLM.
+3. **Contrato de API CRUD.** Endpoints, payloads, formas dinámicas; agnóstico al runtime.
+4. **Estructura MOCK inicial.** Dos escuadras casi simétricas (Confederación y Ejército Rojo), 11 personajes cada una, que sirven de plantilla viva para futuros ejércitos.
+5. **Reglas del motor de batalla y encuentros — alcance squad vs squad.** Sistema balanceado, comprensible, **replicable en papel**, escrito como protocolos.
 
-- **Efímeros**: generados al vuelo, sin persistencia. Determinísticos por seed.
-- **Mocks**: 22 fixtures versionadas escritas a mano, importadas del corpus narrativo del battle-system. Inmutables.
-- **Canonizados**: persistidos por la API como parte del corpus oficial *de la API*. **Mutables y evolutivos**: acumulan historia.
-
-El producto encapsula tres fidelidades: al **reglamento** (matriz de stats, composición de escuadra), al **lore** (tono, geografía, nomenclatura por facción) y al **tiempo** (un personaje canonizado existe y cambia).
-
-## 2. Problema y oportunidad
-
-El ecosistema SyV está repartido en tres repositorios con responsabilidades distintas (`syv` — sitio público; `syv-game-system` — esquemas y reglas abstractas; `syv-battle-game-system` — reglamento de combate y fichas de origen). Cada producto que necesita personajes los inventa por su cuenta o copia fichas manualmente.
-
-`syv-character-kit` resuelve esto siendo **la fuente única de personajes** del ecosistema. Concentra las tablas curadas (nombres, conceptos, skills, traits, perks, equipamiento), aplica la matriz determinística por rango, delega a un modelo generativo solo la prosa inicial, y — diferencial de esta versión — **administra el ciclo de vida del personaje canonizado**: nace, pelea, cambia, queda registrado.
-
-El diferencial frente a un generador clásico es la memoria viva. Cualquier consumidor pide un personaje en t1 y en t2 y recibe **el mismo personaje en estados distintos**, no dos personajes nuevos.
-
-## 3. Usuarios y consumidores previstos
-
-La API no tiene UI propia: sus clientes son otros componentes del ecosistema SyV.
-
-- **Motor de batalla**: pide escuadras completas para escenarios. Reporta hitos posteriores (triple-0, baja, captura) para que la API los registre en el `historial` del personaje canonizado.
-- **Generador de escenarios y aventuras**: pide PNJs con tono y stats coherentes al sector geográfico. Crea principalmente efímeros.
-- **Sitio público de lore**: muestra galerías de canonizados con su biografía vigente (no la original). Permite "tirar un personaje al azar" como herramienta de inmersión.
-- **Herramientas narrativas internas**: redactores que canonizan personajes notables y agregan hitos manuales ("ascendido", "trasladado", "amputación").
-- **Pipelines de QA del reglamento**: tests que ejercitan el motor contra los 22 mocks y miden desbalances.
-
-## 4. Principios de diseño
-
-- **SOLID y open/close como pilar.** El schema se diseña desde el día uno para extenderse sin romperse. Nuevos perks, nuevos tipos de hito, nuevas categorías de equipamiento, nuevas facciones — se agregan sin migraciones, sin breaking changes. Si una decisión de diseño nos obligaría a romper esto, se rechaza la decisión.
-- **Customs libres + enums abiertos como política deliberada.** El producto acepta tags `skill`/`trait`/`perk` con valores fuera del canon. Los enums (`tipo` de hito, `tipo` de vínculo, sub-categoría de tag, etc.) tienen valores **sugeridos** pero no rechazan otros. **Tensión asumida**: el motor downstream que consuma estos customs tiene que poder interpretarlos. Ver sección 12.
-- **Stats determinísticos por rango, identidad sorteada.** En creación, los atributos `{fis, tac, men}` se derivan de una tabla fija por rango operativo (ver [GDDR-01 §3](gddr/01-flujo-obligatorio-creacion.md)). Cero aleatoriedad en stats. Nombre, género, edad, rasgos, skills/traits/perks, equipamiento e historia sí se sortean. Ascensos posteriores **no** mueven stats — solo lo hacen hitos narrativos como `triple_cero` o `mejora_atributo`.
-- **Memoria viva como naturaleza del recurso canonizado.** Un canonizado tiene historial y muta. No es un payload; es una entidad. Ver sección 8.
-- **Reproducibilidad por seed para efímeros.** Toda creación admite `?seed=`. La misma `(seed, faccion, rango)` produce el mismo personaje, incluida la prosa inicial. **Limitación aceptada**: los canonizados pierden esta propiedad tras el primer hito.
-- **LLM solo para prosa, solo una vez.** El modelo generativo escribe el campo `historia` en la creación efímera. Si el personaje se canoniza, esa prosa se congela.
-- **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables del battle-system. Los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
-- **El PRD es contrato; el repo es implementación.** Este documento define formas y reglas. Cómo se almacenan tablas, dónde corre el LLM, qué binding usa la persistencia — fuera de scope.
-- **Agnosis al renderer.** El schema describe *qué* tiene un personaje, no *cómo* se muestra. Los tags se agrupan por categorías para que cualquier consumidor (CLI ASCII, UI web, motor de batalla, exportador a PDF) decida cómo presentarlos como secciones visuales. El modelo no impone una forma de renderizado. Una misma hoja puede aparecer como bloques ASCII, tarjetas, filas de tabla, o grafo de relaciones — todas son vistas válidas del mismo recurso.
-- **Tags como modelo de primera clase.** La regla es: *"lo que puede ser tag, es tag."* Rasgos físicos, habilidades aprendidas, ventajas mecánicas, condiciones de carácter, inventario de equipo — todo eso es un tag categorizado. Lo que NO es tag: identidad (`nombre`, `sobrenombre`, `edad`, `genero`), `atributos`, `vinculos` (aliados/némesis con prosa), `historial`, `historia`, `metadatos`. La frontera es deliberada: el campo estructurado se usa cuando el motor necesita acceso semántico directo sin parsear una lista. Todo lo demás convive en `tags[]` con categorías abiertas. Esto permite extender el modelo de personaje sin agregar campos, sin migraciones, sin breaking changes. Las categorías canon actuales son: `rasgo`, `rol`, `skill`, `trait`, `perk`, `efecto`, `faccion`, `subfaccion`, `rango`, `escuadra`, `mando`, `estado`, `salud`, `mental`, `lealtad`, `nemesis`, y la familia jerárquica `equipo.{arma,utilitario,vestidura}`.
-- **GDDR (Game Design Decision Record) como puente de diseño.** En este kit de gestión de personajes de *Subordinación y Valor*, el diseño de juego precede al software. Las decisiones de diseño de mecánicas y uso de recursos se asientan en el directorio [`gddr/`](file:///Dev/SyV/syv-character-kit/gddr/) sin mezclarse con la lógica de la API o la infraestructura. Los GDDRs definen cómo queremos que se utilicen los archivos que hemos preparado (modelos, schemas y tags) y se referencian mutuamente con ellos, usando incluso los personajes de `mock/personajes/` como ejemplos prácticos de diseño.
-
-## 5. Casos de uso
-
-| # | Como… | Quiero… | Para… |
-|---|---|---|---|
-| UC-01 | motor de batalla | pedir un personaje al azar sin restricciones | rellenar un slot vacío en un escenario |
-| UC-02 | generador de escenarios | pedir un personaje filtrando por facción | poblar una escuadra de Ejército Rojo |
-| UC-03 | sitio de lore | pedir un personaje filtrando por rango | mostrar "un sargento confederado típico" |
-| UC-04 | redactor narrativo | pedir un personaje filtrando por facción y rango | tener un Camarada Puntero específico para un cuento |
-| UC-05 | motor de batalla | pedir un personaje exacto por id | recargar al Sargento Aguirre en una continuación |
-| UC-06 | redactor | regenerar el mismo personaje efímero con la misma seed | discutir variantes sin perder el original |
-| UC-07 | curador de canon | canonizar un personaje generado | que pase a ser entidad permanente del corpus de la API |
-| UC-08 | herramienta de QA | listar todos los mock | correr el motor sobre la población canon completa |
-| UC-09 | cualquier cliente | consultar el catálogo de facciones, rangos, skills, traits, perks, equipo, tipos de hito | construir UIs sin hardcodear enums |
-| UC-10 | motor de batalla | registrar un triple-0 sobre un canonizado | que el +1 al atributo quede reflejado en la ficha vigente |
-| UC-11 | redactor | registrar un ascenso narrativo sobre un canonizado | que la próxima `GET` muestre el nuevo rango y el hito |
-| UC-12 | motor de batalla | registrar la formación de un vínculo (mentor, hermano de armas) entre dos canonizados | que ambos personajes lo recuerden |
-| UC-13 | motor de batalla | registrar la captura de un arma enemiga | que el equipo vigente la incluya |
-| UC-14 | redactor | registrar la ruptura de una lealtad | que el personaje pase a tener un secreto o un enemigo jurado |
-| UC-15 | sitio de lore | pedir el mismo canonizado en t1 (post-canonización) y t2 (tras 4 hitos) | mostrar evolución visible en la ficha |
-| UC-16 | cualquier cliente | pedir la ficha con `?fields=` podada | bajar payload cuando solo le interesa el resumen |
-| UC-17 | sitio de lore | pedir el `historial[]` de un canonizado | renderizar una línea de tiempo del personaje |
-| UC-18 | curador | asignar un personaje a una escuadra | ver `filiacion` y `estado: activo` derivados correctamente |
-| UC-19 | motor de batalla | filtrar personajes por tag `skill: Francotirador` | armar un pelotón de tiradores para una misión de hostigamiento |
-| UC-20 | redactor narrativo | pedir un personaje con tag `trait: Miope` | forzar una complicación visual específica en una escena de tensión |
-| UC-21 | editor de canon | listar todos los tags `equipo.arma` del roster de mocks | auditar coherencia del inventario armamentístico antes de una batalla |
-| UC-22 | motor de batalla | filtrar personajes por tag `rol: lider` AND `faccion: Ejército Rojo` | identificar candidatos al mando ante la caída del líder vigente |
-| UC-23 | herramienta de QA | consultar `/meta/tag_categories` y `/meta/skills` | verificar que el generador no produce tags fuera del vocab canon |
+Lo que se entrega es la documentación que permite construir todo lo anterior. La aplicación es responsabilidad de otro proyecto.
 
 ---
 
-## 6. Schema canónico del personaje
+## 2. Mapa de artefactos
 
-**Fuente autoritativa del schema**: la spec detallada vive en `/docs`. Este PRD no la duplica.
-
-- [`docs/hoja-modelo.md`](docs/hoja-modelo.md) — estructura de la hoja campo por campo, derivaciones, mutabilidad, slug-protocolo.
-- [`docs/hoja-modelo.yaml`](docs/hoja-modelo.yaml) — template programático vacío.
-- [`docs/tag-modelo.md`](docs/tag-modelo.md) — sistema de tags: notación punto, categorías, catálogo, `requires`, relacional `lealtad` (a facciones/escuadras), extensibilidad.
-- [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml) — template de entrada de catálogo.
-- [`docs/tag-modelo-ejemplos.yaml`](docs/tag-modelo-ejemplos.yaml) — cinco personajes ejemplo en composición.
-
-### 6.1. Contrato de producto (lo que el PRD asegura)
-
-Tres compromisos que este producto sostiene sobre el schema; los detalles de cómo se materializan están en los documentos de arriba.
-
-- **Lista plana de tags como modelo de primera clase.** Todo lo discreto del personaje vive en `tags[]` en notación punto. Lo que no es tag (identidad, atributos, prosa, auditoría, escape hatch) está fijado en [`hoja-modelo.md §0`](docs/hoja-modelo.md).
-- **Extensibilidad sin migración.** El sistema acepta tags, sub-categorías y categorías nuevas sin romper el contrato. Lo que la API garantiza y lo que NO promete: [`tag-modelo.md §7`](docs/tag-modelo.md).
-- **Coherencia declarativa, no validación.** El bloque `requires` (con prefijo `"no:"` para NOT) es documentación ejecutable consultable por validadores opcionales — no parte del contrato duro. La API acepta personajes con tags incoherentes. Detalle en [`tag-modelo.md §4.4`](docs/tag-modelo.md).
-
-### 6.2. Derivaciones del motor (no persistidas)
-
-Recordatorio operativo — los campos que cualquier consumidor del API verá calculados al servir, no en la base: `filiacion`, `sobrenombre`, `fatiga_max`, `moral_max`, `fza_aportada`. Fórmulas exactas y semántica en [`hoja-modelo.md §3.1`](docs/hoja-modelo.md).
-
-**`aliados[]` y `nemesis[]` NO son derivados** — son colecciones persistidas de primera clase sobre la hoja, cada entrada con `{ref, descripcion, desde?}`. Los vínculos personales llevan prosa que no puede derivarse de un tag. Ver [`hoja-modelo.md §3.4`](docs/hoja-modelo.md).
-
-### 6.3. Slug del personaje — patente, no nombre
-
-`identidad.slug` es una **patente opaca** `^[A-Z0-9]{8}$` generada al persistir (ej. `K9F2H3M4`). No es el nombre legible; ese vive en `identidad.nombre`. Las refs en `aliados[].ref` y `nemesis[].ref` apuntan a la patente. Reglas completas y motivación en [`hoja-modelo.md §1.1`](docs/hoja-modelo.md).
-
----
-
-## 7. Reglas de generación dinámica
-
-Cómo se completa cada campo en un personaje **generado dinámicamente** (origen `"generado"`). Los mocks ignoran estas reglas: vienen escritos a mano. Los canonizados nacen como un generado o como un body explícito, y a partir de ahí mutan vía hitos (sección 8).
-
-### 7.1. Fases del flujo
-
-El detalle paso-a-paso vive en [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md). Resumen del contrato:
-
-1. **Afiliación** — Rango → Facción → Subfacción. Solicitada al usuario; sorteo ponderado solo como fallback.
-2. **Identidad** — Género, Edad, Nombre, Sobrenombre. Pools en [`resources/nombres/`](resources/nombres/), sampler de referencia en [`scripts/sample_name.py`](scripts/sample_name.py). Restricciones cruzadas (rango/facción → género/edad) se resuelven contra la tabla de reglas del proyecto.
-3. **Atributos** — `{fis, tac, men}` por lookup determinista sobre el tag `rango.*`. Cero aleatoriedad. Tabla canónica en GDDR-01 §3.
-4. **Resto** — tags adicionales (rol, skills, perks, equipo, lealtad), historia (LLM), historial vacío.
-
-### 7.2. Atributos por rango — referencia rápida
-
-Lookup determinista. Detalle y diseño en [GDDR-01 §3](gddr/01-flujo-obligatorio-creacion.md). Topes:
-
-- `fis 5` → exclusivo `artillero`.
-- `tac 6` → exclusivo `francotirador`.
-- `men 7` → exclusivo `lider_de_escuadra`.
-
-**`mando` default**: `true` para `lider_de_escuadra` y `segundo_al_mando`; `false` para el resto. Cambiar `mando` post-creación requiere hito `cambio_mando`.
-
-**`estado` default**: `disponible` para todo generado sin escuadra asignada.
-
-#### 7.2.1. Estado vital derivado
-
-Derivado al servir, no persistido: `fatiga_max = fis + men`; `moral_max = men`. Ver [`hoja-modelo.md §3.1`](docs/hoja-modelo.md). Los valores cambian solo si cambia el atributo base.
-
-### 7.3. Identidad personal — referencia rápida
-
-- **Nombre + apellido + sobrenombre**: pools en [`resources/nombres/`](resources/nombres/) (25M, 25F, 50 apellidos), apodos curados a mano con 50% de probabilidad de emisión. Detalle en GDDR-01 §2.3–2.4.
-- **Edad**: uniforme 12–70 por defecto; rango se estrecha por reglas de facción/rango.
-- **Género**: 45/45/5/5 (m/f/no_binario/desconocido) por defecto; set se restringe por reglas de facción/rango.
-
-(El bloque `origen_geografico` fue eliminado. Si la procedencia importa narrativamente, va a `historia` o entra como tag `rasgo` / `extras`.)
-
-### 7.5. Pools de tags por categoría
-
-**Vocabulario**: el generador sortea de los catálogos curados en `tags/{categoria}/`. Cada slug que aparece allí es candidato natural. Cuando el generador necesita algo fuera del catálogo, lo crea con `origen: emergente`.
-
-Reglas algorítmicas de sorteo (lo único PRD-específico; el vocabulario vive en el catálogo):
-
-- **`rasgo`**: 1 altura + 1 complexión obligatorios + 2-3 rasgos físicos del pool segmentado por facción (Confederación → interior rural; Ejército Rojo → costa/meseta industrial). Sin cicatrices en creación — entran vía hito.
-- **`rol.combate.*`**: exactamente 1 tag derivado del `rango`. `Lider de escuadra` y `Segundo al mando` → `lider` (`fza_aportada: 2`); resto → ninguno (`fza_aportada: 1`). El tag `rol.combate.heroe` (→ 3) **no se autogenera**; entra solo vía hito por acción extraordinaria.
-- **`rol.oficio.*`** / **`rol.jerarquia.*`**: derivados del `rango` + facción (`apuntador → rol.oficio.francotirador`, `Lider de escuadra → rol.jerarquia.sargento`, etc.).
-- **`skill`**: 1-3 según rango. Líder garantiza `comandancia`; apuntador garantiza `precision`; el resto sortea 0-2 del pool de su facción/rango. El skill prominente en Ejército Rojo influye en `sobrenombre` (ver 7.3).
-- **`trait`**: 1-2 traits. **80% coherentes** con rol/rango; **20% complicación** (efecto desfavorable en alguna circunstancia). Sin polaridad explícita en el catálogo. Quitar un trait vía hito requiere justificación narrativa.
-- **`perk`**: típicamente 1 perk. **80/20 soft**: ~80% del subconjunto natural del rango, ~20% libre para sabor. Líderes con más probabilidad; reclutas raramente.
-- **`trait`**: 1-2 traits según rango, mezcla de polaridad. Pool curado por facción. Traits emergentes vía hito; customs permitidos pero deben curarse en el catálogo antes de aplicarse. (La categoría `aspecto` fue absorbida por `trait` — todo trait declara `efecto` o `trigger`.)
-- **`equipo.arma`**: tabla determinística `rango × faccion`. Líderes Confederación: `rifle_militar` + `pistola`. Líderes Ejército Rojo: `smg` + `pistola`. Artilleros: `ametralladora`. Apuntadores: `rifle_militar`. Fusileros y reclutas: `rifle_militar` o `smg` según disponibilidad.
-- **`equipo.utilitario`**: 50% ninguno, 50% 1 tag genérico en generados. En mocks: 3-5 narrativos.
-- **`equipo.vestidura`**: determinística por facción. Confederados → `uniforme_confederado`. Rojos integrados → `uniforme_rojo`. Rojos civiles recientes → `ropa_de_civil` o `camuflaje_basico`.
-- **`salud.*` y `mental.*`**: vacíos al generar. El motor downstream los aplica/remueve vía hitos `cambio_salud` / `cambio_mental` durante batalla.
-- **`lealtad.*`**: el generador emite `lealtad.faccion.{faccion_propia}` por default. `lealtad.escuadra.*` se agrega vía hito `asignacion_escuadra`. Las lealtades personales **no son tags** — viven en `aliados[]` (ver [`hoja-modelo.md §3.4`](docs/hoja-modelo.md)) y se pueblan en caliente o por curaduría.
-
-### 7.6. `historia` (LLM)
-
-Prosa de 120–200 palabras. Prompt recibe: `faccion`, `rol`, `rango`, tags prominentes, `nombre`, `sobrenombre`, `edad`, `genero`. Tono militar austero, voz rioplatense, 2–3 párrafos. Cache por `hash(seed + inputs + version_modelo)`. Si se canoniza, se congela.
-
-### 7.7. `aliados[]`, `nemesis[]`, `historial[]`
-
-- **Generados dinámicamente**: los tres vacíos (`[]`).
-- **Mocks**: inicializados a mano con prosa real.
-- **Canonizados**: heredan del estado inicial; el motor downstream los puebla vía hitos (`formacion_lealtad`, `identificacion_nemesis`, `agregar_tag`, etc.).
-
----
-
-## 8. Memoria viva — el diferencial del producto
-
-### 9.1. Naturaleza del canonizado
-
-Un personaje canonizado **existe en el tiempo**. La ficha que devuelve `GET /character/{id}` es el **estado vigente**, no el original.
-
-### 9.2. Eventos y mutación
-
-Los cambios ocurren vía `POST /character/{id}/event`. La API apendea al `historial[]`, aplica el efecto sobre campos vigentes, y actualiza `metadatos.ultima_actualizacion`.
-
-### 9.3. Campos mutables vs inmutables
-
-**Mutables** (cambian vía hito):
-
-- `atributos.{fis, tac, men}` (via `triple_cero` o `mejora_atributo`).
-- `tags[]` (vía `agregar_tag` / `quitar_tag` — cubre rasgos, skills, traits, perks, equipo en todas sus sub-categorías).
-- `vinculos[]` (vía `formacion_vinculo`, `ruptura_vinculo`).
-- `lealtades.secundarias`, `lealtades.secretos` (vía `cambio_lealtad`).
-- `rol`, `rango` (vía `ascenso`, `traslado`, `cambio_rango`). Atributos `{fis, tac, men}` NO se tocan; los tags `categoria: rol` se realinean.
-- `escuadra_id` (vía `asignacion_escuadra`).
-- `mando` (vía `cambio_mando`).
-- `estado` (vía `cambio_estado` — incluye transiciones a `kia`, `licencia`, etc.).
-- `estado_salud` (vía `herida`, `recuperacion`).
-- `sobrenombre` (vía `ascenso` o `cambio_rango`, cuando el título cambia).
-- `metadatos.ultima_actualizacion` (siempre).
-
-**Inmutables** (definen la identidad del canonizado):
-
-- `identidad.slug`, `identidad.nombre`, `identidad.genero`, `historia`.
-- `metadatos.creado_en`, `metadatos.canonizado_en`.
-
-**`edad`**: mutable vía decisión narrativa explícita; sin hito formal.
-
-**`filiacion`, `fza_aportada`**: derivados al servir; no mutables porque no son persistidos.
-
-### 9.4. Granularidad del historial
-
-Solo hitos importantes. **Sin límite ni paginación en v1.**
-
-### 9.5. Tipos de hito (canon sugerido — abierto)
-
-| `tipo` | Disparador típico | Efecto sobre campos vigentes |
+| Archivo | Propósito | Estado |
 |---|---|---|
-| `triple_cero` | Motor | `atributos.<atributo> += 1` (techo 5; MEN-líder 7); `metadata: { atributo, delta, valor_anterior, valor_nuevo }` |
-| `mejora_atributo` | Narrador | igual a `triple_cero` sin disparador mecánico |
-| `ascenso` | Narrador | `rol`, `rango` se reemplazan; `sobrenombre` se recompone; tags `categoria: rol` se realinean; atributos NO se tocan; `metadata: { rango_anterior, rango_nuevo }` |
-| `traslado` | Narrador | `rol` y/o `rango` y/o `escuadra_id` cambian; atributos NO se tocan |
-| `cambio_rango` | Narrador o motor | `rango` se reemplaza; `metadata: { de, a, motivo }` |
-| `cambio_mando` | Narrador o motor | `mando` (bool) se reemplaza; ningún otro campo cambia; `metadata: { de, a, motivo }` |
-| `cambio_estado` | Motor o narrador | `estado` se reemplaza (ej. transición a `kia`, `licencia`); `metadata: { de, a, motivo }` |
-| `asignacion_escuadra` | Narrador o motor | `escuadra_id` se reemplaza; típicamente lleva `estado: activo` cuando pasa a una escuadra real; `metadata: { de, a, motivo }` |
-| `agregar_tag` | Motor o narrador | append a `tags[]`; `metadata: { categoria, valor }` |
-| `quitar_tag` | Motor o narrador | remove de `tags[]`; `metadata: { categoria, valor }` |
-| `herida` | Motor o narrador | `estado_salud: "herido"`; opcionalmente `agregar_tag` con `categoria: rasgo` |
-| `recuperacion` | Motor o narrador | `estado_salud: "saludable"` |
-| `formacion_vinculo` | Narrador | append a `vinculos[]`; `metadata: { vinculo_creado }` |
-| `ruptura_vinculo` | Narrador | remove o transformación de `vinculos[]` |
-| `cambio_lealtad` | Narrador | mutación de `lealtades.secundarias` o `lealtades.secretos` |
-| `condecoracion` | Narrador | no muta campos vigentes (hito puro) |
-| `cambio_estado_vital` | Motor o narrador | mutación de `estado_vital.{fatiga_actual,moral_actual,fatiga_max,moral_max}`; `metadata: { campo, valor_anterior, valor_nuevo, motivo }` |
+| [`PRD.md`](PRD.md) | Este documento. Visión y mapa. | vigente |
+| [`API.md`](API.md) | Contrato HTTP. Fuente de verdad de endpoints. | vigente |
+| [`MODEL.md`](MODEL.md) | Contrato de persistencia. Entidades, tipos, constraints. | vigente |
+| [`AGENTS.md`](AGENTS.md) | Política editorial y convenciones. | vigente |
+| [`docs/hoja-modelo.md`](docs/hoja-modelo.md) | Schema del personaje campo por campo. | vigente |
+| [`docs/hoja-modelo.yaml`](docs/hoja-modelo.yaml) | Template programático vacío. | vigente |
+| [`docs/tag-modelo.md`](docs/tag-modelo.md) | Sistema de tags: notación, categorías, catálogo. | vigente |
+| [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml) | Template de entrada de catálogo. | vigente |
+| [`docs/tag-modelo-ejemplos.yaml`](docs/tag-modelo-ejemplos.yaml) | Cinco personajes ejemplo compuestos. | vigente |
+| [`docs/tag-requeridos-por-categoria.md`](docs/tag-requeridos-por-categoria.md) | Índice rápido de campos `(+)` por categoría. | vigente |
+| [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md) | Vocabulario canónico de atributos y stats calculadas. | vigente |
+| [`docs/user-stories.md`](docs/user-stories.md) | Catálogo de UCs ↔ endpoints. | vigente |
+| [`docs/open-questions.md`](docs/open-questions.md) | Tensiones asumidas, OQs, notas de arquitectura. | vigente |
+| [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md) | Orden canónico de creación de personaje. | vigente (Fase 4 pendiente) |
+| `gddr/02-motor-batalla.md` | Reglas de combate squad vs squad. | **pendiente** |
+| [`mock/personajes/`](mock/personajes/) | 22 fixtures canon (dos escuadras). | parcial (ver §5) |
+| [`tags/`](tags/) | Catálogo curado, sembrado por categoría. | vigente |
+| [`resources/nombres/`](resources/nombres/) | Pools de nombres + apellidos. | vigente |
+| [`scripts/`](scripts/) | Samplers de referencia. **Sujeto a eliminación.** | provisional |
 
-**Detalle de `agregar_tag` y `quitar_tag` — los hitos de tags son el mecanismo central de evolución del personaje.**
-
-`agregar_tag` y `quitar_tag` operan sobre cualquier categoría de la lista plana `tags[]`. `metadata` siempre lleva `{ categoria, valor }` como mínimo; se puede extender con contexto narrativo o mecánico.
-
-Ejemplos representativos:
-
-| Situación narrativa | `tipo` | `metadata` ejemplo |
-|---|---|---|
-| Personaje aprende una habilidad de su mentor | `agregar_tag` | `{ categoria: "skill", valor: "terreno" }` |
-| Herida grave en combate deja secuela | `agregar_tag` | `{ categoria: "trait", valor: "hemorragia_lenta" }` + hito `herida` coordinado |
-| Captura enemiga. Le requisaron el arma | `quitar_tag` | `{ categoria: "equipo.arma", valor: "rifle_militar" }` |
-| Captura y recuperación de armamento enemigo | `agregar_tag` | `{ categoria: "equipo.arma", valor: "pistola" }` |
-| Hazaña reconocida por el alto mando | `agregar_tag` | `{ categoria: "perk", valor: "cobertura" }` |
-| Consigue tres cargadores tras asaltar una posición | `agregar_tag` (×3) | `{ categoria: "equipo.utilitario", valor: "cargador" }` — tres hitos independientes o un único hito con `metadata.cantidad: 3` si la implementación lo admite |
-| Cobardía documentada en campo — el mando le retira confianza | `quitar_tag` | `{ categoria: "trait", valor: "confiable" }` + `agregar_tag` `{ categoria: "trait", valor: "cobarde" }` — requiere justificación narrativa en `descripcion` |
-
-**Trayectoria de tags y auditoría.** El estado vigente de `tags[]` se modifica vía hitos `agregar_tag` y `quitar_tag` en el `historial`. La trayectoria completa de tags de un personaje se puede reconstruir hacia adelante reproduciendo el historial, o hacia atrás aplicando los hitos en reversa contra el estado vigente. El schema no expone un snapshot inmutable del estado inicial — la decisión de mantener el schema mínimo prima sobre la queryabilidad directa de "cómo nació el personaje".
-
-**Nota — traits mutables.** Los cambios de identidad mecánica (perk, trait, skill) son adiciones/eliminaciones a las categorías correspondientes vía `agregar_tag` / `quitar_tag`.
-
-**Nota — atributos y rango.** Los atributos `{fis, tac, men}` son propiedad del personaje, no derivados del rango post-creación. Cuando cambia `rango`, los atributos no se tocan. Los tags `categoria: rol` sí se realinean. La matriz por rango (7.2) aplica **únicamente** en creación.
+Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se hace por link al archivo correspondiente. **El PRD no duplica reglas.**
 
 ---
 
-## 9. Endpoints
+## 3. Principios de diseño
 
-**Fuente de verdad: [`API.md`](API.md).** Los endpoints, parámetros, payloads y mapeo a UC viven íntegramente ahí. Si una ruta no figura ahí, no existe en el contrato.
-
-**Catálogos `/meta/*`**: convención uniforme — `GET /meta/{categoria}` devuelve el catálogo curado de esa categoría de tag, sembrado desde `tags/{categoria}/`. Para listar valores reales, consultar el directorio. Detalle en `API.md`.
-
-Las tensiones y open questions vinculadas a endpoints (gobernanza de `POST /event`, endpoint de escuadras, expansión `?expand=tags`, etc.) se mantienen en este PRD; el **contrato** vive en `API.md`.
+- **El PRD es contrato; el repo es la documentación.** Este documento define forma y alcance. Cómo se implemente, dónde corra, qué stack use — fuera de scope.
+- **SOLID y open/close.** El schema extiende sin romper. Nuevos perks, tipos de hito, categorías de tag, facciones — sin migraciones, sin breaking changes.
+- **Tags como modelo de primera clase.** *Lo que puede ser tag, es tag.* Rasgos, skills, traits, perks, equipo, lealtades a facciones/escuadras. La frontera con los campos estructurales (`identidad`, `atributos`, `aliados`, `nemesis`, `historial`, `historia`, `metadatos`) está fijada en [`docs/hoja-modelo.md`](docs/hoja-modelo.md) y [`docs/tag-modelo.md`](docs/tag-modelo.md).
+- **Customs libres + enums abiertos.** El producto acepta tags, sub-categorías y tipos de hito fuera del canon. El motor downstream interpreta. Tensión documentada en [T-01](docs/open-questions.md).
+- **Stats determinísticos por rango; identidad sorteada.** En creación, `{fis, tac, men}` se derivan de una tabla fija ([GDDR-01 §3](gddr/01-flujo-obligatorio-creacion.md)). Cero aleatoriedad en stats. Nombre, género, edad, rasgos, skills/traits/perks, equipo e historia sí se sortean.
+- **Memoria viva como naturaleza del canonizado.** Un canonizado existe en el tiempo: nace, pelea, cambia. La ficha vigente no es la original. Mutaciones vía hitos en `historial[]`.
+- **Reproducibilidad por seed para efímeros.** `(seed, faccion, rango)` produce el mismo personaje. Los canonizados pierden esta propiedad tras el primer hito ([T-05](docs/open-questions.md)).
+- **LLM solo para prosa, solo una vez.** El modelo generativo escribe `historia` en la creación. Al canonizar, se congela.
+- **Mocks separados de canonizados.** Los 22 mocks son fixtures inmutables; los canonizados son entidades vivas de la API. No hay sincronización ni promoción mock → canonizado.
+- **Agnosis al renderer.** El schema describe *qué* tiene un personaje, no *cómo* se muestra. Las categorías de tag son metadato semántico, no instrucción de presentación.
+- **Agnosis al sistema de azar.** Todas las probabilidades y modificadores se expresan en **porcentaje** sobre atributos en escala 0–9. Cualquier sistema de resolución (dados, cartas, digital) puede mapearlo a su moneda local. Ver [`AGENTS.md`](AGENTS.md) §"Aleatoriedad".
+- **GDDR como puente de diseño.** El diseño de juego precede al software. Las decisiones de mecánicas y uso de recursos viven en [`gddr/`](gddr/) y se referencian con los schemas/catálogos.
 
 ---
 
-## 10. Los 22 mock — alcance del MVP
+## 4. Schema y reglas
 
-Los 22 personajes iniciales son fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
+**Forma de la hoja**: seis bloques estructurales (`identidad`, `atributos`, `historia`, `historial`, `aliados`, `nemesis`, `metadatos`, `extras`) más la lista plana `tags[]`. Definición autoritativa: [`docs/hoja-modelo.md`](docs/hoja-modelo.md).
 
-**Estado de los mocks.** Cada fixture tiene exactamente 1 tag `equipo.vestidura` del catálogo cerrado de 4 valores (uno por facción/rol). Tags emergentes (oficios, customs narrativos) coexisten con el catálogo canon — el catálogo es semilla, no purga.
+**Sistema de tags**: notación punto `<categoria>[.<subcategoria>].<slug>`, multiset, catálogo extensible, `requires` como documentación ejecutable. Definición autoritativa: [`docs/tag-modelo.md`](docs/tag-modelo.md).
 
-### 11.1. Escuadra Confederación (11)
+**Mutabilidad**: el estado vigente del canonizado cambia vía hitos en `historial[]`. Tabla de campos mutables / inmutables / derivados en [`docs/hoja-modelo.md §8`](docs/hoja-modelo.md). Catálogo sugerido de `tipo` de hito en [`docs/hoja-modelo.md §5`](docs/hoja-modelo.md). Los hitos `agregar_tag` / `quitar_tag` son el mecanismo central de evolución.
 
-| # | `id` | Rango operativo | Nombre canon |
+**Atributos y stats calculadas**: vocabulario canónico (`FISICO`, `TACTICO`, `MENTAL`, `INICIATIVA`, `MORAL`, `FATIGA`, `MOVIMIENTO`, `ESTRESS`) y su semántica de combate en [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md). Los efectos de los tags se declaran contra este vocabulario.
+
+**Generador procedural**: flujo obligatorio de creación, fases, sorteos ponderados, tabla determinística por rango en [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md).
+
+---
+
+## 5. Mocks — dos escuadras canon
+
+22 personajes, distribuidos en dos escuadras simétricas. Composición de cada escuadra: 1 + 1 + 1 + 1 + 4 + 3 (líder, segundo, apuntador, artillero, 4 fusileros, 3 reclutas). Fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
+
+### 5.1. Escuadra Confederación (11)
+
+| # | `slug` (legado) | Rango | Nombre canon |
 |---|---|---|---|
-| 01 | `mock.confederacion.01.aguirre` | `Lider de escuadra` | Sargento Walter Aguirre |
-| 02 | `mock.confederacion.02.sosa` | `Segundo al mando` | Cabo Primero Sosa |
-| 03 | `mock.confederacion.03.quiroga` | `Apuntador` | Apuntador Quiroga |
-| 04 | `mock.confederacion.04.funes` | `Artillero` | Artillero Funes |
-| 05 | `mock.confederacion.05.rodriguez` | `Fusilero` | Soldado de Primera Marcela Rodríguez |
-| 06 | `mock.confederacion.06.olivares` | `Fusilero` | Soldado de Primera Olivares |
-| 07 | `mock.confederacion.07.acosta` | `Fusilero` | Soldado de Primera Acosta |
-| 08 | `mock.confederacion.08.pereyra` | `Fusilero` | Soldado de Primera Pereyra |
-| 09 | `mock.confederacion.09.mendez` | `Recluta` | Recluta Méndez |
-| 10 | `mock.confederacion.10.lugones` | `Recluta` | Recluta Lugones |
-| 11 | `mock.confederacion.11.ramirez` | `Recluta` | Recluta Ramírez |
+| 01 | `mock.confederacion.01.aguirre` | `lider_de_escuadra` | Sargento Walter Aguirre |
+| 02 | `mock.confederacion.02.sosa` | `segundo_al_mando` | Cabo Primero Sosa |
+| 03 | `mock.confederacion.03.quiroga` | `apuntador` | Apuntador Quiroga |
+| 04 | `mock.confederacion.04.funes` | `artillero` | Artillero Funes |
+| 05 | `mock.confederacion.05.rodriguez` | `fusilero` | Soldado de Primera Marcela Rodríguez |
+| 06 | `mock.confederacion.06.olivares` | `fusilero` | Soldado de Primera Olivares |
+| 07 | `mock.confederacion.07.acosta` | `fusilero` | Soldado de Primera Acosta |
+| 08 | `mock.confederacion.08.pereyra` | `fusilero` | Soldado de Primera Pereyra |
+| 09 | `mock.confederacion.09.mendez` | `recluta` | Recluta Méndez |
+| 10 | `mock.confederacion.10.lugones` | `recluta` | Recluta Lugones |
+| 11 | `mock.confederacion.11.ramirez` | `recluta` | Recluta Ramírez |
 
-### 11.2. Escuadra Ejército Rojo (11)
+### 5.2. Escuadra Ejército Rojo (11)
 
-| # | `id` | Rango operativo | Nombre canon |
+| # | `slug` (legado) | Rango | Nombre canon |
 |---|---|---|---|
-| 12 | `mock.ejercito_rojo.01.mansilla` | `Lider de escuadra` | Camarada Puntero Ramón Mansilla |
-| 13 | `mock.ejercito_rojo.02.iturra` | `Segundo al mando` | Segundo Camarada Iturra |
-| 14 | `mock.ejercito_rojo.03.antinao` | `Apuntador` | Tirador Antinao |
-| 15 | `mock.ejercito_rojo.04.calfucura` | `Artillero` | Ametrallador Calfucurá |
-| 16 | `mock.ejercito_rojo.05.carcamo` | `Fusilero` | Miliciano Veterano Fermín Cárcamo |
-| 17 | `mock.ejercito_rojo.06.paine` | `Fusilero` | Miliciano Veterano Paine |
-| 18 | `mock.ejercito_rojo.07.soriano` | `Fusilero` | Miliciano Veterano Soriano |
-| 19 | `mock.ejercito_rojo.08.belenchini` | `Fusilero` | Miliciano Veterano Belenchini |
-| 20 | `mock.ejercito_rojo.09.bordon` | `Recluta` | Voluntario Bordón |
-| 21 | `mock.ejercito_rojo.10.maturana` | `Recluta` | Voluntario Maturana |
-| 22 | `mock.ejercito_rojo.11.bordagaray` | `Recluta` | Voluntario Bordagaray |
+| 12 | `mock.ejercito_rojo.01.mansilla` | `lider_de_escuadra` | Camarada Puntero Ramón Mansilla |
+| 13 | `mock.ejercito_rojo.02.iturra` | `segundo_al_mando` | Segundo Camarada Iturra |
+| 14 | `mock.ejercito_rojo.03.antinao` | `apuntador` | Tirador Antinao |
+| 15 | `mock.ejercito_rojo.04.calfucura` | `artillero` | Ametrallador Calfucurá |
+| 16 | `mock.ejercito_rojo.05.carcamo` | `fusilero` | Miliciano Veterano Fermín Cárcamo |
+| 17 | `mock.ejercito_rojo.06.paine` | `fusilero` | Miliciano Veterano Paine |
+| 18 | `mock.ejercito_rojo.07.soriano` | `fusilero` | Miliciano Veterano Soriano |
+| 19 | `mock.ejercito_rojo.08.belenchini` | `fusilero` | Miliciano Veterano Belenchini |
+| 20 | `mock.ejercito_rojo.09.bordon` | `recluta` | Voluntario Bordón |
+| 21 | `mock.ejercito_rojo.10.maturana` | `recluta` | Voluntario Maturana |
+| 22 | `mock.ejercito_rojo.11.bordagaray` | `recluta` | Voluntario Bordagaray |
 
-**Composición:** escuadra de 11 = 1 + 1 + 1 + 1 + 4 + 3.
+**Inmutabilidad.** Los 22 mocks no aceptan hitos vía API (`POST /character/{slug}/event` → 409). Su evolución, si la hay, ocurre por reescritura del fixture.
 
-**Mutabilidad.** Los mocks son **inmutables** desde la API. `POST /character/{id}/event` sobre un mock devuelve 409. Su evolución, si la hay, ocurre por reescritura manual del fixture.
+**Pendiente** ([OQ-12](docs/open-questions.md)): migración final de los fixtures al modelo de lista plana de tags + patentes 8-char en `identidad.slug`.
 
 ---
 
-## 11. Alcance MVP vs futuro
+## 6. API y casos de uso
 
-### Dentro de v1
+**Endpoints**: definidos en [`API.md`](API.md). Si una ruta no figura ahí, no existe en el contrato. La convención `GET /meta/{categoria}` expone catálogos curados sin requerir edición del contrato cuando aparecen categorías nuevas — la dinámica del catálogo de tags se traslada al endpoint.
 
-- 2 facciones jugables: Confederación y Ejército Rojo, con sus subfacciones (`pelicanos`, `ejercito_revolucionario_del_pueblo`).
-- 8 rangos operativos canon con tabla determinística de atributos (`militante`, `recluta`, `fusilero`, `apuntador`, `artillero`, `francotirador`, `segundo_al_mando`, `lider_de_escuadra`). `ciudadano` como rama no-combatiente.
-- Pools curados de `skill`, `trait`, `perk` en `tags/`.
-- Tablas curadas de nombres, edades, géneros, equipo por facción.
-- Generación efímera con seed reproducible.
-- 22 mocks regenerados al schema en iteración separada.
-- Canonización persistente (solo DB de la API).
-- **Memoria viva**: endpoint de evento, mutación de campos vigentes, historial inline.
-- **Sistema de tags como ciudadanos de primera clase**: rasgo, rol, skill, trait, perk, efecto, faccion, subfaccion, rango, escuadra, mando, estado, salud, mental, lealtad, nemesis, y la familia jerárquica equipo.{arma,utilitario,vestidura}.
-- **Campos derivados**: `filiacion`, `fza_aportada` — computados al servir.
-- **`mando` como booleano**: capacidad de mando; titularidad derivada.
-- **`estado` como dimensión de asignación**: activo/disponible/kia/licencia.
-- **Lealtades estructuradas** con secretos.
-- **Customs libres** (valores fuera del canon en cualquier categoría de tag).
-- **Extras** libres al top level.
-- **Enums abiertos** con catálogos `/meta/*`.
-- Restricción 80/20 soft de perks por rango.
-- Poda de respuesta con `?fields=`.
+**Casos de uso**: catálogo de UCs (UC-01..UC-23) y mapping inverso a endpoints en [`docs/user-stories.md`](docs/user-stories.md).
 
-### Explícitamente fuera de v1
+**Modelo de persistencia**: entidades y constraints en [`MODEL.md`](MODEL.md). Sincronía estricta con `API.md`.
 
-- Las 3 facciones secundarias.
-- PJs civiles.
-- Perks de batalla y complicaciones temporales (son del motor de batalla).
-- Sistema de hexágonos, mapa, escenarios.
-- Runtime de batalla.
+---
+
+## 7. Motor de batalla — squad vs squad
+
+**Entregable pendiente.** Sin documento todavía. Cuando se redacte, vivirá en `gddr/02-motor-batalla.md` y deberá:
+
+- Definir el ciclo de turno (iniciativa → orden → resolución → desgaste).
+- Especificar cómo se aplican los efectos declarados en los tags ([`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md)) durante el combate.
+- Modelar la escuadra como unidad táctica: composición, `fza_aportada` agregada, moral de grupo, movimiento al ritmo del más lento.
+- Establecer las condiciones de victoria/derrota de un encuentro squad vs squad.
+- Ser **replicable en papel**: las reglas se escriben como protocolos secuenciales, no como pseudocódigo. Cualquier persona con la documentación debe poder arbitrar una batalla sin software.
+
+Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución descritas en [`docs/atributos-y-efectos.md §2`](docs/atributos-y-efectos.md) son el punto de partida.
+
+---
+
+## 8. Alcance
+
+### Cubierto por este PRD (entregables documentales)
+
+- Schema completo de la hoja de personaje.
+- Sistema de tags categorizado con catálogo curado y extensible.
+- Vocabulario canónico de atributos y stats calculadas.
+- Flujo obligatorio de creación (GDDR-01, Fases 1–3).
+- 2 facciones jugables con sus subfacciones (`pelicanos`, `ejercito_revolucionario_del_pueblo`).
+- 8 rangos operativos canon más `ciudadano`.
+- 22 mocks (dos escuadras simétricas).
+- Contrato de API HTTP (`API.md`).
+- Contrato de persistencia (`MODEL.md`).
+- Catálogos `/meta/*` dinámicos por categoría de tag.
+
+### Pendiente dentro de este PRD
+
+- GDDR-01 Fase 4 (tags adicionales, prosa, historial, metadatos en el flujo de creación).
+- GDDR-02: motor de batalla squad vs squad.
+- Migración final de los 22 mocks al modelo vigente ([OQ-12](docs/open-questions.md)).
+- Schema completo de la entidad `escuadra` ([OQ-06](docs/open-questions.md)).
+
+### Fuera de este PRD
+
+- Implementación de la API (cualquier lenguaje, framework o stack).
+- Persistencia concreta (motor de base, hosting, despliegue).
 - Autenticación, autorización, rate limiting.
-- UI propia.
+- UI, CLI de usuario final, dashboards.
+- Las 3 facciones secundarias del lore.
+- PJs civiles fuera del rol `ciudadano`.
 - Generación de escuadras completas en una sola llamada.
-- Edición arbitraria de canonizados (solo cambios vía evento).
-- Edición de mocks vía API.
+- Edición arbitraria de canonizados fuera del mecanismo de hitos.
 - Reverso de hitos.
 - Versionado de la prosa congelada.
-- Schema completo de la entidad `escuadra` (queda como entidad implícita; se especifica cuando se necesite).
-- Endpoint `/meta/escuadras` con composición vigente (potencial v1.1).
-- Operación "diff entre estado original y estado vigente" automatizada.
+
+Cuando alguno de estos elementos se vuelva relevante, irá a un PRD separado.
 
 ---
 
-## 12. Tensiones explícitas y compromisos asumidos
+## 9. Tensiones, open questions y arquitectura
 
-### 13.1. Customs libres + enums abiertos → motor downstream interpreta contenido libre
+Consolidado en [`docs/open-questions.md`](docs/open-questions.md). Tres secciones:
 
-**Decisión.** El producto acepta tags `skill`/`trait`/`perk` con valores fuera del canon. Acepta `tipo` de hito y de vínculo con valores custom. Acepta `extras` no validado.
-
-**Costo.** El motor downstream tiene que interpretar el efecto de un `perk` custom o un `trait` custom.
-
-**Por qué se acepta.** La alternativa paralizaría la creación de personajes notables.
-
-**Mitigación.** Los catálogos `/meta/*` siempre devuelven la versión oficial como fallback de comparación.
-
-### 13.2. Tags con categorías abiertas → riesgo de fragmentación semántica
-
-**Decisión.** Las categorías de tags son un enum abierto. Las sub-categorías jerárquicas con punto (`equipo.arma`, `equipo.utilitario`, `equipo.vestidura`) también son extensibles.
-
-**Costo.** Distintos clientes pueden inventar sinónimos (`equipo.weapon` vs `equipo.arma`).
-
-**Por qué se acepta.** Consistente con la política de enums abiertos.
-
-**Mitigación.** `/meta/tag_categories` documenta el canon. Los consumidores deben normalizar al leer.
-
-### 13.3. Sin versionado del payload → riesgo de drift si SOLID falla
-
-**Decisión.** No hay `version_canon`. Schema extensible sin romper.
-
-**Costo.** Si un campo está mal diseñado, no hay herramienta de versionado para migrar.
-
-**Por qué se acepta.** Versionar y migrar es caro. Apostamos a SOLID/open-close.
-
-**Mitigación.** Bloques fuertemente segmentados; `extras`, enums abiertos, customs libres absorben extensión.
-
-### 13.4. Sin validación de `ref_personaje_id` ni `escuadra_id` → referencias colgadas posibles
-
-**Decisión.** Ni `vinculos[].ref_personaje_id` ni `escuadra_id` se verifican.
-
-**Costo.** Posibles referencias rotas.
-
-**Por qué se acepta.** Validar implica orden de creación, ciclos, integridad referencial — costo desproporcionado para MVP.
-
-**Mitigación.** `descripcion` del vínculo es obligatorio. Para escuadras, `filiacion` se compone con fallback ("Sargento del Ejército de la Confederación Argentina" si la escuadra no resuelve).
-
-### 13.5. Memoria viva rompe reproducibilidad post-canonización
-
-**Decisión.** Un canonizado, tras su primer hito, deja de ser regenerable desde su `semilla`.
-
-**Costo.** Tests que dependen de regenerar el mismo personaje deben usar efímeros.
-
-**Por qué se acepta.** Es el diferencial del producto.
-
-**Mitigación.** El `historial` registra cada mutación con `agregar_tag` / `quitar_tag` y permite reconstruir la trayectoria. El schema no expone una promesa de regenerabilidad byte-a-byte; la prosa LLM no es determinísticamente reproducible y por eso no hay `semilla` ni snapshot.
-
-### 13.6. Traits sin polaridad explícita → el motor downstream interpreta
-
-**Decisión.** Los tags `trait` no tienen polaridad fija. La categoría agrupa positivos (`imperturbable`, `veloz`), neutros (`impredecible`) y penalidades (`cobarde`, `fatigado`).
-
-**Costo.** Un cliente que necesite filtrar "solo penalidades" tiene que consultar `/meta/traits/{valor}.polaridad` (si existe) o tratar a todos los traits como neutros y aplicar reglas downstream.
-
-**Por qué se acepta.** No obliga a categorizar moralmente cada trait. Muchas ambigüedades del lore son reales (¿`Voz grave` es positiva o penalidad? depende de la escena). Forzar polaridad al schema empobrecería esa ambigüedad.
-
-**Mitigación.** El catálogo `/meta/traits` puede declarar `polaridad: positivo | neutro | penalidad` como hint sugerido pero no autoritativo. Los traits custom no la tendrán.
-
-### 13.7. Sinónimos y aliases de tags → fragmentación semántica silenciosa
-
-**Decisión.** El sistema no tiene mecanismo de alias ni normalización de tags en v1. `Francotirador` y `francotirador` son valores distintos. `equipo.arma` y `equipo.weapon` son categorías distintas.
-
-**Costo.** Una query por `skill: Francotirador` no encontrará a un personaje cargado con `skill: francotirador` (minúscula). Distintos generadores pueden usar `Oratoria de muelle` y `Oratoria sindical` para el mismo concepto.
-
-**Por qué se acepta.** Implementar alias en v1 requiere un grafo de equivalencia, gobernanza del catálogo y resolución en writes — costo alto para un MVP donde el generador es la única fuente.
-
-**Mitigación.** El generador es determinístico y usa el vocab del catálogo `/meta/*`. El problema surge cuando humanos o motores externos escriben tags manualmente. Documentar claramente en `/meta/tag_categories` los valores canónicos. Normalización de case (lowercase en `valor`) es una solución mínima viable que debería resolverse antes de v1.
-
-### 13.9. Catálogo `/meta/*` como semilla, no como autoridad
-
-**Decisión.** El catálogo curado MVP es vocabulario sugerido, no enum cerrado. Cubre los casos comunes; otros valores se aceptan como customs. La excepción es `equipo.vestidura`, cerrado en 4 valores por decisión del cliente.
-
-**Costo.** Convive con la fragmentación documentada en 13.2 y 13.7: distintos usuarios pueden crear sinónimos del mismo concepto (`Tiro de precisión` canon vs `Francotirador` custom), y el catálogo emergente termina mezclando registros canónicos con customs no normalizados.
-
-**Por qué se acepta.** El usuario explicitó: "completamos lo estándar, los casos más normales solamente; otros usuarios crearán tags personalizados". Forzar enum cerrado en `skill`/`trait`/`perk`/`equipo.{arma,utilitario}` paralizaría la creatividad narrativa, que es exactamente el diferencial del producto.
-
-**Mitigación.** El catálogo curado MVP cubre los casos comunes — un cliente sano resuelve >80% de los personajes contra él. Los `/meta/*` pueden marcar entradas con `origen: "canon" | "emergente"` para que el cliente discrimine. La normalización de case (OQ #11) y el mecanismo de alias (OQ #10) atacan el síntoma cuando lleguen a v1.
-
-### 13.8. Denormalización opt-in de efectos de tags → dos fuentes de verdad potenciales
-
-**Decisión.** Los efectos mecánicos de skills, traits y perks viven en `/meta/*`, no inlineados en cada tag de cada personaje.
-
-**Costo.** Si un cliente necesita los efectos para procesar un personaje, tiene que hacer N calls adicionales a `/meta/*` o cachear el catálogo localmente. Un personaje con 12 tags puede requerir hasta 12 lookups adicionales.
-
-**Por qué se acepta.** Inlinear el efecto en el tag del personaje es una trampa de denormalización: si el catálogo cambia (un perk recibe errata), habría que actualizar todos los personajes con ese perk.
-
-**Mitigación.** La API puede soportar un query param `?expand=tags` que en una sola call devuelva la ficha del personaje con cada tag resuelto contra su entrada en `/meta/*`. Fuera de v1 estricto.
-
-### 13.11. Tags mínimos vs riqueza contextual
-
-**Decisión.** En los tags se normalizan a forma mínima: 1-2 palabras, 3 cuando el nombre canónico lo exige. Cero prosa, cero paréntesis, cero comas internas, cero guiones largos. El tag es **identificador**, no descripción.
-
-**Costo.** Se pierde info contextual enriquecida que vivía dentro del propio tag — "brújula de oficial — regalo del instructor de Stroeder" colapsa a `brújula`; "cuaderno de campaña — anotaciones de terreno, firma con la inicial R en el margen" colapsa a `cuaderno`. Parte de ese color narrativo ya estaba duplicado en la prosa de `historia` (y ahí queda); parte se pierde irreversiblemente. La pérdida es aceptada como costo del minimalismo.
-
-**Por qué se acepta.** Tags-como-ID habilitan inverted index trivial (14.2), comparación entre personajes, agregación en `/meta/*`, y semántica predecible para el motor downstream. Tags-como-prosa-disfrazada rompen esas tres cosas. La info contextual canónica vive en el catálogo `/meta/*`; el color narrativo vive en `historia`; la info estructurada por instancia, si llega a hacer falta, va a la futura entidad `notas` (OQ #16).
-
-**Mitigación.** La pasada de preservó literal la prosa de `historia` e `historial[]` en los 22 mocks — toda la info contextual irrecuperable que estuviera reflejada ahí sigue viva. Una ola futura puede introducir `notas: array<{tag_ref, texto}>` si el caso de uso aparece (ver OQ #16).
+- **Tensiones asumidas** (T-01..T-10) — decisiones con costo conocido.
+- **Open questions** (OQ-01..OQ-14) — sin decisión todavía.
+- **Notas de arquitectura** (N-01..N-04) — no normativas; insumo para implementadores eventuales.
 
 ---
 
-### 13.10. Estructuración de triggers y efectos en los tags
+## 10. Política editorial
 
-**Decisión.** Los tags con comportamiento reactivo o modificador definen su lógica mediante campos estructurados: bloque `trigger` con `trigger-action` (reactivos/temporales) o `efecto` a nivel raíz como string o lista de strings (pasivos/permanentes). Los efectos apuntan a un set canónico de variables — atributos base (`FISICO`, `TACTICO`, `MENTAL`) y estadísticas calculadas (`INICIATIVA`, `MORAL`, `FATIGA`, `MOVIMIENTO`, `ESTRESS`) — documentadas en [`docs/atributos-y-efectos.md`](docs/atributos-y-efectos.md).
-
-**Costo.** La curaduría del catálogo requiere tags `efecto.*` independientes para casos reutilizables. Los clientes downstream parsean este esquema para aplicar lógica en combate.
-
-**Por qué se acepta.** Habilita interpretación automatizada sin heurísticas en caliente, y vincula los efectos a un vocabulario cerrado de variables (no a texto libre).
-
-**Mitigación.** `trigger` y `efecto` son opcionales: tags narrativos o de equipamiento sin mecánica siguen siendo mínimos. Detalle del esquema en [`docs/tag-modelo.md §4.6`](docs/tag-modelo.md).
+Convenciones de trabajo, identificadores, idioma, expresión de azar en porcentajes, rolling release y trato a los mocks: [`AGENTS.md`](AGENTS.md).
 
 ---
 
-## 13. Píldoras de arquitectura
-
-### 14.1. Tags y stores no-transaccionales
-
-El patrón de entidades pequeñas, repetibles, agrupables y sin esquema rígido (tags) es el caso textbook para un store no-transaccional o document-oriented. Cloudflare D1 con columna JSON o Workers KV con prefijo por categoría son candidatos naturales.
-
-### 14.2. Tags como ciudadanos de primera clase → inverted index natural
-
-Con los tags absorben rasgos, rol, skills, traits, perks y equipo subcategorizado — la mayor parte del contenido mutable del personaje. Esto refuerza la afinidad NoSQL/document-store ya señalada y añade una segunda observación: el query típico downstream es **"dame personajes con tag X"** o **"expandime los efectos mecánicos de estos tags"**. Es el patrón clásico de **inverted index sobre tags**, soportado nativamente por D1 con índices JSON o por Workers KV con clave compuesta `tag:{categoria}:{valor}` apuntando a lista de `personaje_id`.
-
-Ejemplo concreto: la query "personajes con `skill: Francotirador` AND `rol: lider` AND facción `Confederación`" se resuelve con tres lookups en el inverted index (`skill:Francotirador`, `rol:lider`, filtro `faccion`) seguidos de intersección de sets de `personaje_id`. Más barato que un full scan sobre el campo JSON de cada ficha. Con los seis tipos de categoría canon y un corpus de ~100 canonizados, un inverted index en Workers KV cabe cómodamente en memoria.
-
-Esta píldora no fija stack; solo registra que el diseño hace que las optimizaciones de búsqueda sean baratas si la necesidad aparece — y los UCs 19, 20, 21 y 22 (filtros por tag) confirman que aparecerá.
-
-### 14.3. Campos derivados → cómputo al servir, no al persistir
-
-`filiacion` y `fza_aportada` son derivados que la API computa al armar la respuesta. El campo `armor` fue eliminado del sistema: la vestidura es identidad visual y no aporta protección numérica; si más adelante se necesita defensa, vuelve como tag `trait: blindado` derivado de vestidura o skill defensiva.
-
----
-
-## 14. Open questions
-
-Decisiones de producto que el PRD no resuelve todavía. Cuando una se resuelve, esta sección se reescribe; las resueltas no quedan archivadas (vive en `git log`).
-
-- **`slug` derivado vs persistido en archivos de catálogo de tag.** Ver `docs/tag-modelo.md §7`.
-- **Catálogo de personajes históricos** referenciados por `lealtad.pj.*` pero no presentes en el roster activo (ej. mentores caídos citados en lealtades). Crear un catálogo `mock/personajes_historicos/` con entradas mínimas (slug, nombre, breve nota) o mantener slugs sintéticos sin entrada de catálogo.
-- **Sistema de lealtades latentes / secretas / aspiracionales.** El bloque eliminado `lealtades: {primaria, secundarias, secretos}` cubría más de lo que `lealtad.*` cubre hoy. Modelos a evaluar: tags `lealtad_latente.*` con visibilidad restringida, entidad nueva `intenciones[]`, o extensión del bloque `extras`.
-- **Regla canónica de titularidad de mando.** El tag `mando.capaz` indica capacidad. ¿La titularidad vigente se deriva como `mando.capaz` AND mayor `rango.*` en `escuadra.*`? ¿Empate de rango cómo se rompe?
-- **Nombre final del campo derivado `filiacion`.** Alternativas: `designacion`, `titulo`, `pie_de_firma`.
-- **Gobernanza de mutaciones de personaje vía API.** Sin auth, cualquiera con la URL puede emitir hitos. Tokens, lista blanca, o aceptación porque el corpus es curable.
-- **Polaridad de `trait`.** ¿Existe `/meta/traits/{slug}.polaridad` como hint sugerido, o el motor downstream interpreta libremente? Tensión 12.6.
-- **Schema completo de la entidad `escuadra`.** El tag `escuadra.{slug}` necesita un catálogo análogo a `tags/faccion/`. Definir slug canónico y campos del archivo (nombre legible, cuerpo, facción asociada).
-- **Interpretación de tags `custom` por el motor.** ¿LLM al aplicar la regla, o curador humano traduce a regla mecánica antes? Tensión 12.1.
-- **Versionado de categorías canon de tags.** Las sub-categorías de la notación punto son ciudadanos explícitos del catálogo. Gobernanza pendiente.
-- **Catálogo de tags canon por facción.** El campo `skill.facciones_predominantes` está documentado (`docs/tag-modelo.md §5`); falta política de avisos cuando el generador sortea un tag fuera de su facción esperada.
-- **Política de eviction de tags obsoletos.** Si el catálogo retira un slug, los personajes que lo tienen no se actualizan. Sin mecanismo de alias todavía.
-- **Límite de tags por categoría.** ¿Hay máximo razonable? ¿Caps internos del generador? ¿La API valida o advierte?
-- **Polaridad explícita de traits.** ¿Los traits admiten un campo `polaridad: positivo | neutro | penalidad` como hint sugerido, o se tratan como neutros y el motor interpreta el contenido del `efecto`?
-- **Entidad `notas` como capa enriquecida de tags.** `notas: array<{tag_ref, texto}>` permitiría persistir contexto narrativo o mecánico atado a tags específicos sin contaminar el slug. Cubriría el caso histórico (cuaderno con anotaciones) y el caso de vínculos (descripción del mentor).
-- **Migración final de los 22 mocks al modelo de lista plana de tags en notación punto.** Bloqueada por la decisión sobre la prosa de `vinculos[].descripcion` (mover a `historia`, a entradas de `historial` con tipo `formacion_vinculo`, o descartar).
-
----
-
-## 15. Roadmap y naturaleza del entregable
-
-### 16.1. Naturaleza agnóstica del PRD
-
-Este documento describe el sistema de creación de personajes y sus reglas **sin comprometerse con un lenguaje de programación, framework, plataforma de despliegue ni stack concreto**. Las decisiones de implementación quedan diferidas.
-
-Lo único canónico aquí es:
-
-- **Schema de la hoja**: la forma completa del recurso `personaje` (§6) con todos sus campos, tipos y restricciones.
-- **Reglas de atributos / tags / estado_vital**: las invariantes de distribución por rango (§7), el sistema de tags categorizado (§6.2, §8, §9), la mecánica de traits con efecto declarado (§7.5, §13.10), y el bloque `estado_vital` con sus derivados.
-- **Generador de personajes**: el algoritmo determinístico y el pipeline de prosa que lo acompaña (§7, §7.2, §7.2.1, §7.9.5).
-- **Suite de tests del generador**: las invariantes que todo generador conforme debe satisfacer (golden mocks, distribuciones esperadas, idempotencia por semilla).
-
-Cualquier otro detalle — base de datos, lenguaje de programación, framework HTTP, runtime, infraestructura — es implementación y vive fuera de este PRD.
-
----
-
-### 16.2. Hito 1 — Creación perfecta de personajes (**ACTIVO**)
-
-Único hito al que apunta este PRD en su versión vigente. Cubre los cuatro entregables siguientes, todos agnósticos respecto del stack:
-
-#### 16.2.1. Schema + reglas + validación
-
-La hoja canónica (documentada en `docs/hoja-modelo.{yml,md}` y en §6–§9 de este PRD), las invariantes de atributos / tags / estado_vital, y los validadores correspondientes. Entregable estático: no requiere servidor ni persistencia para ser validado.
-
-#### 16.2.2. Generador procedural
-
-Algoritmo (sin LLM) capaz de producir personajes nuevos respetando:
-
-- Distribuciones de atributos por rango (§7.2 / §7.2.1).
-- Pool de tags semilla por categoría (§8 y catálogos `/meta/*`).
-- Pool de traits con `efecto` declarado (§7.5).
-- Semilla reproducible (`metadatos.semilla`): la misma `(semilla, faccion, rango)` produce siempre el mismo resultado.
-
-#### 16.2.3. Generador vía LLM (prosa)
-
-Pipeline que rellena el campo `historia` y enriquece descripciones narrativas a partir del personaje procedural. El LLM solo interviene en la prosa — la estructura y los atributos los produce el algoritmo procedural.
-
-#### 16.2.4. Suite de tests del generador
-
-Tests agnósticos que validan el comportamiento del generador:
-
-- **Golden mocks**: el generador reproduce los 22 personajes existentes fijando su semilla canónica.
-- **Invariantes de schema**: todo personaje generado satisface las restricciones de §6 (tipos, campos obligatorios, rangos de atributos).
-- **Distribuciones por rango**: los atributos generados caen dentro de las bandas de §7.2.1.
-- **Idempotencia con semilla fija**: `generar(semilla, faccion, rango)` devuelve el mismo payload en llamadas sucesivas.
-
-Esta suite es entregable del Hito 1, no del Hito 2.
-
----
-
-### 16.3. Hito 2 — API en contenedor Docker (**BLOQUEADO**)
-
-<!-- BLOQUEADO: no se avanza con este hito hasta autorización explícita del usuario kodex. -->
-
-Convertir el sistema del Hito 1 en un servicio HTTP empaquetado en Docker. Endpoints mínimos:
-
-- Obtener personaje existente por ID (mock o canonizado).
-- Generar personaje nuevo con o sin semilla explícita.
-
-Incluye **tests de contrato y de integración** del servicio HTTP. Lenguaje y framework sin definir todavía — la decisión queda para cuando se autorice el hito.
-
----
-
-### 16.4. Hito 3 — Sistema de escuadras (**BLOQUEADO**)
-
-<!-- BLOQUEADO: no se avanza con este hito hasta autorización explícita del usuario kodex. -->
-
-Modelado y API del sistema de escuadras: composición de escuadra, `fza_aportada` agregada, lealtad de escuadra, dinámicas inter-escuadra. También empaquetado como API en Docker. Mismo criterio de bloqueo que el Hito 2.
-
----
-
-### 16.5. Excluido del alcance actual
-
-Mientras los Hitos 2 y 3 permanezcan bloqueados, los siguientes elementos están **fuera del PRD vigente**:
-
-- La API HTTP y sus endpoints.
-- El contenedor Docker y cualquier decisión de infraestructura.
-- El sistema de escuadras (schema completo, CRUD, dinámicas de grupo).
-- Persistencia en base de datos.
-- Autenticación y autorización de llamadas.
-- Cualquier interfaz de usuario (UI, CLI de usuario final, dashboards).
-
-Estos temas pueden documentarse en PRDs separados cuando sus hitos sean autorizados.
-
----
-
-*Fuentes canónicas referenciadas (no copiadas):*
+*Fuentes canónicas externas referenciadas (no copiadas):*
 
 - `/Dev/syv-battle-game-system/reglamento/02_hoja_personaje.md` — esquema y matriz de stats por rango.
-- `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md` — pools de perks y complicaciones (estos últimos migrados como traits con polaridad negativa).
-- `/Dev/syv-battle-game-system/lore/universo.md` — descriptores de facción usados como contexto del LLM.
-- `/Dev/syv-battle-game-system/personajes/` — 22 fichas canon base que alimentan los mocks (regenerados al schema y normalizados).
+- `/Dev/syv-battle-game-system/reglamento/03_atributos_perks.md` — pools de perks y complicaciones.
+- `/Dev/syv-battle-game-system/lore/universo.md` — descriptores de facción para contexto del LLM.
+- `/Dev/syv-battle-game-system/personajes/` — 22 fichas canon base que alimentan los mocks.
 - `https://github.com/kodexArg/syv-game-system/blob/main/arquitectura/esquemas/personaje.schema.json` — schema público de referencia.

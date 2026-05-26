@@ -27,11 +27,14 @@ Mapea: UC-09.
 
 ### `GET /character`
 
-Genera un personaje efímero. Parámetros opcionales: `faccion`, `rango`, `seed`, `fields`.
+Genera un personaje efímero. Parámetros opcionales: `faccion`, `rango`, `seed`, `fields`, `tag`.
+
+- `tag` admite repetición para filtrado en AND lógico (`?tag=skill.francotirador&tag=rol.lider`). El valor debe ser un tag completo en notación punto. OR no está soportado en v1 — el cliente lo resuelve con N calls + unión.
+- Aplica al sorteo: el efímero generado debe portar todos los tags exigidos. Si la combinación es inviable, devuelve **409**.
 
 Devuelve un `personaje` con `identidad.slug: null` (los efímeros no tienen slug hasta canonizarse), `historial: []`, `aliados: []`, `nemesis: []`, `metadatos.canonizado_en: null`, y los tags mínimos `estado.disponible` + `escuadra.*` correspondiente.
 
-Mapea: UC-01..04, UC-06, UC-16.
+Mapea: UC-01..04, UC-06, UC-16, UC-19, UC-20, UC-22.
 
 ### `GET /character/{slug}`
 
@@ -69,13 +72,15 @@ Mapea: UC-08.
 
 | Método | Path | UC |
 |---|---|---|
-| GET | `/character` | 01..04, 06, 16 |
+| GET | `/character` | 01..04, 06, 16, 19, 20, 22 |
 | GET | `/character/{slug}` | 05, 15, 16 |
 | GET | `/character/{slug}/historial` | 17 |
 | POST | `/character/{slug}/event` | 10..14, 18 |
 | POST | `/canonize` | 07 |
-| GET | `/roster/mock` | 08 |
-| GET | `/meta/{categoria}` | 09 |
+| GET | `/roster/mock` | 08, 21 |
+| GET | `/meta/{categoria}` | 09, 23 |
 | GET | `/meta/factions` | 09 |
 | GET | `/meta/rangos` | 09 |
 | GET | `/meta/hito_types` | 09 |
+
+Catálogo completo de UCs en [`docs/user-stories.md`](docs/user-stories.md).
