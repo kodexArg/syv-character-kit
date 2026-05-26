@@ -1,6 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+- group: homologacion-mocks-catálogo-mvp
+  priority: high
+  commit: fb4a6a2
+  changes:
+    - refactor(tags/perk): prune catalog from 14 to 4 MVP perks — consolidate brazo_derecho_funcional, cobertura_instintiva→cobertura, disparo_de_oportunidad, escudo_humano, olfato_del_terreno, punteria_fria, recarga_rapida→recarga, resistencia_al_dolor→estoico, sangre_fria, sucesor_de_ricardo, tirador_preciso, veterano, veterano_de_flanqueo (trailing removed, merged into 4 core perks)
+    - refactor(tags/skill): prune catalog from 11 to 8 MVP skills — consolidate analisis_tactico, carga_rapida, conocimiento_de_meseta→meseta, fuego_sostenido, lectura_de_mapas→cartografia, lectura_de_terreno→terreno, lectura_del_viento, manejo_de_ametralladora→ametralladora, movimiento_sigiloso→sigilo, operacion_de_radio→radio, tiro_de_precision→precision + add sigilo (new curated)
+    - refactor(tags/trait): prune obsolete traits — arma_pesada_sin_dotacion, eco_del_penasco removed; fatigado_cronico→fatigado; 15 trait mappings applied (voz_grave→rasgo.voz_grave, sangre_fria→imperturbable, obstinado→terco, paciente→imperturbable, parco→discreta, metodico→confiable, pragmatico→confiable, reservada→discreta, sombra_del_lider→confiable, objetivo_prioritario→vanguardia, panico_en_abierto→cobarde, recluta_novato→cobarde, vacio_de_mando→cobarde, voluntarioso→determinada, intelectual→discreta)
+    - refactor(mock/personajes): homologate all 22 YAMLs to curated tag catalog — replace all invalid trait/perk/skill slugs via explicit mapping; verify all 111 tag refs resolve to extant files
+    - refactor(mock/personajes/ejercito_rojo/paine): lealtad.faccion.comunidad_mapuche→lealtad.faccion.ejercito_rojo + add rasgo.rasgos_mapuche (identity preservation across faction alignment)
+    - feat(mock/personajes): enrich 3 patagónicos confederados (aguirre, pereyra, lugones) with subfaccion.pelicanos; enrich 7 red army rojos with subfaccion.ejercito_revolucionario_del_pueblo (mansilla, iturra, carcamo, soriano, belenchini, bordon, bordagaray)
+    - feat(mock/personajes): add 1 coherent perk to leaders/snipers without prior perk (estoico for líderes, cobertura for apuntadores); maintain recruits perk-free by heuristic
+    - chore: 22 YAMLs parse OK; 111 unique tag refs all resolve; no schema breaks; bloque identidad/atributos/historia/historial/aliados/nemesis/metadatos/extras untouched
 - group: peso-field-equipo
   priority: high
   commit: dd0a45f
