@@ -19,9 +19,9 @@ personaje:
     edad:        int         # (*)
 
   atributos:
-    fis:         int         # (*) 2..5  (5 exclusivo de artillero)
-    tac:         int         # (*) 2..6  (6 exclusivo de francotirador)
-    men:         int         # (*) 2..7  (7 exclusivo de lider_de_escuadra)
+    fis:         int         # (*) 2..5  (tope absoluto 5; creación máx 4; vía hito hasta tope)
+    tac:         int         # (*) 2..6  (tope absoluto 6; creación máx 5; vía hito hasta tope)
+    men:         int         # (*) 2..7  (tope absoluto 7; creación máx 6; vía hito hasta tope)
 
   # Lista plana de tags en notación punto: <categoria>[.<subcategoria>].<slug>.
   # Multiset — admite repetidos. Vacía al crear; se puebla según rango/facción y/o curaduría.

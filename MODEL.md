@@ -29,8 +29,8 @@ Resource principal. Servido por `GET /character/{slug}`, mutado por `POST /chara
 | `identidad.genero` | `str` | inmutable | Enum abierto: `masculino \| femenino \| no_binario \| otro`. |
 | `identidad.edad` | `int` | mutable (sin hito) | Decisión narrativa. |
 | `atributos.fis` | `int` (2..5) | vía `triple_cero`/`mejora_atributo` | |
-| `atributos.tac` | `int` (2..6) | vía `triple_cero`/`mejora_atributo` | `6` solo para `francotirador`. |
-| `atributos.men` | `int` (2..7) | vía `triple_cero`/`mejora_atributo` | `7` solo para `lider_de_escuadra`. |
+| `atributos.tac` | `int` (2..6) | vía `triple_cero`/`mejora_atributo` | Tope absoluto 6; creación máx 5; vía hito hasta tope. |
+| `atributos.men` | `int` (2..7) | vía `triple_cero`/`mejora_atributo` | Tope absoluto 7; creación máx 6; vía hito hasta tope. |
 | `tags[]` | `list<str>` (multiset) | vía `agregar_tag`/`quitar_tag` | Notación punto `<categoria>[.<subcategoria>].<slug>`. Admite repetidos. |
 | `historia` | `str` | inmutable tras canonizar | 120–200 palabras. Congelada. |
 | `historial[]` | `list<hito>` (embebida) | append-only vía `POST /event` | Ver §1.1. |

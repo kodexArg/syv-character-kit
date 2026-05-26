@@ -9,8 +9,8 @@ Este documento define el catálogo oficial de variables que pueden ser afectadas
 Los atributos base son las únicas magnitudes numéricas de capacidad que se persisten de forma fija en la hoja de personaje (ver [`hoja-modelo.md §2`](hoja-modelo.md)).
 
 - **FISICO** (`fis`): Fuerza física, potencia muscular y resistencia del organismo. Rango: 2..5.
-- **TACTICO** (`tac`): Coordinación, puntería, reflejos y destreza técnica de combate. Rango: 2..6 (6 exclusivo de `francotirador`).
-- **MENTAL** (`men`): Fortaleza psicológica, resistencia al estrés, moral base y capacidad de liderazgo. Rango: 2..7 (7 exclusivo de `lider_de_escuadra`).
+- **TACTICO** (`tac`): Coordinación, puntería, reflejos y destreza técnica de combate. Rango: 2..6 (tope absoluto; creación máx 5; alcanzable solo vía hito `triple_cero` o `mejora_atributo`).
+- **MENTAL** (`men`): Fortaleza psicológica, resistencia al estrés, moral base y capacidad de liderazgo. Rango: 2..7 (tope absoluto; creación máx 6; alcanzable solo vía hito `triple_cero` o `mejora_atributo`).
 
 ### 1.1. Skills como disparador de chequeos
 
