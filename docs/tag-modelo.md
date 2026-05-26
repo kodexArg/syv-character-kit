@@ -43,7 +43,7 @@ Un tag se escribe como un **string único** con la forma `<categoria>[.<subcateg
 - Los segmentos intermedios son **sub-categorías** anidadas.
 - El último segmento es el **slug** específico (lowercase + underscore, sin acentos).
 
-**Reglas del slug de tag**: lowercase, underscores como único separador, sin acentos, sin espacios, sin caracteres especiales. Ejemplos: `pistola`, `tirador_preciso`, `ejercito_rojo`, `lider_de_escuadra`. El slug de un tag es **legible por diseño** — es la pieza humana de la notación punto.
+**Reglas del slug de tag**: lowercase, underscores como único separador, sin acentos, sin espacios, sin caracteres especiales. Ejemplos: `pistola`, `precision`, `ejercito_rojo`, `lider_de_escuadra`. El slug de un tag es **legible por diseño** — es la pieza humana de la notación punto.
 
 > **Importante** — el slug de tag es distinto del **slug de personaje** (`identidad.slug`). Este último es una **patente opaca de 8 caracteres `[A-Z0-9]`** (ej. `K9F2H3M4`), no un nombre legible. Ver `hoja-modelo.md` para las reglas del slug de personaje. Las refs a otros personajes (vínculos personales) **no son tags** — viven en las colecciones `personaje.aliados[]` y `personaje.nemesis[]`. Ver §5.1.
 

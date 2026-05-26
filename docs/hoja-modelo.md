@@ -135,7 +135,7 @@ Cambios post-creación en `tags[]` se registran como hito `agregar_tag` / `quita
 
 Asimetría deliberada:
 
-- **Slug de tag** (catálogo): legible, lowercase + underscore. Ejemplos: `pistola`, `tirador_preciso`, `ejercito_rojo`. Es la pieza humana de la dot notation. Ver [`tag-modelo.md` §2](tag-modelo.md).
+- **Slug de tag** (catálogo): legible, lowercase + underscore. Ejemplos: `pistola`, `precision`, `ejercito_rojo`. Es la pieza humana de la dot notation. Ver [`tag-modelo.md` §2](tag-modelo.md).
 - **Slug de personaje** (`identidad.slug`): patente opaca `^[A-Z0-9]{8}$`. Ejemplo: `K9F2H3M4`. Ver §1.1.
 
 Cuando un tag relacional referencia un personaje (ej. `lealtad.pj.K9F2H3M4`), el segmento final es la patente del personaje, no su nombre. Cuando un tag relacional referencia una entidad del catálogo (ej. `lealtad.faccion.ejercito_rojo`), el segmento final es el slug legible de la entidad. La distinción operativa: tags son metadato curado y se leen; personajes son entidades del juego y se identifican por patente.
