@@ -28,7 +28,7 @@ Mapea: UC-09.
 
 ### `GET /character`
 
-Genera un personaje efímero. Parámetros opcionales: `faccion`, `rango`, `seed`, `fields`, `tag`.
+Genera un personaje efímero. Parámetros opcionales: `faccion`, `rango`, `seed`, `fields`, `tag`. `fields` recibe dot-paths separados por coma: `fields=identidad.slug,atributos.fis`.
 
 - `tag` admite repetición para filtrado en AND lógico (`?tag=skill.francotirador&tag=rol.lider`). El valor debe ser un tag completo en notación punto. OR no está soportado en v1 — el cliente lo resuelve con N calls + unión.
 - Aplica al sorteo: el efímero generado debe portar todos los tags exigidos. Si la combinación es inviable, devuelve **409**.
@@ -39,7 +39,7 @@ Mapea: UC-01..04, UC-06, UC-16, UC-19, UC-20, UC-22.
 
 ### `GET /character/{slug}`
 
-Devuelve la ficha vigente del personaje con `identidad.slug` exacto. 404 si no existe. Acepta `fields=` para podar. Incluye los campos derivados (`filiacion`, `fatiga_max`, `moral_max`, `fza_aportada`) definidos en [`MODEL.md §1`](MODEL.md).
+Devuelve la ficha vigente del personaje con `identidad.slug` exacto. 404 si no existe. Acepta `fields=` (dot-paths CSV, ej. `fields=identidad.slug,identidad.nombre,atributos.fis`) para podar. Incluye los campos derivados (`filiacion`, `fatiga_max`, `moral_max`, `fza_aportada`) definidos en [`MODEL.md §1`](MODEL.md).
 
 Mapea: UC-05, UC-15, UC-16.
 
@@ -75,25 +75,25 @@ Mapea: UC-08.
 Lista todas las escuadras persistidas. Acepta parámetro opcional `faccion` para filtrar.
 
 ### `GET /escuadras/{slug}`
-Devuelve la ficha detallada de la escuadra con el `slug` exacto. Incluye todos los campos de identidad, la lista completa de `miembros[]` y los campos calculados dinámicamente (`fza_total`, `cohesion_vigente`, `movimiento_tactico`, `lider_vigente`, `estado_escuadra`).
+Devuelve la ficha detallada de la escuadra con el `slug` exacto. Incluye todos los campos de identidad (incluyendo `tipo`), la lista de `miembros[]` (con sus `puntos_pagados`), la lista `historial[]` de hitos, y los campos calculados dinámicamente (`fza_total`, `cohesion_vigente`, `moral_promedio`, `fatiga_promedio`, `movimiento_tactico`, `puntos_totales`, `lider_vigente`, `estado_escuadra`, `cumple_template`, `errores_validacion[]`).
 
 Mapea: UC-24.
 
 ### `POST /escuadras`
-Crea y persiste una nueva escuadra. El body debe incluir la estructura de identidad y opcionalmente una lista inicial de miembros.
+Crea y persiste una nueva escuadra. El body debe incluir la estructura de identidad (incluyendo `tipo`) y opcionalmente una lista inicial de miembros e historial.
 
 Mapea: UC-25.
 
 ### `POST /escuadras/{slug}/miembro`
 Añade un personaje como miembro de la escuadra.
-- Body: `{ "ref": "PATENTE", "posicion": 1..11 }`.
-- Efecto colateral: Añade la patente del personaje a la lista `miembros[]` de la escuadra, y añade el tag `escuadra.{slug}` y `lealtad.escuadra.{slug}` a la hoja del personaje, registrando un hito de `asignacion_escuadra` en su `historial[]`.
+- Body: `{ "ref": "PATENTE", "pos": int, "puntos": int }`.
+- Efecto colateral: Añade la patente, posición (`pos`), costo en puntos (`puntos`), rango y nombre a la lista `miembros[]` de la escuadra, añade los tags `escuadra.{slug}` y `lealtad.escuadra.{slug}` a la hoja del personaje, y registra un hito `asignacion_escuadra` tanto en el `historial[]` del personaje como en el `historial[]` de la escuadra.
 
 Mapea: UC-26.
 
 ### `DELETE /escuadras/{slug}/miembro/{char_slug}`
 Remueve a un miembro de la escuadra.
-- Efecto colateral: Quita la referencia de `miembros[]` en la escuadra, elimina los tags `escuadra.{slug}` y `lealtad.escuadra.{slug}` del personaje, y registra un hito de `traslado` (o remoción) en su `historial[]`.
+- Efecto colateral: Quita la referencia de `miembros[]` en la escuadra, elimina los tags `escuadra.{slug}` y `lealtad.escuadra.{slug}` del personaje, y registra un hito de `traslado` en el `historial[]` del personaje y un hito de `reorganizacion` (baja de miembro) en el `historial[]` de la escuadra.
 
 Mapea: UC-27.
 
