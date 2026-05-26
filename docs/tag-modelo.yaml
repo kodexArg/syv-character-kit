@@ -13,7 +13,7 @@
 tag:
 
   slug:          str         # (*) slug del TAG (no del personaje): lowercase + underscore,
-                             #     sin acentos. Ej: "pistola", "tirador_preciso", "ejercito_rojo".
+                             #     sin acentos. Ej: "pistola", "precision", "ejercito_rojo".
                              #     El slug de personaje es una patente opaca [A-Z0-9]{8} —
                              #     ver hoja-modelo.md.
   nombre:        str         # (*)

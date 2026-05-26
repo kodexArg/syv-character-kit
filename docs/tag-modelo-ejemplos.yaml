@@ -38,10 +38,10 @@ personajes:
       - rasgo.altura_media
       - rasgo.manos_grandes
       - trait.taciturno
-      - perk.resistencia_al_dolor
+      - perk.tenaz
       - skill.medicina
       - skill.primeros_auxilios
-      - skill.lectura_de_terreno
+      - skill.terreno
       - rol.oficio.medico
       - rol.jerarquia.sargento
       - equipo.arma.pistola
@@ -75,7 +75,7 @@ personajes:
       - rasgo.barba_canosa
       - trait.taciturno
       - trait.devoto
-      - skill.conocimiento_de_meseta
+      - skill.meseta
       - skill.medicina
       - skill.oratoria          # origen: emergente — uso comunitario, no de mando
       - rol.narrativo.chaman    # origen: custom — categoría narrativa nueva
@@ -116,7 +116,7 @@ personajes:
       - trait.voz_de_mando
       - skill.oratoria
       - skill.comisariado
-      - skill.lectura_de_mapas
+      - skill.cartografia
       - rol.narrativo.lider_revolucionario
       - equipo.arma.smg
       - equipo.utilitario.cargador
@@ -185,11 +185,10 @@ personajes:
       - rasgo.atletico
       - rasgo.pelo_corto
       - trait.templado_bajo_fuego
-      - perk.punteria_fria
-      - perk.recarga_rapida
-      - perk.cobertura_instintiva
-      - skill.tiro_de_precision
-      - skill.lectura_de_terreno
+      - perk.cobertura
+      - perk.recarga
+      - skill.precision
+      - skill.terreno
       - rol.oficio.francotirador
       - rol.jerarquia.sargento
       - equipo.arma.rifle_militar
