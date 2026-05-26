@@ -1,6 +1,51 @@
 # Changelog
 
 ## [Unreleased]
+- group: canon-independencia-kit
+  priority: high
+  commit: 69d43fd
+  changes:
+    - docs(prd/§10): consolidate lore references to single source /Dev/SyV/syv/src/content/docs/ (github.com/kodexArg/syv); remove refs to syv-battle-game-system, syv-obsidian, syv-game-system
+    - docs(prd/§5): remove "(ver reglamento canon)" citation; FZA derivation now self-contained in rol.combate.* of kit
+    - docs(agents): narrowed "Lore canon" rule to /Dev/SyV/syv/src/content/docs/ structure (0_proyecto..6_media); list other SyV directories as non-canonical for this kit
+- group: mock-audit-subfaccion-lealtad
+  priority: high
+  commit: 114a85c
+  changes:
+    - fix(mock/personajes): add missing subfaccion.* tags to 8 confederacion fixtures (02..11) and 4 ejercito_rojo fixtures (03,04,06,10) per GDDR-01 §1.3
+    - fix(mock/personajes): add lealtad.subfaccion.pelicanos to all 11 confederacion fixtures and lealtad.subfaccion.ejercito_revolucionario_del_pueblo to all 11 ejercito_rojo fixtures
+- group: tags-huerfanos
+  priority: normal
+  commit: 21b3af4
+  changes:
+    - feat(tags/rasgo): materialize barba_canosa, manos_grandes, piel_curtida (minimal, without effect)
+    - feat(tags/trait): materialize lealtad_obrera (+2 MORAL / -1 INICIATIVA), mirada_larga (+1 TACTICO / +1 INICIATIVA), taciturno (+1 MENTAL / -1 INICIATIVA), recluta_novato (-1 TACTICO / -1 ESTRESS / -1 INICIATIVA), templado_bajo_fuego (+1 MENTAL / +1 MORAL / +1 ESTRESS)
+    - feat(tags/trait): materialize panico_en_abierto with trigger bajo_fuego/sin_cobertura → efecto.panico
+    - chore(tag-modelo-ejemplos): all 18 tag refs now resolve to extant files in tags/
+- group: docs-audit-canon-alignment
+  priority: high
+  commit: 25e8a99
+  changes:
+    - docs(hoja-modelo.md §0): include aliados[] and nemesis[] in structure documentation
+    - fix(hoja-modelo.md): remove §9 changelog section (rolling release violation)
+    - fix(hoja-modelo.yaml): correct tac range 2..5 → 2..6
+    - fix(gddr/01 §1.3): separate subfacción and escuadra into distinct phases
+    - fix(gddr/01 §3): remove reference to nonexistent GDDR-03
+    - fix(tag-modelo.md): consolidate OQ-tag-2 (resolved), update OQ-tag-3 to reference aliados[]/nemesis[] instead of stale lealtad.pj.* and nemesis.pj.* patterns
+    - fix(prd/§1.1): add universe context (year 2178, Zanja de Alsina, Confederación Argentina/Ciudad Dársena, Ejército Rojo/Bahía Blanca, Camarada Puntero, Anatema Mecánico)
+    - fix(prd/§5): rename mocks column to fixture_id; clarify FZA total = 15 derivation; update Confederación → Confederación Argentina
+    - docs(agents): refine randomness rule (probabilities in %, modifiers as delta integers, % for rates per docs/atributos-y-efectos.md); generalize docs/ policy to all files
+    - chore: cross-reference corrections (API.md PRD §7.2 → gddr/01 §3; MODEL.md PRD §4 → PRD §8; resources/nombres/README.md §1.3 → §2.3; tag-modelo.md ref T-02/T-07 in open-questions.md)
+- group: refactor-prd-docs
+  priority: high
+  commit: 47d3872
+  changes:
+    - refactor(prd): reduce from 623 to 211 lines — product is documentation, not application; clarify five deliverables (protocol, procedural generator, API contract, 22 mocks in two squads, battle rules)
+    - feat(docs): new file MODEL.md with persistence contract (sub-product of API.md)
+    - feat(docs): new file user-stories.md with UCs 01-23 and bidirectional endpoint mapping
+    - feat(docs): new file open-questions.md consolidating tensions (T-01..T-10), open questions (OQ-01..OQ-14), architecture notes (N-01..N-04)
+    - fix(api.md): add ?tag= parameter with AND-by-repetition; map UCs 19/20/22 without breaking existing contract
+    - fix(agents.md): one-line sync (PRD §14 → docs/open-questions.md)
 - group: docs-reconciliacion-slugs-ejemplo
   priority: normal
   commit: aea151b
