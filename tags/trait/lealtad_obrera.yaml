@@ -1,0 +1,13 @@
+tag:
+  slug: lealtad_obrera
+  nombre: "Lealtad obrera"
+  categoria: trait
+  descripcion: >
+    Fidelidad visceral a los de su clase y su columna, sin necesidad de argumentos
+    ideológicos. Cumple porque son los suyos; no deserta aunque la situación sea
+    desesperada. El mando informal que ejerce Emilia Bordagaray descansa sobre este rasgo
+    en quienes la rodean.
+  origen: emergente
+  efecto:
+    - "(+2) MORAL"
+    - "(-1) INICIATIVA"

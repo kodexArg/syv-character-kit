@@ -1,0 +1,12 @@
+tag:
+  slug: taciturno
+  nombre: "Taciturno"
+  categoria: trait
+  descripcion: >
+    Habla lo mínimo indispensable; el silencio es su idioma habitual. No por
+    reserva ni hostilidad sino porque las palabras le resultan costosas y las
+    ahorra. Su presencia pesa más que sus órdenes.
+  origen: emergente
+  efecto:
+    - "(+1) MENTAL"
+    - "(-1) INICIATIVA"

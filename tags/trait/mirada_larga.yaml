@@ -1,0 +1,12 @@
+tag:
+  slug: mirada_larga
+  nombre: "Mirada larga"
+  categoria: trait
+  descripcion: >
+    Capacidad de leer el terreno y la situación más allá del momento inmediato.
+    Quien tiene mirada larga no se deja llevar por el caos del instante; procesa,
+    aguarda y actúa con información que los demás aún no procesaron.
+  origen: emergente
+  efecto:
+    - "(+1) TACTICO"
+    - "(+1) INICIATIVA"
