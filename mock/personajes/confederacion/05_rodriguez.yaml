@@ -21,10 +21,10 @@ personaje:
   - trait.discreta
   - rasgo.modales_suaves
   - rol.oficio.infanteria
-  - skill.fuego_sostenido
+  - skill.resistencia
   - skill.sastreria
-  - trait.panico_en_abierto
-  - perk.cobertura_instintiva
+  - trait.cobarde
+  - perk.cobertura
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado

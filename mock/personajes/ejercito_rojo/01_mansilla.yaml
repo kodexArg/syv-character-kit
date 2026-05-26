@@ -24,11 +24,12 @@ personaje:
   - rol.combate.lider
   - skill.comisariado
   - skill.oratoria
-  - skill.lectura_de_mapas
-  - trait.voz_grave
-  - trait.obstinado
-  - trait.objetivo_prioritario
+  - skill.cartografia
+  - trait.terco
+  - trait.vanguardia
   - trait.voz_de_mando
+  - perk.estoico
+  - subfaccion.ejercito_revolucionario_del_pueblo
   - equipo.arma.smg
   - equipo.arma.pistola
   - equipo.utilitario.cargador

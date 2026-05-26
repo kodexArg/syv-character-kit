@@ -21,10 +21,8 @@ personaje:
   - rasgo.cara_joven
   - rasgo.mirada_firme
   - rol.oficio.recargador
-  - perk.recarga_rapida
-  - trait.obediente
-  - trait.vacio_de_mando
-  - perk.disparo_de_oportunidad
+  - trait.confiable
+  - trait.cobarde
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado

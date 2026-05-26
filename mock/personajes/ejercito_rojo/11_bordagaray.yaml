@@ -22,10 +22,10 @@ personaje:
   - rasgo.manos_curtidas
   - rol.oficio.recargador
   - skill.mecanica
-  - skill.carga_rapida
-  - trait.voluntarioso
+  - skill.carga
+  - trait.determinada
   - trait.hemorragia_lenta
-  - perk.escudo_humano
+  - subfaccion.ejercito_revolucionario_del_pueblo
   - equipo.arma.smg
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_rojo

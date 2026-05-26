@@ -21,10 +21,10 @@ personaje:
   - rasgo.pelo_corto
   - rasgo.modales_suaves
   - rol.oficio.infanteria
-  - skill.fuego_sostenido
-  - skill.analisis_tactico
-  - trait.sangre_fria
-  - trait.obstinado
+  - skill.resistencia
+  - skill.coordinacion
+  - trait.imperturbable
+  - trait.terco
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado

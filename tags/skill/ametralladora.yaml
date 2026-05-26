@@ -1,6 +1,8 @@
 tag:
-  slug: manejo_de_ametralladora
-  nombre: "Manejo de ametralladora"
+  slug: ametralladora
+  nombre: "Ametralladora"
   categoria: skill
   descripcion: >
     Entrenamiento especializado en el disparo, mantenimiento y control de armas automáticas pesadas.
+  skill:
+    atributo_dominante: tac

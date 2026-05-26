@@ -22,11 +22,11 @@ personaje:
   - rasgo.postura_torcida
   - rasgo.cicatriz_corporal
   - rol.oficio.infanteria
-  - skill.fuego_sostenido
+  - skill.resistencia
   - skill.primeros_auxilios
-  - perk.veterano
   - trait.hemorragia_lenta
-  - perk.resistencia_al_dolor
+  - trait.veterano
+  - perk.tenaz
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.utilitario.vendaje

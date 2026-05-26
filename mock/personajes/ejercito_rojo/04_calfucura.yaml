@@ -21,11 +21,11 @@ personaje:
   - rasgo.manos_curtidas
   - rasgo.mirada_firme
   - rol.oficio.artillero
-  - skill.manejo_de_ametralladora
+  - skill.ametralladora
   - skill.desencasquillamiento
   - trait.imperturbable
-  - trait.arma_pesada_sin_dotacion
-  - perk.recarga_rapida
+  - trait.terco
+  - perk.recarga
   - equipo.arma.ametralladora
   - equipo.utilitario.cuchillo
   - equipo.utilitario.bandolera

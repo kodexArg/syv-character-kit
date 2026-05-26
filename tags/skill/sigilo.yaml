@@ -1,0 +1,8 @@
+tag:
+  slug: sigilo
+  nombre: "Sigilo"
+  categoria: skill
+  descripcion: >
+    Capacidad para desplazarse, observar y posicionarse sin ser detectado.
+  skill:
+    atributo_dominante: tac

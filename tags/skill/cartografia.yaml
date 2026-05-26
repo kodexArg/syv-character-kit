@@ -1,6 +1,8 @@
 tag:
-  slug: lectura_de_mapas
-  nombre: "Lectura de mapas"
+  slug: cartografia
+  nombre: "Cartografía"
   categoria: skill
   descripcion: >
     Capacidad para orientarse cartográficamente y comprender las coordenadas del terreno.
+  skill:
+    atributo_dominante: men

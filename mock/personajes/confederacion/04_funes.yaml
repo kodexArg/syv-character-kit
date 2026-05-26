@@ -20,11 +20,11 @@ personaje:
   - rasgo.manos_curtidas
   - rasgo.mirada_firme
   - rol.oficio.artillero
-  - skill.manejo_de_ametralladora
+  - skill.ametralladora
   - skill.municion
-  - trait.metodico
-  - trait.parco
-  - perk.recarga_rapida
+  - trait.confiable
+  - trait.discreta
+  - perk.recarga
   - equipo.arma.ametralladora
   - equipo.utilitario.cuchillo
   - equipo.utilitario.bandolera

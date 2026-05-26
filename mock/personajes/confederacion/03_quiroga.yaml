@@ -21,11 +21,11 @@ personaje:
   - rasgo.mirada_firme
   - rasgo.habla_parca
   - rol.oficio.apuntador
-  - skill.tiro_de_precision
-  - skill.lectura_de_mapas
-  - trait.paciente
-  - perk.punteria_fria
-  - perk.olfato_del_terreno
+  - skill.precision
+  - skill.cartografia
+  - trait.imperturbable
+  - trait.punteria
+  - perk.cobertura
   - equipo.arma.rifle_militar
   - equipo.utilitario.cargador
   - equipo.utilitario.mapa

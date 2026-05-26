@@ -20,11 +20,12 @@ personaje:
   - rasgo.manos_curtidas
   - rasgo.respiracion_pesada
   - rol.oficio.infanteria
-  - skill.fuego_sostenido
+  - skill.resistencia
   - skill.carga
   - trait.aguantador
-  - trait.peso_muerto
-  - perk.resistencia_al_dolor
+  - trait.fatigado
+  - subfaccion.ejercito_revolucionario_del_pueblo
+  - perk.tenaz
   - equipo.arma.smg
   - equipo.utilitario.cargador
   - equipo.utilitario.cinto
