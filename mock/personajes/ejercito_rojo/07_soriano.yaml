@@ -31,6 +31,7 @@ personaje:
   - equipo.utilitario.cinto
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
+  - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
   - lealtad.escuadra.mansilla
   historia: Norberto Soriano tiene cuarenta años y dos hernias de disco que el médico del sindicato le diagnosticó hace tres años. "No cargues más de veinte kilos", le dijo. El FAP vacío pesa dieciocho. La mochila de campaña con agua, raciones y parque pesa veintidós. Soriano lleva los dos porque es lo que hay. Veinte años en las dársenas de Puerto Madryn cargando contenedores de pescado congelado le dejaron la espalda, los pulmones afectados por el amoníaco de las cámaras frigoríficas, y una convicción muy clara sobre quién se queda con el dinero y quién pone el cuerpo. Cuando el Ejército Rojo llegó al puerto con sus agitadores, Soriano ya tenía las mismas conclusiones — solo le faltaba una estructura donde meterlas. No le cuesta obedecer órdenes. La diferencia es que aquí las órdenes vienen de camaradas, no de gerentes. O al menos eso le dijeron.
   historial:

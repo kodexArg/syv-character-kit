@@ -93,7 +93,7 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 ## 5. Mocks — dos escuadras canon
 
-22 personajes, distribuidos en dos escuadras simétricas. Composición de cada escuadra: 1 + 1 + 1 + 1 + 4 + 3 (líder, segundo, apuntador, artillero, 4 fusileros, 3 reclutas). FZA total de escuadra completa: 2+2+2+2+(4×1)+(3×1) = **15** (ver [reglamento canon](../syv-battle-game-system/reglamento/02_hoja_personaje.md)). Fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
+22 personajes, distribuidos en dos escuadras simétricas. Composición de cada escuadra: 1 + 1 + 1 + 1 + 4 + 3 (líder, segundo, apuntador, artillero, 4 fusileros, 3 reclutas). FZA total de escuadra completa: 2+2+2+2+(4×1)+(3×1) = **15** (derivado de `rol.combate.*` — ver §4). Fixtures en `mock/personajes/{faccion}/{nn}_{rango}_{apellido}.yaml`.
 
 > **Columna `fixture_id`**: identificador del archivo en `mock/personajes/`, NO `personaje.identidad.slug`. El slug del personaje es una patente opaca `[A-Z0-9]{8}` que se asigna al persistir. La migración final de los mocks a patentes 8-char está pendiente ([OQ-12](docs/open-questions.md)).
 
@@ -214,11 +214,8 @@ Convenciones de trabajo, identificadores, idioma, expresión de azar en porcenta
 
 ---
 
-*Fuentes canónicas externas referenciadas (no copiadas):*
+*Fuente canónica del universo (referencia de lore, no copiada):*
 
-- [`/Dev/SyV/syv-battle-game-system/reglamento/`](../syv-battle-game-system/reglamento/) — reglamento del motor de batalla (hoja-personaje canon, atributos, perks, dados, loop de combate, entropía, finales).
-- [`/Dev/SyV/syv-battle-game-system/lore/universo.md`](../syv-battle-game-system/lore/universo.md) — síntesis MVP del universo: año 2178, Zanja de Alsina, las dos facciones jugables y las tres facciones secundarias.
-- [`/Dev/SyV/syv-battle-game-system/personajes/`](../syv-battle-game-system/personajes/) — fichas canon base que alimentan los mocks.
-- [`/Dev/SyV/syv-obsidian/docs/`](../syv-obsidian/docs/) — Obsidian vault completo del universo SyV (trasfondo, atlas, personajes principales, codex del Anatema Mecánico).
-- [`/Dev/SyV/syv/`](../syv/) — sitio público de lore (Astro).
-- `https://github.com/kodexArg/syv-game-system` — repo público del game system.
+- [`/Dev/SyV/syv/src/content/docs/`](../syv/src/content/docs/) — documentación del universo *Subordinación y Valor*: trasfondo, atlas, personajes, diégesis, aventuras, media. **Única fuente válida** de lore del universo. Repo público: `https://github.com/kodexArg/syv`.
+
+El kit no depende de ningún otro repo para definirse: el schema, los catálogos, las reglas de generación y las reglas del motor de batalla viven íntegramente acá. La cita al canon es para fidelidad narrativa, no dependencia técnica.

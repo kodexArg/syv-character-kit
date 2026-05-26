@@ -12,6 +12,7 @@ personaje:
     men: 2
   tags:
   - faccion.confederados
+  - subfaccion.pelicanos
   - rango.recluta
   - escuadra.ricardo
   - estado.activo
@@ -27,6 +28,7 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
+  - lealtad.subfaccion.pelicanos
   - lealtad.escuadra.ricardo
   historia: 'Esteban Ramírez es de Bahía Blanca, tiene dieciocho años, y antes del servicio terminó el secundario con notas mediocres en todo excepto educación física. Sus padres tienen un almacén en Villa Mitre que él ayudaba a atender los fines de semana. Es el menor de tres hermanos; los otros dos ya cumplieron el servicio y volvieron, lo que en teoría debería tranquilizarlo y en la práctica no lo tranquiliza. La instrucción duró lo que dura siempre y no fue suficiente para ninguna de las cosas que importan en el frente. Ramírez lleva dos semanas en el sector y todavía hay ruidos que no identifica correctamente. Walter lo notó al segundo día: Ramírez obedece órdenes con la rapidez del que sabe que no sabe, que es el tipo de obediencia más útil en un recluta. No es valor ni entrenamiento — es que todavía no aprendió a dudar de las órdenes.'
   historial:

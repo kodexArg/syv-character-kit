@@ -31,6 +31,7 @@ personaje:
   - equipo.utilitario.cuaderno
   - equipo.vestidura.ropa_de_civil
   - lealtad.faccion.ejercito_rojo
+  - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
   - lealtad.escuadra.mansilla
   historia: Luciano Bordón estudió dos años y medio de ingeniería industrial en la Universidad Nacional del Sur antes de que la revolución cambiara la composición del cuerpo docente, el plan de estudios y sus propias convicciones, en ese orden. Leyó los panfletos, fue a dos reuniones, y al tercer mes se presentó voluntario. Sus padres — contadores ambos — todavía no entienden bien qué pasó. En el Ejército Rojo aprendió que las cosas que entendía teóricamente sobre la guerra no sirven de nada cuando alguien te está disparando de verdad. El cuerpo reacciona antes que el cálculo. La contradicción antimaquinista del Ejército Rojo lo inquieta intelectualmente más que a cualquier otro en la escuadra. Tuvo esa conversación con Mansilla una vez. Mansilla le explicó que las contradicciones tácticas se resuelven después de la victoria estratégica. Bordón anotó la respuesta y sigue sin estar convencido.
   historial:

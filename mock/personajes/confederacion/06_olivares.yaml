@@ -12,6 +12,7 @@ personaje:
     men: 3
   tags:
   - faccion.confederados
+  - subfaccion.pelicanos
   - rango.fusilero
   - escuadra.ricardo
   - estado.activo
@@ -29,6 +30,7 @@ personaje:
   - equipo.utilitario.cargador
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
+  - lealtad.subfaccion.pelicanos
   - lealtad.escuadra.ricardo
   historia: Tomás Olivares es porteño, Caballito. Su madre es profesora de historia en un secundario y su padre maneja un remis desde que Olivares tiene memoria. Entró a filosofía porque le parecía la carrera más honesta para no saber qué estudiar. El servicio obligatorio lo interrumpió en el segundo año. Lo mandaron al sur con el mismo lote de conscriptos que a Rodríguez y Pereyra, y los tres terminaron en la misma escuadra casi por azar. En la instrucción fue mediocre en lo físico y sorprendentemente competente en lo táctico — no por talento militar, sino porque le gustaba entender los sistemas antes de operar en ellos. En el frente patagónico descubrió que el frío y el barro son argumentos filosóficos que ningún texto anticipa bien. Lo menciona ocasionalmente, sin ironía. Sus compañeros no saben si es gracioso o si algo le falta.
   historial:

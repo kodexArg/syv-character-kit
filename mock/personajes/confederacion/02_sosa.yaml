@@ -12,6 +12,7 @@ personaje:
     men: 6
   tags:
   - faccion.confederados
+  - subfaccion.pelicanos
   - rango.segundo_al_mando
   - escuadra.ricardo
   - mando.capaz
@@ -33,6 +34,7 @@ personaje:
   - equipo.utilitario.radio
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
+  - lealtad.subfaccion.pelicanos
   - lealtad.escuadra.ricardo
   historia: 'Horacio Sosa es cordobés, del cinturón industrial. Antes del servicio trabajaba turno noche en una planta de procesado de aceite — sin quejarse porque era lo que había. Entró al servicio obligatorio sin expectativas y descubrió que tenía talento para la organización bajo presión: nunca perdía la cuenta de cartuchos, posiciones ni tiempos. Dos inviernos patagónicos lo curtieron. Sobrevivió a ambos sin heridas graves y con la reputación de saber dónde está todo. Aguirre lo eligió Cabo Primero de su nueva escuadra. No se conocían del Sector 12,15 — Sosa estaba en otro frente —, pero el expediente habla solo. Sosa aceptó sin preguntar sobre el ascenso ni sobre cómo murió el sargento anterior. Eso también es parte de por qué lo eligieron.'
   historial:

@@ -12,6 +12,7 @@ personaje:
     men: 3
   tags:
   - faccion.confederados
+  - subfaccion.pelicanos
   - rango.artillero
   - escuadra.ricardo
   - estado.activo
@@ -31,6 +32,7 @@ personaje:
   - equipo.utilitario.almanaque
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
+  - lealtad.subfaccion.pelicanos
   - lealtad.escuadra.ricardo
   historia: 'Dardo Funes es de Resistencia, Chaco. Llegó al frente patagónico sin saber que el frío del sur es otro tipo de frío — no el húmedo del nordeste, sino uno seco que entra por las articulaciones. Le tomó un mes aclimatarse y otro dejar de pensar en el clima como problema personal. Le asignaron el FAP porque era el más corpulento del pelotón y nadie se preguntó si había mejores criterios. Funes no protestó. Aprendió el arma por partes, sin saltarse pasos, verificando dos veces. A los seis meses era el artillero más parco y confiable de su compañía — el tipo que no desperdicia munición porque sabe cuánto cuesta traerla al frente. Su única rareza: lleva un almanaque de bolsillo con el que registra el clima diario. No lo usa para nada en particular. Dice que es por costumbre.'
   historial:
