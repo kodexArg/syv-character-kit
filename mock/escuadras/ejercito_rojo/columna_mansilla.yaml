@@ -1,0 +1,73 @@
+escuadra:
+  identidad:
+    slug: columna_mansilla
+    nombre: "Columna Mansilla"
+    faccion: ejercito_rojo
+    tipo: "escuadra_de_infanteria"
+  miembros:
+    - ref: RM5F3C8T
+      pos: 1
+      puntos: 5
+      rango: lider_de_escuadra
+      nombre: "Camarada Puntero Ramón Mansilla"
+    - ref: DI4K9M2P
+      pos: 2
+      puntos: 4
+      rango: segundo_al_mando
+      nombre: "Segundo Camarada Delia Iturra"
+    - ref: HA2D7N6B
+      pos: 3
+      puntos: 4
+      rango: apuntador
+      nombre: "Tirador Vanguardia Héctor Antinao"
+    - ref: IC6P1R3X
+      pos: 4
+      puntos: 3
+      rango: artillero
+      nombre: "Ametrallador Ignacio Calfucurá"
+    - ref: FC8T5H1N
+      pos: 5
+      puntos: 2
+      rango: fusilero
+      nombre: "Miliciano Veterano Fermín Cárcamo"
+    - ref: RP3N2K7M
+      pos: 6
+      puntos: 2
+      rango: fusilero
+      nombre: "Miliciana Veterana Rosa Painé"
+    - ref: NS9B4D5F
+      pos: 7
+      puntos: 2
+      rango: fusilero
+      nombre: "Miliciano Veterano Norberto Soriano"
+    - ref: EB1M6T3R
+      pos: 8
+      puntos: 2
+      rango: fusilero
+      nombre: "Miliciano Veterano Esteban Belenchini"
+    - ref: LB7C8N2P
+      pos: 9
+      puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
+      rango: recluta
+      nombre: "Voluntario Luciano Bordón"
+    - ref: CM4X3F9K
+      pos: 10
+      puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
+      rango: recluta
+      nombre: "Voluntario Claudio Maturana"
+    - ref: SB6H1D8T
+      pos: 11
+      puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
+      rango: recluta
+      nombre: "Voluntario Sebastián Bordagaray"
+  historial:
+    - fecha: "2026-03-22T08:30:00Z"
+      tipo: reorganizacion
+      descripcion: "Se conforma la Columna Mansilla reuniendo milicianos experimentados e ingenieros locales."
+      ref_batalla: null
+      metadata:
+        iniciador: "RM5F3C8T"
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+  extras: null

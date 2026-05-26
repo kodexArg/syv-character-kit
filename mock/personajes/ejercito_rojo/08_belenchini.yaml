@@ -13,7 +13,7 @@ personaje:
   tags:
   - faccion.ejercito_rojo
   - rango.fusilero
-  - escuadra.mansilla
+  - escuadra.columna_mansilla
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
@@ -32,7 +32,7 @@ personaje:
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
   - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
-  - lealtad.escuadra.mansilla
+  - lealtad.escuadra.columna_mansilla
   historia: Esteban Belenchini tiene treinta y nueve años y una quemadura en la mejilla izquierda del tamaño de una palma que data del año uno de la revolución, cuando la patronal de la siderúrgica mandó a quemar el local sindical con gente adentro. Belenchini salió por una ventana lateral. Otros dos no salieron. Desde entonces lleva una cicatriz que la gente mira sin querer mirar y él ignora con práctica de años. Tres batallas antes de esta. No es el más rápido ni el más preciso, pero sabe flanquear. Los flancos son donde se gana, o donde te matan. Tiene tres hijos en Bahía Blanca. El mayor empezó a trabajar en la misma siderúrgica el año pasado. Eso le produce una mezcla de satisfacción y náuseas que no sabe cómo resolver. La revolución supuestamente cambió las condiciones. Siguen siendo condiciones de mierda, pero son las condiciones de ellos ahora.
   historial:
   - fecha: '2022-06-01T00:00:00Z'

@@ -76,8 +76,8 @@ Cada personaje arranca con **exactamente un** tag `subfaccion.*`. Catálogo cano
 
 Cada personaje activo arranca con **exactamente un** tag `escuadra.*`. Catálogo canon en [`tags/escuadra/`](../tags/escuadra/):
 
-- `mansilla` *(Ejército Rojo)*
-- `ricardo` *(Confederación)*
+- `columna_mansilla` *(Ejército Rojo)*
+- `cazadores_de_ricardo` *(Confederación)*
 
 **Sorteo (fallback)**: uniforme entre las escuadras compatibles con la facción/subfacción de §1.2–§1.3.
 

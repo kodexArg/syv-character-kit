@@ -14,7 +14,7 @@ personaje:
   - faccion.ejercito_rojo
   - subfaccion.ejercito_revolucionario_del_pueblo
   - rango.recluta
-  - escuadra.mansilla
+  - escuadra.columna_mansilla
   - estado.activo
   - rasgo.altura_media
   - rasgo.delgado
@@ -31,7 +31,7 @@ personaje:
   - equipo.vestidura.ropa_de_civil
   - lealtad.faccion.ejercito_rojo
   - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
-  - lealtad.escuadra.mansilla
+  - lealtad.escuadra.columna_mansilla
   historia: 'Claudio Maturana pasó cuatro años trabajando en estancias al sur del Chubut — esquila, marcación, alambrado. Los estancieros de esa zona no distinguían mucho entre un peón y una herramienta. Maturana tampoco los distinguía a ellos de ningún patrón que hubiera conocido antes. Cuando un agitador rojo llegó a la zona prometiendo cambiar eso, Maturana preguntó cuánto pagaban y cuánto había que caminar. Creció en la meseta y conoce la niebla patagónica mejor que la mayoría: sabe leer el viento, distinguir siluetas en la llovizna, moverse sin orientarse por referencias visuales claras. Eso le da utilidad en condiciones que paralizan a gente con más entrenamiento formal. No tiene opinión firme sobre el operativo de caza. No conoce bien el contexto del Sector 12,15. Sigue a Mansilla porque Mansilla parece saber lo que hace. Si resulta que no sabe, Maturana va a notar el problema probablemente antes que el resto.'
   historial:
   - fecha: '2026-05-24T00:00:00Z'

@@ -14,7 +14,7 @@ personaje:
   - faccion.confederados
   - subfaccion.pelicanos
   - rango.fusilero
-  - escuadra.ricardo
+  - escuadra.cazadores_de_ricardo
   - estado.activo
   - rasgo.altura_media
   - rasgo.atletico
@@ -34,7 +34,7 @@ personaje:
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
   - lealtad.subfaccion.pelicanos
-  - lealtad.escuadra.ricardo
+  - lealtad.escuadra.cazadores_de_ricardo
   historia: 'Rubén Acosta es de Mendoza, aunque pasó años en el norte antes de que la guerra lo enviara al sur. Tiene veintiséis años y ya lleva tres en servicio activo — más que la mayoría de los fusileros de primera de su escuadra. El frente del norte fue donde aprendió lo que significa sostener una posición: no heroísmo, sino turnos de guardia, pies mojados y el ruido constante de algo que puede ser viento o movimiento. En el frente norte recibió un impacto de metralla que le fracturó una costilla y le dejó una cicatriz larga en el costado derecho. El alta médica llegó antes de que la costilla terminara de soldar bien. Acosta aprendió a operar con el dolor como ruido de fondo — no lo ignora, lo clasifica junto con el frío y el hambre. En el frente patagónico lo sorprendió el silencio que hace la niebla. Todavía no se acostumbró del todo.'
   historial:
   - fecha: '2024-08-15T00:00:00Z'

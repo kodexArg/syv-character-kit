@@ -13,7 +13,7 @@ personaje:
   tags:
   - faccion.confederados
   - rango.lider_de_escuadra
-  - escuadra.ricardo
+  - escuadra.cazadores_de_ricardo
   - mando.capaz
   - estado.activo
   - rasgo.altura_media
@@ -37,7 +37,7 @@ personaje:
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
   - lealtad.subfaccion.pelicanos
-  - lealtad.escuadra.ricardo
+  - lealtad.escuadra.cazadores_de_ricardo
   historia: 'Héctor Aguirre es de Neuquén, aunque hace tres años que no pisa la provincia. Antes del servicio trabajaba con su padre en corte de madera en el alto valle — sabe leer el terreno boscoso porque pasó la infancia entre árboles que matan si no los respetás. Entró a la Confederación como conscripto, sobrevivió al primer invierno en el frente sur, y terminó de soldado de primera antes de que alguien notara que era más cuidadoso que la mayoría. El Sargento Ricardo lo eligió Cabo Primero al mes. No con palabras: con tareas que necesitaban hacerse bien, no rápido. En el Sector 12,15, cuando la radio se rompió y Ricardo cayó, Héctor organizó la columna y sacó a todos. Semanas después llegó el parche. No lo festejó. La escuadra que le asignaron es nueva. Los va a cuidar o los va a perder, y las dos cosas lo mantienen despierto.'
   historial:
   - fecha: '2026-03-12T14:20:00Z'

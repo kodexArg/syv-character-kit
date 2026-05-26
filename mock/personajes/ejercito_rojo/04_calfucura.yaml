@@ -14,7 +14,7 @@ personaje:
   - faccion.ejercito_rojo
   - subfaccion.ejercito_revolucionario_del_pueblo
   - rango.artillero
-  - escuadra.mansilla
+  - escuadra.columna_mansilla
   - estado.activo
   - rasgo.altura_media
   - rasgo.corpulento
@@ -34,7 +34,7 @@ personaje:
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
   - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
-  - lealtad.escuadra.mansilla
+  - lealtad.escuadra.columna_mansilla
   historia: Ignacio Calfucurá tiene treinta y cuatro años y manos que parecen hechas de otra materia. Trabajó en la siderúrgica SOMISA de San Nicolás antes de que la revolución lo empujara al sur. Las cicatrices de las salpicaduras de acero fundido le recorren los antebrazos hasta el codo. No les presta atención — son parte del oficio, como el FAP sin manual de instrucciones que el alto mando rojo le asignó hace ocho meses. Aprendió a operar el FAP por ensayo y error. El arma encasquilla cada cuarenta o cincuenta disparos si el ambiente es húmedo. Calfucurá desarrolló un ritual de desencasquillamiento que ejecuta sin mirar. No tiene opinión elaborada sobre el operativo. Recibió la orden, verificó que había munición suficiente. La política la deja para Mansilla; él se ocupa de que el FAP dispare cuando tiene que disparar.
   historial:
   - fecha: '2026-04-30T15:00:00Z'

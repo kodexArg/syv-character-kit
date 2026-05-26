@@ -13,7 +13,7 @@ personaje:
   tags:
   - faccion.ejercito_rojo
   - rango.lider_de_escuadra
-  - escuadra.mansilla
+  - escuadra.columna_mansilla
   - mando.capaz
   - estado.activo
   - rasgo.alto
@@ -38,7 +38,7 @@ personaje:
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
   - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
-  - lealtad.escuadra.mansilla
+  - lealtad.escuadra.columna_mansilla
   historia: 'Mansilla no disparó un arma en combate hasta los treinta y dos años. Era redactor del boletín sindical de los metalúrgicos de Bahía Blanca, después comisario político de la segunda región, después instructor de cuadros en Stroeder. La revolución tiene usos para un hombre que sabe leer mapas y convencer a otros de que la causa vale el riesgo. El campo de batalla no estaba en su programa. Cuando llegó el informe del Sector 12,15, Mansilla fue uno de los tres hombres que lo analizaron. Anotó: "respuesta táctica competente del oficial azul". Después recomendó eliminarlo antes de la siguiente operación. El alto mando lo comisionó para liderar la escuadra de caza — no por tirador, sino porque conoce el informe y no carga rencor.'
   historial:
   - fecha: '2026-02-28T10:00:00Z'

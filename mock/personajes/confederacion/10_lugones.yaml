@@ -13,7 +13,7 @@ personaje:
   tags:
   - faccion.confederados
   - rango.recluta
-  - escuadra.ricardo
+  - escuadra.cazadores_de_ricardo
   - estado.activo
   - rasgo.bajo
   - rasgo.corpulento
@@ -31,7 +31,7 @@ personaje:
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
   - lealtad.subfaccion.pelicanos
-  - lealtad.escuadra.ricardo
+  - lealtad.escuadra.cazadores_de_ricardo
   historia: Patricia Lugones es de Ushuaia, la ciudad más al sur del frente confederado. Tiene veinte años y creció con el tipo de frío que hace que el frente patagónico le resulte conocido en temperatura aunque no en nada más. Su familia trabaja en el turismo — antes de la guerra, al menos. Antes de la conscripción trabajó dos temporadas como guía de senderismo en el Parque Nacional Tierra del Fuego. Conoce el terreno abrupto, el barro, la roca mojada. En condiciones normales sería una ventaja; en el frente el terreno es uno de los factores y no el más importante, y Lugones todavía está aprendiendo a jerarquizar correctamente. La asignaron a recargador secundario. No tiene apuntador fijo — es apoyo móvil que va donde la dotación lo requiera. En la práctica Sosa o Walter la mueven según la situación, y ella obedece sin chistar.
   historial:
   - fecha: '2026-05-24T00:00:00Z'

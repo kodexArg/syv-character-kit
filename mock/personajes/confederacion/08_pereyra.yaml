@@ -13,7 +13,7 @@ personaje:
   tags:
   - faccion.confederados
   - rango.fusilero
-  - escuadra.ricardo
+  - escuadra.cazadores_de_ricardo
   - estado.activo
   - rasgo.altura_media
   - rasgo.atletico
@@ -32,7 +32,7 @@ personaje:
   - equipo.vestidura.uniforme_confederado
   - lealtad.faccion.confederados
   - lealtad.subfaccion.pelicanos
-  - lealtad.escuadra.ricardo
+  - lealtad.escuadra.cazadores_de_ricardo
   historia: Graciela Pereyra es de Rawson, Chubut — nació y creció en la Patagonia, así que el frío no la sorprendió como a los norteños de la escuadra. Lo que la sorprendió fue el ruido. En Rawson el viento hace su propio ruido constante; el del combate es diferente, más concentrado y arbitrario. Su familia no entiende del todo por qué pidió mantenerse en el frente patagónico cuando le ofrecieron reasignación a logística. Ella explicó que era más útil en línea, que tenía experiencia de terreno, que había razones tácticas. Probablemente haya algo más, pero no lo dice y nadie le insiste. Con Olivares y Rodríguez terminaron en el mismo pelotón de asignación y en la misma escuadra por azar. No son amigos exactamente, pero se conocen lo suficiente como para saber cuándo el otro está funcionando mal.
   historial:
   - fecha: '2026-05-24T00:00:00Z'

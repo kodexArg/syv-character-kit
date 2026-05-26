@@ -13,7 +13,7 @@ personaje:
   tags:
   - faccion.confederados
   - rango.lider_de_escuadra
-  - escuadra.ricardo
+  - escuadra.cazadores_de_ricardo
   - mando.capaz
   - estado.muerto_en_combate
   - rasgo.complexion_robusta

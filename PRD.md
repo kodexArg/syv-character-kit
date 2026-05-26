@@ -42,6 +42,8 @@ El kit existe dentro del universo de *Subordinación y Valor*. Contexto mínimo 
 | [`AGENTS.md`](AGENTS.md) | Política editorial y convenciones. | vigente |
 | [`docs/hoja-modelo.md`](docs/hoja-modelo.md) | Schema del personaje campo por campo. | vigente |
 | [`docs/hoja-modelo.yaml`](docs/hoja-modelo.yaml) | Template programático vacío. | vigente |
+| [`docs/escuadra-modelo.md`](docs/escuadra-modelo.md) | Schema de la escuadra y sus agregaciones tácticas. | vigente |
+| [`docs/escuadra-modelo.yaml`](docs/escuadra-modelo.yaml) | Template programático de la escuadra. | vigente |
 | [`docs/tag-modelo.md`](docs/tag-modelo.md) | Sistema de tags: notación, categorías, catálogo. | vigente |
 | [`docs/tag-modelo.yaml`](docs/tag-modelo.yaml) | Template de entrada de catálogo. | vigente |
 | [`docs/tag-modelo-ejemplos.yaml`](docs/tag-modelo-ejemplos.yaml) | Cinco personajes ejemplo compuestos. | vigente |
@@ -52,6 +54,7 @@ El kit existe dentro del universo de *Subordinación y Valor*. Contexto mínimo 
 | [`gddr/01-flujo-obligatorio-creacion.md`](gddr/01-flujo-obligatorio-creacion.md) | Orden canónico de creación de personaje. | vigente (Fase 4 pendiente) |
 | `gddr/02-motor-batalla.md` | Reglas de combate squad vs squad. | **pendiente** |
 | [`mock/personajes/`](mock/personajes/) | 22 fixtures canon (dos escuadras). | parcial (ver §5) |
+| [`mock/escuadras/`](mock/escuadras/) | Fixtures de escuadras (dos escuadras canon). | vigente |
 | [`tags/`](tags/) | Catálogo curado, sembrado por categoría. | vigente |
 | [`resources/nombres/`](resources/nombres/) | Pools de nombres + apellidos. | vigente |
 | [`scripts/`](scripts/) | Samplers de referencia. **Sujeto a eliminación.** | provisional |
@@ -171,12 +174,12 @@ Hasta que ese GDDR exista, las stats calculadas y su mecánica de resolución de
 - Contrato de API HTTP (`API.md`).
 - Contrato de persistencia (`MODEL.md`).
 - Catálogos `/meta/*` dinámicos por categoría de tag.
+- Schema completo e implementación mock de la entidad `escuadra` (OQ-06).
 
 ### Pendiente dentro de este PRD
 
 - GDDR-01 Fase 4 (tags adicionales, prosa, historial, metadatos en el flujo de creación).
 - GDDR-02: motor de batalla squad vs squad.
-- Schema completo de la entidad `escuadra` (OQ-06).
 
 ### Fuera de este PRD
 

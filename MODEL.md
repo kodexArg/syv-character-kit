@@ -101,16 +101,54 @@ Catálogo de tags curados. Servido por `GET /meta/{categoria}`. Sembrado desde `
 
 ## 3. `escuadra`
 
-Entidad implícita. Schema pendiente (ver OQ-06). Forma mínima asumida hasta entonces:
+Resource principal de agrupación táctica. Servido por `GET /escuadras/{slug}`, modificado por altas/bajas de miembros.
+
+| Campo | Tipo | Mutable | Notas |
+|---|---|---|---|
+| `identidad.slug` | `str` lowercase + underscore | inmutable | PK. Coincide con el segmento final del tag `escuadra.{slug}`. |
+| `identidad.nombre` | `str` | mutable | Nombre de la escuadra. |
+| `identidad.faccion` | `str` (slug de `faccion`) | inmutable | Referencia a la facción. |
+| `identidad.tipo` | `str` | inmutable | Tipo de escuadra (ej. `escuadra_de_infanteria`). |
+| `miembros[]` | `list<miembro>` (embebida) | mutable | Lista ordenada de integrantes con costo en puntos. |
+| `historial[]` | `list<hito_escuadra>` (embebida) | append-only | Log de eventos de la escuadra. |
+| `metadatos.creado_en` | `str` ISO-8601 | inmutable | |
+| `metadatos.ultima_actualizacion` | `str` ISO-8601 | actualiza con cada cambio | |
+| `extras` | `object \| null` | libre | Escape hatch. |
+
+**Campos derivados** — computados al servir, **no persistidos**:
+
+- `fza_total` — Suma de `fza_aportada` de miembros activos (no KIA).
+- `cohesion_vigente` — Promedio de `men` de miembros activos (redondeado hacia abajo). Penalizado con `(-2)` si el líder está KIA/licencia sin reemplazo, o `(-1)` si el segundo al mando asume el mando vigente.
+- `moral_promedio` — Promedio entero (redondeado hacia abajo) del valor `moral_max` (o Moral actual) de todos los miembros activos.
+- `fatiga_promedio` — Promedio entero (redondeado hacia abajo) de la `fatiga_max` de todos los miembros activos.
+- `movimiento_tactico` — `min(MOVIMIENTO)` de los miembros activos.
+- `puntos_totales` — Suma de `puntos` de todos los miembros (activos e inactivos).
+- `lider_vigente` — Patente del personaje actualmente al mando.
+- `estado_escuadra` — `operativa | decapitada | desmembrada | retirada`.
+- `cumple_template` — `bool`. Indica si cumple con las restricciones estructurales de su `tipo`.
+- `errores_validacion[]` — `list<str>`. Listado de infracciones estructurales si `cumple_template` es falso.
+
+Aparecen en la response de `GET /escuadras/{slug}` y se recomputan en cada lectura.
+
+### 3.1. `miembro` (embebido en `escuadra.miembros[]`)
 
 | Campo | Tipo | Notas |
 |---|---|---|
-| `slug` | `str` lowercase + underscore | PK. Coincide con el segmento final del tag `escuadra.{slug}`. |
-| `nombre` | `str` | Legible. |
-| `cuerpo` | `str` | Pertenencia organizacional. |
-| `faccion_padre` | `str` (slug de `faccion`) | Referencia. |
+| `ref` | `str` `^[A-Z0-9]{8}$` | Patente del personaje. FK virtual hacia `personaje`. |
+| `pos` | `int` | Orden táctico en la formación. |
+| `puntos` | `int` | Costo en puntos de reclutamiento (escala 1..5). |
+| `rango` | `str` | Slug de rango del personaje (ej. `lider_de_escuadra`). |
+| `nombre` | `str` | Nombre compuesto / de guerra del personaje. |
 
-Composición vigente se reconstruye via inverted index sobre `personaje.tags[]` filtrando por `escuadra.{slug}`.
+### 3.2. `hito_escuadra` (embebido en `escuadra.historial[]`)
+
+| Campo | Tipo | Notas |
+|---|---|---|
+| `fecha` | `str` ISO-8601 | |
+| `tipo` | `str` | Enum abierto (baja_miembro, ascenso_miembro, combate_finalizado, reorganizacion). |
+| `descripcion` | `str` | Obligatorio. |
+| `ref_batalla` | `str \| null` | Batalla de referencia si aplica. |
+| `metadata` | `object` | Libre. |
 
 ---
 
@@ -122,7 +160,26 @@ Composición vigente se reconstruye via inverted index sobre `personaje.tags[]` 
 | `nombre` | `str` | Legible. |
 | `descripcion` | `str` | Descriptor de lore corto. |
 
-`subfaccion` sigue el mismo modelo, con campo adicional `faccion_padre: str`. Vive en `tag_catalogo` bajo `categoria = subfaccion`.
+Servido por `GET /meta/factions`. Sembrado desde `tags/faccion/*.yaml`. Conjunto **cerrado-curado**: pocas facciones (2-3 hoy: `confederados`, `ejercito_rojo`), todas canon, todas referenciadas por `escuadra.identidad.faccion` y por la tabla de rangos.
+
+### 4.1. Relación `faccion` ↔ `subfaccion` (asimetría deliberada)
+
+`faccion` y `subfaccion` **no son simétricas**, y la diferencia es de diseño:
+
+| Aspecto | `faccion` | `subfaccion` |
+|---|---|---|
+| Naturaleza | Entidad de primera clase (esta §4). | Categoría de `tag_catalogo` (§2). |
+| Cardinalidad | Cerrado-curado (2-3 hoy). | Abierto-emergente (cualquier grupo táctico, sindicato, célula). |
+| Endpoint | `GET /meta/factions` (dedicado). | `GET /meta/subfaccion` (genérico `/meta/{categoria}`). |
+| FK desde otras entidades | `escuadra.identidad.faccion`; tabla de rangos. | Ninguna. Solo aparece en `personaje.tags[]`. |
+| Forma como membresía sobre personaje | Tag `faccion.{slug}` + `lealtad.faccion.{slug}`. | Tag `subfaccion.{slug}` + `lealtad.subfaccion.{slug}`. |
+| Padre | — | `subfaccion.faccion_padre: faccion.{slug}` (campo del tag, ver `docs/tag-modelo.md §4.2`). |
+
+**Por qué la asimetría es correcta**: `faccion` ancla la geometría operativa del juego (escuadras pertenecen a una facción; los rangos canónicos están definidos por facción; las batallas tienen bandos). Necesita identidad estable y endpoint dedicado. `subfaccion` agrupa narrativamente — un tercio, una célula, un sindicato armado — y el catálogo crece por curaduría a demanda. Forzarla a entidad primera clase infla el modelo sin beneficio; degradar `faccion` a tag rompe las FK existentes.
+
+**Dualidad entidad+tag**: tanto `faccion` como `escuadra` son entidades persistidas **y** existen además como namespace de tag (`faccion.confederados`, `escuadra.{slug}`) para expresar membresía declarativa sobre `personaje.tags[]`. El slug del tag coincide con el PK de la entidad. Esta dualidad es el patrón canónico del kit cuando una entidad es referenciable como membresía narrativa.
+
+**Pertenencia subfaccion → faccion**: vive en el catálogo (`subfaccion.faccion_padre`), no en la hoja del personaje. La hoja taggea ambas independientemente (`faccion.ejercito_rojo` + `subfaccion.ejercito_revolucionario_del_pueblo`); la coherencia entre las dos la sostiene la curaduría (ver invariante "tags fuera de catálogo se aceptan" en §5).
 
 ---
 

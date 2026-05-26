@@ -1,0 +1,79 @@
+escuadra:
+  identidad:
+    slug: cazadores_de_ricardo
+    nombre: "Cazadores de Ricardo"
+    faccion: confederados
+    tipo: "escuadra_de_infanteria"
+  miembros:
+    - ref: WA3K9F2H
+      pos: 1
+      puntos: 5
+      rango: lider_de_escuadra
+      nombre: "Sargento Héctor Aguirre"
+    - ref: HS7M4N1P
+      pos: 2
+      puntos: 4
+      rango: segundo_al_mando
+      nombre: "Cabo Primero Horacio Sosa"
+    - ref: LQ5C8D3R
+      pos: 3
+      puntos: 4
+      rango: apuntador
+      nombre: "Cabo Apuntador Lisandro Quiroga"
+    - ref: DF2T6G9X
+      pos: 4
+      puntos: 3
+      rango: artillero
+      nombre: "Soldado de Primera Dardo Funes"
+    - ref: MR4B1K7S
+      pos: 5
+      puntos: 2
+      rango: fusilero
+      nombre: "Soldado de Primera Marcela Rodríguez"
+    - ref: TO8P5H2N
+      pos: 6
+      puntos: 2
+      rango: fusilero
+      nombre: "Soldado de Primera Tomás Olivares"
+    - ref: RA6N3F1M
+      pos: 7
+      puntos: 2
+      rango: fusilero
+      nombre: "Soldado de Primera Rubén Acosta"
+    - ref: GP9D7K4C
+      pos: 8
+      puntos: 2
+      rango: fusilero
+      nombre: "Soldado de Primera Graciela Pereyra"
+    - ref: IM1R8T5L
+      pos: 9
+      puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
+      rango: recluta
+      nombre: "Recluta Ignacio Méndez"
+    - ref: PL3X2B9K
+      pos: 10
+      puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
+      rango: recluta
+      nombre: "Recluta Patricia Lugones"
+    - ref: ER7H6N4D
+      pos: 11
+      puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
+      rango: recluta
+      nombre: "Recluta Esteban Ramírez"
+  historial:
+    - fecha: "2026-03-12T14:20:00Z"
+      tipo: baja_miembro
+      descripcion: "El sargento Ricardo cae en el Sector 12,15 bajo fuego pesado. El cabo Aguirre asume el mando temporal."
+      ref_batalla: "batalla_sector_12_15"
+      metadata:
+        lider_caido: "RS0P2M7N"
+    - fecha: "2026-04-10T09:00:00Z"
+      tipo: reorganizacion
+      descripcion: "Se incorporan los cabos Sosa y Quiroga como mandos y la escuadra se reorganiza a 11 combatientes."
+      ref_batalla: null
+      metadata:
+        nuevos_miembros: ["HS7M4N1P", "LQ5C8D3R"]
+  metadatos:
+    creado_en: "2026-05-24T00:00:00Z"
+    ultima_actualizacion: "2026-05-24T00:00:00Z"
+  extras: null

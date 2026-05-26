@@ -60,10 +60,18 @@ Para ver tags concretos en uso compuesto sobre personajes, consultar [`tag-model
 Las categorías curadas hasta hoy. **No es un canon cerrado**: el sistema acepta categorías nuevas sin migración (ver §7). Tomalas como puntos de referencia, no como menú restrictivo. Para ver los slugs reales de cada categoría, consultar el directorio `tags/{categoria}/` correspondiente.
 
   faccion:
-    significado: Pertenencia macro (bando).
+    significado: >
+      Pertenencia macro (bando). El slug del tag coincide con el PK de la
+      entidad `faccion` del MODEL §4 — dualidad entidad+tag. Conjunto
+      cerrado-curado.
 
   subfaccion:
-    significado: Grupo militar o político subordinado a una facción principal (bando).
+    significado: >
+      Grupo militar o político subordinado a una facción principal.
+      Categoría de tag (no entidad de primera clase). Conjunto abierto-emergente;
+      la pertenencia a la facción padre vive en el campo `subfaccion.faccion_padre`
+      del catálogo, no en una FK schema-level. Ver MODEL §4.1 para la
+      asimetría deliberada con `faccion`.
 
   rango:
     significado: Designación operativa jerárquica de campo.

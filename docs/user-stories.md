@@ -44,6 +44,10 @@
 | UC-21 | editor de canon | listar todos los `equipo.arma` del roster | auditar inventario armamentístico | `GET /roster/mock` + filtro cliente |
 | UC-22 | motor de batalla | filtrar `rol.lider` AND `faccion.confederados` | candidatos al mando ante caída del líder | `GET /character?tag=rol.lider&tag=faccion.confederados` |
 | UC-23 | QA | consultar `/meta/tag_categories` | verificar que el generador no produce tags fuera del catálogo | `GET /meta/{categoria}` |
+| UC-24 | motor de batalla | pedir la composición y valores calculados de una escuadra | evaluar su moral o movimiento | `GET /escuadras/{slug}` |
+| UC-25 | curador | crear una nueva escuadra | registrar una unidad en campaña | `POST /escuadras` |
+| UC-26 | motor de batalla | añadir un combatiente a una escuadra | reflejar un refuerzo táctico | `POST /escuadras/{slug}/miembro` |
+| UC-27 | motor de batalla | remover un combatiente de una escuadra | registrar una baja o traslado | `DELETE /escuadras/{slug}/miembro/{char_slug}` |
 
 ---
 
@@ -60,6 +64,11 @@ Vista inversa: para cada endpoint, qué UCs satisface. Sincroniza 1:1 con la tab
 | POST | `/canonize` | 07 |
 | GET | `/roster/mock` | 08, 21 |
 | GET | `/meta/{categoria}` | 09, 23 |
+| GET | `/escuadras` | 24 |
+| GET | `/escuadras/{slug}` | 24 |
+| POST | `/escuadras` | 25 |
+| POST | `/escuadras/{slug}/miembro` | 26 |
+| DELETE | `/escuadras/{slug}/miembro/{char_slug}` | 27 |
 
 ---
 

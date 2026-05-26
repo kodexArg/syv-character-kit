@@ -107,7 +107,7 @@ personajes:
       - faccion.ejercito_rojo
       - rango.fusilero
       - estado.activo
-      - escuadra.mansilla
+      - escuadra.columna_mansilla
       - rasgo.altura_media
       - rasgo.pelo_corto
       - trait.lealtad_obrera
@@ -124,7 +124,7 @@ personajes:
       - equipo.utilitario.cuaderno
       - equipo.vestidura.uniforme_rojo
       - lealtad.faccion.ejercito_rojo
-      - lealtad.escuadra.mansilla
+      - lealtad.escuadra.columna_mansilla
     historia: >
       Llegó al frente como cuadro político y se quedó como fusilera. El líder de su
       escuadra le pide la palabra cuando hay que arengar; el resto de los días carga
@@ -181,7 +181,7 @@ personajes:
       - faccion.confederados
       - rango.apuntador
       - estado.activo
-      - escuadra.ricardo
+      - escuadra.cazadores_de_ricardo
       - rasgo.atletico
       - rasgo.pelo_corto
       - trait.templado_bajo_fuego

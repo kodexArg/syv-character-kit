@@ -14,7 +14,7 @@ personaje:
   - faccion.ejercito_rojo
   - subfaccion.ejercito_revolucionario_del_pueblo
   - rango.apuntador
-  - escuadra.mansilla
+  - escuadra.columna_mansilla
   - estado.activo
   - rasgo.altura_media
   - rasgo.delgado
@@ -32,7 +32,7 @@ personaje:
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
   - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
-  - lealtad.escuadra.mansilla
+  - lealtad.escuadra.columna_mansilla
   historia: 'Héctor Antinao creció en la meseta, entre Roca y el Limay. Cazaba con su padre desde los doce años: liebre, martineta, guanaco cuando la temporada daba. No era cuestión de deporte sino de comer. A los veintidós cruzó a la costa y terminó cargando bolsas en el puerto de Viedma por dos años. Ahí conoció a los agitadores ferroviarios y, a través de ellos, al Ejército Rojo. Nadie le enseñó a disparar en el ejército. Lo que le enseñaron fue a no malgastar el tiro. En acción tiene fama de esperar más de lo que sus compañeros consideran razonable antes de apretar el gatillo. A él le parece simplemente la única forma sensata de proceder. El objetivo del operativo no le genera ni repulsión ni entusiasmo. Si Mansilla lo pone en la mira, Antinao va a hacer lo que sabe hacer.'
   historial:
   - fecha: '2026-04-22T11:00:00Z'

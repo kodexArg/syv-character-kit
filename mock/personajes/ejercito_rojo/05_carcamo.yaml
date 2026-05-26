@@ -13,7 +13,7 @@ personaje:
   tags:
   - faccion.ejercito_rojo
   - rango.fusilero
-  - escuadra.mansilla
+  - escuadra.columna_mansilla
   - estado.activo
   - rasgo.altura_media
   - rasgo.atletico
@@ -32,7 +32,7 @@ personaje:
   - equipo.vestidura.uniforme_rojo
   - lealtad.faccion.ejercito_rojo
   - lealtad.subfaccion.ejercito_revolucionario_del_pueblo
-  - lealtad.escuadra.mansilla
+  - lealtad.escuadra.columna_mansilla
   historia: Fermín Cárcamo era garrafero de playa en el ferrocarril del sur. Treinta y dos años, divorciado, dos hijos en Bahía Blanca que ve cuando la rotación lo permite, que es rara vez. Se unió al Ejército Rojo cuando el sindicato ferroviario declaró la adhesión a la revolución y el capataz de su turno amenazó con despedir a quien firmara. Cárcamo firmó igual, no por heroísmo sino porque le pareció que correspondía. Tres años de milicia le enseñaron que la guerra no es como la describen ni el boletín sindical ni el alto mando. Es más sucia, más aburrida y más rápida cuando finalmente ocurre algo. El operativo de caza no lo entusiasma. Matar a un oficial específico por nombre y apellido le parece más propio de un ajuste que de una guerra. Pero Mansilla da las órdenes y Cárcamo las cumple. Tiene hijos que esperan que vuelva.
   historial:
   - fecha: '2026-05-24T00:00:00Z'
