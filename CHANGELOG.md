@@ -1,6 +1,20 @@
 # Changelog
 
 ## [Unreleased]
+- group: oq12-patentes-opacas-fixtures
+  priority: high
+  commit: 613d8b4
+  changes:
+    - feat(mocks): migrar identidad.slug de 22 fixtures (mock/personajes/{confederacion,ejercito_rojo}/) desde forma legible (apellido_nombre) a patente opaca ^[A-Z0-9]{8}$ conforme docs/hoja-modelo.md §1.1
+    - feat(mocks/npc): materializar 2 NPCs sintéticos previamente referenciados sin fixture propio en mock/personajes/npc/: RS0P2M7N (Ricardo Sargento postmortem) y MM4B9L1X (mentor metalúrgico Bahía Blanca)
+    - feat(scripts): añadir scripts/migrate_slug_to_patente.py — tabla de mapeo 24 entradas, idempotente
+    - chore: propagar 105 reemplazos a campos ref en aliados[].ref, nemesis[].ref, historial[].metadata.ref, historial[].metadata.lider_caido
+- group: gitignore-harness-cleanup
+  priority: low
+  commit: df29030
+  changes:
+    - chore(gitignore): añadir .antigravitycli/ al ignore
+    - chore: deshace leak de scratch del harness en el commit previo
 - group: audit-trait-slugs-quiroga-fix
   priority: normal
   commit: e24acdd
