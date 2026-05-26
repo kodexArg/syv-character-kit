@@ -13,6 +13,17 @@
     - fix(mock): align 22 fixtures {confederacion,ejercito_rojo} atributos to GDDR-01 §3 canon — 14 files touched; líderes (men 7→6), segundos (tac 5→4 / men 6→5), apuntadores (tac 5→4 / men 5→4), artilleros (fis 3→4)
     - docs(model): update attribute ranges in hoja-modelo field spec to match GDDR-01 ceiling declarations
     - docs(api): align attribute parameter bounds to GDDR-01 absolute ceilings (fis max 5 / tac max 6 / men max 7)
+- group: model-api-campos-derivados-en-response
+  priority: normal
+  commit: bdb376e
+  changes:
+    - docs(model §1): declarar explícitamente que los campos derivados (`filiacion`, `fatiga_max`, `moral_max`, `fza_aportada`) aparecen en la response de `GET /character` y `GET /character/{slug}` y se recomputan en cada lectura
+    - docs(api §GET /character/{slug}): cross-reference a `MODEL.md §1` para campos derivados — resuelve TBD-08 de la auditoría MODEL+API
+- group: model-tipar-slug-nullable
+  priority: normal
+  commit: 3e3f567
+  changes:
+    - fix(model): tipar `identidad.slug` como `str | null` con mutabilidad "set una vez" (paralelo a `metadatos.canonizado_en`) — resuelve TBD-06 de la auditoría MODEL+API
 - group: canon-independencia-kit
   priority: high
   commit: 69d43fd
