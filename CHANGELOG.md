@@ -1,6 +1,16 @@
 # Changelog
 
 ## [Unreleased]
+- group: audit-trait-slugs-quiroga-fix
+  priority: normal
+  commit: e24acdd
+  changes:
+    - fix(tags/trait): rename discreta.yaml → discreto.yaml; normalize slug, nombre, descripcion to masculine generic form (Castilian neutro convention)
+    - fix(tags/trait): rename determinada.yaml → determinado.yaml; normalize slug, nombre to masculine generic form
+    - fix(mock/personajes): update 7 confederacion/ejercito_rojo fixtures using trait.discreta → trait.discreto (04_funes, 05_rodriguez, 08_pereyra, 10_lugones, 06_paine, 09_bordon, 11_bordagaray)
+    - fix(mock/personajes): update 2 confederacion/ejercito_rojo fixtures using trait.determinada → trait.determinado (08_pereyra, 11_bordagaray)
+    - fix(mock/personajes/confederacion/03_quiroga.yaml): correct historial ascenso typo rango_anterior apuntador → fusilero (canonical promotion path from fusilero to cabo especialista)
+    - chore: grep trait.(discreta|determinada) confirms zero remaining refs
 - group: gddr-01-ssot-atributos-canonicos
   priority: high
   commit: e016ddf
