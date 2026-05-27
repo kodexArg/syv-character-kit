@@ -5,6 +5,7 @@ tags:
   - syv/tags
 aliases:
   - tag-requeridos-por-categoria
+  - Tags Requeridos
 ---
 
 # Tags requeridos por categoría

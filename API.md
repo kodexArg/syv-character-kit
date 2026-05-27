@@ -85,7 +85,7 @@ Mapea: UC-08.
 Lista todas las escuadras persistidas. Acepta parámetro opcional `faccion` para filtrar.
 
 ### `GET /escuadras/{slug}`
-Devuelve la ficha detallada de la escuadra con el `slug` exacto. Incluye todos los campos de identidad (incluyendo `tipo`), la lista de `miembros[]` (con sus `puntos_pagados`), la lista `historial[]` de hitos, y los campos calculados dinámicamente (`fza_total`, `cohesion_vigente`, `moral_promedio`, `fatiga_promedio`, `movimiento_tactico`, `puntos_totales`, `lider_vigente`, `estado_escuadra`, `cumple_template`, `errores_validacion[]`).
+Devuelve la ficha detallada de la escuadra con el `slug` exacto. Incluye todos los campos de identidad (incluyendo `tipo`), la lista de `miembros[]` (con sus `puntos`), la lista `historial[]` de hitos, y los campos calculados dinámicamente (`fza_total`, `cohesion_vigente`, `moral_promedio`, `fatiga_promedio`, `movimiento_tactico`, `puntos_totales`, `lider_vigente`, `estado_escuadra`, `cumple_template`, `errores_validacion[]`).
 
 Mapea: UC-24.
 
@@ -96,8 +96,8 @@ Mapea: UC-25.
 
 ### `POST /escuadras/{slug}/miembro`
 Añade un personaje como miembro de la escuadra.
-- Body: `{ "ref": "PATENTE", "pos": int, "puntos": int }`.
-- Efecto colateral: Añade la patente, posición (`pos`), costo en puntos (`puntos`), rango y nombre a la lista `miembros[]` de la escuadra, añade los tags `escuadra.{slug}` and `lealtad.escuadra.{slug}` a la hoja del personaje, y registra un hito `asignacion_escuadra` tanto en el `historial[]` del personaje como en el `historial[]` de la escuadra.
+- Body: `{ "ref": "PATENTE", "pos": int, "puntos": int, "aspectos"?: list[str] }`. `aspectos` es opcional; default `[]`.
+- Efecto colateral: Añade la patente, posición (`pos`), costo en puntos (`puntos`), rango, nombre y `aspectos[]` a la lista `miembros[]` de la escuadra, añade los tags `escuadra.{slug}` and `lealtad.escuadra.{slug}` a la hoja del personaje, y registra un hito `asignacion_escuadra` tanto en el `historial[]` del personaje como en el `historial[]` de la escuadra.
 
 Mapea: UC-26.
 

@@ -90,7 +90,7 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 ## 4. Schema y reglas
 
-**Forma de la hoja**: seis bloques estructurales (`identidad`, `atributos`, `historia`, `historial`, `aliados`, `nemesis`, `metadatos`, `extras`) más la lista plana `tags[]`. Definición autoritativa: [[hoja-modelo|docs/hoja-modelo.md]].
+**Forma de la hoja**: seis bloques estructurales (`identidad`, `atributos`, `historia`, `historial`, `metadatos`, `extras`) + dos colecciones persistidas (`aliados`, `nemesis`) + la lista plana `tags[]`. Definición autoritativa: [[hoja-modelo|docs/hoja-modelo.md]].
 
 **Sistema de tags**: notación punto `<categoria>[.<subcategoria>].<slug>`, multiset, catálogo extensible, `requires` como documentación ejecutable. Definición autoritativa: [[tag-modelo|docs/tag-modelo.md]].
 
@@ -138,7 +138,7 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 | 18 | `mock.ejercito_rojo.07.soriano` | `fusilero` | Miliciano Veterano Soriano |
 | 19 | `mock.ejercito_rojo.08.belenchini` | `fusilero` | Miliciano Veterano Belenchini |
 | 20 | `mock.ejercito_rojo.09.bordon` | `recluta` | Voluntario Bordón |
-| 21 | `mock.ejercito_rojo.maturana` | `recluta` | Voluntario Maturana |
+| 21 | `mock.ejercito_rojo.10.maturana` | `recluta` | Voluntario Maturana |
 | 22 | `mock.ejercito_rojo.11.bordagaray` | `recluta` | Voluntario Bordagaray |
 
 **Inmutabilidad.** Los 22 mocks no aceptan hitos vía API (`POST /character/{slug}/event` → 409). Su evolución, si la hay, ocurre por reescritura del fixture.
@@ -149,7 +149,7 @@ Toda referencia desde el PRD a un detalle del schema, del flujo o del motor se h
 
 **Endpoints**: definidos en [[API|API.md]]. Si una ruta no figura ahí, no existe en el contrato. La convención `GET /meta/{categoria}` expone catálogos curados sin requerir edición del contrato cuando aparecen categorías nuevas — la dinámica del catálogo de tags se traslada al endpoint.
 
-**Casos de uso**: catálogo de UCs (UC-01..UC-23) y mapping inverso a endpoints en [[user-stories|docs/user-stories.md]].
+**Casos de uso**: catálogo de UCs (UC-01..UC-27) y mapping inverso a endpoints en [[user-stories|docs/user-stories.md]].
 
 **Modelo de persistencia**: entidades y constraints en [[MODEL|MODEL.md]]. Sincronía estricta con [[API|API.md]].
 

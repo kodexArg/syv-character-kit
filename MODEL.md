@@ -149,6 +149,7 @@ Aparecen en la response de `GET /escuadras/{slug}` y se recomputan en cada lectu
 | `puntos` | `int` | Costo en puntos de reclutamiento (escala 1..5). |
 | `rango` | `str` | Slug de rango del personaje (ej. `lider_de_escuadra`). |
 | `nombre` | `str` | Nombre compuesto / de guerra del personaje. |
+| `aspectos` | `list<str>` | Descriptores narrativos del miembro dentro de la escuadra (frases libres). Mutable. Default `[]`. |
 
 ### 3.2. `hito_escuadra` (embebido en `escuadra.historial[]`)
 

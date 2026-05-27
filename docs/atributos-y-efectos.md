@@ -57,7 +57,7 @@ Estado de ánimo, voluntad de lucha y cohesión psicológica individual.
 Velocidad y capacidad de desplazamiento táctico.
 
 - **Cálculo**: producto de **FISICO** y la orden táctica vigente del turno.
-- **Escuadra**: la velocidad grupal está limitada por el menor movimiento individual entre miembros activos (ver [[escuadra-modelo#3.4. Movimiento Táctico de Escuadra (movimiento_tactico)|escuadra-modelo.md §3.4]]).
+- **Escuadra**: la velocidad grupal está limitada por el menor movimiento individual entre miembros activos (ver [[escuadra-modelo#3.5. Movimiento Táctico de Escuadra (movimiento_tactico)|escuadra-modelo.md §3.5]]).
 
 ### 2.4. FATIGA
 Recurso físico-mental que limita acciones continuas. Principal factor de desgaste.
@@ -79,5 +79,5 @@ Tensión acumulada a corto plazo; previene el colapso mental inmediato.
 
 ## 3. Ejemplos en tags
 
-Los traits canon usan este vocabulario en su campo `efecto`. Ver catálogo real en `mock/tags/trait/*.yaml` (formato `"(+1) INICIATIVA"`, `"(-1) FATIGA"`, etc., documentado en [[tag-modelo#4.7. Traits — identidad mecánicamente activa|tag-modelo.md §4.7]]).
+Los traits canon usan este vocabulario en su campo `efecto`. Ver catálogo real en `tags/trait/*.yaml` (formato `"(+1) INICIATIVA"`, `"(-1) FATIGA"`, etc., documentado en [[tag-modelo#4.7. Traits — identidad mecánicamente activa|tag-modelo.md §4.7]]).
 

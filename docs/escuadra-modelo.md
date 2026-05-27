@@ -36,7 +36,7 @@ Una escuadra consta de un bloque de **identidad**, una lista plana de **miembros
 
 ### 2.2. Miembros
 
-La composición de miembros contiene la patente, el orden táctico, el costo en puntos, rango y nombre compuesto/de guerra de cada personaje (ver [[hoja-modelo]]):
+La composición de miembros contiene la patente, el orden táctico, el costo en puntos, rango, nombre compuesto/de guerra y los aspectos narrativos vigentes de cada personaje dentro de la escuadra (ver [[hoja-modelo]]):
 
 ```yaml
 miembros:
@@ -45,7 +45,11 @@ miembros:
     puntos:         int         # costo en puntos de reclutamiento del miembro
     rango:          str         # slug de rango (ej. "lider_de_escuadra")
     nombre:         str         # nombre compuesto de guerra del personaje
+    aspectos:       list[str]   # descriptores narrativos del miembro en la escuadra; default []
 ```
+
+> [!note] Aspectos del miembro (`aspectos[]`)
+> Lista plana de frases descriptivas cortas que califican al miembro dentro del marco operativo de la escuadra (ej. "veterano del 12,15", "mano firme bajo fuego", "cojea por herida vieja"). Son **mutables** — se agregan o se quitan según evolucione la situación táctica. No afectan `puntos` ni los derivados agregados de la escuadra; son material narrativo que el [[02-motor-batalla|motor de batalla]] podrá invocar para modular resoluciones puntuales. Default: `[]`.
 
 #### Tabla de Costo en Puntos por Unidad
 El costo en puntos se define de acuerdo al rango y la función de la tropa (se declaran como tags de rango en [[tag-modelo]]):
@@ -86,32 +90,40 @@ Estas estadísticas tácticas se calculan dinámicamente en caliente a partir de
   - `rol.combate.lider`: ==2==
   - Otros: ==1==
 
-### 3.2. Moral de Escuadra (moral_promedio)
+### 3.2. Cohesión Vigente (cohesion_vigente)
+
+Representa la cohesión operativa efectiva de la escuadra, teniendo en cuenta la cadena de mando.
+- **Fórmula**: Promedio entero redondeado hacia abajo del atributo MENTAL (`men`) de todos los miembros activos (ver [[atributos-y-efectos#1. Atributos Base (Persistidos)|atributos-y-efectos.md §1]]).
+- **Penalizaciones por mando**:
+  - `(-2)` si el líder (`lider_de_escuadra`) está KIA o de licencia sin reemplazo.
+  - `(-1)` si el segundo al mando (`segundo_al_mando`) asume el mando vigente.
+
+### 3.3. Moral de Escuadra (moral_promedio)
 
 Representa la cohesión psicológica media del grupo táctico.
 - **Fórmula**: Promedio entero redondeado hacia abajo del atributo MENTAL (`men`) de todos los miembros activos (ver [[atributos-y-efectos#1. Atributos Base (Persistidos)|atributos-y-efectos.md §1]]).
 
-### 3.3. Fatiga de Escuadra (fatiga_promedio)
+### 3.4. Fatiga de Escuadra (fatiga_promedio)
 
 Representa el desgaste físico-mental promedio de la escuadra.
 - **Fórmula**: Promedio entero redondeado hacia abajo del valor total de `fatiga_max` (`fis` + `men`) de todos los miembros activos (ver [[atributos-y-efectos#2.4. FATIGA|atributos-y-efectos.md §2.4]]).
 
-### 3.4. Movimiento Táctico de Escuadra (movimiento_tactico)
+### 3.5. Movimiento Táctico de Escuadra (movimiento_tactico)
 
 - **Fórmula**: `min(MOVIMIENTO)` de todos los miembros activos. La unidad marcha al ritmo de su miembro más lento (ver [[atributos-y-efectos#2.3. MOVIMIENTO|atributos-y-efectos.md §2.3]]).
 
-### 3.5. Puntos Totales (puntos_totales)
+### 3.6. Puntos Totales (puntos_totales)
 
 - **Fórmula**: Suma de los `puntos` de todos los miembros del listado (incluidos inactivos/KIA para mantener la auditoría de costo inicial).
 
-### 3.6. Líder Vigente (lider_vigente)
+### 3.7. Líder Vigente (lider_vigente)
 
 Determina qué personaje ejerce la autoridad táctica efectiva sobre el terreno, evaluado en este orden de prioridad entre los miembros activos:
 1. `lider_de_escuadra`
 2. `segundo_al_mando`
 3. Combatiente activo de mayor edad.
 
-### 3.7. Estado de la Escuadra (estado_escuadra)
+### 3.8. Estado de la Escuadra (estado_escuadra)
 
 Indica la condición operativa de la unidad:
 - `operativa`: Escuadra con líder o segundo activo, y con suficiente capacidad de combate.

@@ -17,11 +17,12 @@ escuadra:
 
   # Lista de miembros asignados a la escuadra.
   miembros:                  # (*) lista; default []
-    - ref:    str            # (*) Patente opaca [A-Z0-9]{8} del personaje.
-      pos:    int            # (*) Orden táctico de combate.
-      puntos: int            # (*) Costo en puntos por rango. Rango: 1..5.
-      rango:  str            # (*) Slug de rango del personaje.
-      nombre: str            # (*) Nombre de guerra / compuesto.
+    - ref:      str          # (*) Patente opaca [A-Z0-9]{8} del personaje.
+      pos:      int          # (*) Orden táctico de combate.
+      puntos:   int          # (*) Costo en puntos por rango. Rango: 1..5.
+      rango:    str          # (*) Slug de rango del personaje.
+      nombre:   str          # (*) Nombre de guerra / compuesto.
+      aspectos: list[str]    #     Descriptores narrativos del miembro dentro de la escuadra. default []
 
   # Registro temporal de eventos que le ocurren a la escuadra.
   historial:                 # (*) lista; default []

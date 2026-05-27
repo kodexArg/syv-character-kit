@@ -308,7 +308,6 @@ inmutables:
 
 derivados_no_persistidos:
   - filiacion, fatiga_max, moral_max, fza_aportada
-  - aliados, nemesis (contenedores)
   - sobrenombre (cuando es derivable)
 ```
 
