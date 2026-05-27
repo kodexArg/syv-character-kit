@@ -1,5 +1,5 @@
 ---
-title: "PRD — syv-character-kit"
+title: PRD — syv-character-kit
 tags:
   - syv/prd
 aliases:

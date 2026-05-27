@@ -69,7 +69,7 @@ El kit **no fija** un sistema de resolución de azar. El motor de batalla, las h
 ## Convenciones de identificadores
 
 - **Slugs**: lowercase + underscore, sin acentos, sin guiones (`ejercito_rojo`, `lider_de_escuadra`, `mansilla`). El separador uniforme es `_` para permitir composición en notación punto sin ambigüedad (`equipo.arma.pistola`, `lealtad.escuadra.columna_mansilla`). Excepción: el `identidad.slug` del personaje es **patente opaca** `^[A-Z0-9]{8}$` (ej. `K9F2H3M4`), no slug legible — ver [[hoja-modelo#1.1. slug — la patente del personaje|docs/hoja-modelo.md §1.1]].
-- **Tags**: notación punto `<categoria>[.<subcategoria>].<slug>`. Ver [[tag-modelo#§2 — Identificadores y Anatomía de un Tag|docs/tag-modelo.md §2]].
+- **Tags**: notación punto `<categoria>[.<subcategoria>].<slug>`. Ver [[tag-modelo#§2 — Notación punto|docs/tag-modelo.md §2]].
 - **Campos estructurales en YAML**: `snake_case_castellano` (`escuadra`, `atributos`, `mando`).
 - **Idioma**: castellano rioplatense, voseo sobrio. Sin emojis salvo pedido explícito del usuario.
 

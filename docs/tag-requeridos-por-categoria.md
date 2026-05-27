@@ -11,9 +11,9 @@ aliases:
 
 > [!info] Protocolo Blando
 > - **Protocolo blando**: Índice canónico de campos obligatorios condicionales `(+)` por categoría y subcategoría.
-> - **Complemento**: Este documento complementa a [[tag-modelo#### 4.2. Campos obligatorios condicionales — los (+)|tag-modelo.md §4.2]].
+> - **Complemento**: Este documento complementa a [[tag-modelo#4.2. Campos obligatorios condicionales — los (+)|tag-modelo.md §4.2]].
 > 
-> Los cuatro campos siempre obligatorios `(*)` — `slug`, `nombre`, `categoria`, `descripcion` — viven en [[tag-modelo#### 4.1. Campos obligatorios siempre — los cuatro (*)|tag-modelo.md §4.1]] y **no** se repiten acá.
+> Los cuatro campos siempre obligatorios `(*)` — `slug`, `nombre`, `categoria`, `descripcion` — viven en [[tag-modelo#4.1. Campos obligatorios siempre — los cuatro (*)|tag-modelo.md §4.1]] y **no** se repiten acá.
 > 
 > Lo mantiene el orquestador: cada vez que se instaura una nueva regla de obligatoriedad condicional para una categoría, se anota acá como una bullet.
 
@@ -39,7 +39,7 @@ aliases:
 
 ## perk
 
-- **No lleva `requires` ni `excluye`** — los perks se otorgan al azar como recompensa narrativa (vía hito en campo), sin precondiciones de pertenencia ni dependencias de otros tags (ver [[tag-modelo#### 4.4. Sistema requires — dependencias del tag|tag-modelo.md §4.4]]). Cualquier perk puede caer sobre cualquier personaje.
+- **No lleva `requires` ni `excluye`** — los perks se otorgan al azar como recompensa narrativa (vía hito en campo), sin precondiciones de pertenencia ni dependencias de otros tags (ver [[tag-modelo#4.4. Sistema requires — dependencias del tag|tag-modelo.md §4.4]]). Cualquier perk puede caer sobre cualquier personaje.
 - `efecto` recomendado (no obligatorio en v1): los perks suelen aportar un modificador numérico explícito sobre el vocabulario canónico.
 
 ## efecto

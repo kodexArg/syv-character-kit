@@ -24,7 +24,7 @@ Catálogo oficial de variables que pueden ser afectadas por `efecto` en tags (t�
 - **==MENTAL==** (`men`): Fortaleza psicológica, resistencia al estrés, moral base, liderazgo. Rango: 2..7 (creación máx 6; 7 solo vía hito).
 
 > [!note] Skills y Tiradas
-> Las `skill.*` son **disparadores binarios** de tirada contra el `atributo_dominante`, no bonificadores. Ver [[tag-modelo#### 4.6. Efectos y triggers|tag-modelo.md §4.6]].
+> Las `skill.*` son **disparadores binarios** de tirada contra el `atributo_dominante`, no bonificadores. Ver [[tag-modelo#4.6. Efectos y triggers|tag-modelo.md §4.6]].
 
 ---
 
@@ -32,7 +32,7 @@ Catálogo oficial de variables que pueden ser afectadas por `efecto` en tags (t�
 
 No se persisten en la hoja para evitar drift. El motor las computa al servir, a partir de los atributos base, el estado de salud/mental y los modificadores de los tags activos (ver [[hoja-modelo#3.1. Derivaciones desde tags|hoja-modelo.md §3.1]]).
 
-### 2.1. ==INICIATIVA==
+### 2.1. INICIATIVA
 Orden de actuación en combate y prioridad de selección de objetivos.
 
 - **Resolución**:
@@ -45,7 +45,7 @@ Orden de actuación en combate y prioridad de selección de objetivos.
 > [!info] Impacto Táctico de la Iniciativa
 > La iniciativa alta actúa primero pero también es atacada primero; la baja mantiene al personaje a resguardo en la retaguardia.
 
-### 2.2. ==MORAL==
+### 2.2. MORAL
 Estado de ánimo, voluntad de lucha y cohesión psicológica individual.
 
 - **Resolución**: valor individual por unidad. Eventos críticos (bajas cercanas, fuego pesado) exigen chequeo.
@@ -53,13 +53,13 @@ Estado de ánimo, voluntad de lucha y cohesión psicológica individual.
 > [!warning] Consecuencias del Fallo de Moral
 > Cada fallo resta 1 punto. La caída progresiva puede llevar a **Desesperación**/**Pánico** (pérdida de control), **Furia** (ataques descontrolados) o **Locura** (inutilización permanente para el combate).
 
-### 2.3. ==MOVIMIENTO==
+### 2.3. MOVIMIENTO
 Velocidad y capacidad de desplazamiento táctico.
 
 - **Cálculo**: producto de **FISICO** y la orden táctica vigente del turno.
 - **Escuadra**: la velocidad grupal está limitada por el menor movimiento individual entre miembros activos (ver [[escuadra-modelo#3.4. Movimiento Táctico de Escuadra (movimiento_tactico)|escuadra-modelo.md §3.4]]).
 
-### 2.4. ==FATIGA==
+### 2.4. FATIGA
 Recurso físico-mental que limita acciones continuas. Principal factor de desgaste.
 
 - **Pool inicial**: **FISICO** + **MENTAL**.
@@ -69,7 +69,7 @@ Recurso físico-mental que limita acciones continuas. Principal factor de desgas
 > - Los puntos de **FISICO** se consumen primero. Al agotarse, gana `salud.cansado`.
 > - Luego se consumen los de **MENTAL**. Al agotarse, gana `salud.exhausto` y queda inmovilizado.
 
-### 2.5. ==ESTRESS==
+### 2.5. ESTRESS
 Tensión acumulada a corto plazo; previene el colapso mental inmediato.
 
 - **Odómetro** descendente basado en **MENTAL** (valor inicial usual: 3).
@@ -79,5 +79,5 @@ Tensión acumulada a corto plazo; previene el colapso mental inmediato.
 
 ## 3. Ejemplos en tags
 
-Los traits canon usan este vocabulario en su campo `efecto`. Ver catálogo real en `mock/tags/trait/*.yaml` (formato `"(+1) INICIATIVA"`, `"(-1) FATIGA"`, etc., documentado en [[tag-modelo#### 4.7. Traits — identidad mecánicamente activa|tag-modelo.md §4.7]]).
+Los traits canon usan este vocabulario en su campo `efecto`. Ver catálogo real en `mock/tags/trait/*.yaml` (formato `"(+1) INICIATIVA"`, `"(-1) FATIGA"`, etc., documentado en [[tag-modelo#4.7. Traits — identidad mecánicamente activa|tag-modelo.md §4.7]]).
 

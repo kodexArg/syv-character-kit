@@ -77,41 +77,41 @@ historial:
 
 ## §3 — Valores Agregados y Derivados (Calculados al servir)
 
-Estas estadísticas tácticas se calculan dinámicamente en caliente a partir de la composición de los miembros activos (no KIA) y no se persisten en la base de datos (ver [[hoja-modelo#derivados_no_persistidos|hoja-modelo.md §8]]):
+Estas estadísticas tácticas se calculan dinámicamente en caliente a partir de la composición de los miembros activos (no KIA) y no se persisten en la base de datos (ver [[hoja-modelo#§8 — Mutabilidad: qué cambia y cómo|hoja-modelo.md §8]]):
 
-### 3.1. Fuerza Aportada Total (`fza_total`)
+### 3.1. Fuerza Aportada Total (fza_total)
 
 - **Fórmula**: Suma de la `fza_aportada` de los miembros activos (no KIA). Las magnitudes son:
   - `rol.combate.heroe`: ==3== (ver [[tag-modelo#§3 — Categorías de referencia|tag-modelo.md §3]])
   - `rol.combate.lider`: ==2==
   - Otros: ==1==
 
-### 3.2. Moral de Escuadra (`moral_promedio`)
+### 3.2. Moral de Escuadra (moral_promedio)
 
 Representa la cohesión psicológica media del grupo táctico.
 - **Fórmula**: Promedio entero redondeado hacia abajo del atributo MENTAL (`men`) de todos los miembros activos (ver [[atributos-y-efectos#1. Atributos Base (Persistidos)|atributos-y-efectos.md §1]]).
 
-### 3.3. Fatiga de Escuadra (`fatiga_promedio`)
+### 3.3. Fatiga de Escuadra (fatiga_promedio)
 
 Representa el desgaste físico-mental promedio de la escuadra.
 - **Fórmula**: Promedio entero redondeado hacia abajo del valor total de `fatiga_max` (`fis` + `men`) de todos los miembros activos (ver [[atributos-y-efectos#2.4. FATIGA|atributos-y-efectos.md §2.4]]).
 
-### 3.4. Movimiento Táctico de Escuadra (`movimiento_tactico`)
+### 3.4. Movimiento Táctico de Escuadra (movimiento_tactico)
 
 - **Fórmula**: `min(MOVIMIENTO)` de todos los miembros activos. La unidad marcha al ritmo de su miembro más lento (ver [[atributos-y-efectos#2.3. MOVIMIENTO|atributos-y-efectos.md §2.3]]).
 
-### 3.5. Puntos Totales (`puntos_totales`)
+### 3.5. Puntos Totales (puntos_totales)
 
 - **Fórmula**: Suma de los `puntos` de todos los miembros del listado (incluidos inactivos/KIA para mantener la auditoría de costo inicial).
 
-### 3.6. Líder Vigente (`lider_vigente`)
+### 3.6. Líder Vigente (lider_vigente)
 
 Determina qué personaje ejerce la autoridad táctica efectiva sobre el terreno, evaluado en este orden de prioridad entre los miembros activos:
 1. `lider_de_escuadra`
 2. `segundo_al_mando`
 3. Combatiente activo de mayor edad.
 
-### 3.7. Estado de la Escuadra (`estado_escuadra`)
+### 3.7. Estado de la Escuadra (estado_escuadra)
 
 Indica la condición operativa de la unidad:
 - `operativa`: Escuadra con líder o segundo activo, y con suficiente capacidad de combate.

@@ -42,7 +42,7 @@ personaje:
 > [!tip] Regla rectora
 > Todo lo que puede ser discreto y no es identidad, atributo, prosa, auditoría o vínculo personal con prosa — ==es tag==.
 > La justificación detallada vive en [[tag-modelo#§1 — Mecánica universal del tag|tag-modelo.md §1]].
-> `aliados[]` y `nemesis[]` son colecciones (no tags) porque llevan prosa por entrada — ver [[#§3.4. Aliados y némesis — colecciones persistidas|§3.4]].
+> `aliados[]` y `nemesis[]` son colecciones (no tags) porque llevan prosa por entrada — ver [[#3.4. Aliados y némesis — colecciones persistidas|§3.4]].
 
 ---
 
@@ -52,7 +52,7 @@ Quién es el personaje, fuera de su contexto operativo.
 
 ### 1.1. `slug` — la patente del personaje
 
-El `slug` es la ==patente opaca== del personaje. No es su nombre. Es el identificador estable que el sistema usa para referenciarlo en cualquier vínculo: entradas de `aliados[].ref` y `nemesis[].ref` (ver [[#§3.4. Aliados y némesis — colecciones persistidas|§3.4]]), eventos del historial, ediciones por API.
+El `slug` es la ==patente opaca== del personaje. No es su nombre. Es el identificador estable que el sistema usa para referenciarlo en cualquier vínculo: entradas de `aliados[].ref` y `nemesis[].ref` (ver [[#3.4. Aliados y némesis — colecciones persistidas|§3.4]]), eventos del historial, ediciones por API.
 
 ```yaml
 slug:
@@ -105,7 +105,7 @@ edad:
 
 ## §2 — Atributos
 
-Tres valores numéricos que definen la capacidad base (escala `2..7`). Para los topes y reglas detalladas, ver [[gddr/01-flujo-obligatorio-creacion|01-flujo-obligatorio-creacion.md]].
+Tres valores numéricos que definen la capacidad base (escala `2..7`). Para los topes y reglas detalladas, ver [[01-flujo-obligatorio-creacion|01-flujo-obligatorio-creacion.md]].
 
 ```yaml
 fis:
@@ -166,19 +166,19 @@ fza_aportada:
 Cambios post-creación en `tags[]` se registran como hito `agregar_tag` / `quitar_tag` con metadata `{tag}`.
 
 > [!note] Aliados y némesis
-> **Aliados y némesis NO son derivados**. Son colecciones persistidas de primera clase. Ver [[#§3.4. Aliados y némesis — colecciones persistidas|§3.4]].
+> **Aliados y némesis NO son derivados**. Son colecciones persistidas de primera clase. Ver [[#3.4. Aliados y némesis — colecciones persistidas|§3.4]].
 
 ### 3.2. Slug de tag ≠ slug de personaje
 
 Asimetría deliberada:
 
 - **Slug de tag** (catálogo): legible, lowercase + underscore. Ejemplos: `pistola`, `precision`, `ejercito_rojo`. Es la pieza humana de la dot notation. Ver [[tag-modelo#§2 — Notación punto|tag-modelo.md §2]].
-- **Slug de personaje** (`identidad.slug`): patente opaca `^[A-Z0-9]{8}$`. Ejemplo: `K9F2H3M4`. Ver [[#1.1. `slug` — la patente del personaje|§1.1]].
+- **Slug de personaje** (`identidad.slug`): patente opaca `^[A-Z0-9]{8}$`. Ejemplo: `K9F2H3M4`. Ver [[#1.1. slug — la patente del personaje|§1.1]].
 
 > [!info] Asimetría de Slugs
 > Cuando un tag relacional referencia una entidad del catálogo (ej. `lealtad.faccion.ejercito_rojo`, `lealtad.escuadra.columna_mansilla`), el segmento final es el slug legible de la entidad.
 > 
-> Cuando un vínculo apunta a otro personaje, ==no se usa tag== — se usa una entrada en `aliados[]` o `nemesis[]` con `ref: K9F2H3M4` (la patente). La distinción operativa: tags son metadato curado y se leen sin prosa; los vínculos personales llevan descripción narrativa y por eso son colecciones, no tags. Ver [[#§3.4. Aliados y némesis — colecciones persistidas|§3.4]].
+> Cuando un vínculo apunta a otro personaje, ==no se usa tag== — se usa una entrada en `aliados[]` o `nemesis[]` con `ref: K9F2H3M4` (la patente). La distinción operativa: tags son metadato curado y se leen sin prosa; los vínculos personales llevan descripción narrativa y por eso son colecciones, no tags. Ver [[#3.4. Aliados y némesis — colecciones persistidas|§3.4]].
 
 ### 3.3. Extensibilidad
 

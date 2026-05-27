@@ -362,7 +362,7 @@ Solo lealtades **reales y declarables**. Las latentes, aspiracionales o secretas
 
 Los vínculos personales (a otro personaje) **no se expresan como tags**. Viven en colecciones persistidas de primera clase sobre la hoja:
 
-- `personaje.aliados[]` — list de `{ref, descripcion, desde?}`. Ver [[hoja-modelo#§3.4. Aliados y némesis — colecciones persistidas|hoja-modelo.md §3.4]].
+- `personaje.aliados[]` — list de `{ref, descripcion, desde?}`. Ver [[hoja-modelo#3.4. Aliados y némesis — colecciones persistidas|hoja-modelo.md §3.4]].
 - `personaje.nemesis[]` — list de `{ref, descripcion, desde?}`. Mismo lifecycle.
 
 **Por qué no son tags**: un vínculo personal lleva prosa (la historia del vínculo). Un tag puede afirmar la relación pero no contarla. Las colecciones llevan la textura narrativa.
