@@ -11,66 +11,77 @@ escuadra:
       rango: lider_de_escuadra
       nombre: "Sargento Héctor Aguirre"
       aspectos: []
+      iniciativa: null
     - ref: HS7M4N1P
       pos: 2
       puntos: 4
       rango: segundo_al_mando
       nombre: "Cabo Primero Horacio Sosa"
       aspectos: []
+      iniciativa: null
     - ref: LQ5C8D3R
       pos: 3
       puntos: 4
       rango: apuntador
       nombre: "Cabo Apuntador Lisandro Quiroga"
       aspectos: []
+      iniciativa: null
     - ref: DF2T6G9X
       pos: 4
       puntos: 3
       rango: artillero
       nombre: "Soldado de Primera Dardo Funes"
       aspectos: []
+      iniciativa: null
     - ref: MR4B1K7S
       pos: 5
       puntos: 2
       rango: fusilero
       nombre: "Soldado de Primera Marcela Rodríguez"
       aspectos: []
+      iniciativa: null
     - ref: TO8P5H2N
       pos: 6
       puntos: 2
       rango: fusilero
       nombre: "Soldado de Primera Tomás Olivares"
       aspectos: []
+      iniciativa: null
     - ref: RA6N3F1M
       pos: 7
       puntos: 2
       rango: fusilero
       nombre: "Soldado de Primera Rubén Acosta"
       aspectos: []
+      iniciativa: null
     - ref: GP9D7K4C
       pos: 8
       puntos: 2
       rango: fusilero
       nombre: "Soldado de Primera Graciela Pereyra"
       aspectos: []
+      iniciativa: null
     - ref: IM1R8T5L
       pos: 9
       puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
       rango: recluta
       nombre: "Recluta Ignacio Méndez"
       aspectos: []
+      iniciativa: null
     - ref: PL3X2B9K
       pos: 10
       puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
       rango: recluta
       nombre: "Recluta Patricia Lugones"
       aspectos: []
+      iniciativa: null
     - ref: ER7H6N4D
       pos: 11
       puntos: 2 # Recargador (puesto idéntico al de soldado de segunda)
       rango: recluta
       nombre: "Recluta Esteban Ramírez"
       aspectos: []
+      iniciativa: null
   historial:
     - fecha: "2026-03-12T14:20:00Z"
       tipo: baja_miembro

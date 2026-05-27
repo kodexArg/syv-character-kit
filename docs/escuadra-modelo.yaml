@@ -17,12 +17,19 @@ escuadra:
 
   # Lista de miembros asignados a la escuadra.
   miembros:                  # (*) lista; default []
-    - ref:      str          # (*) Patente opaca [A-Z0-9]{8} del personaje.
-      pos:      int          # (*) Orden táctico de combate.
-      puntos:   int          # (*) Costo en puntos por rango. Rango: 1..5.
-      rango:    str          # (*) Slug de rango del personaje.
-      nombre:   str          # (*) Nombre de guerra / compuesto.
-      aspectos: list[str]    #     Descriptores narrativos del miembro dentro de la escuadra. default []
+    - ref:        str          # (*) Patente opaca [A-Z0-9]{8} del personaje.
+      pos:        int          # (*) Orden táctico de combate.
+      puntos:     int          # (*) Costo en puntos por rango. Rango: 1..5.
+      rango:      str          # (*) Slug de rango del personaje.
+      nombre:     str          # (*) Nombre de guerra / compuesto.
+      aspectos:   list[str]    #     Descriptores narrativos del miembro dentro de la escuadra. default []
+      iniciativa: null|object  #     Estado volátil de combate; default null.
+                               #     Sub-objeto cuando hay encuentro activo:
+                               #       encuentro: str   # patente [A-Z0-9]{8} del encuentro
+                               #       valor:     int   # iniciativa final, clamped [0, 5]
+                               #       columna:   int   # = valor
+                               #       orden:     int   # id de extracción de la bolsa (1..n)
+                               #     Ver escuadra-modelo.md §2.2.1 y gddr/02-motor-batalla.md §1.
 
   # Registro temporal de eventos que le ocurren a la escuadra.
   historial:                 # (*) lista; default []

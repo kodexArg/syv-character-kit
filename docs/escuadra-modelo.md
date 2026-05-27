@@ -36,20 +36,38 @@ Una escuadra consta de un bloque de **identidad**, una lista plana de **miembros
 
 ### 2.2. Miembros
 
-La composición de miembros contiene la patente, el orden táctico, el costo en puntos, rango, nombre compuesto/de guerra y los aspectos narrativos vigentes de cada personaje dentro de la escuadra (ver [[hoja-modelo]]):
+La composición de miembros contiene la patente, el orden táctico, el costo en puntos, rango, nombre compuesto/de guerra, los aspectos narrativos vigentes y el estado volátil de combate de cada personaje dentro de la escuadra (ver [[hoja-modelo]]):
 
 ```yaml
 miembros:
-  - ref:            WA3K9F2H    # [[hoja-modelo#1.1. slug — la patente del personaje|patente opaca [A-Z0-9]{8}]]
-    pos:            int         # orden de despliegue en la formación
-    puntos:         int         # costo en puntos de reclutamiento del miembro
-    rango:          str         # slug de rango (ej. "lider_de_escuadra")
-    nombre:         str         # nombre compuesto de guerra del personaje
-    aspectos:       list[str]   # descriptores narrativos del miembro en la escuadra; default []
+  - ref:            WA3K9F2H        # [[hoja-modelo#1.1. slug — la patente del personaje|patente opaca [A-Z0-9]{8}]]
+    pos:            int             # orden de despliegue en la formación
+    puntos:         int             # costo en puntos de reclutamiento del miembro
+    rango:          str             # slug de rango (ej. "lider_de_escuadra")
+    nombre:         str             # nombre compuesto de guerra del personaje
+    aspectos:       list[str]       # descriptores narrativos del miembro en la escuadra; default []
+    iniciativa:     null | object   # estado volátil de combate; default null; ver §2.2.1
 ```
 
 > [!note] Aspectos del miembro (`aspectos[]`)
 > Lista plana de frases descriptivas cortas que califican al miembro dentro del marco operativo de la escuadra (ej. "veterano del 12,15", "mano firme bajo fuego", "cojea por herida vieja"). Son **mutables** — se agregan o se quitan según evolucione la situación táctica. No afectan `puntos` ni los derivados agregados de la escuadra; son material narrativo que el [[02-motor-batalla|motor de batalla]] podrá invocar para modular resoluciones puntuales. Default: `[]`.
+
+#### 2.2.1. `iniciativa` — estado volátil de combate
+
+Sub-objeto embebido en cada miembro durante un encuentro activo. Default `null` (sin encuentro en curso). Cuando hay encuentro activo, contiene los cuatro campos del subsistema de iniciativa:
+
+```yaml
+iniciativa:
+  encuentro: K9F4M2P1   # patente opaca [A-Z0-9]{8} del encuentro
+  valor:     int        # iniciativa final clamped en [0, 5]
+  columna:   int        # = valor (redundante pero explícito sobre el dato)
+  orden:     int        # id de extracción de la bolsa (1..n); estable durante el encuentro
+```
+
+> [!important] La escuadra como hogar del estado volátil
+> Toda variable temporal de combate (iniciativa, posición en grilla, y los futuros campos del ciclo de turno) vive en `escuadra.miembros[].*`, **no en la hoja del personaje**. La hoja queda reservada para estado permanente: atributos, tags, historial canon, y el estado de salud que sobrevive al encuentro. Esto centraliza las escrituras durante combate y desacopla el ciclo de batalla del ciclo de canonización de personajes.
+>
+> El detalle mecánico y el procedimiento de armado están en [[02-motor-batalla#§1 — Iniciativa|GDDR-02 §1]]. La patente `encuentro` está descrita en [[02-motor-batalla#1.7. Encuentro: patente opaca, entidad implícita|GDDR-02 §1.7]]; el endpoint helper para obtener una patente nueva está en [[API#`GET /meta/encuentro/new`|API.md]].
 
 #### Tabla de Costo en Puntos por Unidad
 El costo en puntos se define de acuerdo al rango y la función de la tropa (se declaran como tags de rango en [[tag-modelo]]):

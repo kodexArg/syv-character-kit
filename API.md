@@ -31,6 +31,7 @@ Mapea: UC-09.
 - `GET /meta/factions` — facciones con descriptor de lore corto.
 - `GET /meta/rangos` — rangos con tabla determinística de stats, `mando` default y rol cultural por facción. Tabla canónica en [[01-flujo-obligatorio-creacion#Fase 3 — Atributos|gddr/01-flujo-obligatorio-creacion.md §3]].
 - `GET /meta/hito_types` — enum sugerido de tipos de hito (catálogo abierto; lista en [[hoja-modelo#§5 — Historial|docs/hoja-modelo.md §5]]).
+- `GET /meta/encuentro/new` — devuelve una patente opaca de **encuentro** lista para usarse en `escuadra.miembros[].iniciativa.encuentro`. No es un catálogo: es un generador. Ver [[02-motor-batalla#1.7. Encuentro: patente opaca, entidad implícita|GDDR-02 §1.7]] para el modelo de la entidad implícita.
 
 ---
 
@@ -109,6 +110,19 @@ Mapea: UC-27.
 
 ---
 
+## Encuentro (entidad implícita)
+
+### `GET /meta/encuentro/new`
+Genera y devuelve una **patente opaca de encuentro** de uso futuro para escribir en `escuadra.miembros[].iniciativa.encuentro` (estado volátil de combate; ver [[escuadra-modelo#2.2.1. `iniciativa` — estado volátil de combate|docs/escuadra-modelo.md §2.2.1]]) y opcionalmente en `escuadra.historial[].ref_batalla` u otros campos narrativos.
+
+- Response: `{ "patente": "K9F4M2P1" }` — string `^[A-Z0-9]{8}$`. Servidor garantiza unicidad contra patentes ya vistas en `escuadra.miembros[].iniciativa.encuentro` de la base.
+- Sin parámetros. Sin efectos colaterales: el kit **no persiste** la patente en una tabla de encuentros; solo se compromete a no repetirla.
+- Motivación: el kit no modela el encuentro como entidad (no hay `GET /encuentros/{patente}`); ofrece este helper para que clientes downstream — motor de batalla, herramientas narrativas — usen una patente referenciable sin requerir un schema de combate completo. Ver [[02-motor-batalla#1.7. Encuentro: patente opaca, entidad implícita|GDDR-02 §1.7]].
+
+Mapea: UC-28.
+
+---
+
 ## Tabla plana
 
 | Método | Path | UC |
@@ -123,6 +137,7 @@ Mapea: UC-27.
 | GET | `/meta/factions` | 09 |
 | GET | `/meta/rangos` | 09 |
 | GET | `/meta/hito_types` | 09 |
+| GET | `/meta/encuentro/new` | 28 |
 | GET | `/escuadras` | 24 |
 | GET | `/escuadras/{slug}` | 24 |
 | POST | `/escuadras` | 25 |
