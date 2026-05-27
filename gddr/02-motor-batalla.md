@@ -115,11 +115,13 @@ for col in [5, 4, 3, 2, 1, 0]:
 - Ninguna ficha declara `mod_acción` individual (`mod_acción = 0` para las 22).
 
 **Aspectos declarados al inicio del encuentro**:
-- **Quiroga** (Cazadores de Ricardo, `rango.francotirador` — en la Confederación se la llama 'Francotiradora'): `aspectos: ["oculto al acecho"]`. Al emerger, su rango le habilita la variante de selección invertida (ver §2.4.1).
-- **Antinao** (Columna Mansilla, `rango.apuntador` — en el Ejército Rojo, 'Tirador Vanguardia'): `aspectos: ["oculto al acecho"]`. Al emerger, criterio default.
+- **Quiroga** (Cazadores de Ricardo, `rango.tirador_designado` — en la Confederación, "Tirador Selecto"): `aspectos: ["oculto al acecho"]`. Al emerger, su rango le habilita la variante de selección invertida (ver §2.4.1).
+- **Antinao** (Columna Mansilla, `rango.tirador_designado` — en el Ejército Rojo, "Cazador"): `aspectos: ["oculto al acecho"]`. Mismo rango, misma variante invertida al emerger.
 
 > [!note] Nota terminológica
-> `rango.francotirador` es el rango canónico del sniper-especialista. **En la Confederación** se lo llama "**Francotirador**"; **en el Ejército Rojo**, "**Cazador**" — distintas etiquetas culturales para el mismo rango canónico. La coincidencia con el nombre de la escuadra "**Cazadores de Ricardo**" (Confederados) es nominal y no debe confundirse: la escuadra es la unidad táctica, el rango es la especialización del miembro.
+> `rango.tirador_designado` es el rango canónico del **tirador asignado de la escuadra**: un fusilero al que se le entregó un rifle con mira de precisión. Su **iniciativa basal es la misma que la de un fusilero regular** — no es un sniper de élite, es infantería con armamento mejorado. Llamado "**Tirador Selecto**" en la Confederación y "**Cazador**" en el Ejército Rojo (etiquetas culturales del mismo rango canónico). La coincidencia con el nombre de la escuadra "**Cazadores de Ricardo**" (Confederados) es nominal — la escuadra es la unidad táctica, el rango es la especialización del miembro.
+>
+> El **francotirador de élite** (`rango.francotirador`, clase aparte) existe en el universo del juego pero **queda fuera del MVP**: típicamente integra escuadras de reconocimiento de 2 a 4 efectivos, que no se modelan en esta versión. Cuando se incorporen, el aspecto `oculto al acecho` podrá aplicarles bajo la misma mecánica.
 
 El efecto mecánico de `oculto al acecho` — sobre la actuación, sobre la visibilidad de la ficha y sobre la selección de objetivos — se documenta en [[#§2 — El Sistema de Columnas y la Marca de Objetivos|§2]]. La grilla que se arma en este §1.6 representa el estado inicial del encuentro, antes de que ningún aspecto se consuma o despliegue su efecto.
 
@@ -129,7 +131,7 @@ El efecto mecánico de `oculto al acecho` — sobre la actuación, sobre la visi
 |---|---|---|---|
 | Aguirre | lider_de_escuadra (sargento) | Cazadores de Ricardo | 4 |
 | Sosa | segundo_al_mando | Cazadores de Ricardo | 3 |
-| Quiroga | francotirador | Cazadores de Ricardo | 5 |
+| Quiroga | tirador_designado | Cazadores de Ricardo | 4 |
 | Funes | artillero | Cazadores de Ricardo | 2 |
 | Rodríguez | fusilero | Cazadores de Ricardo | 3 |
 | Olivares | fusilero | Cazadores de Ricardo | 4 |
@@ -140,7 +142,7 @@ El efecto mecánico de `oculto al acecho` — sobre la actuación, sobre la visi
 | Ramírez | recluta | Cazadores de Ricardo | 1 *(tirada baja)* |
 | Mansilla | lider_de_escuadra (sargento) | Columna Mansilla | 5 |
 | Iturra | segundo_al_mando | Columna Mansilla | 4 |
-| Antinao | apuntador | Columna Mansilla | 5 |
+| Antinao | tirador_designado | Columna Mansilla | 4 |
 | Calfucurá | artillero | Columna Mansilla | 3 |
 | Cárcamo | fusilero | Columna Mansilla | 3 |
 | Painé | fusilero | Columna Mansilla | 4 |
@@ -157,18 +159,18 @@ El efecto mecánico de `oculto al acecho` — sobre la actuación, sobre la visi
 | 1 | Rodríguez | Cazadores | 3 | -3 | 0 → col 0 | col 0: `[Rodríguez(1)]` |
 | 2 | Mansilla | Mansilla | 5 | 0 | 5 → **col 0** *(sargento override)* | col 0: `[Mansilla(2), Rodríguez(1)]` |
 | 3 | Lugones | Cazadores | 1 | -3 | 0 *(clamp)* → col 0 | col 0: `[Lugones(3), Mansilla(2), Rodríguez(1)]` |
-| 4 | Antinao | Mansilla | 5 | 0 | 5 → col 5 | col 5: `[Antinao(4)]` |
+| 4 | Antinao | Mansilla | 4 | 0 | 4 → col 4 | col 4: `[Antinao(4)]` |
 | 5 | Aguirre | Cazadores | 4 | -3 | 1 → **col 0** *(sargento override)* | col 0: `[Aguirre(5), Lugones(3), Mansilla(2), Rodríguez(1)]` |
 | 6 | Calfucurá | Mansilla | 3 | 0 | 3 → col 3 | col 3: `[Calfucurá(6)]` |
 
 **Grilla resultante tras las 22 extracciones** (una de las permutaciones posibles del sorteo; cada ficha lleva entre paréntesis su `iniciativa.orden`):
 
 ```
-col 5 ──┐  Antinao(4)
-col 4 ──┤  Painé(18) → Iturra(10)
+col 5 ──┐  (vacía)
+col 4 ──┤  Painé(18) → Iturra(10) → Antinao(4)
 col 3 ──┤  Soriano(17) → Cárcamo(14) → Calfucurá(6)
-col 2 ──┤  Bordagaray(21) → Bordón(15) → Belenchini(11) → Quiroga(8)
-col 1 ──┤  Olivares(12)
+col 2 ──┤  Bordagaray(21) → Bordón(15) → Belenchini(11)
+col 1 ──┤  Olivares(12) → Quiroga(8)
 col 0 ──┘  Ramírez(22) → Méndez(20) → Maturana(19) → Acosta(16) → Funes(13) → Pereyra(9) → Sosa(7) → Aguirre(5) → Lugones(3) → Mansilla(2) → Rodríguez(1)
             ▲                                                                                                                                            ▲
             └─ frente: mayor `orden` actúa primero                                                                                                       └─ fondo: menor `orden`
@@ -186,10 +188,10 @@ ORDER BY iniciativa.columna DESC, iniciativa.orden DESC
 
 Ambas lecturas dan exactamente la misma secuencia de actuación:
 
-1. Antinao  •  2. Painé  •  3. Iturra  •  4. Soriano  •  5. Cárcamo  •  6. Calfucurá  •  7. Bordagaray  •  8. Bordón  •  9. Belenchini  •  10. Quiroga  •  11. Olivares  •  12. Ramírez  •  13. Méndez  •  14. Maturana  •  15. Acosta  •  16. Funes  •  17. Pereyra  •  18. Sosa  •  19. Aguirre  •  20. Lugones  •  21. Mansilla  •  22. Rodríguez
+1. Painé  •  2. Iturra  •  3. Antinao  •  4. Soriano  •  5. Cárcamo  •  6. Calfucurá  •  7. Bordagaray  •  8. Bordón  •  9. Belenchini  •  10. Olivares  •  11. Quiroga  •  12. Ramírez  •  13. Méndez  •  14. Maturana  •  15. Acosta  •  16. Funes  •  17. Pereyra  •  18. Sosa  •  19. Aguirre  •  20. Lugones  •  21. Mansilla  •  22. Rodríguez
 
 > [!warning] Consecuencia táctica de la emboscada + regla del sargento
-> Con la regla del sargento (§1.4 paso 3b), **ambos `lider_de_escuadra` aterrizan en col 0**: Mansilla (su `valor 5` la habría llevado a col 5) y Aguirre (su `valor 1` la habría puesto en col 1). Los dos quedan apilados al fondo del turno entre colimbas y pifias. Con Antinao oculto en col 5 y Quiroga oculta en col 2, las primeras nueve fichas que **realmente actúan** son siete Mansilla (Painé, Iturra, Soriano, Cárcamo, Calfucurá, Bordagaray, Bordón), Belenchini cerrando esa ronda, y Olivares — el único Cazador con `columna > 0` visible. El `-3` aplasta y la regla del sargento descabeza: la línea de mando confederada se mueve al caos del col 0.
+> Con la regla del sargento (§1.4 paso 3b), **ambos `lider_de_escuadra` aterrizan en col 0**: Mansilla (su `valor 5` la habría llevado a col 5) y Aguirre (su `valor 1` la habría puesto en col 1). Los dos quedan apilados al fondo del turno entre colimbas y pifias. Como Mansilla era la única ficha con `valor 5` y el override la baja, **col 5 queda completamente vacía** — el motor la salta sin consumir turno. La grilla efectiva arranca en col 4. Con Antinao oculto en col 4 (junto a Painé e Iturra) y Quiroga oculta en col 1 (junto a Olivares), las primeras nueve fichas que **realmente actúan** son ocho Mansilla (Painé, Iturra, Soriano, Cárcamo, Calfucurá, Bordagaray, Bordón, Belenchini) y un Cazador — Olivares, el único con `columna > 0` visible. El `-3` aplasta y la regla del sargento descabeza: la línea de mando confederada se mueve al caos del col 0.
 
 > [!note] Sobre las once fichas de col 0
 > Once fichas terminan en col 0:
@@ -261,12 +263,12 @@ Un aspecto canon puede operar sobre uno o más de estos ejes:
 
 #### 2.4.1. Aspecto: `oculto al acecho`
 
-Aspecto canon pensado para fichas de **iniciativa alta no comprometidas en la línea de mando ni en armamento pesado**. Su perfil natural en el kit es:
+Aspecto canon pensado para fichas **especializadas en disparo de precisión y emboscada**. Su perfil natural en el kit del MVP es `rango.tirador_designado` — el tirador asignado de la escuadra (un fusilero al que se le entregó un rifle con mira de precisión). En la **Confederación** se lo llama "**Tirador Selecto**"; en el **Ejército Rojo**, "**Cazador**" — distintas etiquetas culturales para el mismo rango canónico.
 
-- `rango.francotirador` — el sniper-especialista (en la **Confederación** llamado "**Francotirador**"; en el **Ejército Rojo**, "**Cazador**" — distintas etiquetas culturales para el mismo rango canónico).
-- `rango.apuntador` — el scout/spotter (Cabo Apuntador en la Conf, Tirador Vanguardia en el E. Rojo).
+**No aplica** a `lider_de_escuadra` (sargento), `segundo_al_mando`, `artillero`, ni a `fusilero` o `recluta` regulares — el motor rechaza la declaración para esos roles. `rango.apuntador` tampoco califica: el apuntador del kit es el rol de soporte del FAP (ver [[escuadra-modelo#§4 — Plantilla de Validación (Infantería)|escuadra-modelo.md §4]]), no un tirador stealth.
 
-**No aplica** a `lider_de_escuadra` (sargento), `segundo_al_mando` ni `artillero` — el motor rechaza la declaración para esos roles.
+> [!note] Fuera del MVP
+> El **francotirador de élite** (`rango.francotirador`, clase aparte) podrá portar el aspecto bajo la misma mecánica, pero **queda fuera del MVP**: típicamente integra escuadras de reconocimiento de 2 a 4 efectivos, que no se modelan en esta versión.
 
 **Efecto sobre la actuación** (eje 1 + eje 2):
 - Mientras la ficha conserva el aspecto es **intarjeteable**: no figura como enemigo para el cómputo de objetivos del resto del campo (§2.3).
@@ -279,7 +281,7 @@ Aspecto canon pensado para fichas de **iniciativa alta no comprometidas en la l�
 
 Si ambas condiciones se cumplen, el aspecto se consume (`aspectos[]` pierde la entrada `"oculto al acecho"`) y la ficha ejecuta su ataque siguiendo las reglas de §2.2. Si nunca se cumplen, la ficha **persiste oculta a través de los turnos** — `oculto al acecho` no caduca por tiempo.
 
-**Variante por rango francotirador** (eje 3): si la ficha tiene `rango.francotirador`, al emerger su criterio de selección de objetivos se **invierte**: dentro de la columna elegida, ataca al de `iniciativa.orden` **más bajo** en lugar del más alto. Es la única excepción explícita al criterio "id más grande primero" (§2.2 tip). Para una ficha con `rango.apuntador` (también scout, también puede portar el aspecto) el criterio default se mantiene.
+**Variante por rango** (eje 3): toda ficha con `rango.tirador_designado` que emerja de `oculto al acecho` aplica **criterio de selección invertido**: dentro de la columna elegida, ataca al de `iniciativa.orden` **más bajo** en lugar del más alto. Es la única excepción explícita al criterio "id más grande primero" (§2.2 tip). Como en el MVP el aspecto solo se declara sobre `tirador_designado`, el invertido es de facto el criterio universal de las fichas que portan `oculto al acecho` por ahora.
 
 > [!important] Por qué exponer este aspecto antes que cualquier otro
 > `oculto al acecho` ilustra el patrón canon completo: opera simultáneamente sobre los tres ejes de modulación (secuencia, visibilidad, criterio). Cualquier futuro aspecto que altere la grilla operará sobre alguna combinación de estos tres ejes, y se documentará bajo el mismo molde de "efecto + condiciones de activación + variantes por rango".
@@ -288,30 +290,32 @@ Si ambas condiciones se cumplen, el aspecto se consume (`aspectos[]` pierde la e
 
 Sobre la grilla armada en §1.6 aplican tres mecánicas no triviales:
 
-- **Antinao** (Columna Mansilla, `rango.apuntador`, col 5, orden 4) — `oculto al acecho` activo; variante default al emerger.
-- **Quiroga** (Cazadores de Ricardo, `rango.francotirador`, col 2, orden 8) — `oculto al acecho` activo; variante invertida al emerger.
+- **Antinao** (Columna Mansilla, `rango.tirador_designado` / "Cazador", col 4, orden 4) — `oculto al acecho` activo; variante invertida al emerger.
+- **Quiroga** (Cazadores de Ricardo, `rango.tirador_designado` / "Tirador Selecto", col 1, orden 8) — `oculto al acecho` activo; variante invertida al emerger.
 - **Mansilla** y **Aguirre** (ambos `lider_de_escuadra`) — col 0 por regla del sargento (§1.4 paso 3b).
 
 **Turno 1 — recorrido cualitativo**:
 
-**Inicio (pos 1)**: Antinao oculto, salta su turno.
+**Apertura (pos 1)**: Painé (col 4 Mansilla, primera ficha activa de la grilla — col 5 vacía) aplica regla 4. Quiroga, oculta en col 1, no figura. El Cazador visible de columna más alta es **Olivares** (col 1, único Caz con `columna > 0` tras los overrides). Painé ataca a Olivares.
 
-**Barrida atacante (pos 2–9)**: Painé (col 4 Mansilla, primera ficha activa) ve la grilla y aplica regla 4 — busca el Cazador visible de columna más alta. Quiroga, oculta en col 2, no figura. El primer blanco visible es **Olivares** (col 1, único Caz en col 1 tras el override de Aguirre a col 0). Painé ataca a Olivares.
+**Iturra (pos 2)**: aplica regla 4. Sin enemigos a la izquierda (col 4 mismo orden mayor = Painé aliada; col 5 vacía). Olivares ya cayó. La columna más alta con Cazadores visibles es col 0 — DESC por `orden`, el primero es **Ramírez(22)**. Iturra ataca a Ramírez.
 
-Las seis fichas Mansilla siguientes (Iturra, Soriano, Cárcamo, Calfucurá, Bordagaray, Bordón) caen una tras otra sobre col 0 — la columna ahora atestada con 11 fichas. Aplican regla 4 con criterio "mayor `orden` primero" y atraviesan a los Cazadores en orden DESC: **Ramírez(22) → Méndez(20)** (la siguiente, **Maturana(19)**, es Mansilla — se salta) **→ Acosta(16) → Funes(13) → Pereyra(9) → Sosa(7)**. Belenchini (col 2 Mansilla, pos 9) cierra la ronda atacando a **Aguirre(5)** — el sargento confederado, oculto bajo el override en col 0, cae sin haber actuado.
+**Antinao (pos 3, oculto)**: le toca pero `oculto al acecho` activo. Condiciones de emergencia: (a) no tiene enemigos visibles a la izquierda (col 5 vacía, col 4 mismo orden mayor son aliadas Painé e Iturra) → ✓. (b) Tiene muchos enemigos pendientes a la derecha — toda col 0 con Cazadores aún por procesarse — → ✘. Antinao **persiste oculto**.
 
-**Detención en col 2 (pos 10)**: Quiroga le toca. Aplica condiciones de emergencia: la izquierda no está limpia — toda la línea Mansilla en cols 5..2-orden-mayor-que-8 sigue viva. Quiroga **persiste oculta**.
+**Barrida col 3 + col 2 (pos 4–9)**: cada Mansilla aplica regla 4 sobre col 0, atravesando los Cazadores en orden DESC. **Soriano → Méndez(20)**. **Cárcamo → Acosta(16)** (Maturana(19) es Mansilla, se salta). **Calfucurá → Funes(13)**. **Bordagaray → Pereyra(9)**. **Bordón → Sosa(7)**. **Belenchini → Aguirre(5)** — el sargento confederado cae bajo el override sin haber actuado.
 
-**Cierre de col 1 y col 0 (pos 11–22)**: Olivares (pos 11) ya cayó en pos 2 — se salta. Los Cazadores en col 0 caídos en pos 3-9 se saltan al llegar a sus posiciones. La única ficha mansillera viva con turno en col 0 es **Maturana** (pos 14, regla 1 → random); le quedan dos Cazadores visibles (Lugones, Rodríguez) y dispara al azar — digamos a **Lugones**. Más tarde **Mansilla** (pos 21, sargento mansillero col 0, regla 1 → random) tiene un solo blanco visible — Rodríguez — y lo elimina.
+**Olivares y Quiroga en col 1 (pos 10–11)**: Olivares ya cayó en pos 1, se salta. Quiroga le toca; aplica condiciones — toda la línea Mansilla en cols 4, 3, 2 sigue intacta, condición (a) ✘. Quiroga **persiste oculta**.
+
+**Cierre de col 0 (pos 12–22)**: los Cazadores ya caídos se saltan al llegar a sus posiciones. La única ficha mansillera viva con turno en col 0 es **Maturana** (pos 14, regla 1 → random); le quedan dos Cazadores visibles (Lugones, Rodríguez) y dispara al azar — digamos a **Lugones**. Más tarde **Mansilla** (pos 21, sargento mansillero col 0, regla 1 → random) tiene un único blanco visible — Rodríguez — y lo elimina.
 
 **Cierre del turno** — el motor evalúa condiciones de emergencia:
 
-- **Antinao**: condición (a) "ningún enemigo visible a la izquierda" — vacuamente cierta (no hay enemigos en col 5+). ✓. Condición (b) "ningún enemigo pendiente a la derecha" — turno cerrado. ✓. → **Emerge**, consume el aspecto. Busca blanco por regla 4. El único Cazador vivo es Quiroga, intarjeteable. **No hay blanco legal — Antinao pasa sin disparar**.
-- **Quiroga**: condición (a) — falla. La línea Mansilla en cols 5, 4, 3 y col 2 con `orden > 8` sigue intacta (Bordagaray, Bordón, Belenchini y todas las superiores menos Painé). → **No emerge**, entra al turno 2 con el aspecto vigente.
+- **Antinao** (col 4): condición (a) "sin enemigos visibles a la izquierda" — vacuamente cierta (col 5 vacía; col 4 mismo `orden` mayor son aliadas) → ✓. Condición (b) "sin enemigos pendientes a la derecha" — turno cerrado → ✓. → **Emerge** y consume el aspecto. Busca blanco por regla 4 con criterio **invertido** (variante tirador_designado). El único Cazador vivo es Quiroga — oculta, intarjeteable. **No hay blanco legal — Antinao pasa sin disparar**.
+- **Quiroga** (col 1): condición (a) — falla. La línea Mansilla en cols 4, 3 y 2 sigue intacta (Painé, Iturra, Soriano, Cárcamo, Calfucurá, Bordagaray, Bordón, Belenchini). → **No emerge**, entra al turno 2 con el aspecto vigente.
 
 **Estado al cierre del turno 1**:
 - **Cazadores vivos**: solo Quiroga (oculta).
-- **Mansilla vivos**: los 11 (incluyendo Antinao tras consumir su aspecto), menos Painé que cayó por la única andanada de Olivares en pos 2.
+- **Mansilla vivos**: los 11 — **cero bajas**. Olivares era el único Cazador con `columna > 0` capaz de disparar, pero cayó por la primera andanada de Painé antes de su propio turno; nadie más del bando emboscado tuvo ocasión de tirar.
 
 **Turnos subsiguientes**: el campo entra en deadlock. Quiroga no puede emerger porque la línea Mansilla está casi intacta; los Mansilla no pueden disparar a Quiroga porque es intarjeteable. Antinao reintentará emerger cada turno, pero sin blanco legal pasa sin disparar.
 
@@ -319,9 +323,9 @@ Las seis fichas Mansilla siguientes (Iturra, Soriano, Cárcamo, Calfucurá, Bord
 > Tres mecánicas concurren para producir el aniquilamiento del bando emboscado:
 > 1. **`mod_escuadra = -3`** comprime ocho Cazadores en col 0 desde el armado.
 > 2. **Regla del sargento** mete a Aguirre en col 0 — el sargento confederado se hunde junto a sus colimbas y cae sin actuar. Mansilla, también en col 0 por la misma regla, llega a actuar solo porque su `orden = 2` la pone anteúltima y para entonces queda un único blanco vivo.
-> 3. **`oculto al acecho`** retira a Quiroga del campo: vive pero no contribuye porque su francotirador requiere izquierda limpia para emerger — y la izquierda es la escuadra Mansilla completa.
+> 3. **`oculto al acecho` en Quiroga** retira a la única Cazadora con `valor > 0` del cómputo de objetivos: vive pero no contribuye porque su rango requiere izquierda limpia para emerger — y la izquierda es la escuadra Mansilla casi entera.
 >
-> Solo Olivares logra una andanada (pos 2 → Painé). Antinao emerge sin blanco. Quiroga sobrevive intacta sin posibilidad de intervenir.
+> El bando atacante limpia col 1 (Olivares) en la primera andanada y col 0 en orden DESC durante el resto del turno. Ningún Cazador logra disparar; Antinao emerge sin blanco legal y Quiroga sobrevive intacta sin posibilidad de intervenir.
 
 > [!warning] Resolución de impactos: pendiente
 > El traceo asume que cada ataque resuelve en baja del blanco. La mecánica real de daño y resolución de impactos (tiradas, dificultades, defensas) no está documentada todavía. El ejemplo de §2 ilustra **cómo se elige el blanco**, no si el blanco cae.
