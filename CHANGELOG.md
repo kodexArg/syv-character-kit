@@ -1,6 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+- group: tirador-designado-rename-complete
+  priority: high
+  commit: 9d8d043
+  changes:
+    - refactor(tags/rango): rename francotirador.yaml → tirador_designado.yaml; update slug, nombre
+    - refactor(tags/rol/oficio): rename francotirador.yaml → tirador_designado.yaml; update slug, nombre
+    - refactor(docs): propagate francotirador → tirador_designado across cost table (docs/escuadra-modelo.md §2.2), examples (docs/tag-modelo-ejemplos.yaml), user stories (docs/user-stories.md)
+    - refactor(gddr): update rank references in gddr/01 §1.1 (rango sorteo pesos) and gddr/02 §2 (rango combinations)
+    - refactor(api): update API.md rank enum and examples
+    - refactor(scripts): update rank validation in scripts/validar_escuadras.py
+    - revert(agents): restore "Francotirador/francotirador" illustrative case-collision example in AGENTS.md (policy: internal pedagogical content distinct from catalog references)
+    - revert(changelog): restore "francotirador" in historical CHANGELOG.md entry (policy: changelog entries immutable; git log falsification rejected)
 - group: escuadras-schema-motor-gddr02
   priority: high
   commit: 0267178
