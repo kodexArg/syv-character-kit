@@ -41,7 +41,7 @@ Cada personaje arranca con **exactamente un** tag `rango.*`. Catálogo canon en 
 - `fusilero`
 - `apuntador`
 - `artillero`
-- `francotirador`
+- `tirador_designado`
 - `segundo_al_mando`
 - `lider_de_escuadra`
 
@@ -53,7 +53,7 @@ Cada personaje arranca con **exactamente un** tag `rango.*`. Catálogo canon en 
 | `fusilero` | 20% |
 | `apuntador` | 10% |
 | `artillero` | 10% |
-| `francotirador` | 2% |
+| `tirador_designado` | 2% |
 | `segundo_al_mando` | 7% |
 | `lider_de_escuadra` | 3% |
 | `militante` | 18% |
@@ -196,7 +196,7 @@ No se genera en este paso. El servidor asigna patente `^[A-Z0-9]{8}$` al persist
 | `fusilero` | 3 | 3 | 3 | 9 |
 | `apuntador` | 3 | 4 | 4 | 11 |
 | `artillero` | 4 | 4 | 3 | 11 |
-| `francotirador` | 4 | 5 | 3 | 12 |
+| `tirador_designado` | 4 | 5 | 3 | 12 |
 | `segundo_al_mando` | 3 | 4 | 5 | 12 |
 | `lider_de_escuadra` | 3 | 5 | 6 | 14 |
 

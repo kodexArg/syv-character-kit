@@ -41,7 +41,7 @@ Mapea: UC-09.
 
 Genera un personaje efímero. Parámetros opcionales: `faccion`, `rango`, `seed`, `fields`, `tag`. `fields` recibe dot-paths separados por coma: `fields=identidad.slug,atributos.fis`.
 
-- `tag` admite repetición para filtrado en AND lógico (`?tag=skill.francotirador&tag=rol.lider`). El valor debe ser un tag completo en notación punto. OR no está soportado en v1 — el cliente lo resuelve con N calls + unión.
+- `tag` admite repetición para filtrado en AND lógico (`?tag=skill.tirador_designado&tag=rol.lider`). El valor debe ser un tag completo en notación punto. OR no está soportado en v1 — el cliente lo resuelve con N calls + unión.
 - Aplica al sorteo: el efímero generado debe portar todos los tags exigidos. Si la combinación es inviable, devuelve **409**.
 
 Devuelve un `personaje` con `identidad.slug: null` (los efímeros no tienen slug hasta canonizarse), `historial: []`, `aliados: []`, `nemesis: []`, `metadatos.canonizado_en: null`, y los tags mínimos `estado.disponible` + `escuadra.*` correspondiente.

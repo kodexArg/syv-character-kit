@@ -73,7 +73,7 @@
   commit: e016ddf
   changes:
     - docs(gddr/01 §3): declare SSOT rank-to-attributes mapping deterministic table — zero randomness; topes absolutos fis 5 / tac 6 / men 7; creación máximo N-1 por rango; mutación solo vía hito triple_cero|mejora_atributo
-    - docs(gddr/01 §1.1): adjust rank sorteo pesos — recluta 30% / fusilero 20% / apuntador 10% / artillero 10% / francotirador 2% / segundo_al_mando 7% / lider_de_escuadra 3% / militante 18%
+    - docs(gddr/01 §1.1): adjust rank sorteo pesos — recluta 30% / fusilero 20% / apuntador 10% / artillero 10% / tirador_designado 2% / segundo_al_mando 7% / lider_de_escuadra 3% / militante 18%
     - docs(hoja-modelo.md §2): propagate tope absoluto semantics to fis; add symmetric annotation matching tac/men (tope N; creación máx N-1; vía hito hasta tope)
     - docs(hoja-modelo.yaml): synchronize attribute table header (fis/tac/men ranges normalized; ceiling notation consistent)
     - docs(atributos-y-efectos.md §1): update attribute documentation to reflect absolute ceilings and hito-based growth beyond creation limits

@@ -73,7 +73,7 @@ iniciativa:
 El costo en puntos se define de acuerdo al rango y la función de la tropa (se declaran como tags de rango en [[tag-modelo]]):
 - **==`1` punto==**: Colimbas/Reclutas (rango `recluta`) e integrantes de milicias (rango `militante`).
 - **==`2` puntos==**: Soldados de segunda / regulares (rango `fusilero`).
-- **==`3` puntos==**: Especialistas (rangos `artillero`, `francotirador`).
+- **==`3` puntos==**: Especialistas (rangos `artillero`, `tirador_designado`).
 - **==`4` puntos==**: Segundos mandos y apuntadores (rango `segundo_al_mando`, y roles de `apuntador`).
 - **==`5` puntos==**: Líderes de unidad (rango `lider_de_escuadra`).
 

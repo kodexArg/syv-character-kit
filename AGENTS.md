@@ -24,7 +24,7 @@ Política editorial y convenciones de trabajo del proyecto. Para entender QUÉ e
 
 **Por qué.** El PRD es contrato, no narrativa. Los consumidores (clientes, motor de batalla, herramientas downstream) leen el PRD para saber qué pueden esperar HOY. La historia los confunde — si el campo `semilla` no existe, leer "se eliminó en v0.5.0 porque la prosa LLM no es reproducible" agrega ruido cognitivo y no aporta valor operativo. La explicación útil para implementadores actuales se reformula como "el schema no expone reproducibilidad determinista de la prosa: la prosa se persiste como artefacto al guardar" — sin mencionar la transición.
 
-**Cuándo sí preservar contexto histórico.** Decisiones de diseño cuyo *por qué* sigue vivo se documentan en el cuerpo del PRD como "tensión asumida" o "decisión de producto" — sin fecha ni versión, solo el razonamiento. Ejemplo: "El sistema acepta tags fuera del canon. Costo: fragmentación silenciosa entre `Francotirador` y `francotirador`. Mitigación: curaduría del catálogo, no validación del schema". Eso es útil hoy. "Antes el schema validaba estrictamente, en v0.3.0 se abrió" no lo es.
+**Cuándo sí preservar contexto histórico.** Decisiones de diseño cuyo *por qué* sigue vivo se documentan en el cuerpo del PRD como "tensión asumida" o "decisión de producto" — sin fecha ni versión, solo el razonamiento. Ejemplo: "El sistema acepta tags fuera del canon. Costo: fragmentación silenciosa entre `Tirador_designado` y `tirador_designado`. Mitigación: curaduría del catálogo, no validación del schema". Eso es útil hoy. "Antes el schema validaba estrictamente, en v0.3.0 se abrió" no lo es.
 
 ---
 

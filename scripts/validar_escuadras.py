@@ -172,7 +172,7 @@ def validate_infantry_template(escuadra: dict, personajes: dict) -> list:
             puntos_esperados = 5
         elif rango_declarado == "segundo_al_mando" or rango_declarado == "apuntador":
             puntos_esperados = 4
-        elif rango_declarado == "artillero" or rango_declarado == "francotirador":
+        elif rango_declarado == "artillero" or rango_declarado == "tirador_designado":
             puntos_esperados = 3
         elif rango_declarado == "fusilero":
             puntos_esperados = 2

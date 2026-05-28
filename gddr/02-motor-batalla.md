@@ -121,7 +121,7 @@ for col in [5, 4, 3, 2, 1, 0]:
 > [!note] Nota terminológica
 > `rango.tirador_designado` es el rango canónico del **tirador asignado de la escuadra**: un fusilero al que se le entregó un rifle con mira de precisión. Su **iniciativa basal es la misma que la de un fusilero regular** — no es un sniper de élite, es infantería con armamento mejorado. Llamado "**Tirador Selecto**" en la Confederación y "**Cazador**" en el Ejército Rojo (etiquetas culturales del mismo rango canónico). La coincidencia con el nombre de la escuadra "**Cazadores de Ricardo**" (Confederados) es nominal — la escuadra es la unidad táctica, el rango es la especialización del miembro.
 >
-> El **francotirador de élite** (`rango.francotirador`, clase aparte) existe en el universo del juego pero **queda fuera del MVP**: típicamente integra escuadras de reconocimiento de 2 a 4 efectivos, que no se modelan en esta versión. Cuando se incorporen, el aspecto `oculto al acecho` podrá aplicarles bajo la misma mecánica.
+> El **tirador_designado de élite** (`rango.tirador_designado`, clase aparte) existe en el universo del juego pero **queda fuera del MVP**: típicamente integra escuadras de reconocimiento de 2 a 4 efectivos, que no se modelan en esta versión. Cuando se incorporen, el aspecto `oculto al acecho` podrá aplicarles bajo la misma mecánica.
 
 El efecto mecánico de `oculto al acecho` — sobre la actuación, sobre la visibilidad de la ficha y sobre la selección de objetivos — se documenta en [[#§2 — El Sistema de Columnas y la Marca de Objetivos|§2]]. La grilla que se arma en este §1.6 representa el estado inicial del encuentro, antes de que ningún aspecto se consuma o despliegue su efecto.
 
@@ -268,7 +268,7 @@ Aspecto canon pensado para fichas **especializadas en disparo de precisión y em
 **No aplica** a `lider_de_escuadra` (sargento), `segundo_al_mando`, `artillero`, ni a `fusilero` o `recluta` regulares — el motor rechaza la declaración para esos roles. `rango.apuntador` tampoco califica: el apuntador del kit es el rol de soporte del FAP (ver [[escuadra-modelo#§4 — Plantilla de Validación (Infantería)|escuadra-modelo.md §4]]), no un tirador stealth.
 
 > [!note] Fuera del MVP
-> El **francotirador de élite** (`rango.francotirador`, clase aparte) podrá portar el aspecto bajo la misma mecánica, pero **queda fuera del MVP**: típicamente integra escuadras de reconocimiento de 2 a 4 efectivos, que no se modelan en esta versión.
+> El **tirador_designado de élite** (`rango.tirador_designado`, clase aparte) podrá portar el aspecto bajo la misma mecánica, pero **queda fuera del MVP**: típicamente integra escuadras de reconocimiento de 2 a 4 efectivos, que no se modelan en esta versión.
 
 **Efecto sobre la actuación** (eje 1 + eje 2):
 - Mientras la ficha conserva el aspecto es **intarjeteable**: no figura como enemigo para el cómputo de objetivos del resto del campo (§2.3).

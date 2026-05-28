@@ -189,7 +189,7 @@ personajes:
       - perk.recarga
       - skill.precision
       - skill.terreno
-      - rol.oficio.francotirador
+      - rol.oficio.tirador_designado
       - rol.jerarquia.sargento
       - equipo.arma.rifle_militar
       - equipo.utilitario.cargador

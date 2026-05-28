@@ -48,7 +48,7 @@ aliases:
 | UC-16 | cualquier cliente | pedir ficha con `?fields=` podada | bajar payload | `GET /character?fields=` |
 | UC-17 | sitio de lore | pedir el `historial[]` | renderizar línea de tiempo | `GET /character/{slug}/historial` |
 | UC-18 | curador | asignar personaje a escuadra | derivar `filiacion` y `estado: activo` | `POST /character/{slug}/event` |
-| UC-19 | motor de batalla | filtrar por tag `skill: Francotirador` | armar pelotón de tiradores | `GET /character?tag=skill.francotirador` |
+| UC-19 | motor de batalla | filtrar por tag `skill: Tirador_designado` | armar pelotón de tiradores | `GET /character?tag=skill.tirador_designado` |
 | UC-20 | redactor narrativo | pedir personaje con `trait.miope` | forzar complicación visual | `GET /character?tag=trait.miope` |
 | UC-21 | editor de canon | listar todos los `equipo.arma` del roster | auditar inventario armamentístico | `GET /roster/mock` + filtro cliente |
 | UC-22 | motor de batalla | filtrar `rol.lider` AND `faccion.confederados` | candidatos al mando ante caída del líder | `GET /character?tag=rol.lider&tag=faccion.confederados` |
